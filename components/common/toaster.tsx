@@ -25,10 +25,10 @@ const icons: Record<ToastType, typeof CheckCircle> = {
 };
 
 const colors: Record<ToastType, string> = {
-  success: "border-[#10B981]/30 bg-[#10B981]/5 text-[#10B981]",
+  success: "border-success/30 bg-success/5 text-success",
   error: "border-danger/30 bg-danger/5 text-danger",
-  info: "border-[#2563EB]/30 bg-[#2563EB]/5 text-[#2563EB]",
-  warning: "border-[#F59E0B]/30 bg-[#F59E0B]/5 text-[#F59E0B]",
+  info: "border-brand/30 bg-brand/5 text-brand",
+  warning: "border-warning/30 bg-warning/5 text-warning",
 };
 
 export function Toaster() {

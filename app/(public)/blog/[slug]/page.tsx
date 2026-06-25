@@ -51,7 +51,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 lg:px-8">
         <h1 className="mb-4 text-2xl font-bold">Post not found</h1>
-        <Link href="/blog" className="text-[#2563EB] hover:underline">
+        <Link href="/blog" className="text-brand hover:underline">
           Back to blog
         </Link>
       </div>
@@ -85,7 +85,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
         {post.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-full bg-[#2563EB]/5 px-3 py-1 text-sm text-[#2563EB]"
+            className="rounded-full bg-brand/5 px-3 py-1 text-sm text-brand"
           >
             {tag}
           </span>
@@ -94,7 +94,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
 
       <Link
         href="/blog"
-        className="mt-8 inline-flex items-center gap-2 text-sm text-[#2563EB] hover:underline"
+        className="mt-8 inline-flex items-center gap-2 text-sm text-brand hover:underline"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to blog

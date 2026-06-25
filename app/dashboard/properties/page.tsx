@@ -23,11 +23,11 @@ export default function DashboardPropertiesPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search properties..."
-            className="w-48 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-[#2563EB]"
+            className="w-48 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-brand"
           />
           <Link
             href="/dashboard/properties/new"
-            className="flex items-center gap-2 rounded-lg bg-[#2563EB] px-4 py-2 text-sm text-white transition hover:opacity-90"
+            className="flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90"
           >
             <Plus className="h-4 w-4" />
             Add Property
@@ -66,10 +66,10 @@ export default function DashboardPropertiesPage() {
                     <td className="p-4 text-muted">{property.beds} / {property.baths}</td>
                     <td className="p-4">
                       <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                        property.status === "available" ? "bg-[#10B981]/10 text-[#10B981]" :
-                        property.status === "under_contract" ? "bg-[#F59E0B]/10 text-[#F59E0B]" :
+                        property.status === "available" ? "bg-success/10 text-success" :
+                        property.status === "under_contract" ? "bg-warning/10 text-warning" :
                         property.status === "sold" ? "bg-danger/10 text-danger" :
-                        "bg-[#2563EB]/10 text-[#2563EB]"
+                        "bg-brand/10 text-brand"
                       }`}>
                         {property.status.replace("_", " ")}
                       </span>
@@ -85,7 +85,7 @@ export default function DashboardPropertiesPage() {
                         <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-border text-danger transition hover:bg-danger/5">
                           <Trash2 className="h-3.5 w-3.5" />
                         </button>
-                        <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-border text-[#10B981] transition hover:bg-[#10B981]/5">
+                        <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-border text-success transition hover:bg-success/5">
                           <Sparkles className="h-3.5 w-3.5" />
                         </button>
                       </div>

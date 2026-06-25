@@ -72,7 +72,7 @@ export default function BlogPage() {
               <span className="text-border">|</span>
               <span>{post.author}</span>
             </div>
-            <h2 className="mb-2 text-lg font-semibold leading-snug group-hover:text-[#2563EB]">
+            <h2 className="mb-2 text-lg font-semibold leading-snug group-hover:text-brand">
               {post.title}
             </h2>
             <p className="mb-4 text-sm text-muted line-clamp-3">{post.excerpt}</p>
@@ -80,7 +80,7 @@ export default function BlogPage() {
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full bg-[#2563EB]/5 px-2.5 py-0.5 text-xs text-[#2563EB]"
+                  className="rounded-full bg-brand/5 px-2.5 py-0.5 text-xs text-brand"
                 >
                   {tag}
                 </span>

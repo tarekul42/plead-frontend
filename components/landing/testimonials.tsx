@@ -42,10 +42,10 @@ export function Testimonials() {
               transition={{ delay: i * 0.1 }}
               className="relative rounded-card border border-border bg-surface p-6 shadow-sm"
             >
-              <Quote className="mb-4 h-8 w-8 text-[#2563EB]/20" />
+              <Quote className="mb-4 h-8 w-8 text-brand/20" />
               <p className="mb-6 text-sm leading-relaxed text-muted">&ldquo;{t.quote}&rdquo;</p>
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2563EB]/10 text-sm font-semibold text-[#2563EB]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10 text-sm font-semibold text-brand">
                   {t.avatar}
                 </div>
                 <div>

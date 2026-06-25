@@ -38,7 +38,7 @@ export function OutcomesChart() {
                 <p className="text-3xl font-bold">90 days</p>
               </div>
               <div>
-                <div className="flex items-center gap-2 text-sm text-[#10B981]">
+                <div className="flex items-center gap-2 text-sm text-success">
                   <TrendingUp className="h-4 w-4" />
                   <span>After</span>
                 </div>

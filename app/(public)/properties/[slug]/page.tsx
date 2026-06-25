@@ -48,10 +48,10 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
   }
 
   const statusColors: Record<string, string> = {
-    available: "bg-[#10B981]/10 text-[#10B981]",
-    under_contract: "bg-[#F59E0B]/10 text-[#F59E0B]",
+    available: "bg-success/10 text-success",
+    under_contract: "bg-warning/10 text-warning",
     sold: "bg-danger/10 text-danger",
-    rented: "bg-[#2563EB]/10 text-[#2563EB]",
+    rented: "bg-brand/10 text-brand",
   };
 
   return (
@@ -130,7 +130,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
         <aside className="space-y-6">
           <div className="sticky top-24 space-y-6">
             <div className="rounded-card border border-border bg-surface p-6 shadow-sm">
-              <p className="text-3xl font-bold text-[#2563EB]">{formatPrice(property.price)}</p>
+              <p className="text-3xl font-bold text-brand">{formatPrice(property.price)}</p>
               <span
                 className={`mt-2 inline-block rounded-full px-3 py-1 text-xs font-medium ${
                   statusColors[property.status] || "bg-neutral-100 text-muted"
@@ -172,7 +172,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
 
               <Link
                 href="/sign-up"
-                className="mt-6 flex items-center justify-center rounded-lg bg-[#2563EB] px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
+                className="mt-6 flex items-center justify-center rounded-lg bg-brand px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
               >
                 Inquire Now
               </Link>

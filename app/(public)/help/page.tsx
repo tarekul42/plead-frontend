@@ -36,7 +36,7 @@ export default function HelpPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search help topics..."
-            className="w-full rounded-lg border border-border bg-background py-2.5 pl-10 pr-4 text-sm outline-none transition focus:border-[#2563EB]"
+            className="w-full rounded-lg border border-border bg-background py-2.5 pl-10 pr-4 text-sm outline-none transition focus:border-brand"
           />
         </div>
       </div>
@@ -75,7 +75,7 @@ export default function HelpPage() {
         {filtered.length === 0 && (
           <p className="py-8 text-center text-muted">
             No results found. Try different keywords, or{" "}
-            <Link href="/contact" className="text-[#2563EB] hover:underline">
+            <Link href="/contact" className="text-brand hover:underline">
               contact support
             </Link>
             .

@@ -15,7 +15,7 @@ export default function ContactPage() {
     <div className="mx-auto max-w-container px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-2xl">
         <div className="mb-12 text-center">
-          <MessageSquare className="mx-auto mb-4 h-10 w-10 text-[#2563EB]" />
+          <MessageSquare className="mx-auto mb-4 h-10 w-10 text-brand" />
           <h1 className="mb-3 text-3xl font-bold md:text-4xl">Get in Touch</h1>
           <p className="text-muted">
             Have a question or feedback? We would love to hear from you.
@@ -23,8 +23,8 @@ export default function ContactPage() {
         </div>
 
         {submitted ? (
-          <div className="rounded-card border border-[#10B981]/20 bg-[#10B981]/5 p-8 text-center">
-            <Send className="mx-auto mb-4 h-8 w-8 text-[#10B981]" />
+          <div className="rounded-card border border-success/20 bg-success/5 p-8 text-center">
+            <Send className="mx-auto mb-4 h-8 w-8 text-success" />
             <h2 className="mb-2 text-xl font-semibold">Message Sent!</h2>
             <p className="text-muted">
               Thanks for reaching out. We will get back to you within 24 hours.
@@ -38,7 +38,7 @@ export default function ContactPage() {
                 <input
                   required
                   placeholder="Your name"
-                  className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-[#2563EB]"
+                  className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-brand"
                 />
               </div>
               <div>
@@ -47,7 +47,7 @@ export default function ContactPage() {
                   type="email"
                   required
                   placeholder="you@example.com"
-                  className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-[#2563EB]"
+                  className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-brand"
                 />
               </div>
             </div>
@@ -56,7 +56,7 @@ export default function ContactPage() {
               <input
                 required
                 placeholder="How can we help?"
-                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-[#2563EB]"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-brand"
               />
             </div>
             <div>
@@ -65,12 +65,12 @@ export default function ContactPage() {
                 required
                 rows={5}
                 placeholder="Tell us more about your inquiry..."
-                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-[#2563EB] resize-y"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-brand resize-y"
               />
             </div>
             <button
               type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#2563EB] px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
             >
               <Send className="h-4 w-4" />
               Send Message

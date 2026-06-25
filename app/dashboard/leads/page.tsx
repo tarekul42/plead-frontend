@@ -6,10 +6,10 @@ import { useLeads } from "@/lib/queries/use-leads";
 import { Plus, LayoutList, Columns3, Search } from "lucide-react";
 
 const statusColors: Record<string, string> = {
-  new: "bg-[#2563EB]/10 text-[#2563EB]",
-  contacted: "bg-[#F59E0B]/10 text-[#F59E0B]",
-  qualified: "bg-[#8B5CF6]/10 text-[#8B5CF6]",
-  won: "bg-[#10B981]/10 text-[#10B981]",
+  new: "bg-brand/10 text-brand",
+  contacted: "bg-warning/10 text-warning",
+  qualified: "bg-brand-light/10 text-brand-light",
+  won: "bg-success/10 text-success",
   lost: "bg-danger/10 text-danger",
 };
 
@@ -36,20 +36,20 @@ export default function LeadsPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search leads..."
-              className="w-48 rounded-lg border border-border bg-background py-2 pl-9 pr-3 text-sm outline-none transition focus:border-[#2563EB]"
+              className="w-48 rounded-lg border border-border bg-background py-2 pl-9 pr-3 text-sm outline-none transition focus:border-brand"
             />
           </div>
           <div className="flex rounded-lg border border-border">
             <button
               onClick={() => setView("table")}
-              className={`flex items-center gap-1 px-3 py-2 text-xs transition ${view === "table" ? "bg-[#2563EB]/5 text-[#2563EB]" : "text-muted hover:text-foreground"}`}
+              className={`flex items-center gap-1 px-3 py-2 text-xs transition ${view === "table" ? "bg-brand/5 text-brand" : "text-muted hover:text-foreground"}`}
             >
               <LayoutList className="h-4 w-4" />
               Table
             </button>
             <button
               onClick={() => setView("kanban")}
-              className={`flex items-center gap-1 border-l border-border px-3 py-2 text-xs transition ${view === "kanban" ? "bg-[#2563EB]/5 text-[#2563EB]" : "text-muted hover:text-foreground"}`}
+              className={`flex items-center gap-1 border-l border-border px-3 py-2 text-xs transition ${view === "kanban" ? "bg-brand/5 text-brand" : "text-muted hover:text-foreground"}`}
             >
               <Columns3 className="h-4 w-4" />
               Kanban
@@ -57,7 +57,7 @@ export default function LeadsPage() {
           </div>
           <Link
             href="#"
-            className="flex items-center gap-2 rounded-lg bg-[#2563EB] px-4 py-2 text-sm text-white transition hover:opacity-90"
+            className="flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90"
           >
             <Plus className="h-4 w-4" />
             Add Lead
@@ -92,7 +92,7 @@ export default function LeadsPage() {
                   {leads.map((lead: any) => (
                     <tr key={lead._id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-[#1E293B]/50">
                       <td className="p-4">
-                        <Link href={`/dashboard/leads/${lead._id}`} className="font-medium hover:text-[#2563EB]">
+                        <Link href={`/dashboard/leads/${lead._id}`} className="font-medium hover:text-brand">
                           {lead.name}
                         </Link>
                       </td>

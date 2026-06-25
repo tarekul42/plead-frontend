@@ -25,7 +25,7 @@ export function PropertySearchBar({ value, onChange }: PropertySearchBarProps) {
         value={local}
         onChange={(e) => setLocal(e.target.value)}
         placeholder="Search by location, title, or features..."
-        className="w-full rounded-lg border border-border bg-background py-2.5 pl-10 pr-4 text-sm outline-none transition focus:border-[#2563EB]"
+        className="w-full rounded-lg border border-border bg-background py-2.5 pl-10 pr-4 text-sm outline-none transition focus:border-brand"
       />
     </div>
   );

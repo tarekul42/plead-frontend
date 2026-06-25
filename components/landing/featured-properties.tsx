@@ -20,7 +20,7 @@ export function FeaturedProperties() {
             <h2 className="text-2xl font-bold md:text-3xl">Featured Properties</h2>
             <p className="mt-2 text-muted">Handpicked listings for you</p>
           </div>
-          <a href="/properties" className="text-sm text-[#2563EB] hover:underline">
+          <a href="/properties" className="text-sm text-brand hover:underline">
             View all
           </a>
         </div>

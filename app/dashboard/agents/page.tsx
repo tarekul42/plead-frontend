@@ -52,13 +52,13 @@ export default function AgentsPage() {
                   <td className="p-4">{agent.leads}</td>
                   <td className="p-4">{agent.closed}</td>
                   <td className="p-4">
-                    <span className={`font-medium ${agent.rate >= 30 ? "text-[#10B981]" : "text-[#F59E0B]"}`}>
+                    <span className={`font-medium ${agent.rate >= 30 ? "text-success" : "text-warning"}`}>
                       {agent.rate}%
                     </span>
                   </td>
                   <td className="p-4">{agent.rating.toFixed(1)}</td>
                   <td className="p-4">
-                    <span className="rounded-full bg-[#10B981]/10 px-2.5 py-0.5 text-xs font-medium text-[#10B981]">
+                    <span className="rounded-full bg-success/10 px-2.5 py-0.5 text-xs font-medium text-success">
                       Active
                     </span>
                   </td>

@@ -27,7 +27,7 @@ export function ProfileDropdown() {
         onClick={() => setOpen(!open)}
         className="flex items-center gap-2 rounded-lg p-2 transition hover:bg-neutral-100 dark:hover:bg-surface"
       >
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#2563EB]/10 text-sm font-semibold text-[#2563EB]">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand/10 text-sm font-semibold text-brand">
           {user?.firstName?.charAt(0) || user?.emailAddresses?.[0]?.emailAddress?.charAt(0) || "U"}
         </div>
       </button>

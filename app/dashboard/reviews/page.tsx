@@ -47,7 +47,7 @@ export default function ReviewsPage() {
             onClick={() => setFilter(f)}
             className={`rounded-lg px-4 py-1.5 text-xs transition ${
               filter === f
-                ? "bg-[#2563EB] text-white"
+                ? "bg-brand text-white"
                 : "border border-border hover:bg-neutral-100 dark:hover:bg-surface"
             }`}
           >
@@ -68,9 +68,9 @@ export default function ReviewsPage() {
                     <div className="flex items-center gap-2">
                       <p className="font-medium">{review.property}</p>
                       <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-                        review.status === "approved" ? "bg-[#10B981]/10 text-[#10B981]" :
+                        review.status === "approved" ? "bg-success/10 text-success" :
                         review.status === "flagged" ? "bg-danger/10 text-danger" :
-                        "bg-[#F59E0B]/10 text-[#F59E0B]"
+                        "bg-warning/10 text-warning"
                       }`}>
                         {review.status}
                       </span>
@@ -80,7 +80,7 @@ export default function ReviewsPage() {
                       <span>|</span>
                       <div className="flex items-center gap-0.5">
                         {Array.from({ length: 5 }).map((_, i) => (
-                          <Star key={i} className={`h-3 w-3 ${i < review.rating ? "text-[#F59E0B] fill-[#F59E0B]" : "text-border"}`} />
+                          <Star key={i} className={`h-3 w-3 ${i < review.rating ? "text-warning fill-[#F59E0B]" : "text-border"}`} />
                         ))}
                       </div>
                       <span>|</span>
@@ -93,7 +93,7 @@ export default function ReviewsPage() {
                       <>
                         <button
                           onClick={() => handleApprove(review.id)}
-                          className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#10B981]/30 text-[#10B981] transition hover:bg-[#10B981]/5"
+                          className="flex h-8 w-8 items-center justify-center rounded-lg border border-success/30 text-success transition hover:bg-success/5"
                         >
                           <Check className="h-4 w-4" />
                         </button>

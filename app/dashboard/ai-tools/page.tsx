@@ -36,7 +36,7 @@ export default function AiToolsPage() {
             onClick={() => { setActiveTool(tool.id); setDone(false); }}
             className={`flex flex-1 items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm transition ${
               activeTool === tool.id
-                ? "bg-[#2563EB] text-white shadow-sm"
+                ? "bg-brand text-white shadow-sm"
                 : "text-muted hover:text-foreground"
             }`}
           >
@@ -54,13 +54,13 @@ export default function AiToolsPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="mb-1.5 block text-sm font-medium">Lead</label>
-                <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-[#2563EB]">
+                <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand">
                   <option>Select a lead...</option>
                 </select>
               </div>
               <div>
                 <label className="mb-1.5 block text-sm font-medium">Properties (optional)</label>
-                <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-[#2563EB]">
+                <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand">
                   <option>All properties</option>
                 </select>
               </div>
@@ -68,7 +68,7 @@ export default function AiToolsPage() {
             <button
               onClick={handleGenerate}
               disabled={loading}
-              className="mt-6 flex items-center gap-2 rounded-lg bg-[#10B981] px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
+              className="mt-6 flex items-center gap-2 rounded-lg bg-success px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
             >
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
               {loading ? "Analyzing..." : done ? "Match Again" : "Run Match"}
@@ -83,13 +83,13 @@ export default function AiToolsPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="mb-1.5 block text-sm font-medium">Property</label>
-                <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-[#2563EB]">
+                <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand">
                   <option>Select a property...</option>
                 </select>
               </div>
               <div>
                 <label className="mb-1.5 block text-sm font-medium">Tone</label>
-                <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-[#2563EB]">
+                <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand">
                   <option>Luxury</option>
                   <option>Family-friendly</option>
                   <option>Investment-focused</option>
@@ -100,7 +100,7 @@ export default function AiToolsPage() {
             <button
               onClick={handleGenerate}
               disabled={loading}
-              className="mt-6 flex items-center gap-2 rounded-lg bg-[#10B981] px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
+              className="mt-6 flex items-center gap-2 rounded-lg bg-success px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
             >
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
               {loading ? "Generating..." : done ? "Generate Again" : "Generate Description"}
@@ -115,20 +115,20 @@ export default function AiToolsPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="mb-1.5 block text-sm font-medium">Lead</label>
-                <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-[#2563EB]">
+                <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand">
                   <option>Select a lead...</option>
                 </select>
               </div>
               <div>
                 <label className="mb-1.5 block text-sm font-medium">Property</label>
-                <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-[#2563EB]">
+                <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand">
                   <option>Select a property...</option>
                 </select>
               </div>
             </div>
             <div className="mt-4">
               <label className="mb-1.5 block text-sm font-medium">Tone</label>
-              <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-[#2563EB]">
+              <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand">
                 <option>Professional</option>
                 <option>Friendly</option>
                 <option>Urgent</option>
@@ -137,7 +137,7 @@ export default function AiToolsPage() {
             <button
               onClick={handleGenerate}
               disabled={loading}
-              className="mt-6 flex items-center gap-2 rounded-lg bg-[#10B981] px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
+              className="mt-6 flex items-center gap-2 rounded-lg bg-success px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
             >
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
               {loading ? "Generating..." : done ? "Generate Again" : "Generate Email"}
@@ -146,7 +146,7 @@ export default function AiToolsPage() {
         )}
 
         {done && (
-          <div className="mt-6 flex items-center gap-2 rounded-lg bg-[#10B981]/5 p-4 text-sm text-[#10B981]">
+          <div className="mt-6 flex items-center gap-2 rounded-lg bg-success/5 p-4 text-sm text-success">
             <Check className="h-4 w-4" />
             <span>Generation complete! Check the results below.</span>
           </div>

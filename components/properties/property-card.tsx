@@ -9,10 +9,10 @@ interface PropertyCardProps {
 
 export function PropertyCard({ property }: PropertyCardProps) {
   const statusColors: Record<string, string> = {
-    available: "bg-[#10B981]/10 text-[#10B981]",
-    under_contract: "bg-[#F59E0B]/10 text-[#F59E0B]",
+    available: "bg-success/10 text-success",
+    under_contract: "bg-warning/10 text-warning",
     sold: "bg-danger/10 text-danger",
-    rented: "bg-[#2563EB]/10 text-[#2563EB]",
+    rented: "bg-brand/10 text-brand",
   };
 
   return (
@@ -41,7 +41,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
         </span>
       </div>
       <div className="p-4">
-        <h3 className="mb-1 font-semibold leading-snug group-hover:text-[#2563EB]">
+        <h3 className="mb-1 font-semibold leading-snug group-hover:text-brand">
           {property.title}
         </h3>
         <p className="mb-3 flex items-center gap-1 text-xs text-muted">
@@ -59,7 +59,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
             <Move className="h-3.5 w-3.5" /> {property.area?.toLocaleString()} sqft
           </span>
         </div>
-        <p className="text-lg font-bold text-[#2563EB]">{formatPrice(property.price)}</p>
+        <p className="text-lg font-bold text-brand">{formatPrice(property.price)}</p>
       </div>
     </Link>
   );

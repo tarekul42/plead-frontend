@@ -29,7 +29,7 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
         <select
           value={filters.sort || "newest"}
           onChange={(e) => update("sort", e.target.value)}
-          className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none transition focus:border-[#2563EB]"
+          className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none transition focus:border-brand"
         >
           <option value="newest">Newest</option>
           <option value="price_asc">Price: Low to High</option>
@@ -49,7 +49,7 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
               }
               className={`rounded-lg border px-3 py-1.5 text-xs transition ${
                 filters.propertyType === type
-                  ? "border-[#2563EB] bg-[#2563EB]/5 text-[#2563EB]"
+                  ? "border-brand bg-brand/5 text-brand"
                   : "border-border hover:bg-neutral-100 dark:hover:bg-surface"
               }`}
             >
@@ -70,7 +70,7 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
               }
               className={`rounded-lg border px-3 py-1.5 text-xs transition ${
                 filters.status === status
-                  ? "border-[#2563EB] bg-[#2563EB]/5 text-[#2563EB]"
+                  ? "border-brand bg-brand/5 text-brand"
                   : "border-border hover:bg-neutral-100 dark:hover:bg-surface"
               }`}
             >
@@ -89,7 +89,7 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
               onClick={() => update("bedsMin", filters.bedsMin === n ? undefined : n)}
               className={`flex h-9 w-9 items-center justify-center rounded-lg border text-xs transition ${
                 filters.bedsMin === n
-                  ? "border-[#2563EB] bg-[#2563EB]/5 text-[#2563EB]"
+                  ? "border-brand bg-brand/5 text-brand"
                   : "border-border hover:bg-neutral-100 dark:hover:bg-surface"
               }`}
             >
@@ -108,7 +108,7 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
               onClick={() => update("bathsMin", filters.bathsMin === n ? undefined : n)}
               className={`flex h-9 w-9 items-center justify-center rounded-lg border text-xs transition ${
                 filters.bathsMin === n
-                  ? "border-[#2563EB] bg-[#2563EB]/5 text-[#2563EB]"
+                  ? "border-brand bg-brand/5 text-brand"
                   : "border-border hover:bg-neutral-100 dark:hover:bg-surface"
               }`}
             >
@@ -126,14 +126,14 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
             placeholder="Min"
             value={filters.priceMin || ""}
             onChange={(e) => update("priceMin", e.target.value ? Number(e.target.value) : undefined)}
-            className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none transition focus:border-[#2563EB]"
+            className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none transition focus:border-brand"
           />
           <input
             type="number"
             placeholder="Max"
             value={filters.priceMax || ""}
             onChange={(e) => update("priceMax", e.target.value ? Number(e.target.value) : undefined)}
-            className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none transition focus:border-[#2563EB]"
+            className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none transition focus:border-brand"
           />
         </div>
       </div>

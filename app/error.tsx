@@ -13,7 +13,7 @@ export default function Error({
       <p className="text-muted">{error.message}</p>
       <button
         onClick={reset}
-        className="rounded-lg bg-[#2563EB] px-6 py-2 text-white transition hover:opacity-90"
+        className="rounded-lg bg-brand px-6 py-2 text-white transition hover:opacity-90"
       >
         Try again
       </button>

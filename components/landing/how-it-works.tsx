@@ -42,11 +42,11 @@ export function HowItWorks() {
               {i < steps.length - 1 && (
                 <div className="absolute right-0 top-8 hidden h-px w-full border-t border-dashed border-border md:-right-1/2 md:block" />
               )}
-              <div className="relative mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#2563EB]/5">
-                <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-[#2563EB] text-xs font-bold text-white">
+              <div className="relative mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-brand/5">
+                <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">
                   {i + 1}
                 </span>
-                <step.icon className="h-7 w-7 text-[#2563EB]" />
+                <step.icon className="h-7 w-7 text-brand" />
               </div>
               <h3 className="mb-3 text-lg font-semibold">{step.title}</h3>
               <p className="text-sm text-muted">{step.description}</p>

@@ -78,12 +78,12 @@ export default function UsersPage() {
                       <div className="flex items-center gap-2">
                         <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
                           user.role === "admin" ? "bg-danger/10 text-danger" :
-                          user.role === "manager" ? "bg-[#F59E0B]/10 text-[#F59E0B]" :
-                          "bg-[#2563EB]/10 text-[#2563EB]"
+                          user.role === "manager" ? "bg-warning/10 text-warning" :
+                          "bg-brand/10 text-brand"
                         }`}>
                           {user.role}
                         </span>
-                        <button onClick={() => setEditingRole(user.id)} className="text-xs text-muted hover:text-[#2563EB]">Change</button>
+                        <button onClick={() => setEditingRole(user.id)} className="text-xs text-muted hover:text-brand">Change</button>
                       </div>
                     )}
                   </td>
@@ -94,7 +94,7 @@ export default function UsersPage() {
                       onClick={() => toggleActive(user.id)}
                       className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
                         user.active
-                          ? "bg-[#10B981]/10 text-[#10B981]"
+                          ? "bg-success/10 text-success"
                           : "bg-danger/10 text-danger"
                       }`}
                     >

@@ -36,8 +36,8 @@ export function AiFeaturesShowcase() {
               transition={{ delay: i * 0.15 }}
               className="rounded-card border border-border bg-background p-8 shadow-sm"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-[#2563EB]/5">
-                <feature.icon className="h-6 w-6 text-[#2563EB]" />
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-brand/5">
+                <feature.icon className="h-6 w-6 text-brand" />
               </div>
               <h3 className="mb-3 text-xl font-semibold">{feature.title}</h3>
               <p className="mb-6 text-sm text-muted leading-relaxed">{feature.description}</p>
@@ -45,7 +45,7 @@ export function AiFeaturesShowcase() {
                 {feature.highlights.map((h) => (
                   <span
                     key={h}
-                    className="rounded-full bg-[#10B981]/5 px-3 py-1 text-xs font-medium text-[#10B981]"
+                    className="rounded-full bg-success/5 px-3 py-1 text-xs font-medium text-success"
                   >
                     {h}
                   </span>

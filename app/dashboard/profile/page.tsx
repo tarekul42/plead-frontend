@@ -20,11 +20,11 @@ export default function ProfilePage() {
 
       <div className="rounded-card border border-border bg-surface p-6 shadow-sm">
         <div className="mb-8 flex items-center gap-4">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#2563EB]/10">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand/10">
             {user?.imageUrl ? (
               <img src={user.imageUrl} alt="Avatar" className="h-full w-full rounded-full object-cover" />
             ) : (
-              <User className="h-8 w-8 text-[#2563EB]" />
+              <User className="h-8 w-8 text-brand" />
             )}
           </div>
           <div>
@@ -39,14 +39,14 @@ export default function ProfilePage() {
               <label className="mb-1.5 block text-sm font-medium">First Name</label>
               <input
                 defaultValue={user?.firstName || ""}
-                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-[#2563EB]"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-brand"
               />
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">Last Name</label>
               <input
                 defaultValue={user?.lastName || ""}
-                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-[#2563EB]"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-brand"
               />
             </div>
           </div>
@@ -55,7 +55,7 @@ export default function ProfilePage() {
             <label className="mb-1.5 block text-sm font-medium">Title</label>
             <input
               placeholder="e.g., Senior Agent"
-              className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-[#2563EB]"
+              className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-brand"
             />
           </div>
 
@@ -64,13 +64,13 @@ export default function ProfilePage() {
             <input
               type="tel"
               placeholder="+1 (555) 123-4567"
-              className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-[#2563EB]"
+              className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-brand"
             />
           </div>
 
           <button
             type="submit"
-            className="flex items-center gap-2 rounded-lg bg-[#2563EB] px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
+            className="flex items-center gap-2 rounded-lg bg-brand px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
           >
             <Save className="h-4 w-4" />
             {saved ? "Saved!" : "Save Changes"}

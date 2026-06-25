@@ -2,16 +2,18 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { leadsApi } from "@/lib/api-client";
+import type { ApiResponse } from "@/types/api";
+import type { Lead } from "@/types/models";
 
 export function useLeads(params?: Record<string, unknown>) {
-  return useQuery({
+  return useQuery<ApiResponse<Lead[]>>({
     queryKey: ["leads", params],
     queryFn: () => leadsApi.list(params),
   });
 }
 
 export function useLead(id: string) {
-  return useQuery({
+  return useQuery<ApiResponse<Lead>>({
     queryKey: ["lead", id],
     queryFn: () => leadsApi.get(id),
     enabled: !!id,

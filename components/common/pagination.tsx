@@ -29,7 +29,7 @@ export function Pagination({ page, totalPages, onPageChange }: PaginationProps) 
               onClick={() => onPageChange(p)}
               className={`flex h-9 w-9 items-center justify-center rounded-lg text-sm transition ${
                 p === page
-                  ? "bg-[#2563EB] text-white"
+                  ? "bg-brand text-white"
                   : "border border-border hover:bg-neutral-100 dark:hover:bg-surface"
               }`}
             >

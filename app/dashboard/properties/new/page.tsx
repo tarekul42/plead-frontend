@@ -31,29 +31,29 @@ export default function NewPropertyPage() {
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="sm:col-span-2">
               <label className="mb-1.5 block text-sm font-medium">Title</label>
-              <input required className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-[#2563EB]" />
+              <input required className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand" />
             </div>
             <div className="sm:col-span-2">
               <label className="mb-1.5 block text-sm font-medium">Description</label>
               <div className="flex items-start gap-2 mb-2">
-                <button type="button" className="flex items-center gap-1 rounded-lg bg-[#10B981]/10 px-3 py-1.5 text-xs text-[#10B981] transition hover:bg-[#10B981]/20">
+                <button type="button" className="flex items-center gap-1 rounded-lg bg-success/10 px-3 py-1.5 text-xs text-success transition hover:bg-success/20">
                   <Sparkles className="h-3 w-3" />
                   Generate with AI
                 </button>
               </div>
-              <textarea rows={4} className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-[#2563EB] resize-y" />
+              <textarea rows={4} className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand resize-y" />
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">Price</label>
-              <input type="number" required className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-[#2563EB]" />
+              <input type="number" required className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand" />
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">Location</label>
-              <input required className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-[#2563EB]" />
+              <input required className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand" />
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">Property Type</label>
-              <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-[#2563EB]">
+              <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand">
                 {PROPERTY_TYPES.map((t) => (
                   <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>
                 ))}
@@ -61,7 +61,7 @@ export default function NewPropertyPage() {
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">Status</label>
-              <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-[#2563EB]">
+              <select className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand">
                 {PROPERTY_STATUSES.map((s) => (
                   <option key={s} value={s}>{s.replace("_", " ").replace(/\b\w/g, (c) => c.toUpperCase())}</option>
                 ))}
@@ -75,19 +75,19 @@ export default function NewPropertyPage() {
           <div className="grid gap-5 sm:grid-cols-4">
             <div>
               <label className="mb-1.5 block text-sm font-medium">Bedrooms</label>
-              <input type="number" min={0} required className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-[#2563EB]" />
+              <input type="number" min={0} required className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand" />
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">Bathrooms</label>
-              <input type="number" min={0} required step="0.5" className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-[#2563EB]" />
+              <input type="number" min={0} required step="0.5" className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand" />
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">Area (sqft)</label>
-              <input type="number" min={0} className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-[#2563EB]" />
+              <input type="number" min={0} className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand" />
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">Images (URLs)</label>
-              <input placeholder="Comma-separated URLs" className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-[#2563EB]" />
+              <input placeholder="Comma-separated URLs" className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand" />
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function NewPropertyPage() {
           <button
             type="submit"
             disabled={saved}
-            className="flex items-center gap-2 rounded-lg bg-[#2563EB] px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
+            className="flex items-center gap-2 rounded-lg bg-brand px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
           >
             <Save className="h-4 w-4" />
             {saved ? "Saved!" : "Save Property"}

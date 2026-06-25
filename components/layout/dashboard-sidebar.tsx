@@ -65,7 +65,7 @@ export function DashboardSidebar() {
           PropLead
         </Link>
         {!isLoading && role && (
-          <span className="rounded-full bg-[#2563EB]/5 px-2 py-0.5 text-xs text-[#2563EB]">
+          <span className="rounded-full bg-brand/5 px-2 py-0.5 text-xs text-brand">
             {roleLabels[role] || role}
           </span>
         )}
@@ -79,7 +79,7 @@ export function DashboardSidebar() {
               href={link.href}
               className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition ${
                 isActive
-                  ? "bg-[#2563EB]/5 text-[#2563EB] font-medium"
+                  ? "bg-brand/5 text-brand font-medium"
                   : "text-muted hover:bg-neutral-100 dark:hover:bg-[#1E293B] hover:text-foreground"
               }`}
             >

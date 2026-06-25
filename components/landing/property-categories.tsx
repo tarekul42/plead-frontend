@@ -29,10 +29,10 @@ export function PropertyCategories() {
             >
               <Link
                 href={`/properties?propertyType=${cat.slug}`}
-                className="flex flex-col items-center gap-3 rounded-card border border-border p-6 text-center shadow-sm transition hover:border-[#2563EB]/30 hover:shadow-md"
+                className="flex flex-col items-center gap-3 rounded-card border border-border p-6 text-center shadow-sm transition hover:border-brand/30 hover:shadow-md"
               >
-                <div className="rounded-full bg-[#2563EB]/5 p-3">
-                  <cat.icon className="h-6 w-6 text-[#2563EB]" />
+                <div className="rounded-full bg-brand/5 p-3">
+                  <cat.icon className="h-6 w-6 text-brand" />
                 </div>
                 <div>
                   <p className="font-medium">{cat.label}</p>

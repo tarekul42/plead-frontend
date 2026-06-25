@@ -102,7 +102,7 @@ function AgentOverview() {
                   <tr key={lead._id} className="border-b border-border last:border-0">
                     <td className="py-3">{lead.name}</td>
                     <td className="py-3">
-                      <span className="rounded-full bg-[#2563EB]/5 px-2 py-0.5 text-xs text-[#2563EB]">{lead.status}</span>
+                      <span className="rounded-full bg-brand/5 px-2 py-0.5 text-xs text-brand">{lead.status}</span>
                     </td>
                     <td className="py-3 text-muted">{lead.budget ? `$${(lead.budget / 1000).toFixed(0)}K` : "-"}</td>
                     <td className="py-3 text-muted">{lead.createdAt ? new Date(lead.createdAt).toLocaleDateString() : "-"}</td>
@@ -159,7 +159,7 @@ function ManagerOverview() {
             {agentsLeaderboard.map((agent, i) => (
               <div key={agent.name} className="flex items-center justify-between rounded-lg border border-border bg-background p-3">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#2563EB]/10 text-xs font-bold text-[#2563EB]">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand/10 text-xs font-bold text-brand">
                     {i + 1}
                   </span>
                   <div>
@@ -167,7 +167,7 @@ function ManagerOverview() {
                     <p className="text-xs text-muted">{agent.closed} closed / {agent.leads} leads</p>
                   </div>
                 </div>
-                <span className="text-sm font-semibold text-[#10B981]">{agent.rate}%</span>
+                <span className="text-sm font-semibold text-success">{agent.rate}%</span>
               </div>
             ))}
           </div>

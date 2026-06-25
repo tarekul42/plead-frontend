@@ -37,7 +37,7 @@ export function BlogTeaser() {
             <h2 className="text-2xl font-bold md:text-3xl">Latest from the Blog</h2>
             <p className="mt-2 text-muted">Tips, guides, and industry insights</p>
           </div>
-          <Link href="/blog" className="text-sm text-[#2563EB] hover:underline">
+          <Link href="/blog" className="text-sm text-brand hover:underline">
             View all
           </Link>
         </div>
@@ -64,7 +64,7 @@ export function BlogTeaser() {
                   {post.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-[#2563EB]/5 px-2.5 py-0.5 text-xs text-[#2563EB]"
+                      className="rounded-full bg-brand/5 px-2.5 py-0.5 text-xs text-brand"
                     >
                       {tag}
                     </span>

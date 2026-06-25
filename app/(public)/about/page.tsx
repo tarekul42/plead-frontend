@@ -22,8 +22,8 @@ export default function AboutPage() {
       <div className="mt-16 grid gap-8 md:grid-cols-2">
         {values.map((v) => (
           <div key={v.title} className="rounded-card border border-border bg-surface p-8 shadow-sm">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-[#2563EB]/5">
-              <v.icon className="h-6 w-6 text-[#2563EB]" />
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-brand/5">
+              <v.icon className="h-6 w-6 text-brand" />
             </div>
             <h3 className="mb-3 text-xl font-semibold">{v.title}</h3>
             <p className="text-sm text-muted leading-relaxed">{v.text}</p>

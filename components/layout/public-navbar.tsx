@@ -34,7 +34,7 @@ export function PublicNavbar() {
           {isSignedIn ? (
             <Link
               href="/dashboard"
-              className="rounded-lg bg-[#2563EB] px-4 py-2 text-sm text-white transition hover:opacity-90"
+              className="rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90"
             >
               Dashboard
             </Link>
@@ -46,7 +46,7 @@ export function PublicNavbar() {
                 </button>
               </SignInButton>
               <SignUpButton mode="modal">
-                <button className="rounded-lg bg-[#2563EB] px-4 py-2 text-sm text-white transition hover:opacity-90">
+                <button className="rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90">
                   Get started
                 </button>
               </SignUpButton>

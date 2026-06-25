@@ -21,7 +21,7 @@ export function FinalCta() {
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/sign-up"
-            className="rounded-lg bg-[#2563EB] px-8 py-3 text-white shadow-lg shadow-[#2563EB]/20 transition hover:opacity-90"
+            className="rounded-lg bg-brand px-8 py-3 text-white shadow-lg shadow-[#2563EB]/20 transition hover:opacity-90"
           >
             Start free
           </Link>

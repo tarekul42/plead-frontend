@@ -14,7 +14,7 @@ export function ErrorState({ message = "Something went wrong.", onRetry }: Error
       {onRetry && (
         <button
           onClick={onRetry}
-          className="rounded-lg bg-[#2563EB] px-4 py-2 text-sm text-white transition hover:opacity-90"
+          className="rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90"
         >
           Try again
         </button>

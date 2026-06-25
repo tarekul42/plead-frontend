@@ -14,7 +14,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#2563EB]/20 bg-[#2563EB]/5 px-4 py-1.5 text-sm text-[#2563EB]">
+          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand/5 px-4 py-1.5 text-sm text-brand">
             <Sparkles className="h-4 w-4" />
             AI-Powered Real Estate Platform
           </span>
@@ -51,7 +51,7 @@ export function Hero() {
         >
           <Link
             href="/sign-up"
-            className="rounded-lg bg-[#2563EB] px-8 py-3 text-white shadow-lg shadow-[#2563EB]/20 transition hover:opacity-90"
+            className="rounded-lg bg-brand px-8 py-3 text-white shadow-lg shadow-[#2563EB]/20 transition hover:opacity-90"
           >
             Start free
           </Link>
@@ -75,37 +75,37 @@ export function Hero() {
             <div className="grid w-full max-w-lg gap-3 px-6">
               <div className="flex items-center justify-between rounded-lg border border-border bg-surface p-4">
                 <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-full bg-[#10B981]/10" />
+                  <div className="h-8 w-8 rounded-full bg-success/10" />
                   <div>
                     <p className="text-sm font-medium">Modern 3BR in Brooklyn</p>
                     <p className="text-xs text-muted">Lead: Sarah J. • Budget: $850K</p>
                   </div>
                 </div>
-                <span className="rounded-full bg-[#10B981]/10 px-3 py-1 text-xs font-medium text-[#10B981]">
+                <span className="rounded-full bg-success/10 px-3 py-1 text-xs font-medium text-success">
                   92% Match
                 </span>
               </div>
               <div className="flex items-center justify-between rounded-lg border border-border bg-surface p-4">
                 <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-full bg-[#2563EB]/10" />
+                  <div className="h-8 w-8 rounded-full bg-brand/10" />
                   <div>
                     <p className="text-sm font-medium">Luxury Condo, Manhattan</p>
                     <p className="text-xs text-muted">Lead: Mark T. • Budget: $1.2M</p>
                   </div>
                 </div>
-                <span className="rounded-full bg-[#2563EB]/10 px-3 py-1 text-xs font-medium text-[#2563EB]">
+                <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand">
                   85% Match
                 </span>
               </div>
               <div className="flex items-center justify-between rounded-lg border border-border bg-surface p-4">
                 <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-full bg-[#F59E0B]/10" />
+                  <div className="h-8 w-8 rounded-full bg-warning/10" />
                   <div>
                     <p className="text-sm font-medium">Cozy Studio, Downtown</p>
                     <p className="text-xs text-muted">Lead: Emily R. • Budget: $400K</p>
                   </div>
                 </div>
-                <span className="rounded-full bg-[#F59E0B]/10 px-3 py-1 text-xs font-medium text-[#F59E0B]">
+                <span className="rounded-full bg-warning/10 px-3 py-1 text-xs font-medium text-warning">
                   71% Match
                 </span>
               </div>

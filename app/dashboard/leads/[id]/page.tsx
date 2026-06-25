@@ -41,10 +41,10 @@ export default function LeadDetailPage({ params }: { params: Promise<{ id: strin
                 <p className="text-sm text-muted">{lead.email}</p>
               </div>
               <span className={`rounded-full px-3 py-1 text-xs font-medium ${
-                lead.status === "new" ? "bg-[#2563EB]/10 text-[#2563EB]" :
-                lead.status === "contacted" ? "bg-[#F59E0B]/10 text-[#F59E0B]" :
-                lead.status === "qualified" ? "bg-[#8B5CF6]/10 text-[#8B5CF6]" :
-                lead.status === "won" ? "bg-[#10B981]/10 text-[#10B981]" :
+                lead.status === "new" ? "bg-brand/10 text-brand" :
+                lead.status === "contacted" ? "bg-warning/10 text-warning" :
+                lead.status === "qualified" ? "bg-brand-light/10 text-brand-light" :
+                lead.status === "won" ? "bg-success/10 text-success" :
                 "bg-danger/10 text-danger"
               }`}>
                 {lead.status}
@@ -91,7 +91,7 @@ export default function LeadDetailPage({ params }: { params: Promise<{ id: strin
               >
                 Log Interaction
               </Link>
-              <button className="flex w-full items-center justify-center rounded-lg bg-[#2563EB] px-4 py-2 text-sm text-white transition hover:opacity-90">
+              <button className="flex w-full items-center justify-center rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90">
                 Generate Email
               </button>
             </div>

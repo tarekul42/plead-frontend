@@ -81,7 +81,7 @@ export default function AiUsagePage() {
                   <td className="p-4 text-muted">{g.user}</td>
                   <td className="p-4">
                     <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                      g.status === "success" ? "bg-[#10B981]/10 text-[#10B981]" : "bg-danger/10 text-danger"
+                      g.status === "success" ? "bg-success/10 text-success" : "bg-danger/10 text-danger"
                     }`}>
                       {g.status}
                     </span>

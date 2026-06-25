@@ -27,7 +27,7 @@ export default function BlogManagementPage() {
         </div>
         <Link
           href="/dashboard/blog/new"
-          className="flex items-center gap-2 rounded-lg bg-[#2563EB] px-4 py-2 text-sm text-white transition hover:opacity-90"
+          className="flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90"
         >
           <Plus className="h-4 w-4" />
           New Post
@@ -55,7 +55,7 @@ export default function BlogManagementPage() {
                     <td className="p-4 font-medium">{post.title}</td>
                     <td className="p-4">
                       <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                        post.status === "published" ? "bg-[#10B981]/10 text-[#10B981]" : "bg-[#F59E0B]/10 text-[#F59E0B]"
+                        post.status === "published" ? "bg-success/10 text-success" : "bg-warning/10 text-warning"
                       }`}>
                         {post.status}
                       </span>

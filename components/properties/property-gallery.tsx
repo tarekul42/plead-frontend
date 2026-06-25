@@ -65,7 +65,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
             key={i}
             onClick={() => setCurrent(i)}
             className={`h-16 w-24 shrink-0 overflow-hidden rounded-lg border-2 transition ${
-              i === current ? "border-[#2563EB]" : "border-transparent opacity-60 hover:opacity-100"
+              i === current ? "border-brand" : "border-transparent opacity-60 hover:opacity-100"
             }`}
           >
             <img
