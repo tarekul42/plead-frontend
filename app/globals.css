@@ -15,7 +15,7 @@
   --color-surface: #FFFFFF;
   --color-border: #E2E8F0;
   --color-foreground: #0F172A;
-  --color-text-muted: #64748B;
+  --color-muted: #64748B;
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --radius-card: 12px;
@@ -28,7 +28,7 @@
   --color-surface: #1E293B;
   --color-border: #334155;
   --color-foreground: #F1F5F9;
-  --color-text-muted: #94A3B8;
+  --color-muted: #94A3B8;
 }
 
 * {
