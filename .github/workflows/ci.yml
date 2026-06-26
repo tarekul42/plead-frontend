@@ -10,10 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18, 20, 22]
-
     steps:
       - uses: actions/checkout@v4
 
@@ -28,6 +24,9 @@ jobs:
 
       - name: Lint
         run: bun run lint
+
+      - name: Unit & Integration tests
+        run: bun run test:ci
 
       - name: Build
         run: bun run build
