@@ -1,30 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { Star, Check, X, MoreHorizontal } from "lucide-react";
+import { Star, Check, X, MoreHorizontal, Loader2 } from "lucide-react";
+import { useReviews, useApproveReview, useDeleteReview } from "@/lib/queries/use-reviews";
 import { StatCard } from "@/components/dashboard/stat-card";
 
-const sampleReviews = [
-  { id: "1", property: "Modern 3BR in Brooklyn", user: "Alice W.", rating: 5, comment: "Excellent property, well-maintained and great location.", status: "pending", date: "Jun 24, 2026" },
-  { id: "2", property: "Luxury Condo, Manhattan", user: "Bob K.", rating: 4, comment: "Beautiful views but a bit pricey for the area.", status: "approved", date: "Jun 22, 2026" },
-  { id: "3", property: "Cozy Studio, Downtown", user: "Carol S.", rating: 2, comment: "Not as described. Much smaller than the photos suggest.", status: "pending", date: "Jun 20, 2026" },
-  { id: "4", property: "Family Home, Suburbs", user: "David L.", rating: 5, comment: "Perfect family home. Great schools nearby.", status: "approved", date: "Jun 18, 2026" },
-  { id: "5", property: "Beachfront Villa", user: "Emma R.", rating: 1, comment: "Spam review - please remove.", status: "flagged", date: "Jun 15, 2026" },
+const statusMap = [
+  { label: "All", value: "all", filter: undefined },
+  { label: "Pending", value: "pending", filter: { isVerified: "false" } },
+  { label: "Approved", value: "approved", filter: { isVerified: "true" } },
 ];
 
 export default function ReviewsPage() {
-  const [reviews, setReviews] = useState(sampleReviews);
   const [filter, setFilter] = useState<string>("all");
+  const filterParam = statusMap.find((f) => f.value === filter)?.filter;
+  const { data: reviewsData, isLoading } = useReviews(filterParam);
+  const approveReview = useApproveReview();
+  const deleteReview = useDeleteReview();
 
-  const filtered = filter === "all" ? reviews : reviews.filter((r) => r.status === filter);
-
-  const handleApprove = (id: string) => {
-    setReviews(reviews.map((r) => (r.id === id ? { ...r, status: "approved" as const } : r)));
-  };
-
-  const handleDelete = (id: string) => {
-    setReviews(reviews.filter((r) => r.id !== id));
-  };
+  const reviews = reviewsData?.data || [];
 
   return (
     <div>
@@ -33,89 +27,84 @@ export default function ReviewsPage() {
         <p className="text-sm text-muted">Approve or remove property reviews</p>
       </div>
 
-      <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <StatCard title="Total Reviews" value={reviews.length} icon={Star} />
-        <StatCard title="Approved" value={reviews.filter((r) => r.status === "approved").length} icon={Check} />
-        <StatCard title="Pending" value={reviews.filter((r) => r.status === "pending").length} icon={MoreHorizontal} />
-        <StatCard title="Flagged" value={reviews.filter((r) => r.status === "flagged").length} icon={X} />
+        <StatCard title="Approved" value={reviews.filter((r) => r.isVerified).length} icon={Check} />
+        <StatCard title="Pending" value={reviews.filter((r) => !r.isVerified).length} icon={MoreHorizontal} />
       </div>
 
       <div className="mb-4 flex gap-2">
-        {["all", "pending", "approved", "flagged"].map((f) => (
+        {statusMap.map((s) => (
           <button
-            key={f}
-            onClick={() => setFilter(f)}
+            key={s.value}
+            onClick={() => setFilter(s.value)}
             className={`rounded-lg px-4 py-1.5 text-xs transition ${
-              filter === f
+              filter === s.value
                 ? "bg-brand text-white"
                 : "border border-border hover:bg-neutral-100 dark:hover:bg-surface"
             }`}
           >
-            {f.charAt(0).toUpperCase() + f.slice(1)}
+            {s.label}
           </button>
         ))}
       </div>
 
       <div className="rounded-card border border-border bg-surface shadow-sm">
-        {filtered.length === 0 ? (
+        {isLoading ? (
+          <div className="flex items-center justify-center py-12">
+            <Loader2 className="h-6 w-6 animate-spin text-muted" />
+          </div>
+        ) : reviews.length === 0 ? (
           <p className="py-12 text-center text-sm text-muted">No reviews to moderate.</p>
         ) : (
           <div className="divide-y divide-border">
-            {filtered.map((review) => (
-              <div key={review.id} className="p-4">
+            {reviews.map((review) => (
+              <div key={review._id} className="p-4">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <p className="font-medium">{review.property}</p>
+                      <p className="font-medium">Property Review</p>
                       <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-                        review.status === "approved" ? "bg-success/10 text-success" :
-                        review.status === "flagged" ? "bg-danger/10 text-danger" :
-                        "bg-warning/10 text-warning"
+                        review.isVerified ? "bg-success/10 text-success" : "bg-warning/10 text-warning"
                       }`}>
-                        {review.status}
+                        {review.isVerified ? "approved" : "pending"}
                       </span>
                     </div>
                     <div className="mt-1 flex items-center gap-3 text-xs text-muted">
-                      <span>{review.user}</span>
-                      <span>|</span>
                       <div className="flex items-center gap-0.5">
                         {Array.from({ length: 5 }).map((_, i) => (
                           <Star key={i} className={`h-3 w-3 ${i < review.rating ? "text-warning fill-[#F59E0B]" : "text-border"}`} />
                         ))}
                       </div>
                       <span>|</span>
-                      <span>{review.date}</span>
+                      <span>{new Date(review.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
                     </div>
-                    <p className="mt-2 text-sm text-muted">{review.comment}</p>
+                    {review.title && <p className="mt-1 text-sm font-medium">{review.title}</p>}
+                    {review.comment && <p className="mt-1 text-sm text-muted">{review.comment}</p>}
                   </div>
                   <div className="flex items-center gap-2 ml-4">
-                    {review.status === "pending" && (
+                    {!review.isVerified && (
                       <>
                         <button
-                          onClick={() => handleApprove(review.id)}
+                          onClick={() => approveReview.mutate(review._id)}
+                          disabled={approveReview.isPending}
                           className="flex h-8 w-8 items-center justify-center rounded-lg border border-success/30 text-success transition hover:bg-success/5"
                         >
                           <Check className="h-4 w-4" />
                         </button>
                         <button
-                          onClick={() => handleDelete(review.id)}
+                          onClick={() => deleteReview.mutate(review._id)}
+                          disabled={deleteReview.isPending}
                           className="flex h-8 w-8 items-center justify-center rounded-lg border border-danger/30 text-danger transition hover:bg-danger/5"
                         >
                           <X className="h-4 w-4" />
                         </button>
                       </>
                     )}
-                    {review.status === "approved" && (
+                    {review.isVerified && (
                       <button
-                        onClick={() => handleDelete(review.id)}
-                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-danger/30 text-danger transition hover:bg-danger/5"
-                      >
-                        <X className="h-4 w-4" />
-                      </button>
-                    )}
-                    {review.status === "flagged" && (
-                      <button
-                        onClick={() => handleDelete(review.id)}
+                        onClick={() => deleteReview.mutate(review._id)}
+                        disabled={deleteReview.isPending}
                         className="flex h-8 w-8 items-center justify-center rounded-lg border border-danger/30 text-danger transition hover:bg-danger/5"
                       >
                         <X className="h-4 w-4" />

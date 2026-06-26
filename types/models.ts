@@ -90,4 +90,6 @@ export interface User {
   phone?: string;
   title?: string;
   isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
 }

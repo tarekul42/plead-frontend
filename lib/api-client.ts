@@ -42,11 +42,29 @@ export const leadsApi = {
   delete: (id: string) => apiClient.delete(`/leads/${id}`).then((r) => r.data),
 };
 
+export const usersApi = {
+  list: () => apiClient.get("/users").then((r) => r.data),
+};
+
+export const reviewsApi = {
+  list: (params?: Record<string, unknown>) =>
+    apiClient.get("/reviews", { params }).then((r) => r.data),
+  update: (id: string, data: unknown) =>
+    apiClient.patch(`/reviews/${id}`, data).then((r) => r.data),
+  delete: (id: string) => apiClient.delete(`/reviews/${id}`).then((r) => r.data),
+};
+
 export const interactionsApi = {
+  list: () => apiClient.get("/interactions").then((r) => r.data),
   listByLead: (leadId: string) =>
     apiClient.get(`/leads/${leadId}/interactions`).then((r) => r.data),
   create: (leadId: string, data: unknown) =>
     apiClient.post(`/leads/${leadId}/interactions`, data).then((r) => r.data),
+};
+
+export const adminApi = {
+  toggleUserStatus: (id: string) =>
+    apiClient.patch(`/admin/users/${id}/toggle-status`).then((r) => r.data),
 };
 
 export const aiApi = {
