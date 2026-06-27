@@ -1,4 +1,5 @@
 import { AlertTriangle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface ErrorStateProps {
   message?: string;
@@ -12,12 +13,9 @@ export function ErrorState({ message = "Something went wrong.", onRetry }: Error
       <h3 className="mb-2 text-lg font-semibold">Error</h3>
       <p className="mb-6 max-w-md text-sm text-muted">{message}</p>
       {onRetry && (
-        <button
-          onClick={onRetry}
-          className="rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90"
-        >
+        <Button variant="primary" onClick={onRetry}>
           Try again
-        </button>
+        </Button>
       )}
     </div>
   );

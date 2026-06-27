@@ -1,9 +1,7 @@
 "use client";
 
-import { useUser } from "@clerk/nextjs";
-import { useQuery } from "@tanstack/react-query";
-import apiClient from "@/lib/api-client";
 import { ReactNode } from "react";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 export function RoleGuard({
   allowedRoles,
@@ -14,16 +12,9 @@ export function RoleGuard({
   children: ReactNode;
   fallback?: ReactNode;
 }) {
-  const { user: clerkUser, isLoaded } = useUser();
+  const { user, isLoading } = useCurrentUser();
 
-  const { data: user } = useQuery({
-    queryKey: ["current-user"],
-    queryFn: () =>
-      apiClient.get("/users/me").then((r) => r.data.data),
-    enabled: isLoaded && !!clerkUser,
-  });
-
-  if (!isLoaded) return null;
+  if (isLoading) return null;
   if (!user) return null;
   if (!allowedRoles.includes(user.role)) {
     return fallback ? <>{fallback}</> : null;

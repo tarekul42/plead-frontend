@@ -41,3 +41,24 @@ export interface AiEmailResult {
   tokensUsed: number;
   cached: boolean;
 }
+
+export interface PropertyListParams {
+  q?: string;
+  location?: string;
+  propertyType?: string;
+  priceMin?: number;
+  priceMax?: number;
+  beds?: number;
+  status?: string;
+  sort?: string;
+  page?: number;
+  limit?: number;
+}
+
+export interface LeadListParams {
+  status?: string;
+  assignedAgentId?: string;
+  q?: string;
+  page?: number;
+  limit?: number;
+}

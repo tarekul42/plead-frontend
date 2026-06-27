@@ -1,123 +1,107 @@
 "use client";
 
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { FormField } from "@/components/ui/form-field";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 
-interface LeadFormData {
-  name: string;
-  email: string;
-  phone?: string;
-  budget?: number;
-  preferredLocation?: string;
-  notes?: string;
-  status?: string;
-  source?: string;
-  assignedAgentId: string;
-}
+const leadFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email"),
+  phone: z.string().regex(/^\+?[\d\s\-().]{7,20}$/, "Invalid phone number").optional().or(z.literal("")),
+  budget: z.coerce.number().min(0, "Budget must be positive").optional(),
+  preferredLocation: z.string().optional(),
+  notes: z.string().optional(),
+  status: z.string().optional(),
+  source: z.string().optional(),
+  assignedAgentId: z.string().min(1, "Assigned agent is required"),
+});
+
+type LeadFormValues = z.infer<typeof leadFormSchema>;
 
 interface LeadFormProps {
-  onSubmit: (data: LeadFormData) => void | Promise<void>;
-  initialData?: Partial<LeadFormData>;
+  onSubmit: (data: LeadFormValues) => void | Promise<void>;
+  initialData?: Partial<LeadFormValues>;
 }
 
 const STATUS_OPTIONS = ["new", "contacted", "qualified", "negotiating", "closed", "lost"];
 const SOURCE_OPTIONS = ["website", "referral", "call", "email", "walk-in", "other"];
 
 export function LeadForm({ onSubmit, initialData }: LeadFormProps) {
-  const [form, setForm] = useState<LeadFormData>({
-    name: initialData?.name || "",
-    email: initialData?.email || "",
-    phone: initialData?.phone || "",
-    budget: initialData?.budget || undefined,
-    preferredLocation: initialData?.preferredLocation || "",
-    notes: initialData?.notes || "",
-    status: initialData?.status || "new",
-    source: initialData?.source || "website",
-    assignedAgentId: initialData?.assignedAgentId || "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LeadFormValues>({
+    resolver: zodResolver(leadFormSchema) as never,
+    defaultValues: {
+      name: initialData?.name ?? "",
+      email: initialData?.email ?? "",
+      phone: initialData?.phone ?? "",
+      budget: initialData?.budget ?? undefined,
+      preferredLocation: initialData?.preferredLocation ?? "",
+      notes: initialData?.notes ?? "",
+      status: initialData?.status ?? "new",
+      source: initialData?.source ?? "website",
+      assignedAgentId: initialData?.assignedAgentId ?? "",
+    },
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const validate = (): boolean => {
-    const errs: Record<string, string> = {};
-    if (!form.name.trim()) errs.name = "Name is required";
-    if (!form.email.includes("@") || !form.email.includes(".")) errs.email = "Invalid email";
-    if (form.budget !== undefined && form.budget < 0) errs.budget = "Budget must be positive";
-    setErrors(errs);
-    return Object.keys(errs).length === 0;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
-    setIsSubmitting(true);
-    try {
-      await onSubmit(form);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const set = (field: keyof LeadFormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const value = field === "budget" ? Number(e.target.value) : e.target.value;
-    setForm((prev) => ({ ...prev, [field]: value }));
-  };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label htmlFor="name">Name</label>
-        <input id="name" value={form.name} onChange={set("name")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-        {errors.name && <p className="text-xs text-danger">{errors.name}</p>}
+    <form onSubmit={handleSubmit((data) => onSubmit(data))} noValidate className="space-y-4">
+      <FormField label="Name" error={errors.name} htmlFor="name" required>
+        <Input id="name" {...register("name")} />
+      </FormField>
+
+      <FormField label="Email" error={errors.email} htmlFor="email" required>
+        <Input id="email" {...register("email")} />
+      </FormField>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <FormField label="Phone" error={errors.phone} htmlFor="phone">
+          <Input id="phone" {...register("phone")} />
+        </FormField>
+
+        <FormField label="Budget" error={errors.budget} htmlFor="budget">
+          <Input id="budget" type="number" {...register("budget")} />
+        </FormField>
+
+        <FormField label="Preferred Location" error={errors.preferredLocation} htmlFor="preferredLocation">
+          <Input id="preferredLocation" {...register("preferredLocation")} />
+        </FormField>
+
+        <FormField label="Assigned Agent" error={errors.assignedAgentId} htmlFor="assignedAgent" required>
+          <Input id="assignedAgent" {...register("assignedAgentId")} />
+        </FormField>
+
+        <FormField label="Status" error={errors.status} htmlFor="status">
+          <Select id="status" {...register("status")}>
+            {STATUS_OPTIONS.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </Select>
+        </FormField>
+
+        <FormField label="Source" error={errors.source} htmlFor="source">
+          <Select id="source" {...register("source")}>
+            {SOURCE_OPTIONS.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </Select>
+        </FormField>
       </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={form.email} onChange={set("email")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-        {errors.email && <p className="text-xs text-danger">{errors.email}</p>}
-      </div>
-      <div>
-        <label htmlFor="phone">Phone</label>
-        <input id="phone" value={form.phone || ""} onChange={set("phone")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-      </div>
-      <div>
-        <label htmlFor="budget">Budget</label>
-        <input id="budget" type="number" value={form.budget ?? ""} onChange={set("budget")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-        {errors.budget && <p className="text-xs text-danger">{errors.budget}</p>}
-      </div>
-      <div>
-        <label htmlFor="preferredLocation">Preferred Location</label>
-        <input id="preferredLocation" value={form.preferredLocation || ""} onChange={set("preferredLocation")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-      </div>
-      <div>
-        <label htmlFor="assignedAgent">Assigned Agent</label>
-        <input id="assignedAgent" value={form.assignedAgentId} onChange={set("assignedAgentId")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-      </div>
-      <div>
-        <label htmlFor="status">Status</label>
-        <select id="status" value={form.status} onChange={set("status")} className="w-full rounded-lg border border-border bg-background px-3 py-2">
-          {STATUS_OPTIONS.map((s) => (
-            <option key={s} value={s}>{s}</option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="source">Source</label>
-        <select id="source" value={form.source} onChange={set("source")} className="w-full rounded-lg border border-border bg-background px-3 py-2">
-          {SOURCE_OPTIONS.map((s) => (
-            <option key={s} value={s}>{s}</option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="notes">Notes</label>
-        <textarea id="notes" value={form.notes || ""} onChange={set("notes")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-      </div>
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
-      >
+
+      <FormField label="Notes" error={errors.notes} htmlFor="notes">
+        <Textarea id="notes" rows={3} {...register("notes")} />
+      </FormField>
+
+      <Button type="submit" disabled={isSubmitting}>
         {isSubmitting ? "Saving..." : "Create Lead"}
-      </button>
+      </Button>
     </form>
   );
 }

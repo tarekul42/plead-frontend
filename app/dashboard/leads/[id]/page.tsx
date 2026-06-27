@@ -14,8 +14,8 @@ export default function LeadDetailPage({ params }: { params: Promise<{ id: strin
   if (isLoading) {
     return (
       <div className="space-y-4">
-        <div className="h-8 w-48 animate-pulse rounded bg-neutral-200 dark:bg-[#1E293B]" />
-        <div className="h-32 animate-pulse rounded-card bg-neutral-200 dark:bg-[#1E293B]" />
+        <div className="h-8 w-48 animate-pulse rounded bg-neutral-200 dark:bg-surface" />
+        <div className="h-32 animate-pulse rounded-card bg-neutral-200 dark:bg-surface" />
       </div>
     );
   }

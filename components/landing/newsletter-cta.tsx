@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Mail, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function NewsletterCta() {
   const [email, setEmail] = useState("");
@@ -40,12 +41,9 @@ export function NewsletterCta() {
               required
               className="flex-1 rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-brand"
             />
-            <button
-              type="submit"
-              className="rounded-lg bg-brand px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
-            >
+            <Button type="submit">
               Subscribe
-            </button>
+            </Button>
           </form>
         )}
       </div>

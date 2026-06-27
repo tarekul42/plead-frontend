@@ -23,7 +23,7 @@ const mockGet = vi.fn().mockResolvedValue({
 vi.mock("@/lib/api-client", () => ({
   default: {
     get: mockGet,
-    interceptors: { response: { use: vi.fn() } },
+    interceptors: { request: { use: vi.fn().mockReturnValue(0) }, response: { use: vi.fn().mockReturnValue(0) } },
   },
   setAuthToken: vi.fn(),
 }));

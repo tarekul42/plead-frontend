@@ -19,7 +19,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
       <div className="mx-auto max-w-container px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <div className="aspect-[16/9] animate-pulse rounded-xl bg-neutral-200 dark:bg-[#1E293B]" />
+            <div className="aspect-[16/9] animate-pulse rounded-xl bg-neutral-200 dark:bg-surface" />
           </div>
           <div className="space-y-4">
             <PropertySkeleton />
@@ -114,7 +114,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
           {property.coordinates && (
             <div className="mt-8">
               <h2 className="mb-4 text-xl font-semibold">Location</h2>
-              <div className="flex h-64 items-center justify-center rounded-xl bg-neutral-100 dark:bg-[#1E293B]">
+              <div className="flex h-64 items-center justify-center rounded-xl bg-neutral-100 dark:bg-surface">
                 <div className="text-center">
                   <MapPin className="mx-auto mb-2 h-6 w-6 text-muted" />
                   <p className="text-sm text-muted">{property.location}</p>

@@ -139,9 +139,7 @@ describe("PropertyForm", () => {
     });
 
     // Select property type
-    const typeSelect = screen.getByLabelText(/property type/i);
-    fireEvent.click(typeSelect);
-    fireEvent.click(screen.getByText("Condo"));
+    fireEvent.change(screen.getByLabelText(/property type/i), { target: { value: "condo" } });
 
     fireEvent.click(screen.getByRole("button", { name: submitButtonName }));
 
@@ -203,9 +201,7 @@ describe("PropertyForm", () => {
       target: { value: "1000" },
     });
 
-    const typeSelect = screen.getByLabelText(/property type/i);
-    fireEvent.click(typeSelect);
-    fireEvent.click(screen.getByText("House"));
+    fireEvent.change(screen.getByLabelText(/property type/i), { target: { value: "house" } });
 
     fireEvent.click(screen.getByRole("button", { name: submitButtonName }));
 

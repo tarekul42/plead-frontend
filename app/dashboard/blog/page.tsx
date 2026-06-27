@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, Eye, Calendar } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { EmptyState } from "@/components/common/empty-state";
 
 const posts = [
   { id: "1", title: "How AI is Transforming Real Estate Lead Management", status: "published", date: "Jun 15, 2026", views: 142 },
@@ -25,10 +27,7 @@ export default function BlogManagementPage() {
           <h1 className="text-2xl font-bold">Blog Management</h1>
           <p className="text-sm text-muted">{blogPosts.length} posts</p>
         </div>
-        <Link
-          href="/dashboard/blog/new"
-          className="flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90"
-        >
+        <Link href="/dashboard/blog/new" className={buttonVariants()}>
           <Plus className="h-4 w-4" />
           New Post
         </Link>
@@ -36,7 +35,9 @@ export default function BlogManagementPage() {
 
       <div className="rounded-card border border-border bg-surface shadow-sm">
         {blogPosts.length === 0 ? (
-          <p className="py-12 text-center text-sm text-muted">No blog posts yet.</p>
+          <div className="py-12">
+            <EmptyState title="No blog posts yet" message="Create your first post to get started." />
+          </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -51,7 +52,7 @@ export default function BlogManagementPage() {
               </thead>
               <tbody>
                 {blogPosts.map((post) => (
-                  <tr key={post.id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-[#1E293B]/50">
+                  <tr key={post.id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50">
                     <td className="p-4 font-medium">{post.title}</td>
                     <td className="p-4">
                       <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${

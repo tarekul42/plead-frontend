@@ -1,29 +1,37 @@
 import axios from "axios";
+import type { PropertyListParams, LeadListParams } from "@/types/api";
 
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1",
   timeout: 15000,
 });
 
+let authToken: string | null = null;
+
+apiClient.interceptors.request.use((config) => {
+  if (authToken) {
+    config.headers.Authorization = `Bearer ${authToken}`;
+  }
+  return config;
+});
+
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    const message =
-      error.response?.data?.error?.message || error.message || "Something went wrong";
-    return Promise.reject(new Error(message));
+    const message = error.response?.data?.error?.message;
+    if (message) {
+      return Promise.reject(new Error(message));
+    }
+    return Promise.reject(error);
   },
 );
 
 export function setAuthToken(token: string | null) {
-  if (token) {
-    apiClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  } else {
-    delete apiClient.defaults.headers.common["Authorization"];
-  }
+  authToken = token;
 }
 
 export const propertiesApi = {
-  list: (params?: Record<string, unknown>) =>
+  list: (params?: PropertyListParams) =>
     apiClient.get("/properties", { params }).then((r) => r.data),
   get: (slug: string) => apiClient.get(`/properties/${slug}`).then((r) => r.data),
   create: (data: unknown) => apiClient.post("/properties", data).then((r) => r.data),
@@ -33,7 +41,7 @@ export const propertiesApi = {
 };
 
 export const leadsApi = {
-  list: (params?: Record<string, unknown>) =>
+  list: (params?: LeadListParams) =>
     apiClient.get("/leads", { params }).then((r) => r.data),
   get: (id: string) => apiClient.get(`/leads/${id}`).then((r) => r.data),
   create: (data: unknown) => apiClient.post("/leads", data).then((r) => r.data),
@@ -44,6 +52,7 @@ export const leadsApi = {
 
 export const usersApi = {
   list: () => apiClient.get("/users").then((r) => r.data),
+  me: () => apiClient.get("/users/me").then((r) => r.data),
 };
 
 export const reviewsApi = {

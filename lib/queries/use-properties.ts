@@ -2,10 +2,10 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { propertiesApi } from "@/lib/api-client";
-import type { ApiResponse } from "@/types/api";
+import type { ApiResponse, PropertyListParams } from "@/types/api";
 import type { Property } from "@/types/models";
 
-export function useProperties(params?: Record<string, unknown>) {
+export function useProperties(params?: PropertyListParams) {
   return useQuery<ApiResponse<Property[]>>({
     queryKey: ["properties", params],
     queryFn: () => propertiesApi.list(params),

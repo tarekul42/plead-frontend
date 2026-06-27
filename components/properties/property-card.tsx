@@ -20,7 +20,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
       href={`/properties/${property.slug}`}
       className="group block rounded-card border border-border bg-surface shadow-sm transition hover:shadow-md"
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-t-card bg-neutral-200 dark:bg-[#1E293B]">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-t-card bg-neutral-200 dark:bg-surface">
         {property.images?.[0] ? (
           <img
             src={property.images[0]}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useUser, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { ThemeToggle } from "@/components/common/theme-toggle";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 export function PublicNavbar() {
   const { isSignedIn } = useUser();
@@ -32,23 +33,16 @@ export function PublicNavbar() {
         <div className="flex items-center gap-3">
           <ThemeToggle />
           {isSignedIn ? (
-            <Link
-              href="/dashboard"
-              className="rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90"
-            >
+            <Link href="/dashboard" className={buttonVariants()}>
               Dashboard
             </Link>
           ) : (
             <>
               <SignInButton mode="modal">
-                <button className="rounded-lg border border-border px-4 py-2 text-sm transition hover:bg-neutral-100 dark:hover:bg-surface">
-                  Sign in
-                </button>
+                <Button variant="secondary">Sign in</Button>
               </SignInButton>
               <SignUpButton mode="modal">
-                <button className="rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90">
-                  Get started
-                </button>
+                <Button>Get started</Button>
               </SignUpButton>
             </>
           )}

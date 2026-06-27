@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 
 export function FinalCta() {
   return (
@@ -19,16 +20,10 @@ export function FinalCta() {
           Join thousands of agents who are closing deals faster with AI-powered lead matching.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Link
-            href="/sign-up"
-            className="rounded-lg bg-brand px-8 py-3 text-white shadow-lg shadow-[#2563EB]/20 transition hover:opacity-90"
-          >
+          <Link href="/sign-up" className={buttonVariants({ size: "lg" })}>
             Start free
           </Link>
-          <Link
-            href="/contact"
-            className="rounded-lg border border-border px-8 py-3 transition hover:bg-neutral-100 dark:hover:bg-surface"
-          >
+          <Link href="/contact" className={buttonVariants({ variant: "secondary", size: "lg" })}>
             Talk to sales
           </Link>
         </div>

@@ -69,7 +69,7 @@ vi.mock("@/lib/api-client", () => ({
         },
       },
     }),
-    interceptors: { response: { use: vi.fn() } },
+    interceptors: { request: { use: vi.fn().mockReturnValue(0) }, response: { use: vi.fn().mockReturnValue(0) } },
   },
   setAuthToken: vi.fn(),
   propertiesApi: {
@@ -173,7 +173,7 @@ describe("Property Listing: Search -> Filter -> Pagination", () => {
     });
 
     function EmptyListingPage() {
-      const { data, isLoading } = useProperties({ search: "nonexistent-city" });
+      const { data, isLoading } = useProperties({ q: "nonexistent-city" });
 
       if (isLoading) return <div>Loading...</div>;
 

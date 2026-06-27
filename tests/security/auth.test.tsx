@@ -28,13 +28,18 @@ vi.mock("next/navigation", () => ({
 }));
 
 // Mock API client
+const mockApiGet = vi.hoisted(() => vi.fn());
 vi.mock("@/lib/api-client", () => ({
   default: {
-    get: vi.fn(),
+    get: mockApiGet,
     post: vi.fn(),
     defaults: { headers: { common: {} } },
   },
   setAuthToken: vi.fn(),
+  usersApi: {
+    list: vi.fn(),
+    me: () => mockApiGet("/users/me").then((r: { data: unknown }) => r.data),
+  },
 }));
 
 import { useUser, useAuth } from "@clerk/nextjs";

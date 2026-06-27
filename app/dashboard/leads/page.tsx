@@ -4,6 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { useLeads } from "@/lib/queries/use-leads";
 import { Plus, LayoutList, Columns3, Search } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { EmptyState } from "@/components/common/empty-state";
 
 const statusColors: Record<string, string> = {
   new: "bg-brand/10 text-brand",
@@ -55,10 +58,7 @@ export default function LeadsPage() {
               Kanban
             </button>
           </div>
-          <Link
-            href="#"
-            className="flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90"
-          >
+          <Link href="#" className={buttonVariants()}>
             <Plus className="h-4 w-4" />
             Add Lead
           </Link>
@@ -70,11 +70,13 @@ export default function LeadsPage() {
           {isLoading ? (
             <div className="space-y-3 p-6">
               {Array.from({ length: 5 }).map((_, i) => (
-                <div key={i} className="h-10 animate-pulse rounded bg-neutral-200 dark:bg-[#1E293B]" />
+                <Skeleton key={i} className="h-10" />
               ))}
             </div>
           ) : leads.length === 0 ? (
-            <p className="py-12 text-center text-sm text-muted">No leads found.</p>
+            <div className="py-12">
+              <EmptyState title="No leads found" message="Try adjusting your search or add a new lead." />
+            </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -90,7 +92,7 @@ export default function LeadsPage() {
                 </thead>
                 <tbody>
                   {leads.map((lead: any) => (
-                    <tr key={lead._id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-[#1E293B]/50">
+                    <tr key={lead._id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50">
                       <td className="p-4">
                         <Link href={`/dashboard/leads/${lead._id}`} className="font-medium hover:text-brand">
                           {lead.name}

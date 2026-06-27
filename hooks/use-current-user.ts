@@ -1,22 +1,24 @@
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
-import apiClient from "@/lib/api-client";
+import { usersApi } from "@/lib/api-client";
+import type { ApiResponse } from "@/types/api";
 import type { User } from "@/types";
 
 export function useCurrentUser() {
   const { user: clerkUser, isLoaded } = useUser();
 
-  const query = useQuery({
+  const query = useQuery<ApiResponse<User>>({
     queryKey: ["current-user"],
-    queryFn: () =>
-      apiClient.get("/users/me").then((r) => r.data.data as User),
+    queryFn: () => usersApi.me(),
     enabled: isLoaded && !!clerkUser,
   });
 
+  const user = query.data?.data;
+
   return {
-    user: query.data,
+    user,
     isLoading: !isLoaded || query.isLoading,
-    role: query.data?.role,
-    agencyId: query.data?.agencyId,
+    role: user?.role,
+    agencyId: user?.agencyId,
   };
 }

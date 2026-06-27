@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Star, Check, X, MoreHorizontal, Loader2 } from "lucide-react";
+import { Star, Check, X, MoreHorizontal } from "lucide-react";
 import { useReviews, useApproveReview, useDeleteReview } from "@/lib/queries/use-reviews";
 import { StatCard } from "@/components/dashboard/stat-card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { EmptyState } from "@/components/common/empty-state";
 
 const statusMap = [
   { label: "All", value: "all", filter: undefined },
@@ -51,11 +53,15 @@ export default function ReviewsPage() {
 
       <div className="rounded-card border border-border bg-surface shadow-sm">
         {isLoading ? (
-          <div className="flex items-center justify-center py-12">
-            <Loader2 className="h-6 w-6 animate-spin text-muted" />
+          <div className="space-y-3 p-6">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <Skeleton key={i} className="h-24 rounded-card" />
+            ))}
           </div>
         ) : reviews.length === 0 ? (
-          <p className="py-12 text-center text-sm text-muted">No reviews to moderate.</p>
+          <div className="py-12">
+            <EmptyState title="No reviews to moderate" message="Reviews from buyers will appear here." />
+          </div>
         ) : (
           <div className="divide-y divide-border">
             {reviews.map((review) => (
@@ -73,7 +79,7 @@ export default function ReviewsPage() {
                     <div className="mt-1 flex items-center gap-3 text-xs text-muted">
                       <div className="flex items-center gap-0.5">
                         {Array.from({ length: 5 }).map((_, i) => (
-                          <Star key={i} className={`h-3 w-3 ${i < review.rating ? "text-warning fill-[#F59E0B]" : "text-border"}`} />
+                          <Star key={i} className={`h-3 w-3 ${i < review.rating ? "text-warning fill-warning" : "text-border"}`} />
                         ))}
                       </div>
                       <span>|</span>

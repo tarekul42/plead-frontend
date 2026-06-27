@@ -48,18 +48,20 @@ vi.mock("@clerk/nextjs", () => ({
   }),
 }));
 
+const mockApiGet = vi.hoisted(() => vi.fn());
 vi.mock("@/lib/api-client", () => ({
   default: {
-    get: vi.fn(),
+    get: mockApiGet,
     patch: vi.fn().mockResolvedValue({
       success: true,
       data: { _id: "agent-1", isActive: false },
     }),
-    interceptors: { response: { use: vi.fn() } },
+    interceptors: { request: { use: vi.fn().mockReturnValue(0) }, response: { use: vi.fn().mockReturnValue(0) } },
   },
   setAuthToken: vi.fn(),
   usersApi: {
     list: vi.fn(),
+    me: () => mockApiGet("/users/me").then((r: { data: unknown }) => r.data),
   },
   adminApi: {
     toggleUserStatus: vi.fn().mockResolvedValue({

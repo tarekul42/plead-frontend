@@ -93,7 +93,7 @@ vi.mock("@/lib/api-client", () => ({
         updatedAt: "2025-06-15T00:00:00Z",
       },
     }),
-    interceptors: { response: { use: vi.fn() } },
+    interceptors: { request: { use: vi.fn().mockReturnValue(0) }, response: { use: vi.fn().mockReturnValue(0) } },
   },
   setAuthToken: vi.fn(),
   leadsApi: {

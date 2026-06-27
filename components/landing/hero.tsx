@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowDown, Sparkles } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
 
 export function Hero() {
   return (
@@ -28,7 +29,7 @@ export function Hero() {
         >
           Close more deals with
           <br />
-          <span className="bg-gradient-to-r from-[#2563EB] to-[#10B981] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-brand to-success bg-clip-text text-transparent">
             AI-powered lead matching
           </span>
         </motion.h1>
@@ -49,16 +50,10 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-wrap justify-center gap-4"
         >
-          <Link
-            href="/sign-up"
-            className="rounded-lg bg-brand px-8 py-3 text-white shadow-lg shadow-[#2563EB]/20 transition hover:opacity-90"
-          >
+          <Link href="/sign-up" className={buttonVariants({ size: "lg" })}>
             Start free
           </Link>
-          <Link
-            href="/properties"
-            className="rounded-lg border border-border px-8 py-3 transition hover:bg-neutral-100 dark:hover:bg-surface"
-          >
+          <Link href="/properties" className={buttonVariants({ variant: "secondary", size: "lg" })}>
             Explore properties
           </Link>
         </motion.div>
@@ -70,7 +65,7 @@ export function Hero() {
         transition={{ delay: 0.8 }}
         className="mt-16 flex justify-center"
       >
-        <div className="relative h-64 w-full max-w-3xl overflow-hidden rounded-xl border border-border bg-gradient-to-b from-neutral-100/50 to-surface dark:from-[#1E293B]/50 dark:to-[#0F172A] shadow-sm">
+        <div className="relative h-64 w-full max-w-3xl overflow-hidden rounded-xl border border-border bg-gradient-to-b from-neutral-100/50 to-surface dark:from-surface/50 dark:to-background shadow-sm">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="grid w-full max-w-lg gap-3 px-6">
               <div className="flex items-center justify-between rounded-lg border border-border bg-surface p-4">

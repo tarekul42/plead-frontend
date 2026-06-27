@@ -17,7 +17,7 @@ export function StatCard({ title, value, description, icon: Icon, trend }: StatC
           <p className="mt-1 text-2xl font-bold">{value}</p>
           {description && <p className="mt-1 text-xs text-muted">{description}</p>}
           {trend && (
-            <p className={`mt-2 text-xs font-medium ${trend.positive ? "text-success" : "text-danger"}`}>
+            <p className={`mt-1 text-xs font-medium ${trend.positive ? "text-success" : "text-danger"}`}>
               {trend.value}
             </p>
           )}

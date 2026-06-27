@@ -64,8 +64,8 @@ export function OutcomesChart() {
                     borderRadius: "8px",
                   }}
                 />
-                <Bar dataKey="before" fill="#EF4444" radius={[4, 4, 0, 0]} name="Before" />
-                <Bar dataKey="after" fill="#10B981" radius={[4, 4, 0, 0]} name="After (PropLead)" />
+                <Bar dataKey="before" fill="var(--color-danger)" radius={[4, 4, 0, 0]} name="Before" />
+                <Bar dataKey="after" fill="var(--color-success)" radius={[4, 4, 0, 0]} name="After (PropLead)" />
               </BarChart>
             </ResponsiveContainer>
           </motion.div>

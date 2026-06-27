@@ -21,7 +21,7 @@ export type PropertyFormValues = z.infer<typeof propertySchema>;
 export const leadSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email"),
-  phone: z.string().optional(),
+  phone: z.string().regex(/^\+?[\d\s\-().]{7,20}$/, "Invalid phone number").optional(),
   budget: z.coerce.number().min(0).optional(),
   preferredLocation: z.string().optional(),
   bedsDesired: z.coerce.number().min(0).optional(),

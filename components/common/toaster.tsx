@@ -12,6 +12,7 @@ interface Toast {
 }
 
 let addToastFn: ((toast: Omit<Toast, "id">) => void) | null = null;
+let toastIdCounter = 0;
 
 export function toast(message: string, type: ToastType = "info") {
   addToastFn?.({ message, type });
@@ -36,7 +37,7 @@ export function Toaster() {
 
   useEffect(() => {
     addToastFn = (t) => {
-      const id = Math.random().toString(36).slice(2);
+      const id = String(++toastIdCounter);
       setToasts((prev) => [...prev, { ...t, id }]);
       setTimeout(() => {
         setToasts((prev) => prev.filter((x) => x.id !== id));
