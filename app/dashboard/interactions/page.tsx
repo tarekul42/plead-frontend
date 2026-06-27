@@ -3,7 +3,17 @@
 import { useState } from "react";
 import { useInteractions, useCreateInteraction } from "@/lib/queries/use-interactions";
 import { useLeads } from "@/lib/queries/use-leads";
-import { Phone, Mail, Calendar, Home, MessageSquare, MoreHorizontal, Loader2 } from "lucide-react";
+import { Phone, Mail, Calendar, Home, MessageSquare, MoreHorizontal } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { FormField } from "@/components/ui/form-field";
+import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { EmptyState } from "@/components/common/empty-state";
 
 const typeIcons: Record<string, typeof Phone> = {
   call: Phone,
@@ -23,27 +33,47 @@ const interactionTypes = [
   { value: "other", label: "Other" },
 ];
 
+const interactionSchema = z.object({
+  leadId: z.string().min(1, "Please select a lead"),
+  type: z.string().min(1),
+  outcome: z.string().optional(),
+  notes: z.string().optional(),
+});
+
+type InteractionFormValues = z.infer<typeof interactionSchema>;
+
 export default function InteractionsPage() {
   const [showForm, setShowForm] = useState(false);
-  const [formType, setFormType] = useState("call");
-  const [formLeadId, setFormLeadId] = useState("");
-  const [formOutcome, setFormOutcome] = useState("");
-  const [formNotes, setFormNotes] = useState("");
-
   const { data: interactionsData, isLoading } = useInteractions();
   const { data: leadsData } = useLeads();
-  const createInteraction = useCreateInteraction(formLeadId);
 
   const interactions = interactionsData?.data || [];
   const leads = leadsData?.data || [];
   const leadNames = new Map(leads.map((l: any) => [l._id, l.name]));
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formLeadId) return;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset: resetForm,
+    watch,
+  } = useForm<InteractionFormValues>({
+    resolver: zodResolver(interactionSchema) as never,
+    defaultValues: { leadId: "", type: "call", outcome: "", notes: "" },
+  });
+
+  const selectedLeadId = watch("leadId");
+  const createInteraction = useCreateInteraction(selectedLeadId);
+
+  const onSubmit = (data: InteractionFormValues) => {
     createInteraction.mutate(
-      { type: formType, outcome: formOutcome || undefined, notes: formNotes || undefined },
-      { onSuccess: () => { setShowForm(false); setFormLeadId(""); setFormType("call"); setFormOutcome(""); setFormNotes(""); } },
+      { type: data.type, outcome: data.outcome || undefined, notes: data.notes || undefined },
+      {
+        onSuccess: () => {
+          setShowForm(false);
+          resetForm();
+        },
+      },
     );
   };
 
@@ -54,114 +84,84 @@ export default function InteractionsPage() {
           <h1 className="text-2xl font-bold">Interactions</h1>
           <p className="text-sm text-muted">Log and track touchpoints with leads</p>
         </div>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90"
-        >
+        <Button onClick={() => setShowForm(!showForm)} variant={showForm ? "secondary" : "primary"}>
           {showForm ? "Cancel" : "Log Interaction"}
-        </button>
+        </Button>
       </div>
 
       {showForm && (
         <div className="mb-6 rounded-card border border-border bg-surface p-6 shadow-sm">
           <h2 className="mb-4 text-lg font-semibold">New Interaction</h2>
-          <form className="space-y-4" onSubmit={handleSubmit}>
+          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <label className="mb-1.5 block text-sm font-medium">Lead</label>
-                <select
-                  value={formLeadId}
-                  onChange={(e) => setFormLeadId(e.target.value)}
-                  required
-                  className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand"
-                >
+              <FormField label="Lead" error={errors.leadId} htmlFor="leadId" required>
+                <Select id="leadId" {...register("leadId")}>
                   <option value="">Select a lead...</option>
                   {leads.map((lead: any) => (
                     <option key={lead._id} value={lead._id}>{lead.name}</option>
                   ))}
-                </select>
-              </div>
-              <div>
-                <label className="mb-1.5 block text-sm font-medium">Type</label>
-                <select
-                  value={formType}
-                  onChange={(e) => setFormType(e.target.value)}
-                  className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand"
-                >
+                </Select>
+              </FormField>
+              <FormField label="Type" error={errors.type} htmlFor="type" required>
+                <Select id="type" {...register("type")}>
                   {interactionTypes.map((t) => (
                     <option key={t.value} value={t.value}>{t.label}</option>
                   ))}
-                </select>
-              </div>
-              <div>
-                <label className="mb-1.5 block text-sm font-medium">Outcome</label>
-                <input
-                  value={formOutcome}
-                  onChange={(e) => setFormOutcome(e.target.value)}
-                  placeholder="e.g. interested, follow-up"
-                  className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand"
-                />
-              </div>
+                </Select>
+              </FormField>
+              <FormField label="Outcome" error={errors.outcome} htmlFor="outcome">
+                <Input id="outcome" placeholder="e.g. interested, follow-up" {...register("outcome")} />
+              </FormField>
             </div>
-            <div>
-              <label className="mb-1.5 block text-sm font-medium">Notes</label>
-              <textarea
-                value={formNotes}
-                onChange={(e) => setFormNotes(e.target.value)}
-                rows={3}
-                placeholder="Describe the interaction..."
-                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand resize-y"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={createInteraction.isPending || !formLeadId}
-              className="flex items-center gap-2 rounded-lg bg-brand px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
-            >
-              {createInteraction.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
-              {createInteraction.isPending ? "Saving..." : "Save Interaction"}
-            </button>
+            <FormField label="Notes" error={errors.notes} htmlFor="notes">
+              <Textarea id="notes" rows={3} placeholder="Describe the interaction..." {...register("notes")} />
+            </FormField>
+            <Button type="submit" disabled={isSubmitting || !selectedLeadId}>
+              {isSubmitting ? "Saving..." : "Save Interaction"}
+            </Button>
           </form>
         </div>
       )}
 
       {isLoading ? (
-        <div className="flex items-center justify-center py-12">
-          <Loader2 className="h-6 w-6 animate-spin text-muted" />
+        <div className="space-y-3">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Skeleton key={i} className="h-24 rounded-card" />
+          ))}
+        </div>
+      ) : interactions.length === 0 ? (
+        <div className="py-12">
+          <EmptyState title="No interactions logged" message="Start logging interactions with your leads." />
         </div>
       ) : (
         <div className="space-y-3">
-          {interactions.length === 0 ? (
-            <p className="py-12 text-center text-sm text-muted">No interactions logged yet.</p>
-          ) : (
-            interactions.map((interaction) => {
-              const Icon = typeIcons[interaction.type] || MoreHorizontal;
-              return (
-                <div key={interaction._id} className="rounded-card border border-border bg-surface p-4 shadow-sm">
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand/5">
-                      <Icon className="h-5 w-5 text-brand" />
+          {interactions.map((interaction: any) => {
+            const Icon = typeIcons[interaction.type] || MoreHorizontal;
+            return (
+              <div key={interaction._id} className="rounded-card border border-border bg-surface p-4 shadow-sm">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand/5">
+                    <Icon className="h-5 w-5 text-brand" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <p className="font-medium">{leadNames.get(interaction.leadId) || interaction.leadId?.slice(-6)}</p>
+                      <span className="text-xs text-muted">{new Date(interaction.createdAt).toLocaleDateString()}</span>
                     </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between">
-                        <p className="font-medium">{leadNames.get(interaction.leadId) || interaction.leadId.slice(-6)}</p>
-                        <span className="text-xs text-muted">{new Date(interaction.createdAt).toLocaleDateString()}</span>
-                      </div>
-                      <div className="mt-1 flex items-center gap-2">
-                        <span className="rounded-full bg-brand/5 px-2 py-0.5 text-xs capitalize text-brand">
-                          {interaction.type}
-                        </span>
-                        {interaction.outcome && (
-                          <span className="text-xs text-muted capitalize">{interaction.outcome}</span>
-                        )}
-                      </div>
-                      {interaction.notes && <p className="mt-2 text-sm text-muted">{interaction.notes}</p>}
+                    <div className="mt-1 flex items-center gap-2">
+                      <span className="rounded-full bg-brand/5 px-2 py-0.5 text-xs capitalize text-brand">
+                        {interaction.type}
+                      </span>
+                      {interaction.outcome && (
+                        <span className="text-xs text-muted capitalize">{interaction.outcome}</span>
+                      )}
                     </div>
+                    {interaction.notes && <p className="mt-2 text-sm text-muted">{interaction.notes}</p>}
                   </div>
                 </div>
-              );
-            })
-          )}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
