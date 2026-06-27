@@ -200,6 +200,27 @@ export const handlers = [
     }),
   ),
 
+  http.post(`${API}/leads/:leadId/interactions`, async ({ request }) => {
+    const body = await request.json();
+    return HttpResponse.json<ApiResponse<Interaction>>(
+      {
+        success: true,
+        data: {
+          _id: "int-new",
+          leadId: "lead-1",
+          type: "call",
+          notes: "",
+          outcome: "neutral",
+          performedById: "agent-1",
+          createdAt: "2025-06-15T10:00:00Z",
+          updatedAt: "2025-06-15T10:00:00Z",
+          ...(body as object),
+        },
+      },
+      { status: 201 },
+    );
+  }),
+
   http.get(`${API}/users`, () =>
     HttpResponse.json<ApiResponse<User[]>>({
       success: true,

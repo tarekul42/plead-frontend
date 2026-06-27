@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useProperties } from "@/lib/queries/use-properties";
 import { PropertyCard } from "@/components/properties/property-card";
 import { PropertySkeleton } from "@/components/properties/property-skeleton";
@@ -20,9 +21,9 @@ export function TopRatedProperties() {
             <h2 className="text-2xl font-bold md:text-3xl">Top Rated Properties</h2>
             <p className="mt-2 text-muted">Most popular among buyers</p>
           </div>
-          <a href="/properties?sort=-views" className="text-sm text-brand hover:underline">
+          <Link href="/properties?sort=-views" className="text-sm text-brand hover:underline">
             View all
-          </a>
+          </Link>
         </div>
 
         {isLoading && (

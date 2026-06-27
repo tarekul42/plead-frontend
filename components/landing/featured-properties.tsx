@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useProperties } from "@/lib/queries/use-properties";
 import { PropertyCard } from "@/components/properties/property-card";
 import { PropertySkeleton } from "@/components/properties/property-skeleton";
@@ -20,9 +21,9 @@ export function FeaturedProperties() {
             <h2 className="text-2xl font-bold md:text-3xl">Featured Properties</h2>
             <p className="mt-2 text-muted">Handpicked listings for you</p>
           </div>
-          <a href="/properties" className="text-sm text-brand hover:underline">
+          <Link href="/properties" className="text-sm text-brand hover:underline">
             View all
-          </a>
+          </Link>
         </div>
 
         {isLoading && (
