@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ClerkLoaded, ClerkLoading, useClerk, useSignIn } from "@clerk/nextjs";
+import { ClerkLoaded, ClerkLoading, useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
@@ -41,40 +41,60 @@ function SkeletonButtons() {
   );
 }
 
+function getErrorMessage(err: any): string {
+  if (!err) return "Sign-in failed";
+  if (err.errors && Array.isArray(err.errors) && err.errors.length > 0) {
+    const firstError = err.errors[0];
+    return firstError.message || firstError.code || "Sign-in failed";
+  }
+  if (err.message) return err.message;
+  return "Sign-in failed";
+}
+
 function DemoButtons() {
-  const clerk = useClerk();
-  const signInState = useSignIn();
+  const signInState = useSignIn() as any;
   const router = useRouter();
   const [loadingRole, setLoadingRole] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const login = async (email: string, password: string, role: string) => {
-    if (!signInState.signIn) return;
+    if (!signInState?.signIn) {
+      setError("Sign-in is not available. Please try again later.");
+      return;
+    }
     setLoadingRole(role);
+    setError(null);
     try {
-      const result = (await signInState.signIn.create({
+      const result = await signInState.signIn.create({
         identifier: email,
         password,
-      })) as any;
+      });
       if (result.status === "complete") {
-        await clerk.setActive({ session: result.createdSessionId });
+        await signInState.setActive({ session: result.createdSessionId });
         router.push("/dashboard");
       } else {
-        console.warn("Sign-in not complete:", result);
+        setError("Sign-in not complete. Please try again.");
       }
     } catch (err: any) {
+      // Handle session already exists
       if (err.errors && err.errors[0]?.code === "session_exists") {
         console.log("Session already exists, redirecting to dashboard");
         router.push("/dashboard");
         return;
       }
-      console.error("Demo login error:", err.errors ? err.errors : err);
-      // Silently fail - demo accounts may not exist in production
+      // Handle form validation errors
+      if (err.errors && Array.isArray(err.errors)) {
+        const messages = err.errors.map((e: any) => e.message).join(", ");
+        setError(messages);
+      } else {
+        setError(getErrorMessage(err));
+      }
     } finally {
       setLoadingRole(null);
     }
   };
 
-  if (!signInState.signIn) return null;
+  if (!signInState?.signIn) return null;
 
   return (
     <div className="space-y-3">
@@ -86,6 +106,11 @@ function DemoButtons() {
           <span className="bg-background px-2 text-muted">Quick demo login</span>
         </div>
       </div>
+      {error && (
+        <div className="rounded-md border border-danger/30 bg-danger/10 px-3 py-2 text-xs text-danger">
+          {error}
+        </div>
+      )}
       <div className="grid gap-2">
         {DEMO_ACCOUNTS.map((account) => (
           <Button
