@@ -51,6 +51,7 @@ export const leadsApi = {
 
 export const usersApi = {
   list: () => apiClient.get("/users").then((r) => r.data),
+  me: () => apiClient.get("/users/me").then((r) => r.data),
 };
 
 export const reviewsApi = {
