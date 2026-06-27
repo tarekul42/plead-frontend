@@ -5,6 +5,15 @@ const apiClient = axios.create({
   timeout: 15000,
 });
 
+let authToken: string | null = null;
+
+apiClient.interceptors.request.use((config) => {
+  if (authToken) {
+    config.headers.Authorization = `Bearer ${authToken}`;
+  }
+  return config;
+});
+
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -17,11 +26,7 @@ apiClient.interceptors.response.use(
 );
 
 export function setAuthToken(token: string | null) {
-  if (token) {
-    apiClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  } else {
-    delete apiClient.defaults.headers.common["Authorization"];
-  }
+  authToken = token;
 }
 
 export const propertiesApi = {

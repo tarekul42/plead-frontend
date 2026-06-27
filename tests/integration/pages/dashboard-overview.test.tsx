@@ -21,7 +21,7 @@ vi.mock("@/lib/api-client", () => ({
         },
       },
     }),
-    interceptors: { response: { use: vi.fn() } },
+    interceptors: { request: { use: vi.fn().mockReturnValue(0) }, response: { use: vi.fn().mockReturnValue(0) } },
   },
   setAuthToken: vi.fn(),
 }));

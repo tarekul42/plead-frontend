@@ -58,7 +58,7 @@ vi.mock("@/lib/api-client", () => ({
   default: {
     get: vi.fn().mockResolvedValue({ data: { data: {} } }),
     post: vi.fn().mockResolvedValue({ success: true, data: [] }),
-    interceptors: { response: { use: vi.fn() } },
+    interceptors: { request: { use: vi.fn().mockReturnValue(0) }, response: { use: vi.fn().mockReturnValue(0) } },
   },
   setAuthToken: vi.fn(),
   aiApi: {
