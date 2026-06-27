@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ClerkLoaded, ClerkLoading, useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,24 @@ interface DemoAccount {
   email: string;
   password: string;
 }
+
+const DEFAULT_ACCOUNTS: DemoAccount[] = [
+  { role: "agent", email: "agent@proplead.ai", password: "Agent#123!" },
+  { role: "manager", email: "manager@proplead.ai", password: "Manager#123!" },
+  { role: "admin", email: "admin@proplead.ai", password: "Admin@u#123!" },
+];
+
+const ICON_MAP: Record<string, typeof User> = {
+  agent: User,
+  manager: Building2,
+  admin: Shield,
+};
+
+const DESC_MAP: Record<string, string> = {
+  agent: "Agent view",
+  manager: "Manager view",
+  admin: "Admin view",
+};
 
 function SkeletonButtons() {
   return (
@@ -26,24 +44,11 @@ function SkeletonButtons() {
 function getErrorMessage(err: any): string {
   if (!err) return "Sign-in failed";
   if (err.errors && Array.isArray(err.errors) && err.errors.length > 0) {
-    const firstError = err.errors[0];
-    return firstError.message || firstError.code || "Sign-in failed";
+    return err.errors[0].message || err.errors[0].code || "Sign-in failed";
   }
   if (err.message) return err.message;
   return "Sign-in failed";
 }
-
-const ICON_MAP: Record<string, typeof User> = {
-  agent: User,
-  manager: Building2,
-  admin: Shield,
-};
-
-const DESC_MAP: Record<string, string> = {
-  agent: "Agent view",
-  manager: "Manager view",
-  admin: "Admin view",
-};
 
 function DemoButtons({ accounts }: { accounts: DemoAccount[] }) {
   const signInState = useSignIn() as any;
@@ -71,13 +76,11 @@ function DemoButtons({ accounts }: { accounts: DemoAccount[] }) {
       }
     } catch (err: any) {
       if (err.errors && err.errors[0]?.code === "session_exists") {
-        console.log("Session already exists, redirecting to dashboard");
         router.push("/dashboard");
         return;
       }
       if (err.errors && Array.isArray(err.errors)) {
-        const messages = err.errors.map((e: any) => e.message).join(", ");
-        setError(messages);
+        setError(err.errors.map((e: any) => e.message).join(", "));
       } else {
         setError(getErrorMessage(err));
       }
@@ -119,7 +122,7 @@ function DemoButtons({ accounts }: { accounts: DemoAccount[] }) {
             >
               <div className="flex flex-col items-start">
                 <span className="text-sm font-medium capitalize">{account.role}</span>
-                <span className="text-[11px] text-muted">{DESC_MAP[account.role] || ""}</span>
+                <span className="text-[11px] text-muted">{DESC_MAP[account.role]}</span>
               </div>
             </Button>
           );
@@ -130,30 +133,7 @@ function DemoButtons({ accounts }: { accounts: DemoAccount[] }) {
 }
 
 export function DemoLoginButtons() {
-  const [accounts, setAccounts] = useState<DemoAccount[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [fetchError, setFetchError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchCredentials = async () => {
-      try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-        const res = await fetch(`${apiUrl}/api/v1/demo-credentials`);
-        const data = await res.json();
-        if (data.success && data.accounts) {
-          setAccounts(data.accounts);
-        } else {
-          setFetchError("Failed to load demo accounts");
-        }
-      } catch (err) {
-        console.error("Failed to fetch demo credentials:", err);
-        setFetchError("Failed to load demo accounts");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCredentials();
-  }, []);
+  const [accounts] = useState<DemoAccount[]>(DEFAULT_ACCOUNTS);
 
   return (
     <>
@@ -161,17 +141,7 @@ export function DemoLoginButtons() {
         <SkeletonButtons />
       </ClerkLoading>
       <ClerkLoaded>
-        {loading ? (
-          <SkeletonButtons />
-        ) : fetchError ? (
-          <div className="space-y-2">
-            <div className="h-12 rounded-md bg-muted/40 animate-pulse" />
-            <div className="h-12 rounded-md bg-muted/40 animate-pulse" />
-            <div className="h-12 rounded-md bg-muted/40 animate-pulse" />
-          </div>
-        ) : (
-          <DemoButtons accounts={accounts} />
-        )}
+        <DemoButtons accounts={accounts} />
       </ClerkLoaded>
     </>
   );
