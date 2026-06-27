@@ -3,14 +3,21 @@ import { cn } from "@/lib/utils";
 
 interface SpinnerProps {
   className?: string;
-  size?: number;
+  size?: "sm" | "md" | "lg";
 }
 
-export function Spinner({ className, size = 16 }: SpinnerProps) {
+const sizes = {
+  sm: 14,
+  md: 20,
+  lg: 28,
+};
+
+export function Spinner({ className, size = "md" }: SpinnerProps) {
   return (
     <Loader2
       className={cn("animate-spin text-muted", className)}
-      size={size}
+      size={sizes[size]}
+      aria-label="Loading"
     />
   );
 }

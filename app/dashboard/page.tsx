@@ -8,11 +8,25 @@ import { BarChart } from "@/components/charts/bar-chart";
 import { DashboardLoading } from "@/components/common/dashboard-loading";
 import { ErrorState } from "@/components/common/error-state";
 import { EmptyState } from "@/components/common/empty-state";
+import { PageHeader } from "@/components/common/page-header";
 import { useLeads } from "@/lib/queries/use-leads";
 import { useProperties } from "@/lib/queries/use-properties";
-import { Building2, Users, TrendingUp, MessageSquare, Sparkles, Shield, Star, UserCheck } from "lucide-react";
+import { useInteractions } from "@/lib/queries/use-interactions";
+import {
+  Building2,
+  Users,
+  TrendingUp,
+  MessageSquare,
+  Sparkles,
+  Shield,
+  UserCheck,
+  DollarSign,
+} from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
+import { formatCompactPrice } from "@/lib/utils";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function DashboardPage() {
   const { role } = useCurrentUser();
@@ -23,14 +37,22 @@ export default function DashboardPage() {
 }
 
 function AgentOverview() {
-  const { data: leadsData, isLoading: leadsLoading, isError: leadsError, refetch: refetchLeads } = useLeads({ limit: 5 });
-  const { data: leaderboard, isLoading: statsLoading } = useQuery({ queryKey: ["lead-stats"], queryFn: () => apiClient.get("/leads/stats").then(r => r.data.data) });
+  const { data: leadsData, isLoading: leadsLoading, isError: leadsError, refetch: refetchLeads } = useLeads({ limit: 100 });
+  const { data: interactionsData, isLoading: intLoading } = useInteractions();
+  const { data: statsData, isLoading: statsLoading } = useQuery({
+    queryKey: ["lead-stats"],
+    queryFn: () => apiClient.get("/leads/stats").then((r) => r.data.data),
+  });
 
-  const leadStatuses = leadsData?.data || [];
+  const leads = leadsData?.data || [];
+  const interactions = interactionsData?.data || [];
   const statusCounts: Record<string, number> = {};
-  leadStatuses.forEach((l: any) => { statusCounts[l.status] = (statusCounts[l.status] || 0) + 1; });
+  leads.forEach((l: any) => { statusCounts[l.status] = (statusCounts[l.status] || 0) + 1; });
+  const wonLeads = leads.filter((l: any) => l.status === "closed");
+  const totalLeads = leads.length;
+  const conversionRate = totalLeads > 0 ? ((wonLeads.length / totalLeads) * 100).toFixed(0) : "0";
 
-  if (leadsLoading || statsLoading) {
+  if (leadsLoading || statsLoading || intLoading) {
     return <DashboardLoading />;
   }
 
@@ -40,13 +62,38 @@ function AgentOverview() {
 
   return (
     <div>
-      <h1 className="mb-6 text-2xl font-bold">Agent Overview</h1>
+      <PageHeader
+        title="Agent Overview"
+        description="Track your leads, interactions, and performance at a glance."
+      />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard title="My Leads" value={leadStatuses.length || 0} icon={Users} />
-        <StatCard title="Properties" value="0" icon={Building2} description="Assigned to you" />
-        <StatCard title="Interactions" value="0" icon={MessageSquare} description="This week" />
-        <StatCard title="Leads Won" value="0" icon={TrendingUp} description="This month" trend={{ value: "12% vs last month", positive: true }} />
+        <StatCard
+          title="Total Leads"
+          value={totalLeads}
+          icon={Users}
+          color="brand"
+          trend={{ value: `${wonLeads.length} won this period`, positive: true }}
+        />
+        <StatCard
+          title="Conversion Rate"
+          value={`${conversionRate}%`}
+          icon={TrendingUp}
+          color="success"
+          trend={{ value: "Lead-to-close ratio", positive: Number(conversionRate) > 20 }}
+        />
+        <StatCard
+          title="Interactions"
+          value={interactions.length}
+          icon={MessageSquare}
+          color="warning"
+        />
+        <StatCard
+          title="Avg Lead Value"
+          value={statsData?.avgValue ? formatCompactPrice(statsData.avgValue) : "$0"}
+          icon={DollarSign}
+          color="brand"
+        />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-3">
@@ -69,11 +116,12 @@ function AgentOverview() {
           <div className="h-64">
             <PieChart
               data={[
-                { name: "New", value: statusCounts["new"] || 5 },
-                { name: "Contacted", value: statusCounts["contacted"] || 3 },
-                { name: "Qualified", value: statusCounts["qualified"] || 2 },
-                { name: "Won", value: statusCounts["won"] || 1 },
-                { name: "Lost", value: statusCounts["lost"] || 2 },
+                { name: "New", value: statusCounts["new"] || 0 },
+                { name: "Contacted", value: statusCounts["contacted"] || 0 },
+                { name: "Qualified", value: statusCounts["qualified"] || 0 },
+                { name: "Negotiating", value: statusCounts["negotiating"] || 0 },
+                { name: "Closed", value: statusCounts["closed"] || 0 },
+                { name: "Lost", value: statusCounts["lost"] || 0 },
               ]}
             />
           </div>
@@ -96,8 +144,13 @@ function AgentOverview() {
       </div>
 
       <div className="mt-6 rounded-card border border-border bg-surface p-6 shadow-sm">
-        <h3 className="mb-4 text-sm font-semibold">Recent Leads</h3>
-        {leadStatuses.length > 0 ? (
+        <div className="mb-4 flex items-center justify-between">
+          <h3 className="text-sm font-semibold">Recent Leads</h3>
+          <Link href="/dashboard/leads">
+            <Button variant="ghost" size="sm">View all</Button>
+          </Link>
+        </div>
+        {leads.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -109,14 +162,20 @@ function AgentOverview() {
                 </tr>
               </thead>
               <tbody>
-                {leadStatuses.slice(0, 5).map((lead: any) => (
-                  <tr key={lead._id} className="border-b border-border last:border-0">
-                    <td className="p-4">{lead.name}</td>
+                {leads.slice(0, 5).map((lead: any) => (
+                  <tr key={lead._id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50">
+                    <td className="p-4 font-medium">{lead.name}</td>
                     <td className="p-4">
-                      <span className="rounded-full bg-brand/5 px-2.5 py-0.5 text-xs font-medium text-brand">{lead.status}</span>
+                      <span className="rounded-full bg-brand/10 px-2.5 py-0.5 text-xs font-medium text-brand">
+                        {lead.status}
+                      </span>
                     </td>
-                    <td className="p-4 text-muted">{lead.budget ? `$${(lead.budget / 1000).toFixed(0)}K` : "-"}</td>
-                    <td className="p-4 text-muted">{lead.createdAt ? new Date(lead.createdAt).toLocaleDateString() : "-"}</td>
+                    <td className="p-4 text-muted">
+                      {lead.budget ? formatCompactPrice(lead.budget) : "-"}
+                    </td>
+                    <td className="p-4 text-muted">
+                      {lead.createdAt ? new Date(lead.createdAt).toLocaleDateString() : "-"}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -131,35 +190,29 @@ function AgentOverview() {
 }
 
 function ManagerOverview() {
-  const { data: leadsData, isLoading: leadsLoading, isError: leadsError, refetch: refetchLeads } = useLeads({ limit: 100 });
-  const { data: propsData, isLoading: propsLoading, isError: propsError, refetch: refetchProps } = useProperties({ limit: 100 });
+  const { data: leadsData, isLoading: leadsLoading } = useLeads({ limit: 100 });
+  const { data: propsData, isLoading: propsLoading } = useProperties({ limit: 100 });
   const leads = leadsData?.data || [];
   const properties = propsData?.data || [];
 
-  if (leadsLoading || propsLoading) {
-    return <DashboardLoading />;
-  }
-
-  if (leadsError || propsError) {
-    return <ErrorState message="Failed to load dashboard data." onRetry={() => { refetchLeads(); refetchProps(); }} />;
-  }
-
-  const agentsLeaderboard = [
-    { name: "Sarah Mitchell", leads: 24, closed: 8, rate: 33 },
-    { name: "James Chen", leads: 18, closed: 5, rate: 28 },
-    { name: "Emily Rodriguez", leads: 15, closed: 4, rate: 27 },
-    { name: "Michael Park", leads: 10, closed: 2, rate: 20 },
-  ];
-
   return (
     <div>
-      <h1 className="mb-6 text-2xl font-bold">Manager Overview</h1>
+      <PageHeader
+        title="Manager Overview"
+        description="Monitor agency performance and team activity."
+      />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard title="Agency Leads" value={leads.length} icon={Users} description="All active leads" />
-        <StatCard title="Agency Properties" value={properties.length} icon={Building2} />
+        <StatCard title="Properties" value={properties.length} icon={Building2} />
         <StatCard title="Team Agents" value={4} icon={Shield} />
-        <StatCard title="Avg Close Time" value="47 days" icon={TrendingUp} description="Lead-to-close" trend={{ value: "28% improvement", positive: true }} />
+        <StatCard
+          title="Avg Close Time"
+          value="47 days"
+          icon={TrendingUp}
+          description="Lead-to-close"
+          trend={{ value: "28% improvement", positive: true }}
+        />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
@@ -167,15 +220,24 @@ function ManagerOverview() {
           <h3 className="mb-4 text-sm font-semibold">Leads by Agent</h3>
           <div className="h-64">
             <BarChart
-              data={agentsLeaderboard.map((a) => ({ label: a.name.split(" ")[0], value: a.leads }))}
-              color="var(--color-brand)"
+              data={[
+                { label: "Sarah", value: 24 },
+                { label: "James", value: 18 },
+                { label: "Emily", value: 15 },
+                { label: "Michael", value: 10 },
+              ]}
             />
           </div>
         </div>
         <div className="rounded-card border border-border bg-surface p-6 shadow-sm">
           <h3 className="mb-4 text-sm font-semibold">Top Performers</h3>
           <div className="space-y-3">
-            {agentsLeaderboard.map((agent, i) => (
+            {[
+              { name: "Sarah Mitchell", leads: 24, closed: 8, rate: 33 },
+              { name: "James Chen", leads: 18, closed: 5, rate: 28 },
+              { name: "Emily Rodriguez", leads: 15, closed: 4, rate: 27 },
+              { name: "Michael Park", leads: 10, closed: 2, rate: 20 },
+            ].map((agent, i) => (
               <div key={agent.name} className="flex items-center justify-between rounded-lg border border-border bg-background p-3">
                 <div className="flex items-center gap-3">
                   <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand/10 text-xs font-bold text-brand">
@@ -197,29 +259,22 @@ function ManagerOverview() {
 }
 
 function AdminOverview() {
-  const { data: leadsData, isLoading: leadsLoading, isError: leadsError, refetch: refetchLeads } = useLeads({ limit: 100 });
-  const { data: propsData, isLoading: propsLoading, isError: propsError, refetch: refetchProps } = useProperties({ limit: 100 });
+  const { data: leadsData } = useLeads({ limit: 100 });
   const leads = leadsData?.data || [];
-  const properties = propsData?.data || [];
-
-  if (leadsLoading || propsLoading) {
-    return <DashboardLoading />;
-  }
-
-  if (leadsError || propsError) {
-    return <ErrorState message="Failed to load dashboard data." onRetry={() => { refetchLeads(); refetchProps(); }} />;
-  }
 
   const statusCounts: Record<string, number> = {};
   leads.forEach((l: any) => { statusCounts[l.status] = (statusCounts[l.status] || 0) + 1; });
 
   return (
     <div>
-      <h1 className="mb-6 text-2xl font-bold">Admin Overview</h1>
+      <PageHeader
+        title="Admin Overview"
+        description="Platform-wide metrics and system health."
+      />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard title="Total Users" value="5" icon={Users} description="Across all agencies" />
-        <StatCard title="Properties" value={properties.length} icon={Building2} />
+        <StatCard title="Properties" value={leads.length} icon={Building2} />
         <StatCard title="AI Generations" value="135" icon={Sparkles} description="This week" />
         <StatCard title="Active Agencies" value="1" icon={Shield} />
       </div>
@@ -244,11 +299,11 @@ function AdminOverview() {
           <div className="h-64">
             <PieChart
               data={[
-                { name: "New", value: statusCounts["new"] || 8 },
-                { name: "Contacted", value: statusCounts["contacted"] || 5 },
-                { name: "Qualified", value: statusCounts["qualified"] || 3 },
-                { name: "Won", value: statusCounts["won"] || 2 },
-                { name: "Lost", value: statusCounts["lost"] || 4 },
+                { name: "New", value: statusCounts["new"] || 0 },
+                { name: "Contacted", value: statusCounts["contacted"] || 0 },
+                { name: "Qualified", value: statusCounts["qualified"] || 0 },
+                { name: "Closed", value: statusCounts["closed"] || 0 },
+                { name: "Lost", value: statusCounts["lost"] || 0 },
               ]}
             />
           </div>

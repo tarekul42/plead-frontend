@@ -2,20 +2,26 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowDown, Sparkles } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
+import { ArrowDown, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const mockMatches = [
+  { title: "Modern 3BR in Brooklyn", lead: "Sarah J.", budget: "$850K", score: 92, color: "success" },
+  { title: "Luxury Condo, Manhattan", lead: "Mark T.", budget: "$1.2M", score: 85, color: "brand" },
+  { title: "Cozy Studio, Downtown", lead: "Emily R.", budget: "$400K", score: 71, color: "warning" },
+];
 
 export function Hero() {
   return (
     <section className="relative mx-auto max-w-container overflow-hidden px-4 pb-24 pt-20 sm:px-6 lg:px-8">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(37,99,235,0.08),transparent_50%)]" />
+      <div className="bg-gradient-hero pointer-events-none absolute inset-0" />
       <div className="relative z-10 mx-auto max-w-4xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand/5 px-4 py-1.5 text-sm text-brand">
+          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand/5 px-4 py-1.5 text-sm font-medium text-brand">
             <Sparkles className="h-4 w-4" />
             AI-Powered Real Estate Platform
           </span>
@@ -25,11 +31,10 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-6 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl"
+          className="mb-6 text-balance text-4xl font-bold leading-tight md:text-5xl lg:text-6xl"
         >
-          Close more deals with
-          <br />
-          <span className="bg-gradient-to-r from-brand to-success bg-clip-text text-transparent">
+          Close more deals with{" "}
+          <span className="text-gradient-brand">
             AI-powered lead matching
           </span>
         </motion.h1>
@@ -38,7 +43,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mb-10 max-w-2xl text-lg text-muted"
+          className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-muted"
         >
           Match the right lead to the right property in seconds — not hours.
           Automate outreach, generate marketing copy, and track your pipeline.
@@ -50,72 +55,79 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-wrap justify-center gap-4"
         >
-          <Link href="/sign-up" className={buttonVariants({ size: "lg" })}>
-            Start free
+          <Link href="/sign-up">
+            <Button size="lg" rightIcon={<ArrowRight className="h-4 w-4" />}>
+              Start free
+            </Button>
           </Link>
-          <Link href="/properties" className={buttonVariants({ variant: "secondary", size: "lg" })}>
-            Explore properties
+          <Link href="/properties">
+            <Button variant="secondary" size="lg" leftIcon={<CheckCircle2 className="h-4 w-4" />}>
+              Explore properties
+            </Button>
           </Link>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-8 flex items-center justify-center gap-6 text-sm text-muted"
+        >
+          <span className="flex items-center gap-1.5">
+            <CheckCircle2 className="h-4 w-4 text-success" /> No credit card
+          </span>
+          <span className="flex items-center gap-1.5">
+            <CheckCircle2 className="h-4 w-4 text-success" /> Free forever plan
+          </span>
+          <span className="flex items-center gap-1.5">
+            <CheckCircle2 className="h-4 w-4 text-success" /> Cancel anytime
+          </span>
         </motion.div>
       </div>
 
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
         className="mt-16 flex justify-center"
       >
-        <div className="relative h-64 w-full max-w-3xl overflow-hidden rounded-xl border border-border bg-gradient-to-b from-neutral-100/50 to-surface dark:from-surface/50 dark:to-background shadow-sm">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="grid w-full max-w-lg gap-3 px-6">
-              <div className="flex items-center justify-between rounded-lg border border-border bg-surface p-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-full bg-success/10" />
-                  <div>
-                    <p className="text-sm font-medium">Modern 3BR in Brooklyn</p>
-                    <p className="text-xs text-muted">Lead: Sarah J. • Budget: $850K</p>
+        <div className="glass relative w-full max-w-3xl overflow-hidden rounded-2xl shadow-xl">
+          <div className="absolute inset-0 flex items-center justify-center p-6">
+            <div className="grid w-full max-w-lg gap-3">
+              {mockMatches.map((match, i) => (
+                <motion.div
+                  key={match.title}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.8 + i * 0.15 }}
+                  className="flex items-center justify-between rounded-xl border border-border bg-background/60 p-4 backdrop-blur-sm"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`h-10 w-10 rounded-full bg-${match.color}/10 flex items-center justify-center`}>
+                      <div className={`h-3 w-3 rounded-full bg-${match.color}`} />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">{match.title}</p>
+                      <p className="text-xs text-muted">Lead: {match.lead} &bull; Budget: {match.budget}</p>
+                    </div>
                   </div>
-                </div>
-                <span className="rounded-full bg-success/10 px-3 py-1 text-xs font-medium text-success">
-                  92% Match
-                </span>
-              </div>
-              <div className="flex items-center justify-between rounded-lg border border-border bg-surface p-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-full bg-brand/10" />
-                  <div>
-                    <p className="text-sm font-medium">Luxury Condo, Manhattan</p>
-                    <p className="text-xs text-muted">Lead: Mark T. • Budget: $1.2M</p>
-                  </div>
-                </div>
-                <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand">
-                  85% Match
-                </span>
-              </div>
-              <div className="flex items-center justify-between rounded-lg border border-border bg-surface p-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-full bg-warning/10" />
-                  <div>
-                    <p className="text-sm font-medium">Cozy Studio, Downtown</p>
-                    <p className="text-xs text-muted">Lead: Emily R. • Budget: $400K</p>
-                  </div>
-                </div>
-                <span className="rounded-full bg-warning/10 px-3 py-1 text-xs font-medium text-warning">
-                  71% Match
-                </span>
-              </div>
+                  <span className={`rounded-full bg-${match.color}/10 px-3 py-1 text-xs font-semibold text-${match.color}`}>
+                    {match.score}% Match
+                  </span>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="mt-8 flex justify-center"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.4, repeat: Infinity, repeatType: "reverse", duration: 1.5 }}
+        className="mt-10 flex justify-center"
       >
-        <ArrowDown className="h-6 w-6 animate-bounce text-muted" />
+        <ArrowDown className="h-5 w-5 text-muted" />
       </motion.div>
     </section>
   );

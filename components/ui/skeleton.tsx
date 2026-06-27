@@ -11,6 +11,7 @@ export function Skeleton({ className }: SkeletonProps) {
         "animate-pulse rounded bg-neutral-200 dark:bg-neutral-800",
         className,
       )}
+      aria-hidden="true"
     />
   );
 }

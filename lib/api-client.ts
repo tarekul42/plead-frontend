@@ -58,6 +58,8 @@ export const usersApi = {
 export const reviewsApi = {
   list: (params?: Record<string, unknown>) =>
     apiClient.get("/reviews", { params }).then((r) => r.data),
+  create: (data: unknown) =>
+    apiClient.post("/reviews", data).then((r) => r.data),
   update: (id: string, data: unknown) =>
     apiClient.patch(`/reviews/${id}`, data).then((r) => r.data),
   delete: (id: string) => apiClient.delete(`/reviews/${id}`).then((r) => r.data),

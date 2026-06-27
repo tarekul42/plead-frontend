@@ -1,7 +1,8 @@
 "use client";
 
 import type { Lead } from "@/types/models";
-import { Eye, Pencil, Trash2 } from "lucide-react";
+import { Eye, Pencil, Trash2, Phone, MapPin, Calendar } from "lucide-react";
+import { cn, formatDate } from "@/lib/utils";
 
 interface LeadCardProps {
   lead: Lead;
@@ -24,45 +25,88 @@ export function LeadCard({ lead, onView, onEdit, onDelete }: LeadCardProps) {
     if (p === undefined || p === null) return "";
     return "$" + p.toLocaleString();
   };
-  const formatDate = (d?: string) => {
-    if (!d) return "";
-    const date = new Date(d);
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-  };
 
   return (
-    <article className={`rounded-card border border-border bg-surface p-4 shadow-sm ${lead.status}`}>
-      <div className="mb-2 flex items-start justify-between">
-        <div>
-          <h3 className="font-medium">{lead.name}</h3>
-          <p className="text-sm text-muted">{lead.email}</p>
+    <article
+      className={cn(
+        "group rounded-card border border-border bg-surface p-6 shadow-sm transition hover:shadow-md",
+        lead.status,
+      )}
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0 flex-1">
+          <h3 className="truncate text-lg font-semibold text-slate-900 dark:text-slate-100">
+            {lead.name}
+          </h3>
+          <p className="truncate text-sm text-muted">{lead.email}</p>
         </div>
-        <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusStyles[lead.status] || ""}`}>
+        <span
+          className={cn(
+            "shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium",
+            statusStyles[lead.status] || "bg-neutral-100 text-muted",
+          )}
+        >
           {lead.status}
         </span>
       </div>
-      {lead.phone && <p className="text-sm text-muted">{lead.phone}</p>}
-      <p className="text-sm font-semibold text-brand">{formatPrice(lead.budget)}</p>
-      {lead.preferredLocation && <p className="text-xs text-muted">{lead.preferredLocation}</p>}
-      {lead.source && <p className="text-xs text-muted">{lead.source}</p>}
-      <p className="mt-1 text-xs text-muted">{formatDate(lead.createdAt)}</p>
-      <div className="mt-3 flex gap-2">
-        {onView && (
-          <button aria-label="View details" onClick={() => onView(lead)} className="flex items-center gap-1 text-xs text-brand hover:underline">
-            <Eye className="h-3 w-3" /> View
-          </button>
+
+      <p className="mt-4 text-2xl font-bold text-brand">
+        {formatPrice(lead.budget)}
+      </p>
+
+      <div className="mt-4 space-y-1.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+        {lead.phone && (
+          <p className="flex items-center gap-1.5 text-xs text-muted">
+            <Phone className="h-3 w-3" />
+            {lead.phone}
+          </p>
         )}
-        {onEdit && (
-          <button aria-label="Edit" onClick={() => onEdit(lead)} className="flex items-center gap-1 text-xs text-brand hover:underline">
-            <Pencil className="h-3 w-3" /> Edit
-          </button>
+        {lead.preferredLocation && (
+          <p className="flex items-center gap-1.5 text-xs text-muted">
+            <MapPin className="h-3 w-3" />
+            {lead.preferredLocation}
+          </p>
         )}
-        {onDelete && (
-          <button aria-label="Delete" onClick={() => onDelete(lead)} className="flex items-center gap-1 text-xs text-danger hover:underline">
-            <Trash2 className="h-3 w-3" /> Delete
-          </button>
+        {lead.source && (
+          <p className="flex items-center gap-1.5 text-xs text-muted">{lead.source}</p>
         )}
+        <p className="flex items-center gap-1.5 text-xs text-muted">
+          <Calendar className="h-3 w-3" />
+          {formatDate(lead.createdAt)}
+        </p>
       </div>
+
+      {(onView || onEdit || onDelete) && (
+        <div className="mt-4 flex gap-1 border-t border-border pt-3 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+          {onView && (
+            <button
+              aria-label="View details"
+              onClick={() => onView(lead)}
+              className="rounded-md p-1.5 text-muted transition hover:bg-neutral-100 hover:text-brand dark:hover:bg-neutral-800"
+            >
+              <Eye className="h-4 w-4" />
+            </button>
+          )}
+          {onEdit && (
+            <button
+              aria-label="Edit"
+              onClick={() => onEdit(lead)}
+              className="rounded-md p-1.5 text-muted transition hover:bg-neutral-100 hover:text-brand dark:hover:bg-neutral-800"
+            >
+              <Pencil className="h-4 w-4" />
+            </button>
+          )}
+          {onDelete && (
+            <button
+              aria-label="Delete"
+              onClick={() => onDelete(lead)}
+              className="rounded-md p-1.5 text-muted transition hover:bg-neutral-100 hover:text-danger dark:hover:bg-neutral-800"
+            >
+              <Trash2 className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+      )}
     </article>
   );
 }

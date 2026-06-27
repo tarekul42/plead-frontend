@@ -1,14 +1,25 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useProperties } from "@/lib/queries/use-properties";
 import { PropertySearchBar } from "@/components/properties/property-search-bar";
 import { PropertyFilters } from "@/components/properties/property-filters";
 import { PropertyGrid } from "@/components/properties/property-grid";
 import { Pagination } from "@/components/common/pagination";
-import { SlidersHorizontal, X } from "lucide-react";
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { SlidersHorizontal, X, RotateCcw } from "lucide-react";
+
+function Chip({ label, onRemove }: { label: string; onRemove: () => void }) {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full border border-brand/20 bg-brand/5 px-3 py-1 text-xs font-medium text-brand">
+      {label}
+      <button onClick={onRemove} className="hover:text-brand-dark">
+        <X className="h-3 w-3" />
+      </button>
+    </span>
+  );
+}
 
 export default function ExplorePage() {
   const router = useRouter();
@@ -52,8 +63,6 @@ export default function ExplorePage() {
   const updateFilters = useCallback(
     (updates: Record<string, unknown>) => {
       const params = new URLSearchParams(searchParams.toString());
-      if (updates.page) params.set("page", String(updates.page));
-      else params.delete("page");
       Object.entries(updates).forEach(([key, value]) => {
         if (value === undefined || value === "" || value === null) {
           params.delete(key);
@@ -66,12 +75,25 @@ export default function ExplorePage() {
     [router, searchParams],
   );
 
+  const clearFilters = useCallback(() => {
+    router.push("/properties");
+  }, [router]);
+
   const totalPages = data?.meta ? Math.ceil(data.meta.total / filters.limit) : 1;
+  const activeFilterCount = [
+    filters.propertyType,
+    filters.status,
+    filters.bedsMin,
+    filters.bathsMin,
+    filters.priceMin,
+    filters.priceMax,
+    filters.q,
+  ].filter(Boolean).length;
 
   return (
     <div className="mx-auto max-w-container px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-6">
-        <h1 className="mb-2 text-2xl font-bold md:text-3xl">Explore Properties</h1>
+        <h1 className="mb-2 text-3xl font-bold">Explore Properties</h1>
         <p className="text-muted">
           {data?.meta?.total
             ? `${data.meta.total} properties found`
@@ -79,29 +101,61 @@ export default function ExplorePage() {
         </p>
       </div>
 
-      <div className="mb-6 flex items-center gap-4">
-        <div className="flex-1">
+      <div className="mb-6 flex flex-wrap items-center gap-4">
+        <div className="min-w-0 flex-1">
           <PropertySearchBar
             value={filters.q}
             onChange={(q) => updateFilters({ q, page: 1 })}
           />
         </div>
-        <button
+        <Button
+          variant="secondary"
+          size="sm"
           onClick={() => setMobileFilters(!mobileFilters)}
-          className="flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm transition hover:bg-neutral-100 dark:hover:bg-surface lg:hidden"
+          className="lg:hidden"
+          leftIcon={<SlidersHorizontal className="h-4 w-4" />}
         >
-          <SlidersHorizontal className="h-4 w-4" />
           Filters
-        </button>
+          {activeFilterCount > 0 && (
+            <span className="ml-1 rounded-full bg-brand/10 px-1.5 py-0.5 text-xs text-brand">
+              {activeFilterCount}
+            </span>
+          )}
+        </Button>
       </div>
+
+      {activeFilterCount > 0 && (
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          {filters.q && (
+            <Chip label={`Search: "${filters.q}"`} onRemove={() => updateFilters({ q: "", page: 1 })} />
+          )}
+          {filters.propertyType && (
+            <Chip label={filters.propertyType} onRemove={() => updateFilters({ propertyType: "", page: 1 })} />
+          )}
+          {filters.status && (
+            <Chip label={filters.status} onRemove={() => updateFilters({ status: "", page: 1 })} />
+          )}
+          {filters.bedsMin && (
+            <Chip label={`${filters.bedsMin}+ beds`} onRemove={() => updateFilters({ bedsMin: undefined, page: 1 })} />
+          )}
+          {filters.bathsMin && (
+            <Chip label={`${filters.bathsMin}+ baths`} onRemove={() => updateFilters({ bathsMin: undefined, page: 1 })} />
+          )}
+          <button
+            onClick={clearFilters}
+            className="flex items-center gap-1 text-xs text-muted transition hover:text-foreground"
+          >
+            <RotateCcw className="h-3 w-3" />
+            Clear all
+          </button>
+        </div>
+      )}
 
       <div className="flex gap-8">
         <aside className="hidden w-64 shrink-0 lg:block">
           <PropertyFilters
             filters={filters}
-            onChange={(f) =>
-              updateFilters({ ...f, page: 1 } as Record<string, unknown>)
-            }
+            onChange={(f) => updateFilters({ ...f, page: 1 } as Record<string, unknown>)}
           />
         </aside>
 
@@ -113,14 +167,17 @@ export default function ExplorePage() {
                 <h2 className="font-semibold">Filters</h2>
                 <button
                   onClick={() => setMobileFilters(false)}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-neutral-100 dark:hover:bg-surface"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-neutral-100 dark:hover:bg-surface-alt"
                 >
                   <X className="h-4 w-4" />
                 </button>
               </div>
               <PropertyFilters
                 filters={filters}
-                onChange={(f) => updateFilters({ ...f, page: 1 } as Record<string, unknown>)}
+                onChange={(f) => {
+                  updateFilters({ ...f, page: 1 } as Record<string, unknown>);
+                  setMobileFilters(false);
+                }}
               />
             </div>
           </div>
@@ -137,6 +194,8 @@ export default function ExplorePage() {
             page={filters.page}
             totalPages={totalPages}
             onPageChange={(page) => updateFilters({ page })}
+            total={data?.meta?.total}
+            pageSize={filters.limit}
           />
         </div>
       </div>

@@ -1,33 +1,39 @@
 "use client";
 
 import { useInteractions } from "@/lib/queries/use-interactions";
+import { Badge } from "@/components/ui/badge";
+import { formatDate } from "@/lib/utils";
 import type { Interaction } from "@/types/models";
 
 interface InteractionTimelineProps {
   leadId: string;
 }
 
-const typeStyles: Record<string, string> = {
-  call: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400",
-  email: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400",
-  meeting: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
-};
-
-const outcomeStyles: Record<string, string> = {
-  positive: "text-green-600 dark:text-green-400",
-  neutral: "text-yellow-600 dark:text-yellow-400",
-  negative: "text-red-600 dark:text-red-400",
-};
-
 export function InteractionTimeline({ leadId }: InteractionTimelineProps) {
   const { data, isLoading, isError } = useInteractions();
 
-  if (isLoading) return <div data-testid="loading" className="py-8 text-center text-sm text-muted">Loading timeline...</div>;
-  if (isError) return <div data-testid="error" className="py-8 text-center text-sm text-danger">Failed to load timeline</div>;
+  if (isLoading) {
+    return (
+      <div className="py-8 text-center text-sm text-muted">
+        Loading timeline...
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="py-8 text-center text-sm text-danger">
+        Failed to load timeline
+      </div>
+    );
+  }
 
   const interactions: Interaction[] = data?.data ?? [];
+  const filtered = interactions
+    .filter((i) => i.leadId === leadId)
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
-  if (interactions.length === 0) {
+  if (filtered.length === 0) {
     return (
       <div className="py-8 text-center text-sm text-muted">
         No interactions recorded yet
@@ -35,38 +41,37 @@ export function InteractionTimeline({ leadId }: InteractionTimelineProps) {
     );
   }
 
-  const sorted = [...interactions].sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  );
-
-  const filtered = sorted.filter((i) => i.leadId === leadId);
-
-  const formatDate = (d: string) => {
-    const date = new Date(d);
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-  };
-
   return (
-    <div data-testid="interaction-timeline" className="space-y-3">
-      <p data-testid="interaction-count" className="text-xs text-muted">
-        {filtered.length} interactions
+    <div className="space-y-3">
+      <p className="text-xs text-muted">
+        {filtered.length} interaction{filtered.length === 1 ? "" : "s"}
       </p>
-      <div data-testid="timeline-entries" className="space-y-2">
+      <div className="space-y-2">
         {filtered.map((interaction) => (
           <div
             key={interaction._id}
-            className="rounded-card border border-border bg-surface p-3"
+            className="relative rounded-card border border-border bg-surface p-4 pl-6"
           >
-            <div className="mb-1 flex items-center gap-2">
-              <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${typeStyles[interaction.type] || ""}`}>
-                {interaction.type}
-              </span>
-              <span className={`text-xs ${outcomeStyles[interaction.outcome as string] || ""}`}>
-                {interaction.outcome}
+            <div className="absolute left-2.5 top-6 h-4 w-3">
+              <span className="block h-2 w-2 rounded-full bg-brand" />
+              <span className="absolute -bottom-8 left-1 block h-8 w-px bg-border" />
+            </div>
+            <div className="mb-2 flex items-center gap-2">
+              <Badge variant="brand">{interaction.type}</Badge>
+              {interaction.outcome && (
+                <span className="text-xs capitalize text-muted">
+                  {interaction.outcome}
+                </span>
+              )}
+              <span className="ml-auto text-xs text-muted">
+                {formatDate(interaction.createdAt)}
               </span>
             </div>
-            <p className="text-sm text-muted">{interaction.notes}</p>
-            <p className="mt-1 text-xs text-muted">{formatDate(interaction.createdAt)}</p>
+            {interaction.notes && (
+              <p className="text-sm leading-relaxed text-muted">
+                {interaction.notes}
+              </p>
+            )}
           </div>
         ))}
       </div>
