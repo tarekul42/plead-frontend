@@ -1,115 +1,130 @@
 "use client";
 
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { FormField } from "@/components/ui/form-field";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 
-interface PropertyFormData {
-  title: string;
-  description: string;
-  price: number;
-  location: string;
-  beds: number;
-  baths: number;
-  area: number;
-  propertyType: string;
-}
+const propertyFormSchema = z.object({
+  title: z.string().min(3, "Title must be at least 3 characters").max(200),
+  description: z.string().min(10, "Description must be at least 10 characters").max(2000),
+  price: z.coerce.number().min(0, "Price must be positive"),
+  location: z.string().min(1, "Location is required"),
+  address: z.string().optional(),
+  beds: z.coerce.number().min(0).max(100),
+  baths: z.coerce.number().min(0).max(100),
+  area: z.coerce.number().min(0),
+  propertyType: z.enum(["house", "apartment", "condo", "townhouse", "land", "commercial"]),
+  status: z.enum(["available", "sold", "rented", "pending"]).optional(),
+  images: z.string().optional(),
+});
+
+type PropertyFormValues = z.infer<typeof propertyFormSchema>;
 
 interface PropertyFormProps {
-  onSubmit: (data: PropertyFormData) => void | Promise<void>;
-  initialData?: Partial<PropertyFormData>;
+  onSubmit: (data: PropertyFormValues) => void | Promise<void>;
+  initialData?: Partial<PropertyFormValues>;
 }
 
-const PROPERTY_TYPES = ["House", "Apartment", "Condo", "Townhouse", "Land", "Commercial"];
+const PROPERTY_TYPES = [
+  { value: "house", label: "House" },
+  { value: "apartment", label: "Apartment" },
+  { value: "condo", label: "Condo" },
+  { value: "townhouse", label: "Townhouse" },
+  { value: "land", label: "Land" },
+  { value: "commercial", label: "Commercial" },
+] as const;
 
 export function PropertyForm({ onSubmit, initialData }: PropertyFormProps) {
-  const [form, setForm] = useState<PropertyFormData>({
-    title: initialData?.title || "",
-    description: initialData?.description || "",
-    price: initialData?.price || 0,
-    location: initialData?.location || "",
-    beds: initialData?.beds || 0,
-    baths: initialData?.baths || 0,
-    area: initialData?.area || 0,
-    propertyType: initialData?.propertyType || "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<PropertyFormValues>({
+    resolver: zodResolver(propertyFormSchema) as never,
+    defaultValues: {
+      title: initialData?.title ?? "",
+      description: initialData?.description ?? "",
+      price: initialData?.price ?? 0,
+      location: initialData?.location ?? "",
+      address: initialData?.address ?? "",
+      beds: initialData?.beds ?? 0,
+      baths: initialData?.baths ?? 0,
+      area: initialData?.area ?? 0,
+      propertyType: initialData?.propertyType ?? "house",
+      status: initialData?.status ?? "available",
+      images: initialData?.images ?? "",
+    },
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const validate = (): boolean => {
-    const errs: Record<string, string> = {};
-    if (!form.title || form.title.length < 3) errs.title = "Title must be at least 3 characters";
-    if (!form.description || form.description.length < 10) errs.description = "Description must be at least 10 characters";
-    if (form.price <= 0) errs.price = "Price must be positive";
-    setErrors(errs);
-    return Object.keys(errs).length === 0;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
-    setIsSubmitting(true);
-    try {
-      await onSubmit(form);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const set = (field: keyof PropertyFormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const value = field === "price" || field === "beds" || field === "baths" || field === "area"
-      ? Number(e.target.value)
-      : e.target.value;
-    setForm((prev) => ({ ...prev, [field]: value }));
-  };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label htmlFor="title">Title</label>
-        <input id="title" value={form.title} onChange={set("title")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-        {errors.title && <p className="text-xs text-danger">{errors.title}</p>}
+    <form onSubmit={handleSubmit((data) => onSubmit(data))} className="space-y-4">
+      <FormField label="Title" error={errors.title} htmlFor="title" required>
+        <Input id="title" {...register("title")} />
+      </FormField>
+
+      <FormField label="Description" error={errors.description} htmlFor="description" required>
+        <Textarea id="description" rows={4} {...register("description")} />
+      </FormField>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <FormField label="Price" error={errors.price} htmlFor="price" required>
+          <Input id="price" type="number" {...register("price")} />
+        </FormField>
+
+        <FormField label="Location" error={errors.location} htmlFor="location" required>
+          <Input id="location" {...register("location")} />
+        </FormField>
+
+        <FormField label="Beds" error={errors.beds} htmlFor="beds" required>
+          <Input id="beds" type="number" {...register("beds")} />
+        </FormField>
+
+        <FormField label="Baths" error={errors.baths} htmlFor="baths" required>
+          <Input id="baths" type="number" step="0.5" {...register("baths")} />
+        </FormField>
+
+        <FormField label="Area (sqft)" error={errors.area} htmlFor="area" required>
+          <Input id="area" type="number" {...register("area")} />
+        </FormField>
+
+        <FormField label="Property Type" error={errors.propertyType} htmlFor="propertyType" required>
+          <Select id="propertyType" {...register("propertyType")}>
+            {PROPERTY_TYPES.map(({ value, label }) => (
+              <option key={value} value={value}>{label}</option>
+            ))}
+          </Select>
+        </FormField>
       </div>
-      <div>
-        <label htmlFor="description">Description</label>
-        <textarea id="description" value={form.description} onChange={set("description")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-        {errors.description && <p className="text-xs text-danger">{errors.description}</p>}
-      </div>
-      <div>
-        <label htmlFor="price">Price</label>
-        <input id="price" type="number" value={form.price || ""} onChange={set("price")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-        {errors.price && <p className="text-xs text-danger">{errors.price}</p>}
-      </div>
-      <div>
-        <label htmlFor="location">Location</label>
-        <input id="location" value={form.location} onChange={set("location")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-      </div>
-      <div>
-        <label htmlFor="beds">Beds</label>
-        <input id="beds" type="number" value={form.beds || ""} onChange={set("beds")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-      </div>
-      <div>
-        <label htmlFor="baths">Baths</label>
-        <input id="baths" type="number" value={form.baths || ""} onChange={set("baths")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-      </div>
-      <div>
-        <label htmlFor="area">Area</label>
-        <input id="area" type="number" value={form.area || ""} onChange={set("area")} className="w-full rounded-lg border border-border bg-background px-3 py-2" />
-      </div>
-      <div>
-        <label htmlFor="propertyType">Property Type</label>
-        <select id="propertyType" value={form.propertyType} onChange={set("propertyType")} className="w-full rounded-lg border border-border bg-background px-3 py-2">
-          <option value="">Select type</option>
-          {PROPERTY_TYPES.map((t) => (
-            <option key={t} value={t}>{t}</option>
-          ))}
-        </select>
-      </div>
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
-      >
+
+      <FormField label="Address" error={errors.address} htmlFor="address">
+        <Input id="address" {...register("address")} />
+      </FormField>
+
+      <FormField label="Status" error={errors.status} htmlFor="status">
+        <Select id="status" {...register("status")}>
+          <option value="available">Available</option>
+          <option value="sold">Sold</option>
+          <option value="rented">Rented</option>
+          <option value="pending">Pending</option>
+        </Select>
+      </FormField>
+
+      <FormField label="Images (URLs, comma-separated)" error={errors.images} htmlFor="images">
+        <Input
+          id="images"
+          placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg"
+          {...register("images")}
+        />
+      </FormField>
+
+      <Button type="submit" disabled={isSubmitting}>
         {isSubmitting ? "Saving..." : "Create Property"}
-      </button>
+      </Button>
     </form>
   );
 }
