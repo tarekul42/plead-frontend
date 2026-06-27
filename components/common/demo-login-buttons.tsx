@@ -12,7 +12,7 @@ const demoAccounts = [
 export function DemoLoginButtons() {
   const { isSignedIn } = useUser();
 
-  if (isSignedIn) return null;
+  if (isSignedIn || process.env.NODE_ENV === "production") return null;
 
   return (
     <div className="w-full">
