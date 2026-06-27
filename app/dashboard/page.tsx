@@ -5,6 +5,9 @@ import { StatCard } from "@/components/dashboard/stat-card";
 import { LineChart } from "@/components/charts/line-chart";
 import { PieChart } from "@/components/charts/pie-chart";
 import { BarChart } from "@/components/charts/bar-chart";
+import { Spinner } from "@/components/ui/spinner";
+import { ErrorState } from "@/components/common/error-state";
+import { EmptyState } from "@/components/common/empty-state";
 import { useLeads } from "@/lib/queries/use-leads";
 import { useProperties } from "@/lib/queries/use-properties";
 import { Building2, Users, TrendingUp, MessageSquare, Sparkles, Shield, Star, UserCheck } from "lucide-react";
@@ -20,12 +23,24 @@ export default function DashboardPage() {
 }
 
 function AgentOverview() {
-  const { data: leadsData } = useLeads({ limit: 5 });
-  const { data: leaderboard } = useQuery({ queryKey: ["lead-stats"], queryFn: () => apiClient.get("/leads/stats").then(r => r.data.data) });
+  const { data: leadsData, isLoading: leadsLoading, isError: leadsError, refetch: refetchLeads } = useLeads({ limit: 5 });
+  const { data: leaderboard, isLoading: statsLoading } = useQuery({ queryKey: ["lead-stats"], queryFn: () => apiClient.get("/leads/stats").then(r => r.data.data) });
 
   const leadStatuses = leadsData?.data || [];
   const statusCounts: Record<string, number> = {};
   leadStatuses.forEach((l: any) => { statusCounts[l.status] = (statusCounts[l.status] || 0) + 1; });
+
+  if (leadsLoading || statsLoading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Spinner size={32} />
+      </div>
+    );
+  }
+
+  if (leadsError) {
+    return <ErrorState message="Failed to load dashboard data." onRetry={() => refetchLeads()} />;
+  }
 
   return (
     <div>
@@ -120,10 +135,22 @@ function AgentOverview() {
 }
 
 function ManagerOverview() {
-  const { data: leadsData } = useLeads({ limit: 100 });
-  const { data: propsData } = useProperties({ limit: 100 });
+  const { data: leadsData, isLoading: leadsLoading, isError: leadsError, refetch: refetchLeads } = useLeads({ limit: 100 });
+  const { data: propsData, isLoading: propsLoading, isError: propsError, refetch: refetchProps } = useProperties({ limit: 100 });
   const leads = leadsData?.data || [];
   const properties = propsData?.data || [];
+
+  if (leadsLoading || propsLoading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Spinner size={32} />
+      </div>
+    );
+  }
+
+  if (leadsError || propsError) {
+    return <ErrorState message="Failed to load dashboard data." onRetry={() => { refetchLeads(); refetchProps(); }} />;
+  }
 
   const agentsLeaderboard = [
     { name: "Sarah Mitchell", leads: 24, closed: 8, rate: 33 },
@@ -178,10 +205,22 @@ function ManagerOverview() {
 }
 
 function AdminOverview() {
-  const { data: leadsData } = useLeads({ limit: 100 });
-  const { data: propsData } = useProperties({ limit: 100 });
+  const { data: leadsData, isLoading: leadsLoading, isError: leadsError, refetch: refetchLeads } = useLeads({ limit: 100 });
+  const { data: propsData, isLoading: propsLoading, isError: propsError, refetch: refetchProps } = useProperties({ limit: 100 });
   const leads = leadsData?.data || [];
   const properties = propsData?.data || [];
+
+  if (leadsLoading || propsLoading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Spinner size={32} />
+      </div>
+    );
+  }
+
+  if (leadsError || propsError) {
+    return <ErrorState message="Failed to load dashboard data." onRetry={() => { refetchLeads(); refetchProps(); }} />;
+  }
 
   const statusCounts: Record<string, number> = {};
   leads.forEach((l: any) => { statusCounts[l.status] = (statusCounts[l.status] || 0) + 1; });

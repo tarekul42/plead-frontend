@@ -6,6 +6,7 @@ import { useUsers } from "@/lib/queries/use-users";
 import { adminApi } from "@/lib/api-client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { StatCard } from "@/components/dashboard/stat-card";
+import { EmptyState } from "@/components/common/empty-state";
 
 const roles = ["agent", "manager", "admin"];
 
@@ -44,6 +45,10 @@ export default function UsersPage() {
           <div className="flex items-center justify-center py-12">
             <Loader2 className="h-6 w-6 animate-spin text-muted" />
           </div>
+        ) : users.length === 0 ? (
+          <div className="py-12">
+            <EmptyState title="No users found" message="There are no users in your agency yet." />
+          </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -59,7 +64,7 @@ export default function UsersPage() {
               </thead>
               <tbody>
                 {users.map((user) => (
-                  <tr key={user._id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-[#1E293B]/50">
+                  <tr key={user._id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50">
                     <td className="p-4 font-medium">{user.name}</td>
                     <td className="p-4 text-muted">{user.email}</td>
                     <td className="p-4">
