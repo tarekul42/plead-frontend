@@ -38,7 +38,7 @@ vi.mock("@/lib/api-client", () => ({
   setAuthToken: vi.fn(),
   usersApi: {
     list: vi.fn(),
-    me: () => mockApiGet("/users/me").then((r) => r.data),
+    me: () => mockApiGet("/users/me").then((r: { data: unknown }) => r.data),
   },
 }));
 

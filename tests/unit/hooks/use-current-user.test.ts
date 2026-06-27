@@ -17,7 +17,7 @@ vi.mock("@/lib/api-client", () => ({
     get: (...args: unknown[]) => mockGet(...args),
   },
   usersApi: {
-    me: () => mockGet("/users/me").then((r) => r.data),
+    me: () => mockGet("/users/me").then((r: { data: unknown }) => r.data),
   },
 }));
 
