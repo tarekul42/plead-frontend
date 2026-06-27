@@ -11,10 +11,13 @@ vi.mock("@clerk/nextjs", () => ({
 }));
 
 // Mock API client
-const mockGet = vi.fn();
+const mockGet = vi.hoisted(() => vi.fn());
 vi.mock("@/lib/api-client", () => ({
   default: {
     get: (...args: unknown[]) => mockGet(...args),
+  },
+  usersApi: {
+    me: () => mockGet("/users/me").then((r) => r.data),
   },
 }));
 

@@ -1,4 +1,5 @@
 import axios from "axios";
+import type { PropertyListParams, LeadListParams } from "@/types/api";
 
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1",
@@ -30,7 +31,7 @@ export function setAuthToken(token: string | null) {
 }
 
 export const propertiesApi = {
-  list: (params?: Record<string, unknown>) =>
+  list: (params?: PropertyListParams) =>
     apiClient.get("/properties", { params }).then((r) => r.data),
   get: (slug: string) => apiClient.get(`/properties/${slug}`).then((r) => r.data),
   create: (data: unknown) => apiClient.post("/properties", data).then((r) => r.data),
@@ -40,7 +41,7 @@ export const propertiesApi = {
 };
 
 export const leadsApi = {
-  list: (params?: Record<string, unknown>) =>
+  list: (params?: LeadListParams) =>
     apiClient.get("/leads", { params }).then((r) => r.data),
   get: (id: string) => apiClient.get(`/leads/${id}`).then((r) => r.data),
   create: (data: unknown) => apiClient.post("/leads", data).then((r) => r.data),

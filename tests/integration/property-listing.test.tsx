@@ -173,7 +173,7 @@ describe("Property Listing: Search -> Filter -> Pagination", () => {
     });
 
     function EmptyListingPage() {
-      const { data, isLoading } = useProperties({ search: "nonexistent-city" });
+      const { data, isLoading } = useProperties({ q: "nonexistent-city" });
 
       if (isLoading) return <div>Loading...</div>;
 
