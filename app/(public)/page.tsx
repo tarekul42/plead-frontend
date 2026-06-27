@@ -14,7 +14,7 @@ import { FinalCta } from "@/components/landing/final-cta";
 
 export default function LandingPage() {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Hero />
       <StatsBar />
       <FeaturedProperties />

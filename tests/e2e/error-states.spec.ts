@@ -15,7 +15,7 @@ test.describe("Error States and Retry Behavior", () => {
     await page.waitForTimeout(2000);
 
     // Should show error state
-    const errorText = page.locator("text=Failed to load, text=Something went wrong, text=Error");
+    const errorText = page.locator("text=Failed to load").or(page.locator("text=Something went wrong")).or(page.locator("text=Error"));
     const hasError = await errorText.first().isVisible();
 
     // Or show empty state as fallback
@@ -34,7 +34,7 @@ test.describe("Error States and Retry Behavior", () => {
     await page.waitForTimeout(2000);
 
     // Should handle network error gracefully
-    const errorText = page.locator("text=Failed to load, text=Error, text=network error");
+    const errorText = page.locator("text=Failed to load").or(page.locator("text=Error")).or(page.locator("text=network error"));
     const hasError = await errorText.first().isVisible();
     const hasEmptyState = await page.locator("text=No properties found").isVisible();
 
@@ -117,7 +117,7 @@ test.describe("Error States and Retry Behavior", () => {
     await page.waitForTimeout(2000);
 
     // Should show 404 page or error message
-    const notFound = page.locator("text=404, text=Not found, text=does not exist");
+    const notFound = page.locator("text=404").or(page.locator("text=Not found")).or(page.locator("text=does not exist"));
     const hasNotFound = await notFound.first().isVisible();
 
     // Or redirect to properties list
@@ -141,7 +141,7 @@ test.describe("Error States and Retry Behavior", () => {
 
     // Should show loading or error state (not crash)
     const loading = page.locator("text=Loading...");
-    const error = page.locator("text=Error, text=Failed");
+    const error = page.locator("text=Error").or(page.locator("text=Failed"));
 
     const hasLoading = await loading.isVisible();
     const hasError = await error.first().isVisible();
@@ -179,8 +179,8 @@ test.describe("Error States and Retry Behavior", () => {
     await page.waitForTimeout(2000);
 
     // Should redirect to sign-in or show auth error
-    const signIn = page.locator("text=Sign in, text=sign-in");
-    const error = page.locator("text=Unauthorized, text=401");
+    const signIn = page.locator("text=Sign in").or(page.locator("text=sign-in"));
+    const error = page.locator("text=Unauthorized").or(page.locator("text=401"));
 
     const hasSignIn = await signIn.first().isVisible();
     const hasError = await error.first().isVisible();
@@ -202,8 +202,8 @@ test.describe("Error States and Retry Behavior", () => {
     await page.waitForTimeout(2000);
 
     // Should show rate limit message or error
-    const rateLimit = page.locator("text=Too many requests, text=rate limit, text=try again later");
-    const error = page.locator("text=Error, text=Failed");
+    const rateLimit = page.locator("text=Too many requests").or(page.locator("text=rate limit")).or(page.locator("text=try again later"));
+    const error = page.locator("text=Error").or(page.locator("text=Failed"));
 
     const hasRateLimit = await rateLimit.first().isVisible();
     const hasError = await error.first().isVisible();
