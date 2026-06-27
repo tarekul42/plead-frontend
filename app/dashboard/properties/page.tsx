@@ -39,7 +39,7 @@ export default function DashboardPropertiesPage() {
         {isLoading ? (
           <div className="space-y-3 p-6">
             {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-12 animate-pulse rounded bg-neutral-200 dark:bg-[#1E293B]" />
+              <div key={i} className="h-12 animate-pulse rounded bg-neutral-200 dark:bg-surface" />
             ))}
           </div>
         ) : properties.length === 0 ? (

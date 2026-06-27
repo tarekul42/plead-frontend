@@ -70,7 +70,7 @@ export default function LeadsPage() {
           {isLoading ? (
             <div className="space-y-3 p-6">
               {Array.from({ length: 5 }).map((_, i) => (
-                <div key={i} className="h-10 animate-pulse rounded bg-neutral-200 dark:bg-[#1E293B]" />
+                <div key={i} className="h-10 animate-pulse rounded bg-neutral-200 dark:bg-surface" />
               ))}
             </div>
           ) : leads.length === 0 ? (
