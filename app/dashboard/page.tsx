@@ -5,7 +5,7 @@ import { StatCard } from "@/components/dashboard/stat-card";
 import { LineChart } from "@/components/charts/line-chart";
 import { PieChart } from "@/components/charts/pie-chart";
 import { BarChart } from "@/components/charts/bar-chart";
-import { Spinner } from "@/components/ui/spinner";
+import { DashboardLoading } from "@/components/common/dashboard-loading";
 import { ErrorState } from "@/components/common/error-state";
 import { EmptyState } from "@/components/common/empty-state";
 import { useLeads } from "@/lib/queries/use-leads";
@@ -31,11 +31,7 @@ function AgentOverview() {
   leadStatuses.forEach((l: any) => { statusCounts[l.status] = (statusCounts[l.status] || 0) + 1; });
 
   if (leadsLoading || statsLoading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <Spinner size={32} />
-      </div>
-    );
+    return <DashboardLoading />;
   }
 
   if (leadsError) {
@@ -106,28 +102,28 @@ function AgentOverview() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border text-left text-muted">
-                  <th className="pb-3 font-medium">Name</th>
-                  <th className="pb-3 font-medium">Status</th>
-                  <th className="pb-3 font-medium">Budget</th>
-                  <th className="pb-3 font-medium">Created</th>
+                  <th className="p-4 font-medium">Name</th>
+                  <th className="p-4 font-medium">Status</th>
+                  <th className="p-4 font-medium">Budget</th>
+                  <th className="p-4 font-medium">Created</th>
                 </tr>
               </thead>
               <tbody>
                 {leadStatuses.slice(0, 5).map((lead: any) => (
                   <tr key={lead._id} className="border-b border-border last:border-0">
-                    <td className="py-3">{lead.name}</td>
-                    <td className="py-3">
-                      <span className="rounded-full bg-brand/5 px-2 py-0.5 text-xs text-brand">{lead.status}</span>
+                    <td className="p-4">{lead.name}</td>
+                    <td className="p-4">
+                      <span className="rounded-full bg-brand/5 px-2.5 py-0.5 text-xs font-medium text-brand">{lead.status}</span>
                     </td>
-                    <td className="py-3 text-muted">{lead.budget ? `$${(lead.budget / 1000).toFixed(0)}K` : "-"}</td>
-                    <td className="py-3 text-muted">{lead.createdAt ? new Date(lead.createdAt).toLocaleDateString() : "-"}</td>
+                    <td className="p-4 text-muted">{lead.budget ? `$${(lead.budget / 1000).toFixed(0)}K` : "-"}</td>
+                    <td className="p-4 text-muted">{lead.createdAt ? new Date(lead.createdAt).toLocaleDateString() : "-"}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         ) : (
-          <p className="py-4 text-center text-sm text-muted">No leads yet. Start by adding your first lead.</p>
+          <EmptyState title="No leads yet" message="Start by adding your first lead." />
         )}
       </div>
     </div>
@@ -141,11 +137,7 @@ function ManagerOverview() {
   const properties = propsData?.data || [];
 
   if (leadsLoading || propsLoading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <Spinner size={32} />
-      </div>
-    );
+    return <DashboardLoading />;
   }
 
   if (leadsError || propsError) {
@@ -176,7 +168,7 @@ function ManagerOverview() {
           <div className="h-64">
             <BarChart
               data={agentsLeaderboard.map((a) => ({ label: a.name.split(" ")[0], value: a.leads }))}
-              color="#2563EB"
+              color="var(--color-brand)"
             />
           </div>
         </div>
@@ -211,11 +203,7 @@ function AdminOverview() {
   const properties = propsData?.data || [];
 
   if (leadsLoading || propsLoading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <Spinner size={32} />
-      </div>
-    );
+    return <DashboardLoading />;
   }
 
   if (leadsError || propsError) {

@@ -49,7 +49,7 @@ export default function AiUsagePage() {
         <div className="rounded-card border border-border bg-surface p-6 shadow-sm">
           <h3 className="mb-4 text-sm font-semibold">Generations Per Day</h3>
           <div className="h-64">
-            <LineChart data={usageData} color="#10B981" />
+            <LineChart data={usageData} color="var(--color-success)" />
           </div>
         </div>
         <div className="rounded-card border border-border bg-surface p-6 shadow-sm">
@@ -76,7 +76,7 @@ export default function AiUsagePage() {
             </thead>
             <tbody>
               {recentGenerations.map((g) => (
-                <tr key={g.id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-[#1E293B]/50">
+                <tr key={g.id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50">
                   <td className="p-4">{g.type}</td>
                   <td className="p-4 text-muted">{g.user}</td>
                   <td className="p-4">

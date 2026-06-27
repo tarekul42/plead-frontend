@@ -70,17 +70,17 @@ export function DashboardSidebar() {
           </span>
         )}
       </div>
-      <nav className="space-y-1 p-4">
+      <nav className="space-y-1 p-6">
         {links.map((link) => {
           const isActive = pathname === link.href || (link.href !== "/dashboard" && pathname.startsWith(link.href));
           return (
             <Link
               key={link.href}
               href={link.href}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition ${
+              className={`flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm transition ${
                 isActive
                   ? "bg-brand/5 text-brand font-medium"
-                  : "text-muted hover:bg-neutral-100 dark:hover:bg-[#1E293B] hover:text-foreground"
+                  : "text-muted hover:bg-neutral-100 dark:hover:bg-surface hover:text-foreground"
               }`}
             >
               <link.icon className="h-4 w-4" />

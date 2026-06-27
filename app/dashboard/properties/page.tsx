@@ -5,6 +5,9 @@ import { useProperties } from "@/lib/queries/use-properties";
 import { formatPrice } from "@/lib/utils";
 import { Plus, Edit2, Trash2, Sparkles } from "lucide-react";
 import { useState } from "react";
+import { buttonVariants } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { EmptyState } from "@/components/common/empty-state";
 
 export default function DashboardPropertiesPage() {
   const [search, setSearch] = useState("");
@@ -25,10 +28,7 @@ export default function DashboardPropertiesPage() {
             placeholder="Search properties..."
             className="w-48 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-brand"
           />
-          <Link
-            href="/dashboard/properties/new"
-            className="flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm text-white transition hover:opacity-90"
-          >
+          <Link href="/dashboard/properties/new" className={buttonVariants()}>
             <Plus className="h-4 w-4" />
             Add Property
           </Link>
@@ -39,11 +39,13 @@ export default function DashboardPropertiesPage() {
         {isLoading ? (
           <div className="space-y-3 p-6">
             {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-12 animate-pulse rounded bg-neutral-200 dark:bg-surface" />
+              <Skeleton key={i} className="h-12" />
             ))}
           </div>
         ) : properties.length === 0 ? (
-          <p className="py-12 text-center text-sm text-muted">No properties found.</p>
+          <div className="py-12">
+            <EmptyState title="No properties found" message="Try adjusting your search or add a new property." />
+          </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -59,7 +61,7 @@ export default function DashboardPropertiesPage() {
               </thead>
               <tbody>
                 {properties.map((property: any) => (
-                  <tr key={property._id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-[#1E293B]/50">
+                  <tr key={property._id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50">
                     <td className="p-4 font-medium">{property.title}</td>
                     <td className="p-4 text-muted">{property.location}</td>
                     <td className="p-4 text-muted">{formatPrice(property.price)}</td>
