@@ -30,9 +30,8 @@ export default function SignInPage() {
             headerTitle: "hidden",
             headerSubtitle: "hidden",
             header: "hidden",
-            socialButtonsBlockButton:
-              "border border-border rounded-lg hover:bg-neutral-100 dark:hover:bg-surface-alt text-foreground font-medium transition",
-            socialButtonsBlockButtonText: "text-foreground",
+            socialButtons: "hidden",
+            dividerRow: "hidden",
             formButtonPrimary:
               "bg-brand hover:bg-brand-dark text-white rounded-lg font-medium shadow-sm transition",
             formFieldInput:
