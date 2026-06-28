@@ -59,7 +59,7 @@ export default function BlogPage() {
         <h1 className="mb-3 text-3xl font-bold md:text-4xl">Blog</h1>
         <p className="text-muted">Tips, guides, and insights for real estate professionals</p>
       </div>
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div data-testid="blog-list" className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <Link
             key={post.slug}

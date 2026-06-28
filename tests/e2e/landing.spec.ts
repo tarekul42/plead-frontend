@@ -10,7 +10,7 @@ test.describe("Landing page", () => {
 
     // Check for h1 or rate limit message
     const h1 = page.locator("h1");
-    const rateLimit = page.locator("text=too many requests, text=rate limit");
+    const rateLimit = page.locator("text=too many requests").or(page.locator("text=too_many_requests"));
 
     await expect(h1.or(rateLimit)).toBeVisible();
   });
@@ -21,7 +21,7 @@ test.describe("Landing page", () => {
 
     await page.waitForTimeout(5000);
 
-    const rateLimit = page.locator("text=too many requests, text=rate limit");
+    const rateLimit = page.locator("text=too many requests").or(page.locator("text=too_many_requests"));
     const hasRateLimit = await rateLimit.isVisible();
 
     if (!hasRateLimit) {

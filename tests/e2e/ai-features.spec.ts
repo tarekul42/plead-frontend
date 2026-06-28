@@ -7,7 +7,9 @@ test.describe("AI Features", () => {
     await page.waitForTimeout(3000);
     const isOnSignIn = page.url().includes("sign-in");
     const isOnClerk = page.url().includes("clerk.accounts.dev");
-    const isRateLimited = await page.locator("text=too many requests, text=rate limit").first().isVisible();
+    const rateLimitText = await page.locator("text=too many requests").first().isVisible();
+const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
+const isRateLimited = rateLimitText || rateLimitJson;
     if (isOnSignIn || isOnClerk || isRateLimited) {
       test.skip();
     }

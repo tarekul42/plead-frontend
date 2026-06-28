@@ -5,7 +5,9 @@ test.describe("Properties listing", () => {
     test.setTimeout(30000);
     await page.goto("/properties");
     await page.waitForTimeout(3000);
-    const isRateLimited = await page.locator("text=too many requests, text=rate limit").first().isVisible();
+    const rateLimitText = await page.locator("text=too many requests").first().isVisible();
+const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
+const isRateLimited = rateLimitText || rateLimitJson;
     if (isRateLimited) {
       test.skip();
     }

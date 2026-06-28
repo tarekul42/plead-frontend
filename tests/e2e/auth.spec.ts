@@ -18,7 +18,7 @@ test.describe("Authentication Flow", () => {
     await page.goto("/sign-in");
     await page.waitForTimeout(15000);
 
-    const hasDemoButtons = await page.locator("text=Quick demo login").isVisible();
+    const hasDemoButtons = await page.locator("text=Quick Demo Access").isVisible();
     const hasRateLimit = await isClerkRateLimited(page);
     expect(hasDemoButtons || hasRateLimit).toBeTruthy();
   });

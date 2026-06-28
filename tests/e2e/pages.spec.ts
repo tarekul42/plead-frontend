@@ -2,7 +2,9 @@ import { test, expect } from "@playwright/test";
 
 // Helper to check if Clerk rate limit is active
 async function isClerkRateLimited(page: any) {
-  return await page.locator("text=too many requests, text=rate limit").first().isVisible();
+  const rateLimitText = await page.locator("text=too many requests").first().isVisible();
+  const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
+  return rateLimitText || rateLimitJson;
 }
 
 test.describe("Agents Page", () => {
@@ -32,7 +34,7 @@ test.describe("Agents Page", () => {
     await page.waitForTimeout(1000);
 
     const hasAgents = await page.locator('[data-testid="agent-list"], table').first().isVisible();
-    const hasEmptyState = await page.locator("text=No agents, text=no agents").isVisible();
+    const hasEmptyState = await page.locator("text=No agents").or(page.locator("text=no agents")).isVisible();
 
     expect(hasAgents || hasEmptyState).toBeTruthy();
   });
@@ -109,7 +111,7 @@ test.describe("Public Blog Page", () => {
     await page.waitForTimeout(1000);
 
     const hasPosts = await page.locator('[data-testid="blog-list"], article').first().isVisible();
-    const hasEmptyState = await page.locator("text=No posts, text=no blog").isVisible();
+    const hasEmptyState = await page.locator("text=No posts").or(page.locator("text=no blog")).isVisible();
 
     expect(hasPosts || hasEmptyState).toBeTruthy();
   });
@@ -174,7 +176,7 @@ test.describe("About Page", () => {
     if (await isClerkRateLimited(page)) return;
     await page.waitForTimeout(1000);
 
-    const aboutContent = page.locator("text=team, text=mission, text=about, text=company");
+    const aboutContent = page.locator("text=team").or(page.locator("text=mission")).or(page.locator("text=about")).or(page.locator("text=company"));
     if (await aboutContent.first().isVisible()) {
       await expect(aboutContent.first()).toBeVisible();
     }

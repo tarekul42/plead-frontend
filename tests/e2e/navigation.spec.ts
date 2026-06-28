@@ -107,35 +107,41 @@ test.describe("Navigation and Routing", () => {
   });
 
   test("browser back button works correctly", async ({ page }) => {
+    const rateLimitText = await page.locator("text=too many requests").first().isVisible();
+    const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
+    if (rateLimitText || rateLimitJson) return;
+
     await page.goto("/");
     await page.waitForTimeout(500);
 
     const propertiesLink = page.getByRole("link", { name: /explore properties|properties/i }).first();
     if (await propertiesLink.isVisible()) {
       await propertiesLink.click();
-      await page.waitForTimeout(500);
+      await page.waitForURL(/\/properties/, { timeout: 5000 });
 
       await page.goBack();
-      await page.waitForTimeout(500);
-      await expect(page).toHaveURL("/");
+      await expect(page).toHaveURL("/", { timeout: 5000 });
     }
   });
 
   test("browser forward button works correctly", async ({ page }) => {
+    const rateLimitText = await page.locator("text=too many requests").first().isVisible();
+    const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
+    if (rateLimitText || rateLimitJson) return;
+
     await page.goto("/");
     await page.waitForTimeout(500);
 
     const propertiesLink = page.getByRole("link", { name: /explore properties|properties/i }).first();
     if (await propertiesLink.isVisible()) {
       await propertiesLink.click();
-      await page.waitForTimeout(500);
+      await page.waitForURL(/\/properties/, { timeout: 5000 });
 
       await page.goBack();
-      await page.waitForTimeout(500);
+      await page.waitForURL("/", { timeout: 5000 });
 
       await page.goForward();
-      await page.waitForTimeout(500);
-      await expect(page).toHaveURL(/\/properties/);
+      await page.waitForURL(/\/properties/, { timeout: 5000 });
     }
   });
 });
