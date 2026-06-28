@@ -42,6 +42,10 @@ function DemoButtons() {
     setLoadingRole(role);
     setError(null);
     try {
+      // Sign out first to prevent session_exists errors
+      await clerk.signOut();
+      await new Promise((r) => setTimeout(r, 50));
+
       const ticketRes = await fetch(`${API_BASE}/api/v1/auth/demo-ticket`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -58,11 +62,6 @@ function DemoButtons() {
       const { error: createErr } = await signIn.create({ strategy: "ticket", ticket: data.token });
 
       if (createErr) {
-        if (createErr.code === "session_exists") {
-          await clerk.signOut();
-          router.refresh();
-          return;
-        }
         setError(createErr.message || createErr.longMessage || "Sign-in failed");
         return;
       }
@@ -72,18 +71,19 @@ function DemoButtons() {
         if (signIn.createdSessionId) {
           await clerk.setActive({ session: signIn.createdSessionId });
         }
-        const sessionToken = await clerk.session?.getToken();
+        // Poll until session token is available (Clerk may need a tick to settle)
+        let sessionToken: string | null = null;
+        for (let i = 0; i < 20; i++) {
+          sessionToken = await clerk.session?.getToken();
+          if (sessionToken) break;
+          await new Promise((r) => setTimeout(r, 50));
+        }
         if (sessionToken) setAuthToken(sessionToken);
         router.push("/dashboard");
       } else {
         setError("Sign-in incomplete. Try again.");
       }
     } catch (err: any) {
-      if (err.errors?.[0]?.code === "session_exists") {
-        await clerk.signOut();
-        router.refresh();
-        return;
-      }
       const clerkMsg = err.errors ? err.errors.map((e: any) => e.message).join(", ") : err.message || "";
       setError(clerkMsg || "Sign-in failed");
     } finally {

@@ -182,7 +182,7 @@ export const leadsApi = {
 
 export const usersApi = {
   list: () =>
-    apiClient.get("/users").then(extractData),
+    apiClient.get("/users").then(extractPaginatedData),
   me: () =>
     apiClient.get("/users/me").then(extractData),
 };
@@ -200,7 +200,7 @@ export const reviewsApi = {
 
 export const interactionsApi = {
   list: () =>
-    apiClient.get("/interactions").then(extractData),
+    apiClient.get("/interactions").then(extractPaginatedData),
   listByLead: (leadId: string) =>
     apiClient.get(`/leads/${leadId}/interactions`).then(extractData),
   create: (leadId: string, data: unknown) =>
