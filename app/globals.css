@@ -73,6 +73,10 @@ body {
   line-height: 1.6;
 }
 
+button:not(:disabled) {
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
