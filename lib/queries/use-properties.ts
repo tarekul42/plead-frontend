@@ -6,9 +6,11 @@ import type { ApiResponse } from "@/types";
 import type { Property, PropertyListParams } from "@/types";
 
 export function useProperties(params?: PropertyListParams) {
+  const hasFilters = params && (params.q || params.propertyType || params.priceMin || params.priceMax || params.beds || params.status || params.location);
   return useQuery<ApiResponse<Property[]>>({
     queryKey: ["properties", params ? JSON.stringify(params) : undefined],
     queryFn: () => propertiesApi.list(params),
+    staleTime: hasFilters ? 0 : 60 * 1000,
   });
 }
 
