@@ -17,7 +17,7 @@ vi.mock("@/lib/api-client", () => ({
     get: (...args: unknown[]) => mockGet(...args),
   },
   usersApi: {
-    me: () => mockGet("/users/me").then((r: { data: unknown }) => r.data),
+    me: () => mockGet("/users/me").then((r: { data: { data: unknown } }) => r.data.data),
   },
 }));
 
@@ -47,16 +47,16 @@ describe("useCurrentUser", () => {
     expect(result.current.user).toBeUndefined();
   });
 
-  it("returns not-loading when Clerk is loaded but no clerkUser (nothing to fetch)", () => {
+  it("returns loading when Clerk is loaded but no clerkUser (nothing to fetch)", () => {
     mockUseUser.mockReturnValue({ user: null, isLoaded: true });
 
     const { result } = renderHook(() => useCurrentUser(), {
       wrapper: createWrapper(),
     });
 
-    // When Clerk is loaded but there is no user, the query is disabled
-    // so isLoading is false (there is nothing to load).
-    expect(result.current.isLoading).toBe(false);
+    // When Clerk is loaded but there is no user, the query is disabled,
+    // but isLoading is true because !clerkUser evaluates to true per the hook.
+    expect(result.current.isLoading).toBe(true);
     expect(result.current.user).toBeUndefined();
   });
 

@@ -62,10 +62,7 @@ describe("AiMatchPanel", () => {
   });
 
   it("displays match results after successful fetch", async () => {
-    mockMatchLeadProperties.mockResolvedValue({
-      success: true,
-      data: { matches: mockMatches },
-    });
+    mockMatchLeadProperties.mockResolvedValue({ matches: mockMatches });
 
     render(<AiMatchPanel leadId="lead-1" />, { wrapper: createWrapper() });
 
@@ -79,13 +76,10 @@ describe("AiMatchPanel", () => {
 
   it("displays match scores with correct color coding", async () => {
     mockMatchLeadProperties.mockResolvedValue({
-      success: true,
-      data: {
-        matches: [
-          { ...mockMatches[0], score: 92 },
-          { ...mockMatches[1], score: 55 },
-        ],
-      },
+      matches: [
+        { ...mockMatches[0], score: 92 },
+        { ...mockMatches[1], score: 55 },
+      ],
     });
 
     render(<AiMatchPanel leadId="lead-1" />, { wrapper: createWrapper() });
@@ -99,10 +93,7 @@ describe("AiMatchPanel", () => {
   });
 
   it("shows 'No matching properties found' when results are empty", async () => {
-    mockMatchLeadProperties.mockResolvedValue({
-      success: true,
-      data: { matches: [] },
-    });
+    mockMatchLeadProperties.mockResolvedValue({ matches: [] });
 
     render(<AiMatchPanel leadId="lead-1" />, { wrapper: createWrapper() });
 
@@ -139,10 +130,7 @@ describe("AiMatchPanel", () => {
   });
 
   it("calls the API with the correct leadId", async () => {
-    mockMatchLeadProperties.mockResolvedValue({
-      success: true,
-      data: { matches: mockMatches },
-    });
+    mockMatchLeadProperties.mockResolvedValue({ matches: mockMatches });
 
     render(<AiMatchPanel leadId="lead-42" />, { wrapper: createWrapper() });
 
@@ -154,10 +142,7 @@ describe("AiMatchPanel", () => {
   });
 
   it("shows refresh button after results load", async () => {
-    mockMatchLeadProperties.mockResolvedValue({
-      success: true,
-      data: { matches: mockMatches },
-    });
+    mockMatchLeadProperties.mockResolvedValue({ matches: mockMatches });
 
     render(<AiMatchPanel leadId="lead-1" />, { wrapper: createWrapper() });
 

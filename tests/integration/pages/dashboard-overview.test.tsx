@@ -17,13 +17,21 @@ vi.mock("@/lib/api-client", () => ({
   },
   setAuthToken: vi.fn(),
   usersApi: {
-    me: () => mockGet("/users/me").then((r: { data: unknown }) => r.data),
+    me: () => mockGet("/users/me").then((r: { data: { data: unknown } }) => r.data.data),
   },
   leadsApi: {
     list: (params?: unknown) => mockGet("/leads", { params }).then((r: { data: unknown }) => r.data),
   },
   propertiesApi: {
     list: (params?: unknown) => mockGet("/properties", { params }).then((r: { data: unknown }) => r.data),
+  },
+  interactionsApi: {
+    list: () => Promise.resolve({ data: [], meta: undefined }),
+  },
+  aiApi: {
+    matchLeadProperties: vi.fn(),
+    generatePropertyDescription: vi.fn(),
+    generateOutreachEmail: vi.fn(),
   },
 }));
 
@@ -84,14 +92,14 @@ describe("DashboardPage integration", () => {
       expect(screen.getByText("Agent Overview")).toBeInTheDocument();
     });
 
-    expect(screen.getByText("My Leads")).toBeInTheDocument();
+    expect(screen.getByText("Recent Leads")).toBeInTheDocument();
   });
 
   it("renders stat cards with data", async () => {
     renderWithProviders();
 
     await waitFor(() => {
-      expect(screen.getByText("My Leads")).toBeInTheDocument();
+      expect(screen.getByText("Recent Leads")).toBeInTheDocument();
     });
   });
 });

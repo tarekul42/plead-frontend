@@ -10,25 +10,22 @@ vi.mock("@clerk/nextjs", () => ({
 }));
 
 const mockMatchLeadProperties = vi.hoisted(() => vi.fn().mockResolvedValue({
-  success: true,
-  data: {
-    matches: [
-      {
-        propertyId: "prop-1",
-        propertyTitle: "Modern Downtown Loft",
-        propertyLocation: "Austin, TX",
-        score: 92,
-        reasons: ["Matches budget ($550k within $500k-$600k range)", "Preferred location: Austin, TX"],
-      },
-      {
-        propertyId: "prop-2",
-        propertyTitle: "Suburban Family Home",
-        propertyLocation: "Round Rock, TX",
-        score: 78,
-        reasons: ["Property type match: house", "Within extended budget range"],
-      },
-    ],
-  },
+  matches: [
+    {
+      propertyId: "prop-1",
+      propertyTitle: "Modern Downtown Loft",
+      propertyLocation: "Austin, TX",
+      score: 92,
+      reasons: ["Matches budget ($550k within $500k-$600k range)", "Preferred location: Austin, TX"],
+    },
+    {
+      propertyId: "prop-2",
+      propertyTitle: "Suburban Family Home",
+      propertyLocation: "Round Rock, TX",
+      score: 78,
+      reasons: ["Property type match: house", "Within extended budget range"],
+    },
+  ],
 }));
 
 const mockGeneratePropertyDescription = vi.hoisted(() => vi.fn().mockResolvedValue({
@@ -201,10 +198,7 @@ describe("AI Features: Match Results Display, Copy Generation", () => {
   });
 
   it("shows message when no matches found", async () => {
-    mockMatchLeadProperties.mockResolvedValueOnce({
-      success: true,
-      data: { matches: [] },
-    });
+    mockMatchLeadProperties.mockResolvedValueOnce({ matches: [] });
 
     renderWithProviders(<AiMatchPanel leadId="lead-1" />);
 

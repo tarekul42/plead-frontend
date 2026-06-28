@@ -53,4 +53,4 @@ export interface CreatePropertyInput {
   features?: string[];
 }
 
-export interface UpdatePropertyInput extends Partial<CreatePropertyInput> {}
+export type UpdatePropertyInput = Partial<CreatePropertyInput>;

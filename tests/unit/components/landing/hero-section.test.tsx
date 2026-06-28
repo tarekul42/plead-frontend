@@ -37,9 +37,9 @@ describe("Hero (landing section)", () => {
 
   it("renders the dashboard preview with match scores", () => {
     render(<Hero />);
-    expect(screen.getByText("92% Match")).toBeInTheDocument();
-    expect(screen.getByText("85% Match")).toBeInTheDocument();
-    expect(screen.getByText("71% Match")).toBeInTheDocument();
+    expect(screen.getByText("92%")).toBeInTheDocument();
+    expect(screen.getByText("85%")).toBeInTheDocument();
+    expect(screen.getByText("71%")).toBeInTheDocument();
   });
 
   it("renders property cards in the preview", () => {
@@ -51,7 +51,7 @@ describe("Hero (landing section)", () => {
 
   it("renders the animated arrow indicator", () => {
     render(<Hero />);
-    const arrow = document.querySelector('[class*="animate-bounce"]');
+    const arrow = document.querySelector("svg.lucide-arrow-down");
     expect(arrow).toBeInTheDocument();
   });
 });

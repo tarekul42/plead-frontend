@@ -86,14 +86,6 @@ describe("AiCopyGenerator", () => {
 
     render(<AiCopyGenerator propertyId="prop-42" />);
 
-    // Select tone if selector exists
-    const combobox = screen.queryByRole("combobox");
-    if (combobox) {
-      fireEvent.click(combobox);
-      const option = screen.getByText(/professional/i);
-      fireEvent.click(option);
-    }
-
     fireEvent.click(screen.getByRole("button", { name: /generate|create/i }));
 
     await waitFor(() => {

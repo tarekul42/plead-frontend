@@ -7,8 +7,10 @@ describe("cn", () => {
   });
 
   it("handles conditional classes", () => {
-    expect(cn("foo", false && "bar", "baz")).toBe("foo baz");
-    expect(cn("foo", true && "bar")).toBe("foo bar");
+    const falsy = false;
+    const truthy = true;
+    expect(cn("foo", falsy && "bar", "baz")).toBe("foo baz");
+    expect(cn("foo", truthy && "bar")).toBe("foo bar");
   });
 
   it("resolves Tailwind conflicts using tailwind-merge", () => {

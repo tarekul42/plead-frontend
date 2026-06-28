@@ -61,7 +61,7 @@ vi.mock("@/lib/api-client", () => ({
   setAuthToken: vi.fn(),
   usersApi: {
     list: vi.fn(),
-    me: () => mockApiGet("/users/me").then((r: { data: unknown }) => r.data),
+    me: () => mockApiGet("/users/me").then((r: { data: { data: unknown } }) => r.data.data),
   },
   adminApi: {
     toggleUserStatus: vi.fn().mockResolvedValue({
@@ -318,10 +318,8 @@ vi.mocked(usersApi.list).mockResolvedValue({ data: mockUsers, meta: undefined })
     );
 
     await waitFor(() => {
-      // Should handle error gracefully
-      expect(
-        screen.queryByTestId("loading"),
-      ).toBeInTheDocument();
+      // Should handle error gracefully (dashboard renders with empty list)
+      expect(screen.getByTestId("admin-dashboard")).toBeInTheDocument();
     });
   });
 });

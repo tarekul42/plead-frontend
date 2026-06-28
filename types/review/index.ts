@@ -16,4 +16,4 @@ export interface CreateReviewInput {
   comment?: string;
 }
 
-export interface UpdateReviewInput extends Partial<CreateReviewInput> {}
+export type UpdateReviewInput = Partial<CreateReviewInput>;

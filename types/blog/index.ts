@@ -24,4 +24,4 @@ export interface CreateBlogInput {
   status?: BlogStatus;
 }
 
-export interface UpdateBlogInput extends Partial<CreateBlogInput> {}
+export type UpdateBlogInput = Partial<CreateBlogInput>;

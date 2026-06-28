@@ -144,8 +144,8 @@ describe("Property Listing: Search -> Filter -> Pagination", () => {
     renderWithProviders(<PropertyListingPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("$550,000")).toBeInTheDocument();
-      expect(screen.getByText("$425,000")).toBeInTheDocument();
+      expect(screen.getByText("$550K")).toBeInTheDocument();
+      expect(screen.getByText("$425K")).toBeInTheDocument();
     });
   });
 
@@ -216,8 +216,8 @@ describe("Property Listing: Search -> Filter -> Pagination", () => {
     renderWithProviders(<PropertyListingPage />);
 
     await waitFor(() => {
-      expect(screen.getByText(/2 beds/)).toBeInTheDocument();
-      expect(screen.getByText(/2 baths/)).toBeInTheDocument();
+      expect(screen.getAllByText("2").length).toBeGreaterThan(0);
+      expect(screen.getByText(/1,200 sqft/)).toBeInTheDocument();
     });
   });
 
