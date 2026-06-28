@@ -2,8 +2,8 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { interactionsApi } from "@/lib/api-client";
-import type { ApiResponse } from "@/types/api";
-import type { Interaction } from "@/types/models";
+import type { ApiResponse } from "@/types";
+import type { Interaction } from "@/types";
 
 export function useInteractions() {
   return useQuery<ApiResponse<Interaction[]>>({

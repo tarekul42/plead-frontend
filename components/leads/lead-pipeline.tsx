@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useLeads } from "@/lib/queries/use-leads";
-import type { Lead } from "@/types/models";
+import type { Lead } from "@/types";
 
 const COLUMNS = [
   { key: "new", label: "New" },

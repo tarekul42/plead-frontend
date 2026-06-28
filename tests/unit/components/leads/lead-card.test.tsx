@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { LeadCard } from "@/components/leads/lead-card";
-import type { Lead } from "@/types/models";
+import type { Lead } from "@/types";
 
 const mockLead: Lead = {
   _id: "lead-1",

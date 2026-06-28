@@ -8,10 +8,10 @@ interface AiCopyGeneratorProps {
   propertyId: string;
 }
 
-const TONES = ["professional", "luxury", "friendly", "modern"];
+const TONES = ["luxury", "standard", "brief"];
 
 export function AiCopyGenerator({ propertyId }: AiCopyGeneratorProps) {
-  const [tone, setTone] = useState("professional");
+  const [tone, setTone] = useState("standard");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<{

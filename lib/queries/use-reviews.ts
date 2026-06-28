@@ -2,12 +2,12 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { reviewsApi } from "@/lib/api-client";
-import type { ApiResponse } from "@/types/api";
-import type { Review } from "@/types/models";
+import type { ApiResponse } from "@/types";
+import type { Review } from "@/types";
 
 export function useReviews(params?: Record<string, unknown>) {
   return useQuery<ApiResponse<Review[]>>({
-    queryKey: ["reviews", params],
+    queryKey: ["reviews", params ? JSON.stringify(params) : undefined],
     queryFn: () => reviewsApi.list(params),
   });
 }

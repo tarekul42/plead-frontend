@@ -1,9 +1,9 @@
 "use client";
 
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { usersApi } from "@/lib/api-client";
-import type { ApiResponse } from "@/types/api";
-import type { User } from "@/types/models";
+import type { ApiResponse } from "@/types";
+import type { User } from "@/types";
 
 export function useUsers() {
   return useQuery<ApiResponse<User[]>>({

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useReviews } from "@/lib/queries/use-reviews";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Star, MessageSquare, ThumbsUp, ChevronDown } from "lucide-react";
+import { Star, MessageSquare, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";

@@ -3,7 +3,7 @@
 import { useInteractions } from "@/lib/queries/use-interactions";
 import { Badge } from "@/components/ui/badge";
 import { formatDate } from "@/lib/utils";
-import type { Interaction } from "@/types/models";
+import type { Interaction } from "@/types";
 
 interface InteractionTimelineProps {
   leadId: string;

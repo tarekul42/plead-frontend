@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeAll } from "vitest";
 import { render, screen, fireEvent, within } from "@testing-library/react";
 import { LeadPipeline } from "@/components/leads/lead-pipeline";
-import type { Lead } from "@/types/models";
+import type { Lead } from "@/types";
 
 // jsdom doesn't provide DataTransfer; mock it for drag-and-drop tests
 class MockDataTransfer {

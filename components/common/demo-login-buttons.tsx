@@ -1,23 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { ClerkLoaded, ClerkLoading, useSignIn } from "@clerk/nextjs";
+import { ClerkLoaded, ClerkLoading, useSignIn, useClerk } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { Building2, Shield, User } from "lucide-react";
+import { User, Building2, Shield, AlertCircle } from "lucide-react";
+import { DEMO_CREDENTIALS, type DemoRole } from "@/lib/constants";
+import { setAuthToken } from "@/lib/api-client";
 
-interface DemoAccount {
-  role: string;
-  email: string;
-  password: string;
-}
-
-const DEFAULT_ACCOUNTS: DemoAccount[] = [
-  { role: "agent", email: "agent@proplead.ai", password: "Agent#123!" },
-  { role: "manager", email: "manager@proplead.ai", password: "Manager#123!" },
-  { role: "admin", email: "admin@proplead.ai", password: "Admin@u#123!" },
-];
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1").replace(/\/api\/v1\/?$/, "");
 
 const ICON_MAP: Record<string, typeof User> = {
   agent: User,
@@ -25,71 +17,82 @@ const ICON_MAP: Record<string, typeof User> = {
   admin: Shield,
 };
 
-const DESC_MAP: Record<string, string> = {
-  agent: "Agent view",
-  manager: "Manager view",
-  admin: "Admin view",
-};
-
 function SkeletonButtons() {
   return (
-    <div className="space-y-2">
+    <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
       {[0, 1, 2].map((i) => (
-        <div key={i} className="h-12 rounded-md bg-muted/40 animate-pulse" />
+        <div key={i} className="flex h-[72px] items-center justify-center rounded-xl bg-muted/40 animate-pulse" />
       ))}
     </div>
   );
 }
 
-function getErrorMessage(err: any): string {
-  if (!err) return "Sign-in failed";
-  if (err.errors && Array.isArray(err.errors) && err.errors.length > 0) {
-    return err.errors[0].message || err.errors[0].code || "Sign-in failed";
-  }
-  if (err.message) return err.message;
-  return "Sign-in failed";
-}
-
-function DemoButtons({ accounts }: { accounts: DemoAccount[] }) {
-  const signInState = useSignIn() as any;
+function DemoButtons() {
+  const { signIn } = useSignIn();
+  const clerk = useClerk();
   const router = useRouter();
-  const [loadingRole, setLoadingRole] = useState<string | null>(null);
+  const [loadingRole, setLoadingRole] = useState<DemoRole | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const login = async (email: string, password: string, role: string) => {
-    if (!signInState?.signIn) {
+  const login = async (_email: string, _password: string, role: DemoRole) => {
+    if (!signIn) {
       setError("Sign-in is not available. Please try again later.");
       return;
     }
     setLoadingRole(role);
     setError(null);
     try {
-      const result = await signInState.signIn.create({
-        identifier: email,
-        password,
+      const ticketRes = await fetch(`${API_BASE}/api/v1/auth/demo-ticket`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role }),
       });
-      if (result.status === "complete") {
-        await signInState.setActive({ session: result.createdSessionId });
+
+      if (!ticketRes.ok) {
+        const body = await ticketRes.json().catch(() => ({}));
+        setError(body?.error?.message || "Failed to get demo sign-in ticket. Run `bun run seed` in the backend.");
+        return;
+      }
+
+      const { data } = await ticketRes.json();
+      const { error: createErr } = await signIn.create({ strategy: "ticket", ticket: data.token });
+
+      if (createErr) {
+        if (createErr.code === "session_exists") {
+          const existingToken = await clerk.session?.getToken();
+          if (existingToken) setAuthToken(existingToken);
+          router.push("/dashboard");
+          return;
+        }
+        setError(createErr.message || createErr.longMessage || "Sign-in failed");
+        return;
+      }
+
+      if (signIn.status === "complete") {
+        await signIn.finalize();
+        if (signIn.createdSessionId) {
+          await clerk.setActive({ session: signIn.createdSessionId });
+        }
+        const sessionToken = await clerk.session?.getToken();
+        if (sessionToken) setAuthToken(sessionToken);
         router.push("/dashboard");
       } else {
-        setError("Sign-in not complete. Please try again.");
+        setError("Sign-in incomplete. Try again.");
       }
     } catch (err: any) {
-      if (err.errors && err.errors[0]?.code === "session_exists") {
+      if (err.errors?.[0]?.code === "session_exists") {
+        try { const t = await clerk.session?.getToken(); if (t) setAuthToken(t); } catch {}
         router.push("/dashboard");
         return;
       }
-      if (err.errors && Array.isArray(err.errors)) {
-        setError(err.errors.map((e: any) => e.message).join(", "));
-      } else {
-        setError(getErrorMessage(err));
-      }
+      const clerkMsg = err.errors ? err.errors.map((e: any) => e.message).join(", ") : err.message || "";
+      setError(clerkMsg || "Sign-in failed");
     } finally {
       setLoadingRole(null);
     }
   };
 
-  if (!signInState?.signIn) return null;
+  if (!signIn) return null;
 
   return (
     <div className="space-y-3">
@@ -98,32 +101,46 @@ function DemoButtons({ accounts }: { accounts: DemoAccount[] }) {
           <div className="w-full border-t border-border" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted">Quick demo login</span>
+          <span className="bg-background px-2 text-muted font-semibold tracking-wider">
+            Quick Demo Access
+          </span>
         </div>
       </div>
+
       {error && (
-        <div className="rounded-md border border-danger/30 bg-danger/10 px-3 py-2 text-xs text-danger">
-          {error}
+        <div className="flex items-start gap-2 rounded-lg border border-danger/30 bg-danger/10 px-3 py-2.5 text-xs text-danger">
+          <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+          <span>{error}</span>
         </div>
       )}
-      <div className="grid gap-2">
-        {accounts.map((account) => {
-          const Icon = ICON_MAP[account.role] || User;
+
+      <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
+        {(Object.keys(DEMO_CREDENTIALS) as DemoRole[]).map((role) => {
+          const cred = DEMO_CREDENTIALS[role];
+          const hasCreds = cred.email && cred.password;
+          const Icon = ICON_MAP[role] || User;
+          const isLoading = loadingRole === role;
+
           return (
             <Button
-              key={account.role}
-              variant="secondary"
-              disabled={loadingRole !== null}
-              onClick={() => login(account.email, account.password, account.role)}
-              leftIcon={
-                loadingRole === account.role ? <Spinner size="sm" /> : <Icon className="h-4 w-4" />
-              }
-              className="justify-start"
+              key={role}
+              type="button"
+              variant="outline"
+              disabled={loadingRole !== null || !hasCreds}
+              onClick={() => login(cred.email, cred.password, role)}
+              className="flex h-auto flex-col items-center gap-1.5 px-2 py-3 transition-all hover:border-brand/40 hover:bg-brand/5 disabled:opacity-40"
             >
-              <div className="flex flex-col items-start">
-                <span className="text-sm font-medium capitalize">{account.role}</span>
-                <span className="text-[11px] text-muted">{DESC_MAP[account.role]}</span>
-              </div>
+              {isLoading ? (
+                <Spinner size="sm" />
+              ) : (
+                <Icon className="h-5 w-5 text-brand" />
+              )}
+              <span className="text-xs font-semibold leading-none">
+                {cred.label}
+              </span>
+              <span className="text-[10px] leading-tight text-muted">
+                {hasCreds ? "Auto-fill & sign in" : "Not configured"}
+              </span>
             </Button>
           );
         })}
@@ -133,15 +150,13 @@ function DemoButtons({ accounts }: { accounts: DemoAccount[] }) {
 }
 
 export function DemoLoginButtons() {
-  const [accounts] = useState<DemoAccount[]>(DEFAULT_ACCOUNTS);
-
   return (
     <>
       <ClerkLoading>
         <SkeletonButtons />
       </ClerkLoading>
       <ClerkLoaded>
-        <DemoButtons accounts={accounts} />
+        <DemoButtons />
       </ClerkLoaded>
     </>
   );

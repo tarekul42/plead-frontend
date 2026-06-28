@@ -3,7 +3,6 @@
 import { Sparkles, Zap, Clock, CheckCircle } from "lucide-react";
 import { StatCard } from "@/components/dashboard/stat-card";
 import { LineChart } from "@/components/charts/line-chart";
-import { BarChart } from "@/components/charts/bar-chart";
 import { PieChart } from "@/components/charts/pie-chart";
 
 const usageData = [

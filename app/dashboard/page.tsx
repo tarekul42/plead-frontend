@@ -19,7 +19,6 @@ import {
   MessageSquare,
   Sparkles,
   Shield,
-  UserCheck,
   DollarSign,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { Suspense, useCallback, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useProperties } from "@/lib/queries/use-properties";
 import { PropertySearchBar } from "@/components/properties/property-search-bar";
@@ -22,6 +22,14 @@ function Chip({ label, onRemove }: { label: string; onRemove: () => void }) {
 }
 
 export default function ExplorePage() {
+  return (
+    <Suspense fallback={<div className="mx-auto max-w-container px-4 py-8 sm:px-6 lg:px-8"><h1 className="mb-2 text-3xl font-bold">Explore Properties</h1><p className="text-muted">Loading...</p></div>}>
+      <ExplorePageContent />
+    </Suspense>
+  );
+}
+
+function ExplorePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [mobileFilters, setMobileFilters] = useState(false);

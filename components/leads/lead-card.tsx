@@ -1,6 +1,6 @@
 "use client";
 
-import type { Lead } from "@/types/models";
+import type { Lead } from "@/types";
 import { Eye, Pencil, Trash2, Phone, MapPin, Calendar } from "lucide-react";
 import { cn, formatDate } from "@/lib/utils";
 

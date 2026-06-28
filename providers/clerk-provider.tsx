@@ -1,7 +1,28 @@
 "use client";
 
-import { ClerkProvider } from "@clerk/nextjs";
-import { ReactNode } from "react";
+import { ClerkProvider, useAuth } from "@clerk/nextjs";
+import { ReactNode, useEffect } from "react";
+import { setAuthToken, setTokenGetter } from "@/lib/api-client";
+
+function AuthTokenSetter() {
+  const { isLoaded, isSignedIn, getToken } = useAuth();
+
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    if (isSignedIn) {
+      setTokenGetter(() => getToken());
+      getToken().then((token) => {
+        if (token) setAuthToken(token);
+      });
+    } else {
+      setTokenGetter(null);
+      setAuthToken(null);
+    }
+  }, [isLoaded, isSignedIn, getToken]);
+
+  return null;
+}
 
 export function ClerkProviderWrapper({ children }: { children: ReactNode }) {
   return (
@@ -16,6 +37,7 @@ export function ClerkProviderWrapper({ children }: { children: ReactNode }) {
         },
       }}
     >
+      <AuthTokenSetter />
       {children}
     </ClerkProvider>
   );

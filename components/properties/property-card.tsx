@@ -3,9 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Bed, Bath, Move, MapPin, Heart, Eye } from "lucide-react";
-import { formatPrice, formatPricePerSqft, formatCompactPrice } from "@/lib/utils";
+import { formatPricePerSqft, formatCompactPrice } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import type { Property } from "@/types";
 
 interface PropertyCardProps {

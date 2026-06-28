@@ -32,9 +32,9 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
           className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none transition focus:border-brand"
         >
           <option value="newest">Newest</option>
-          <option value="price_asc">Price: Low to High</option>
-          <option value="price_desc">Price: High to Low</option>
-          <option value="most_viewed">Most Viewed</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="-views">Most Viewed</option>
         </select>
       </div>
 
@@ -139,7 +139,15 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
       </div>
 
       <button
-        onClick={() => onChange({})}
+        onClick={() => onChange({
+          propertyType: undefined,
+          status: undefined,
+          bedsMin: undefined,
+          bathsMin: undefined,
+          priceMin: undefined,
+          priceMax: undefined,
+          sort: undefined,
+        })}
         className="w-full rounded-lg border border-border px-4 py-2 text-sm transition hover:bg-neutral-100 dark:hover:bg-surface"
       >
         Clear filters

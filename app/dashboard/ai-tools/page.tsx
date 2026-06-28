@@ -5,7 +5,7 @@ import { Sparkles, FileText, Mail, Loader2, Check } from "lucide-react";
 import { useLeads } from "@/lib/queries/use-leads";
 import { useProperties } from "@/lib/queries/use-properties";
 import { useMatchLeadProperties, useGeneratePropertyDescription, useGenerateOutreachEmail } from "@/lib/queries/use-ai-tools";
-import type { AiMatchResult, AiDescriptionResult, AiEmailResult } from "@/types/api";
+import type { AiMatchResult } from "@/types";
 
 type ToolType = "match" | "description" | "email";
 
@@ -24,10 +24,10 @@ export default function AiToolsPage() {
 
   const [matchLeadId, setMatchLeadId] = useState("");
   const [descPropertyId, setDescPropertyId] = useState("");
-  const [descTone, setDescTone] = useState("Luxury");
+  const [descTone, setDescTone] = useState("standard");
   const [emailLeadId, setEmailLeadId] = useState("");
   const [emailPropertyId, setEmailPropertyId] = useState("");
-  const [emailTone, setEmailTone] = useState("Professional");
+  const [emailTone, setEmailTone] = useState("professional");
 
   const matchResult = matchMutation.data;
   const descResult = descriptionMutation.data;
@@ -144,10 +144,9 @@ export default function AiToolsPage() {
                   onChange={(e) => setDescTone(e.target.value)}
                   className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand"
                 >
-                  <option>Luxury</option>
-                  <option>Family-friendly</option>
-                  <option>Investment-focused</option>
-                  <option>Casual</option>
+                  <option value="luxury">Luxury</option>
+                  <option value="standard">Standard</option>
+                  <option value="brief">Brief</option>
                 </select>
               </div>
             </div>
@@ -226,9 +225,9 @@ export default function AiToolsPage() {
                   onChange={(e) => setEmailTone(e.target.value)}
                   className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand"
                 >
-                  <option>Professional</option>
-                  <option>Friendly</option>
-                  <option>Urgent</option>
+                  <option value="professional">Professional</option>
+                  <option value="friendly">Friendly</option>
+                  <option value="urgent">Urgent</option>
                 </select>
               </div>
             </div>

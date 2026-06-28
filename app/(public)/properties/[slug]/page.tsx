@@ -23,7 +23,6 @@ import {
   ChevronRight,
   Heart,
   Share2,
-  CheckCircle2,
 } from "lucide-react";
 
 const statusVariants: Record<string, "success" | "warning" | "danger" | "brand"> = {
@@ -44,8 +43,6 @@ function SpecCard({ icon: Icon, label, value }: { icon: any; label: string; valu
 }
 
 function PropertyMap({ property }: { property: any }) {
-  const [mounted, setMounted] = useState(false);
-
   return (
     <div className="mt-8">
       <h2 className="mb-4 text-xl font-semibold">Location</h2>

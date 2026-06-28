@@ -1,8 +1,7 @@
 "use client";
 
 import { Search } from "lucide-react";
-import { useDebounce } from "@/hooks/use-debounce";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface PropertySearchBarProps {
   value: string;
@@ -11,11 +10,23 @@ interface PropertySearchBarProps {
 
 export function PropertySearchBar({ value, onChange }: PropertySearchBarProps) {
   const [local, setLocal] = useState(value);
-  const debounced = useDebounce(local, 300);
+  const [debounced, setDebounced] = useState(value);
+  const initiated = useRef(false);
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
 
   useEffect(() => {
-    onChange(debounced);
-  }, [debounced, onChange]);
+    const timer = setTimeout(() => setDebounced(local), 300);
+    return () => clearTimeout(timer);
+  }, [local]);
+
+  useEffect(() => {
+    if (!initiated.current) {
+      initiated.current = true;
+      return;
+    }
+    onChangeRef.current(debounced);
+  }, [debounced]);
 
   return (
     <div className="relative">

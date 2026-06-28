@@ -1,6 +1,5 @@
 import { http, HttpResponse } from "msw";
-import type { Property, Lead, Interaction, Review, User } from "@/types/models";
-import type { ApiResponse } from "@/types/api";
+import type { Property, Lead, Interaction, Review, User, ApiResponse } from "@/types";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1";
 

@@ -91,6 +91,29 @@ export const USER_ROLE_LABELS: Record<UserRole, string> = {
   admin: "Admin",
 };
 
+export const DEMO_CREDENTIALS = {
+  agent: {
+    email: process.env.NEXT_PUBLIC_DEMO_AGENT_EMAIL ?? "agent@proplead.ai",
+    password: process.env.NEXT_PUBLIC_DEMO_AGENT_PASSWORD ?? "Ag7$k9mX!pQ2",
+    label: "Agent",
+    description: "Property listings & leads",
+  },
+  manager: {
+    email: process.env.NEXT_PUBLIC_DEMO_MANAGER_EMAIL ?? "manager@proplead.ai",
+    password: process.env.NEXT_PUBLIC_DEMO_MANAGER_PASSWORD ?? "Mgr8$jL3!nR5",
+    label: "Manager",
+    description: "Team oversight & analytics",
+  },
+  admin: {
+    email: process.env.NEXT_PUBLIC_DEMO_ADMIN_EMAIL ?? "admin@proplead.ai",
+    password: process.env.NEXT_PUBLIC_DEMO_ADMIN_PASSWORD ?? "Adm4$vB7!wX1",
+    label: "Admin",
+    description: "Platform administration",
+  },
+} as const;
+
+export type DemoRole = keyof typeof DEMO_CREDENTIALS;
+
 export const USER_ROLE_COLORS: Record<UserRole, string> = {
   agent: "brand",
   manager: "warning",
