@@ -59,9 +59,8 @@ function DemoButtons() {
 
       if (createErr) {
         if (createErr.code === "session_exists") {
-          const existingToken = await clerk.session?.getToken();
-          if (existingToken) setAuthToken(existingToken);
-          router.push("/dashboard");
+          await clerk.signOut();
+          router.refresh();
           return;
         }
         setError(createErr.message || createErr.longMessage || "Sign-in failed");
@@ -81,8 +80,8 @@ function DemoButtons() {
       }
     } catch (err: any) {
       if (err.errors?.[0]?.code === "session_exists") {
-        try { const t = await clerk.session?.getToken(); if (t) setAuthToken(t); } catch {}
-        router.push("/dashboard");
+        await clerk.signOut();
+        router.refresh();
         return;
       }
       const clerkMsg = err.errors ? err.errors.map((e: any) => e.message).join(", ") : err.message || "";
