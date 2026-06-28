@@ -21,7 +21,6 @@ describe("useProperties", () => {
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
-    expect(result.current.data?.success).toBe(true);
     expect(result.current.data?.data).toHaveLength(mockProperties.length);
   });
 });

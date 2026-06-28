@@ -2,13 +2,15 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { reviewsApi } from "@/lib/api-client";
-import type { ApiResponse } from "@/types";
+import type { PaginationMeta } from "@/types";
 import type { Review } from "@/types";
 
+type PaginatedReviews = { data: Review[]; meta?: PaginationMeta };
+
 export function useReviews(params?: Record<string, unknown>) {
-  return useQuery<ApiResponse<Review[]>>({
+  return useQuery({
     queryKey: ["reviews", params ? JSON.stringify(params) : undefined],
-    queryFn: () => reviewsApi.list(params),
+    queryFn: () => reviewsApi.list(params) as Promise<PaginatedReviews>,
   });
 }
 

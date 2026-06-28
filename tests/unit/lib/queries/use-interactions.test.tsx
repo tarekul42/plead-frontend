@@ -26,7 +26,6 @@ describe("useInteractions", () => {
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
-    expect(result.current.data?.success).toBe(true);
     expect(Array.isArray(result.current.data?.data)).toBe(true);
   });
 
@@ -77,7 +76,7 @@ describe("useCreateInteraction", () => {
     result.current.mutate(newInteraction);
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(result.current.data?.success).toBe(true);
+    expect(result.current.data).toBeDefined();
   });
 
   it("invalidates interactions cache on success", async () => {
@@ -91,7 +90,6 @@ describe("useCreateInteraction", () => {
 
     // Pre-populate cache
     qc.setQueryData(["interactions"], {
-      success: true,
       data: [],
     });
 

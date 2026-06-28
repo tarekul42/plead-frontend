@@ -12,9 +12,9 @@ interface AiMatchPanelProps {
 export function AiMatchPanel({ leadId }: AiMatchPanelProps) {
   const [enabled, setEnabled] = useState(false);
 
-  const { data, isLoading, isError, refetch } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery<{ matches: { propertyTitle: string; propertyLocation: string; score: number; reasons: string[] }[] }>({
     queryKey: ["ai-match", leadId],
-    queryFn: () => aiApi.matchLeadProperties({ leadId }),
+    queryFn: () => aiApi.matchLeadProperties({ leadId }) as Promise<{ matches: { propertyTitle: string; propertyLocation: string; score: number; reasons: string[] }[] }>,
     enabled,
   });
 
@@ -59,7 +59,7 @@ export function AiMatchPanel({ leadId }: AiMatchPanelProps) {
         </div>
       ) : (
         <div className="space-y-3">
-          {data?.data?.matches?.map((match: any, i: number) => (
+          {data?.matches?.map((match: any, i: number) => (
             <div key={i} className="rounded-lg border border-border bg-background p-3">
               <div className="mb-1 flex items-center justify-between">
                 <p className="text-sm font-medium">{match.propertyTitle}</p>
@@ -82,7 +82,7 @@ export function AiMatchPanel({ leadId }: AiMatchPanelProps) {
               )}
             </div>
           ))}
-          {(!data?.data?.matches || data.data.matches.length === 0) && (
+          {(!data?.matches || data.matches.length === 0) && (
             <p className="py-4 text-center text-xs text-muted">No matching properties found.</p>
           )}
           <button onClick={handleMatch} className="w-full text-xs text-brand hover:underline">

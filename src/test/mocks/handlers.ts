@@ -112,7 +112,7 @@ export const handlers = [
     return HttpResponse.json<ApiResponse<Property[]>>({
       success: true,
       data: filtered,
-      meta: { page, limit, total: mockProperties.length },
+      meta: { page, limit, total: mockProperties.length, totalPages: Math.ceil(mockProperties.length / limit) },
     });
   }),
 
@@ -152,7 +152,7 @@ export const handlers = [
     return HttpResponse.json<ApiResponse<Lead[]>>({
       success: true,
       data: mockLeads.slice(0, limit),
-      meta: { page, limit, total: mockLeads.length },
+      meta: { page, limit, total: mockLeads.length, totalPages: Math.ceil(mockLeads.length / limit) },
     });
   }),
 

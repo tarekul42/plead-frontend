@@ -107,7 +107,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
     );
   }
 
-  const property = data?.data;
+  const property = data;
 
   if (!property) {
     return (

@@ -57,7 +57,7 @@ const mockLeads: Lead[] = [
     name: "Alice Brown",
     email: "alice@example.com",
     budget: 600000,
-    status: "won",
+    status: "closed",
     assignedAgentId: "agent-1",
     createdAt: "2025-03-04T00:00:00Z",
     updatedAt: "2025-03-04T00:00:00Z",

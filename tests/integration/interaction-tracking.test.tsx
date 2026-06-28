@@ -100,7 +100,7 @@ function InteractionTimeline({ leadId }: { leadId: string }) {
     const fetchInteractions = async () => {
       try {
         const { interactionsApi } = await import("@/lib/api-client");
-        const response = await interactionsApi.listByLead(leadId);
+        const response = await interactionsApi.listByLead(leadId) as any;
         setInteractions(response.data || response);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to load interactions");

@@ -46,15 +46,12 @@ describe("AiCopyGenerator", () => {
 
   it("displays generated copy after success", async () => {
     mockGenerateDescription.mockResolvedValue({
-      success: true,
-      data: {
-        title: "Stunning Modern Loft",
-        description: "Experience luxury living in this breathtaking modern loft.",
-        highlights: ["Spacious open floor plan", "Floor-to-ceiling windows", "Premium finishes"],
-        provider: "openai",
-        tokensUsed: 250,
-        cached: false,
-      },
+      title: "Stunning Modern Loft",
+      description: "Experience luxury living in this breathtaking modern loft.",
+      highlights: ["Spacious open floor plan", "Floor-to-ceiling windows", "Premium finishes"],
+      provider: "openai",
+      tokensUsed: 250,
+      cached: false,
     });
 
     render(<AiCopyGenerator propertyId="prop-1" />);
@@ -79,15 +76,12 @@ describe("AiCopyGenerator", () => {
 
   it("calls API with correct propertyId and tone", async () => {
     mockGenerateDescription.mockResolvedValue({
-      success: true,
-      data: {
-        title: "Test",
-        description: "Test description",
-        highlights: [],
-        provider: "openai",
-        tokensUsed: 100,
-        cached: false,
-      },
+      title: "Test",
+      description: "Test description",
+      highlights: [],
+      provider: "openai",
+      tokensUsed: 100,
+      cached: false,
     });
 
     render(<AiCopyGenerator propertyId="prop-42" />);
@@ -111,15 +105,12 @@ describe("AiCopyGenerator", () => {
 
   it("displays highlights when provided", async () => {
     mockGenerateDescription.mockResolvedValue({
-      success: true,
-      data: {
-        title: "Test Property",
-        description: "A great property.",
-        highlights: ["Recently renovated", "Great location", "Move-in ready"],
-        provider: "openai",
-        tokensUsed: 150,
-        cached: false,
-      },
+      title: "Test Property",
+      description: "A great property.",
+      highlights: ["Recently renovated", "Great location", "Move-in ready"],
+      provider: "openai",
+      tokensUsed: 150,
+      cached: false,
     });
 
     render(<AiCopyGenerator propertyId="prop-1" />);

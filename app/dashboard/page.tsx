@@ -2,9 +2,7 @@
 
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { StatCard } from "@/components/dashboard/stat-card";
-import { LineChart } from "@/components/charts/line-chart";
-import { PieChart } from "@/components/charts/pie-chart";
-import { BarChart } from "@/components/charts/bar-chart";
+import { LineChart, PieChart, BarChart } from "@/components/charts/chart-wrapper";
 import { DashboardLoading } from "@/components/common/dashboard-loading";
 import { ErrorState } from "@/components/common/error-state";
 import { EmptyState } from "@/components/common/empty-state";

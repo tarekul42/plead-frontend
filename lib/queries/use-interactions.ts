@@ -2,13 +2,15 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { interactionsApi } from "@/lib/api-client";
-import type { ApiResponse } from "@/types";
+import type { PaginationMeta } from "@/types";
 import type { Interaction } from "@/types";
 
+type PaginatedInteractions = { data: Interaction[]; meta?: PaginationMeta };
+
 export function useInteractions() {
-  return useQuery<ApiResponse<Interaction[]>>({
+  return useQuery({
     queryKey: ["interactions"],
-    queryFn: () => interactionsApi.list(),
+    queryFn: () => interactionsApi.list() as Promise<PaginatedInteractions>,
   });
 }
 

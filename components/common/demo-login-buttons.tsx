@@ -72,7 +72,7 @@ function DemoButtons() {
           await clerk.setActive({ session: signIn.createdSessionId });
         }
         // Poll until session token is available (Clerk may need a tick to settle)
-        let sessionToken: string | null = null;
+        let sessionToken: string | null | undefined = null;
         for (let i = 0; i < 20; i++) {
           sessionToken = await clerk.session?.getToken();
           if (sessionToken) break;

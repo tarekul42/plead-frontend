@@ -6,18 +6,18 @@ import type { AiMatchResponse, AiDescriptionResult, AiEmailResult } from "@/type
 
 export function useMatchLeadProperties() {
   return useMutation<AiMatchResponse, Error, { leadId: string; propertyIds?: string[] }>({
-    mutationFn: (data) => aiApi.matchLeadProperties(data),
+    mutationFn: (data) => aiApi.matchLeadProperties(data) as Promise<AiMatchResponse>,
   });
 }
 
 export function useGeneratePropertyDescription() {
   return useMutation<AiDescriptionResult, Error, { propertyId: string; tone: string }>({
-    mutationFn: (data) => aiApi.generatePropertyDescription(data),
+    mutationFn: (data) => aiApi.generatePropertyDescription(data) as Promise<AiDescriptionResult>,
   });
 }
 
 export function useGenerateOutreachEmail() {
   return useMutation<AiEmailResult, Error, { leadId: string; propertyId: string; tone: string }>({
-    mutationFn: (data) => aiApi.generateOutreachEmail(data),
+    mutationFn: (data) => aiApi.generateOutreachEmail(data) as Promise<AiEmailResult>,
   });
 }

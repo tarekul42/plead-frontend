@@ -73,7 +73,7 @@ vi.mock("@/lib/api-client", () => ({
 
 // Set initial mock implementations
 vi.mocked(apiClient.get).mockResolvedValue({ data: { data: mockUser } });
-vi.mocked(usersApi.list).mockResolvedValue({ success: true, data: mockUsers });
+    vi.mocked(usersApi.list).mockResolvedValue({ data: mockUsers, meta: undefined });
 
 import React from "react";
 import { RoleGuard } from "@/components/dashboard/role-guard";
@@ -94,8 +94,8 @@ function AdminDashboard() {
     const fetchUsers = async () => {
       try {
         const { usersApi } = await import("@/lib/api-client");
-        const response = await usersApi.list();
-        setUsers(response.data || response);
+        const response = await usersApi.list() as { data: typeof mockUsers };
+        setUsers(response.data);
       } catch {
         // handle error gracefully
       } finally {
@@ -171,10 +171,7 @@ describe("Admin Dashboard: Admin-only Features, User Management", () => {
     vi.mocked(apiClient.get).mockResolvedValue({
       data: { data: mockUser },
     });
-    vi.mocked(usersApi.list).mockResolvedValue({
-      success: true,
-      data: mockUsers,
-    });
+vi.mocked(usersApi.list).mockResolvedValue({ data: mockUsers, meta: undefined });
   });
 
   it("renders admin dashboard for admin users", async () => {
@@ -270,10 +267,7 @@ describe("Admin Dashboard: Admin-only Features, User Management", () => {
   });
 
   it("handles empty user list", async () => {
-    vi.mocked(usersApi.list).mockResolvedValueOnce({
-      success: true,
-      data: [],
-    });
+    vi.mocked(usersApi.list).mockResolvedValueOnce({ data: [], meta: undefined });
 
     renderWithProviders(
       <RoleGuard allowedRoles={["admin"]}>

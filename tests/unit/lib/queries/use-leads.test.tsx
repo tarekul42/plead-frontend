@@ -26,7 +26,6 @@ describe("useLeads", () => {
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
-    expect(result.current.data?.success).toBe(true);
     expect(Array.isArray(result.current.data?.data)).toBe(true);
   });
 
@@ -63,7 +62,7 @@ describe("useLead", () => {
     });
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(result.current.data?.data._id).toBe("lead-1");
+    expect(result.current.data?._id).toBe("lead-1");
   });
 
   it("does not fetch when id is empty", () => {
@@ -106,7 +105,7 @@ describe("useCreateLead", () => {
     result.current.mutate(newLead);
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(result.current.data?.success).toBe(true);
+    expect(result.current.data).toBeDefined();
   });
 });
 
@@ -123,6 +122,6 @@ describe("useUpdateLead", () => {
     result.current.mutate(updates);
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(result.current.data?.data).toBeDefined();
+    expect(result.current.data).toBeDefined();
   });
 });

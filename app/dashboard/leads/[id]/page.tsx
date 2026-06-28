@@ -29,7 +29,7 @@ export default function LeadDetailPage({ params }: { params: Promise<{ id: strin
 
   if (isError) return <ErrorState message="Failed to load lead" onRetry={() => refetch()} />;
 
-  const lead = leadData?.data;
+  const lead = leadData;
   if (!lead) return <ErrorState message="Lead not found" />;
 
   return (

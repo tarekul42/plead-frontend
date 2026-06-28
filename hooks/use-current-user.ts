@@ -6,9 +6,9 @@ import type { User } from "@/types";
 export function useCurrentUser() {
   const { user: clerkUser, isLoaded } = useUser();
 
-  const query = useQuery<User>({
+  const query = useQuery({
     queryKey: ["current-user", clerkUser?.id],
-    queryFn: () => usersApi.me(),
+    queryFn: () => usersApi.me() as Promise<User>,
     enabled: isLoaded && !!clerkUser,
   });
 

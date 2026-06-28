@@ -93,8 +93,8 @@ function AiCopyGenerator() {
     setIsGenerating(true);
     try {
       const { aiApi } = await import("@/lib/api-client");
-      const response = await aiApi.generatePropertyDescription({ propertyId, tone });
-      setGenerated(response.data);
+      const response = await aiApi.generatePropertyDescription({ propertyId, tone }) as any;
+      setGenerated(response.data || response);
     } catch {
       // error handled gracefully
     } finally {

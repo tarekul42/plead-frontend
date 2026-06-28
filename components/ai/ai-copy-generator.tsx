@@ -29,11 +29,7 @@ export function AiCopyGenerator({ propertyId }: AiCopyGeneratorProps) {
     setResult(null);
     try {
       const res = await aiApi.generatePropertyDescription({ propertyId, tone });
-      if (res.success) {
-        setResult(res.data);
-      } else {
-        setError("Failed to generate copy");
-      }
+      setResult(res as typeof result);
     } catch {
       setError("Service unavailable");
     } finally {
