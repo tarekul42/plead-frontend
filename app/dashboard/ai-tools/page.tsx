@@ -94,10 +94,10 @@ export default function AiToolsPage() {
             {matchResult && (
               <div className="mt-6 space-y-3">
                 <h3 className="font-semibold text-success flex items-center gap-2"><Check className="h-4 w-4" /> Match Results</h3>
-                {matchResult.length === 0 ? (
+                {matchResult.matches.length === 0 ? (
                   <p className="text-sm text-muted">No matches found.</p>
                 ) : (
-                  matchResult.map((m: AiMatchResult, i: number) => (
+                  matchResult.matches.map((m: AiMatchResult, i: number) => (
                     <div key={i} className="rounded-lg border border-border bg-background/50 p-4">
                       <div className="flex items-center justify-between">
                         <p className="font-medium">{m.propertyTitle}</p>

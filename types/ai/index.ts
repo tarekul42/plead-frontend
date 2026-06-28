@@ -6,6 +6,13 @@ export interface AiMatchResult {
   reasons: string[];
 }
 
+export interface AiMatchResponse {
+  matches: AiMatchResult[];
+  provider: string;
+  tokensUsed: number;
+  cached: boolean;
+}
+
 export interface AiDescriptionResult {
   title: string;
   description: string;
