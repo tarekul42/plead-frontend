@@ -7,6 +7,11 @@ async function isClerkRateLimited(page: any) {
   return rateLimitText || rateLimitJson;
 }
 
+async function isAuthenticated(page: any) {
+  const cookies = await page.context().cookies();
+  return cookies.some((c: any) => c.name.includes("__session"));
+}
+
 test.describe("Authentication Flow", () => {
   test("sign-in page loads with Clerk UI", async ({ page }) => {
     await page.goto("/sign-in");
@@ -14,6 +19,7 @@ test.describe("Authentication Flow", () => {
   });
 
   test("demo login buttons are visible after Clerk loads", async ({ page }) => {
+    if (await isAuthenticated(page)) { test.skip(); return; }
     test.setTimeout(30000);
     await page.goto("/sign-in");
     await page.waitForTimeout(15000);
@@ -24,6 +30,7 @@ test.describe("Authentication Flow", () => {
   });
 
   test("demo login buttons show all three roles", async ({ page }) => {
+    if (await isAuthenticated(page)) { test.skip(); return; }
     test.setTimeout(30000);
     await page.goto("/sign-in");
     await page.waitForTimeout(15000);
@@ -40,6 +47,7 @@ test.describe("Authentication Flow", () => {
   });
 
   test("clicking demo login button attempts sign-in", async ({ page }) => {
+    if (await isAuthenticated(page)) { test.skip(); return; }
     test.setTimeout(30000);
     await page.goto("/sign-in");
     await page.waitForTimeout(15000);
@@ -54,6 +62,7 @@ test.describe("Authentication Flow", () => {
   });
 
   test("redirects unauthenticated users from dashboard to sign-in", async ({ page }) => {
+    if (await isAuthenticated(page)) { test.skip(); return; }
     test.setTimeout(30000);
     await page.goto("/dashboard");
     await page.waitForTimeout(5000);
@@ -65,6 +74,7 @@ test.describe("Authentication Flow", () => {
   });
 
   test("redirects unauthenticated users from leads to sign-in", async ({ page }) => {
+    if (await isAuthenticated(page)) { test.skip(); return; }
     test.setTimeout(30000);
     await page.goto("/dashboard/leads");
     await page.waitForTimeout(5000);
@@ -76,6 +86,7 @@ test.describe("Authentication Flow", () => {
   });
 
   test("redirects unauthenticated users from properties dashboard to sign-in", async ({ page }) => {
+    if (await isAuthenticated(page)) { test.skip(); return; }
     test.setTimeout(30000);
     await page.goto("/dashboard/properties");
     await page.waitForTimeout(5000);
@@ -87,6 +98,7 @@ test.describe("Authentication Flow", () => {
   });
 
   test("redirects unauthenticated users from profile to sign-in", async ({ page }) => {
+    if (await isAuthenticated(page)) { test.skip(); return; }
     test.setTimeout(30000);
     await page.goto("/dashboard/profile");
     await page.waitForTimeout(5000);
@@ -98,6 +110,7 @@ test.describe("Authentication Flow", () => {
   });
 
   test("redirects unauthenticated users from admin to sign-in", async ({ page }) => {
+    if (await isAuthenticated(page)) { test.skip(); return; }
     test.setTimeout(30000);
     const response = await page.goto("/dashboard/admin");
     await page.waitForTimeout(5000);

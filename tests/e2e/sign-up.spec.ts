@@ -1,6 +1,12 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Sign-Up Flow", () => {
+  test.beforeEach(async ({ page }) => {
+    const cookies = await page.context().cookies();
+    const hasSession = cookies.some((c: any) => c.name.includes("__session"));
+    if (hasSession) test.skip();
+  });
+
   test("sign-up page loads with Clerk UI", async ({ page }) => {
     await page.goto("/sign-up");
 

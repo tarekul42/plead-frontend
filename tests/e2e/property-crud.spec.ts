@@ -22,8 +22,8 @@ const isRateLimited = rateLimitText || rateLimitJson;
   test("displays property list or empty state", async ({ page }) => {
     await page.waitForTimeout(1000);
 
-    const hasProperties = await page.locator('[data-testid="property-list"], .grid').first().isVisible();
-    const hasEmptyState = await page.locator("text=No properties found, text=no properties").isVisible();
+    const hasProperties = await page.locator('table tbody tr').first().isVisible();
+    const hasEmptyState = await page.locator("text=No properties found").or(page.locator("text=no properties")).isVisible();
 
     expect(hasProperties || hasEmptyState).toBeTruthy();
   });
@@ -100,15 +100,12 @@ const isRateLimited = rateLimitText || rateLimitJson;
     const createBtn = page.getByRole("button", { name: /create|new property|add property/i });
     if (await createBtn.first().isVisible()) {
       await createBtn.first().click();
+      await page.waitForURL("**/properties/new", { timeout: 5000 });
+      await page.waitForTimeout(3000);
 
-      const bedsInput = page.locator('input[name="beds"], input[name="bedrooms"]');
-      const bathsInput = page.locator('input[name="baths"], input[name="bathrooms"]');
-      const areaInput = page.locator('input[name="area"], input[name="sqft"]');
-
-      // At least one should be visible
-      const hasBeds = await bedsInput.first().isVisible();
-      const hasBaths = await bathsInput.first().isVisible();
-      const hasArea = await areaInput.first().isVisible();
+      const hasBeds = await page.locator("text=Bedrooms").isVisible();
+      const hasBaths = await page.locator("text=Bathrooms").isVisible();
+      const hasArea = await page.locator("text=Area (sqft)").isVisible();
 
       expect(hasBeds || hasBaths || hasArea).toBeTruthy();
     }

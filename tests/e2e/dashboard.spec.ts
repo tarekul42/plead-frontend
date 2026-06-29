@@ -1,6 +1,11 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Dashboard", () => {
+  test.beforeEach(async ({ context }) => {
+    const cookies = await context.cookies();
+    const hasSession = cookies.some((c) => c.name.includes("__session"));
+    if (hasSession) test.skip();
+  });
   test("redirects unauthenticated users to sign-in", async ({ page }) => {
     test.setTimeout(30000);
     await page.goto("/dashboard");

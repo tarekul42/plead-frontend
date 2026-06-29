@@ -21,7 +21,7 @@ test.describe("Property Detail Page", () => {
     // Wait for property cards to load
     await page.waitForTimeout(1000);
 
-    const propertyCards = page.locator('a[href*="/properties/"]');
+    const propertyCards = page.locator('a[href*="/properties/"]:not([href*="/dashboard"])');
     const count = await propertyCards.count();
 
     // Either cards are shown, or empty/error state
@@ -31,7 +31,7 @@ test.describe("Property Detail Page", () => {
   });
 
   test("navigates to property detail page", async ({ page }) => {
-    const firstPropertyLink = page.locator('a[href*="/properties/"]').first();
+    const firstPropertyLink = page.locator('a[href*="/properties/"]:not([href*="/dashboard"])').first();
     if (await firstPropertyLink.isVisible()) {
       await firstPropertyLink.click();
       await expect(page).toHaveURL(/\/properties\/.+/);
@@ -39,7 +39,7 @@ test.describe("Property Detail Page", () => {
   });
 
   test("property detail page displays title", async ({ page }) => {
-    const firstPropertyLink = page.locator('a[href*="/properties/"]').first();
+    const firstPropertyLink = page.locator('a[href*="/properties/"]:not([href*="/dashboard"])').first();
     if (await firstPropertyLink.isVisible()) {
       await firstPropertyLink.click();
 
@@ -48,10 +48,11 @@ test.describe("Property Detail Page", () => {
   });
 
   test("property detail page shows images or gallery", async ({ page }) => {
-    const firstPropertyLink = page.locator('a[href*="/properties/"]').first();
+    const firstPropertyLink = page.locator('a[href*="/properties/"]:not([href*="/dashboard"])').first();
     if (await firstPropertyLink.isVisible()) {
       await firstPropertyLink.click();
-      await page.waitForTimeout(1000);
+      await page.waitForURL(/\/properties\/.+/);
+      await page.waitForTimeout(3000);
 
       // Check for image or gallery elements
       const images = page.locator('img[alt*="property" i], img[alt*="Property"], .rounded-xl img, .aspect-\\[16\\/9\\] img');
@@ -65,7 +66,7 @@ test.describe("Property Detail Page", () => {
   });
 
   test("property detail shows price", async ({ page }) => {
-    const firstPropertyLink = page.locator('a[href*="/properties/"]').first();
+    const firstPropertyLink = page.locator('a[href*="/properties/"]:not([href*="/dashboard"])').first();
     if (await firstPropertyLink.isVisible()) {
       await firstPropertyLink.click();
       await page.waitForTimeout(1000);
@@ -79,7 +80,7 @@ test.describe("Property Detail Page", () => {
   });
 
   test("property detail shows beds/baths/area", async ({ page }) => {
-    const firstPropertyLink = page.locator('a[href*="/properties/"]').first();
+    const firstPropertyLink = page.locator('a[href*="/properties/"]:not([href*="/dashboard"])').first();
     if (await firstPropertyLink.isVisible()) {
       await firstPropertyLink.click();
       await page.waitForTimeout(1000);
@@ -98,7 +99,7 @@ test.describe("Property Detail Page", () => {
   });
 
   test("property detail shows location", async ({ page }) => {
-    const firstPropertyLink = page.locator('a[href*="/properties/"]').first();
+    const firstPropertyLink = page.locator('a[href*="/properties/"]:not([href*="/dashboard"])').first();
     if (await firstPropertyLink.isVisible()) {
       await firstPropertyLink.click();
       await page.waitForTimeout(1000);
@@ -112,7 +113,7 @@ test.describe("Property Detail Page", () => {
   });
 
   test("property gallery navigation works", async ({ page }) => {
-    const firstPropertyLink = page.locator('a[href*="/properties/"]').first();
+    const firstPropertyLink = page.locator('a[href*="/properties/"]:not([href*="/dashboard"])').first();
     if (await firstPropertyLink.isVisible()) {
       await firstPropertyLink.click();
       await page.waitForTimeout(1000);
@@ -127,7 +128,7 @@ test.describe("Property Detail Page", () => {
   });
 
   test("property gallery lightbox opens on image click", async ({ page }) => {
-    const firstPropertyLink = page.locator('a[href*="/properties/"]').first();
+    const firstPropertyLink = page.locator('a[href*="/properties/"]:not([href*="/dashboard"])').first();
     if (await firstPropertyLink.isVisible()) {
       await firstPropertyLink.click();
       await page.waitForTimeout(1000);
@@ -154,7 +155,7 @@ test.describe("Property Detail Page", () => {
   });
 
   test("property detail shows description", async ({ page }) => {
-    const firstPropertyLink = page.locator('a[href*="/properties/"]').first();
+    const firstPropertyLink = page.locator('a[href*="/properties/"]:not([href*="/dashboard"])').first();
     if (await firstPropertyLink.isVisible()) {
       await firstPropertyLink.click();
       await page.waitForTimeout(1000);
@@ -168,7 +169,7 @@ test.describe("Property Detail Page", () => {
   });
 
   test("property detail shows status badge", async ({ page }) => {
-    const firstPropertyLink = page.locator('a[href*="/properties/"]').first();
+    const firstPropertyLink = page.locator('a[href*="/properties/"]:not([href*="/dashboard"])').first();
     if (await firstPropertyLink.isVisible()) {
       await firstPropertyLink.click();
       await page.waitForTimeout(1000);
@@ -181,7 +182,7 @@ test.describe("Property Detail Page", () => {
   });
 
   test("back navigation returns to properties list", async ({ page }) => {
-    const firstPropertyLink = page.locator('a[href*="/properties/"]').first();
+    const firstPropertyLink = page.locator('a[href*="/properties/"]:not([href*="/dashboard"])').first();
     if (await firstPropertyLink.isVisible()) {
       await firstPropertyLink.click();
       await page.waitForTimeout(1000);

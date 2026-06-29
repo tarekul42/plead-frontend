@@ -132,7 +132,7 @@ test.describe("Responsive Layout", () => {
       await page.goto("/properties");
       await page.waitForTimeout(3000);
 
-      const grid = page.locator('[data-testid="property-grid"], .grid');
+      const grid = page.locator('[data-testid="property-grid"], .grid').first();
       if (await grid.isVisible()) {
         const gridStyle = await grid.evaluate((el) => ({
           columns: window.getComputedStyle(el).gridTemplateColumns,

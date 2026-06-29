@@ -14,14 +14,31 @@ export default defineConfig({
   },
   projects: [
     {
+      name: "setup",
+      testMatch: /auth\.setup\.ts/,
+    },
+    {
       name: "chromium",
-      use: { browserName: "chromium" },
+      use: {
+        browserName: "chromium",
+        storageState: ".auth/user.json",
+      },
+      dependencies: ["setup"],
     },
   ],
-  webServer: {
-    command: "bun run dev",
-    url: "http://localhost:3000",
-    reuseExistingServer: !process.env.CI,
-    timeout: 30000,
-  },
+  webServer: [
+    {
+      command: "bun run dev",
+      url: "http://localhost:3000",
+      reuseExistingServer: !process.env.CI,
+      timeout: 30000,
+    },
+    {
+      command: "node dist/server.js",
+      cwd: "../plead-backend",
+      url: "http://localhost:5000/",
+      reuseExistingServer: !process.env.CI,
+      timeout: 30000,
+    },
+  ],
 });

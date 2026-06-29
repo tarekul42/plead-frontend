@@ -22,8 +22,8 @@ const isRateLimited = rateLimitText || rateLimitJson;
 
   test("displays lead list or empty state", async ({ page }) => {
     // Either leads are shown or an empty state message
-    const hasLeads = await page.locator('[data-testid="lead-list"]').isVisible();
-    const hasEmptyState = await page.locator("text=No leads yet").isVisible();
+    const hasLeads = await page.locator('table tbody tr').first().isVisible();
+    const hasEmptyState = await page.locator("text=No leads found").isVisible();
 
     expect(hasLeads || hasEmptyState).toBeTruthy();
   });

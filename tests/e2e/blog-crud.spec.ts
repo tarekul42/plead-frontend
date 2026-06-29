@@ -22,8 +22,8 @@ const isRateLimited = rateLimitText || rateLimitJson;
   test("displays blog posts list or empty state", async ({ page }) => {
     await page.waitForTimeout(1000);
 
-    const hasBlogs = await page.locator('[data-testid="blog-list"]').isVisible();
-    const hasEmptyState = await page.locator("text=No posts yet, text=No blog posts").isVisible();
+    const hasBlogs = await page.locator('table tbody tr').first().isVisible();
+    const hasEmptyState = await page.locator("text=No posts yet").or(page.locator("text=No blog posts")).isVisible();
 
     expect(hasBlogs || hasEmptyState).toBeTruthy();
   });
@@ -173,7 +173,7 @@ const isRateLimited = rateLimitText || rateLimitJson;
   test("blog post shows status badge (published/draft)", async ({ page }) => {
     await page.waitForTimeout(1000);
 
-    const statusBadge = page.locator("text=published, text=draft");
+    const statusBadge = page.locator("text=published").or(page.locator("text=draft"));
     if (await statusBadge.first().isVisible()) {
       await expect(statusBadge.first()).toBeVisible();
     }
