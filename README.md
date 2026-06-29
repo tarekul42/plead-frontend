@@ -2,7 +2,7 @@
 
 > AI-powered real estate lead engine dashboard. Built with Next.js 16 + React 19 + Tailwind CSS v4 + TypeScript 6.
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-vercel.app-000000?style=flat-square&logo=vercel&logoColor=white)](https://plead.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-vercel.app-000000?style=flat-square&logo=vercel&logoColor=white)](https://plead-frontend.vercel.app)
 [![Backend Repo](https://img.shields.io/badge/Backend_Repo-GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/tarekul42/plead-backend)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
@@ -142,9 +142,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 | Resource | URL |
 |----------|-----|
-| 🌐 **Live Demo** | https://plead.vercel.app |
+| 🌐 **Live Demo** | https://plead-frontend.vercel.app |
 | 🖥️ **Backend Repo** | https://github.com/tarekul42/plead-backend |
-| 📚 **Live API** | https://plead-api.onrender.com |
+| 📚 **Live API** | https://plead-backend.vercel.app |
 | 📧 **Contact** | tarekulrifat142@gmail.com |
 
 ---
