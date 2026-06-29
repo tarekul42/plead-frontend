@@ -9,7 +9,7 @@ import { User, Building2, Shield, AlertCircle } from "lucide-react";
 import { DEMO_CREDENTIALS, type DemoRole } from "@/lib/constants";
 import { setAuthToken } from "@/lib/api-client";
 
-const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "https://plead-backend.vercel.app/api/v1").replace(/\/api\/v1\/?$/, "");
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1").replace(/\/api\/v1\/?$/, "");
 
 const ICON_MAP: Record<string, typeof User> = {
   agent: User,
