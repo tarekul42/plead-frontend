@@ -23,7 +23,7 @@ let refreshQueue: Array<{
 }> = [];
 
 const apiClient: AxiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://plead-backend.vercel.app/api/v1",
   timeout: 15000,
   withCredentials: true,
 });
@@ -84,7 +84,7 @@ apiClient.interceptors.response.use(
 
       try {
         const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1"}/auth/refresh-token`,
+          `${process.env.NEXT_PUBLIC_API_URL || "https://plead-backend.vercel.app/api/v1"}/auth/refresh-token`,
           {},
           { withCredentials: true },
         );
