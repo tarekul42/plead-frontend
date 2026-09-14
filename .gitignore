@@ -1,9 +1,32 @@
+# dependencies
 node_modules/
+
+# next.js
 .next/
+out/
+
+# build
+*.tsbuildinfo
+dist/
+
+# env
+.env
+.env.local
+.env.*.local
+
+# vercel
+.vercel
+
+# testing
 playwright-report/
 test-results/
+coverage/
+
+# auth (local dev)
 .auth/
-*.tsbuildinfo
 .clerk/
-.env.local
+
+# misc
 proxy.ts
+*.tsbuildinfo
+.DS_Store
