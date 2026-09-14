@@ -23,7 +23,14 @@ function Chip({ label, onRemove }: { label: string; onRemove: () => void }) {
 
 export default function ExplorePage() {
   return (
-    <Suspense fallback={<div className="mx-auto max-w-container px-4 py-8 sm:px-6 lg:px-8"><h1 className="mb-2 text-3xl font-bold">Explore Properties</h1><p className="text-muted">Loading...</p></div>}>
+    <Suspense
+      fallback={
+        <div className="mx-auto max-w-container px-4 py-8 sm:px-6 lg:px-8">
+          <h1 className="mb-2 text-3xl font-bold">Explore Properties</h1>
+          <p className="text-muted">Loading...</p>
+        </div>
+      }
+    >
       <ExplorePageContent />
     </Suspense>
   );
@@ -103,18 +110,13 @@ function ExplorePageContent() {
       <div className="mb-6">
         <h1 className="mb-2 text-3xl font-bold">Explore Properties</h1>
         <p className="text-muted">
-          {data?.meta?.total
-            ? `${data.meta.total} properties found`
-            : "Find your perfect property"}
+          {data?.meta?.total ? `${data.meta.total} properties found` : "Find your perfect property"}
         </p>
       </div>
 
       <div className="mb-6 flex flex-wrap items-center gap-4">
         <div className="min-w-0 flex-1">
-          <PropertySearchBar
-            value={filters.q}
-            onChange={(q) => updateFilters({ q, page: 1 })}
-          />
+          <PropertySearchBar value={filters.q} onChange={(q) => updateFilters({ q, page: 1 })} />
         </div>
         <Button
           variant="secondary"
@@ -135,19 +137,31 @@ function ExplorePageContent() {
       {activeFilterCount > 0 && (
         <div className="mb-4 flex flex-wrap items-center gap-2">
           {filters.q && (
-            <Chip label={`Search: "${filters.q}"`} onRemove={() => updateFilters({ q: "", page: 1 })} />
+            <Chip
+              label={`Search: "${filters.q}"`}
+              onRemove={() => updateFilters({ q: "", page: 1 })}
+            />
           )}
           {filters.propertyType && (
-            <Chip label={filters.propertyType} onRemove={() => updateFilters({ propertyType: "", page: 1 })} />
+            <Chip
+              label={filters.propertyType}
+              onRemove={() => updateFilters({ propertyType: "", page: 1 })}
+            />
           )}
           {filters.status && (
             <Chip label={filters.status} onRemove={() => updateFilters({ status: "", page: 1 })} />
           )}
           {filters.bedsMin && (
-            <Chip label={`${filters.bedsMin}+ beds`} onRemove={() => updateFilters({ bedsMin: undefined, page: 1 })} />
+            <Chip
+              label={`${filters.bedsMin}+ beds`}
+              onRemove={() => updateFilters({ bedsMin: undefined, page: 1 })}
+            />
           )}
           {filters.bathsMin && (
-            <Chip label={`${filters.bathsMin}+ baths`} onRemove={() => updateFilters({ bathsMin: undefined, page: 1 })} />
+            <Chip
+              label={`${filters.bathsMin}+ baths`}
+              onRemove={() => updateFilters({ bathsMin: undefined, page: 1 })}
+            />
           )}
           <button
             onClick={clearFilters}

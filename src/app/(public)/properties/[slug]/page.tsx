@@ -33,7 +33,15 @@ const statusVariants: Record<string, "success" | "warning" | "danger" | "brand">
   rented: "brand",
 };
 
-function SpecCard({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
+function SpecCard({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: LucideIcon;
+  label: string;
+  value: string;
+}) {
   return (
     <div className="rounded-card border border-border bg-surface p-4 transition hover:shadow-sm">
       <Icon className="mb-2 h-4 w-4 text-muted" />
@@ -62,7 +70,13 @@ function PropertyMap({ property }: { property: Property }) {
   );
 }
 
-function RelatedProperties({ currentId, propertyType }: { currentId: string; propertyType: string }) {
+function RelatedProperties({
+  currentId,
+  propertyType,
+}: {
+  currentId: string;
+  propertyType: string;
+}) {
   const { data } = useProperties({ limit: 3, propertyType });
   const related = data?.data?.filter((p) => p._id !== currentId) || [];
 
@@ -90,7 +104,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
       <div className="mx-auto max-w-container px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <div className="aspect-[16/9] animate-pulse rounded-xl bg-neutral-200 dark:bg-surface" />
+            <div className="aspect-video animate-pulse rounded-xl bg-neutral-200 dark:bg-surface" />
           </div>
           <div className="space-y-4">
             <PropertySkeleton />
@@ -121,9 +135,13 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
   return (
     <div className="mx-auto max-w-container px-4 py-8 sm:px-6 lg:px-8">
       <nav className="mb-6 flex items-center gap-2 text-sm text-muted">
-        <Link href="/" className="hover:text-foreground">Home</Link>
+        <Link href="/" className="hover:text-foreground">
+          Home
+        </Link>
         <ChevronRight className="h-3 w-3" />
-        <Link href="/properties" className="hover:text-foreground">Properties</Link>
+        <Link href="/properties" className="hover:text-foreground">
+          Properties
+        </Link>
         <ChevronRight className="h-3 w-3" />
         <span className="text-foreground">{property.title}</span>
       </nav>
@@ -145,7 +163,11 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
               <SpecCard icon={Home} label="Price" value={formatPrice(property.price)} />
               <SpecCard icon={Bed} label="Bedrooms" value={String(property.beds)} />
               <SpecCard icon={Bath} label="Bathrooms" value={String(property.baths)} />
-              <SpecCard icon={Move} label="Area" value={`${property.area?.toLocaleString()} sqft`} />
+              <SpecCard
+                icon={Move}
+                label="Area"
+                value={`${property.area?.toLocaleString()} sqft`}
+              />
               <SpecCard icon={Home} label="Type" value={property.propertyType} />
               <SpecCard icon={Home} label="Status" value={property.status.replace("_", " ")} />
               <SpecCard icon={Eye} label="Views" value={property.views?.toLocaleString() || "0"} />
@@ -220,12 +242,18 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
                   <Button
                     variant="secondary"
                     className="flex-1"
-                    leftIcon={<Heart className={`h-4 w-4 ${saved ? "fill-danger text-danger" : ""}`} />}
+                    leftIcon={
+                      <Heart className={`h-4 w-4 ${saved ? "fill-danger text-danger" : ""}`} />
+                    }
                     onClick={() => setSaved(!saved)}
                   >
                     {saved ? "Saved" : "Save"}
                   </Button>
-                  <Button variant="secondary" className="flex-1" leftIcon={<Share2 className="h-4 w-4" />}>
+                  <Button
+                    variant="secondary"
+                    className="flex-1"
+                    leftIcon={<Share2 className="h-4 w-4" />}
+                  >
                     Share
                   </Button>
                 </div>
