@@ -12,7 +12,18 @@ import { Badge, type BadgeProps } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LEAD_STATUS_LABELS, LEAD_STATUS_COLORS } from "@/lib/constants";
 import { formatCompactPrice, formatDate } from "@/lib/utils";
-import { ArrowLeft, Mail, Phone, MapPin, DollarSign, Home, Bed, Bath, Calendar, MessageSquare } from "lucide-react";
+import {
+  ArrowLeft,
+  Mail,
+  Phone,
+  MapPin,
+  DollarSign,
+  Home,
+  Bed,
+  Bath,
+  Calendar,
+  MessageSquare,
+} from "lucide-react";
 
 export default function LeadDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -56,8 +67,11 @@ export default function LeadDetailPage({ params }: { params: Promise<{ id: strin
                   <h2 className="text-xl font-bold">{lead.name}</h2>
                   <p className="text-sm text-muted">{lead.email}</p>
                 </div>
-                <Badge variant={(LEAD_STATUS_COLORS[lead.status] as BadgeProps["variant"]) || "default"}>
-                  {LEAD_STATUS_LABELS[lead.status as keyof typeof LEAD_STATUS_LABELS] || lead.status}
+                <Badge
+                  variant={(LEAD_STATUS_COLORS[lead.status] as BadgeProps["variant"]) || "default"}
+                >
+                  {LEAD_STATUS_LABELS[lead.status as keyof typeof LEAD_STATUS_LABELS] ||
+                    lead.status}
                 </Badge>
               </div>
 
@@ -66,13 +80,24 @@ export default function LeadDetailPage({ params }: { params: Promise<{ id: strin
                   { icon: Mail, label: "Email", value: lead.email },
                   { icon: Phone, label: "Phone", value: lead.phone || "-" },
                   { icon: MapPin, label: "Location", value: lead.preferredLocation || "-" },
-                  { icon: DollarSign, label: "Budget", value: lead.budget ? formatCompactPrice(lead.budget) : "-" },
+                  {
+                    icon: DollarSign,
+                    label: "Budget",
+                    value: lead.budget ? formatCompactPrice(lead.budget) : "-",
+                  },
                   { icon: Home, label: "Type", value: lead.propertyType || "-" },
                   { icon: Bed, label: "Beds", value: lead.bedsDesired || "-" },
                   { icon: Bath, label: "Baths", value: lead.bathsDesired || "-" },
-                  { icon: Calendar, label: "Created", value: lead.createdAt ? formatDate(lead.createdAt) : "-" },
+                  {
+                    icon: Calendar,
+                    label: "Created",
+                    value: lead.createdAt ? formatDate(lead.createdAt) : "-",
+                  },
                 ].map((item) => (
-                  <div key={item.label} className="rounded-lg border border-border bg-background p-3">
+                  <div
+                    key={item.label}
+                    className="rounded-lg border border-border bg-background p-3"
+                  >
                     <div className="flex items-center gap-1.5 text-xs text-muted">
                       <item.icon className="h-3 w-3" />
                       <span>{item.label}</span>
@@ -110,7 +135,11 @@ export default function LeadDetailPage({ params }: { params: Promise<{ id: strin
               <CardTitle className="text-sm font-semibold">Quick Actions</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              <Button variant="secondary" className="w-full justify-start" leftIcon={<MessageSquare className="h-4 w-4" />}>
+              <Button
+                variant="secondary"
+                className="w-full justify-start"
+                leftIcon={<MessageSquare className="h-4 w-4" />}
+              >
                 Log Interaction
               </Button>
               <Button className="w-full justify-start" leftIcon={<Mail className="h-4 w-4" />}>

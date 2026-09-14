@@ -98,23 +98,36 @@ export default function InteractionsPage() {
                 <Select id="leadId" {...register("leadId")}>
                   <option value="">Select a lead...</option>
                   {leads.map((lead) => (
-                    <option key={lead._id} value={lead._id}>{lead.name}</option>
+                    <option key={lead._id} value={lead._id}>
+                      {lead.name}
+                    </option>
                   ))}
                 </Select>
               </FormField>
               <FormField label="Type" error={errors.type} htmlFor="type" required>
                 <Select id="type" {...register("type")}>
                   {interactionTypes.map((t) => (
-                    <option key={t.value} value={t.value}>{t.label}</option>
+                    <option key={t.value} value={t.value}>
+                      {t.label}
+                    </option>
                   ))}
                 </Select>
               </FormField>
               <FormField label="Outcome" error={errors.outcome} htmlFor="outcome">
-                <Input id="outcome" placeholder="e.g. interested, follow-up" {...register("outcome")} />
+                <Input
+                  id="outcome"
+                  placeholder="e.g. interested, follow-up"
+                  {...register("outcome")}
+                />
               </FormField>
             </div>
             <FormField label="Notes" error={errors.notes} htmlFor="notes">
-              <Textarea id="notes" rows={3} placeholder="Describe the interaction..." {...register("notes")} />
+              <Textarea
+                id="notes"
+                rows={3}
+                placeholder="Describe the interaction..."
+                {...register("notes")}
+              />
             </FormField>
             <Button type="submit" disabled={isSubmitting || !selectedLeadId}>
               {isSubmitting ? "Saving..." : "Save Interaction"}
@@ -131,22 +144,32 @@ export default function InteractionsPage() {
         </div>
       ) : interactions.length === 0 ? (
         <div className="py-12">
-          <EmptyState title="No interactions logged" message="Start logging interactions with your leads." />
+          <EmptyState
+            title="No interactions logged"
+            message="Start logging interactions with your leads."
+          />
         </div>
       ) : (
         <div className="space-y-3">
           {interactions.map((interaction) => {
             const Icon = typeIcons[interaction.type] || MoreHorizontal;
             return (
-              <div key={interaction._id} className="rounded-card border border-border bg-surface p-4 shadow-sm">
+              <div
+                key={interaction._id}
+                className="rounded-card border border-border bg-surface p-4 shadow-sm"
+              >
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand/5">
                     <Icon className="h-5 w-5 text-brand" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
-                      <p className="font-medium">{leadNames.get(interaction.leadId) || interaction.leadId?.slice(-6)}</p>
-                      <span className="text-xs text-muted">{new Date(interaction.createdAt).toLocaleDateString()}</span>
+                      <p className="font-medium">
+                        {leadNames.get(interaction.leadId) || interaction.leadId?.slice(-6)}
+                      </p>
+                      <span className="text-xs text-muted">
+                        {new Date(interaction.createdAt).toLocaleDateString()}
+                      </span>
                     </div>
                     <div className="mt-1 flex items-center gap-2">
                       <span className="rounded-full bg-brand/5 px-2 py-0.5 text-xs capitalize text-brand">
@@ -156,7 +179,9 @@ export default function InteractionsPage() {
                         <span className="text-xs text-muted capitalize">{interaction.outcome}</span>
                       )}
                     </div>
-                    {interaction.notes && <p className="mt-2 text-sm text-muted">{interaction.notes}</p>}
+                    {interaction.notes && (
+                      <p className="mt-2 text-sm text-muted">{interaction.notes}</p>
+                    )}
                   </div>
                 </div>
               </div>
