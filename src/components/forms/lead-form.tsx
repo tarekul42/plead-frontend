@@ -12,7 +12,11 @@ import { Button } from "@/components/ui/button";
 const leadFormSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email"),
-  phone: z.string().regex(/^\+?[\d\s\-().]{7,20}$/, "Invalid phone number").optional().or(z.literal("")),
+  phone: z
+    .string()
+    .regex(/^\+?[\d\s\-().]{7,20}$/, "Invalid phone number")
+    .optional()
+    .or(z.literal("")),
   budget: z.coerce.number().min(0, "Budget must be positive").optional(),
   preferredLocation: z.string().optional(),
   notes: z.string().optional(),
@@ -70,18 +74,29 @@ export function LeadForm({ onSubmit, initialData }: LeadFormProps) {
           <Input id="budget" type="number" {...register("budget")} />
         </FormField>
 
-        <FormField label="Preferred Location" error={errors.preferredLocation} htmlFor="preferredLocation">
+        <FormField
+          label="Preferred Location"
+          error={errors.preferredLocation}
+          htmlFor="preferredLocation"
+        >
           <Input id="preferredLocation" {...register("preferredLocation")} />
         </FormField>
 
-        <FormField label="Assigned Agent" error={errors.assignedAgentId} htmlFor="assignedAgent" required>
+        <FormField
+          label="Assigned Agent"
+          error={errors.assignedAgentId}
+          htmlFor="assignedAgent"
+          required
+        >
           <Input id="assignedAgent" {...register("assignedAgentId")} />
         </FormField>
 
         <FormField label="Status" error={errors.status} htmlFor="status">
           <Select id="status" {...register("status")}>
             {STATUS_OPTIONS.map((s) => (
-              <option key={s} value={s}>{s}</option>
+              <option key={s} value={s}>
+                {s}
+              </option>
             ))}
           </Select>
         </FormField>
@@ -89,7 +104,9 @@ export function LeadForm({ onSubmit, initialData }: LeadFormProps) {
         <FormField label="Source" error={errors.source} htmlFor="source">
           <Select id="source" {...register("source")}>
             {SOURCE_OPTIONS.map((s) => (
-              <option key={s} value={s}>{s}</option>
+              <option key={s} value={s}>
+                {s}
+              </option>
             ))}
           </Select>
         </FormField>

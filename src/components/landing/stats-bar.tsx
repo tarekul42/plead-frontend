@@ -8,10 +8,25 @@ const stats = [
   { label: "Properties Listed", value: 1247, suffix: "+", icon: Building2, color: "brand" },
   { label: "Leads Tracked", value: 5832, suffix: "+", icon: Users, color: "success" },
   { label: "AI Matches Made", value: 28491, suffix: "+", icon: Sparkles, color: "warning" },
-  { label: "Avg Deal Time", value: 52, prefix: "", suffix: "%", icon: TrendingDown, color: "danger" },
+  {
+    label: "Avg Deal Time",
+    value: 52,
+    prefix: "",
+    suffix: "%",
+    icon: TrendingDown,
+    color: "danger",
+  },
 ];
 
-function AnimatedCounter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
+function AnimatedCounter({
+  to,
+  prefix = "",
+  suffix = "",
+}: {
+  to: number;
+  prefix?: string;
+  suffix?: string;
+}) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
@@ -47,7 +62,9 @@ function AnimatedCounter({ to, prefix = "", suffix = "" }: { to: number; prefix?
 
   return (
     <span ref={ref} className="text-3xl font-bold tracking-tight md:text-4xl">
-      {prefix}{count.toLocaleString()}{suffix}
+      {prefix}
+      {count.toLocaleString()}
+      {suffix}
     </span>
   );
 }

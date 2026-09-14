@@ -13,9 +13,7 @@ export function FinalCta() {
         viewport={{ once: true }}
         className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8"
       >
-        <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-          Ready to close your next deal?
-        </h2>
+        <h2 className="mb-4 text-3xl font-bold md:text-4xl">Ready to close your next deal?</h2>
         <p className="mb-8 text-lg text-muted">
           Join thousands of agents who are closing deals faster with AI-powered lead matching.
         </p>

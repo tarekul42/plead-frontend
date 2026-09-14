@@ -7,19 +7,22 @@ const testimonials = [
   {
     name: "Sarah Mitchell",
     role: "Real Estate Agent, Sterling Realty",
-    quote: "PropLead cut my lead-to-close time in half. The AI match engine is like having a second agent working for me 24/7.",
+    quote:
+      "PropLead cut my lead-to-close time in half. The AI match engine is like having a second agent working for me 24/7.",
     avatar: "SM",
   },
   {
     name: "James Chen",
     role: "Broker, Pacific Homes",
-    quote: "The AI copy generator alone saves me hours every week. Property descriptions that used to take 20 minutes now take 20 seconds.",
+    quote:
+      "The AI copy generator alone saves me hours every week. Property descriptions that used to take 20 minutes now take 20 seconds.",
     avatar: "JC",
   },
   {
     name: "Maria Rodriguez",
     role: "Agency Owner, Rodriguez Group",
-    quote: "We've grown our closed deals by 40% since switching to PropLead. The multi-agent dashboard gives me full visibility into my team.",
+    quote:
+      "We've grown our closed deals by 40% since switching to PropLead. The multi-agent dashboard gives me full visibility into my team.",
     avatar: "MR",
   },
 ];

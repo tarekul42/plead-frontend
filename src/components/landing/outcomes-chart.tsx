@@ -23,9 +23,7 @@ export function OutcomesChart() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="mb-4 text-2xl font-bold md:text-3xl">
-              Measurable Results
-            </h2>
+            <h2 className="mb-4 text-2xl font-bold md:text-3xl">Measurable Results</h2>
             <p className="mb-6 text-muted">
               Agencies using PropLead see a dramatic reduction in lead-to-close time.
             </p>
@@ -55,7 +53,12 @@ export function OutcomesChart() {
           >
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data} barGap={4}>
-                <XAxis dataKey="month" tick={{ fontSize: 12 }} stroke="currentColor" opacity={0.4} />
+                <XAxis
+                  dataKey="month"
+                  tick={{ fontSize: 12 }}
+                  stroke="currentColor"
+                  opacity={0.4}
+                />
                 <YAxis tick={{ fontSize: 12 }} stroke="currentColor" opacity={0.4} />
                 <Tooltip
                   contentStyle={{
@@ -64,8 +67,18 @@ export function OutcomesChart() {
                     borderRadius: "8px",
                   }}
                 />
-                <Bar dataKey="before" fill="var(--color-danger)" radius={[4, 4, 0, 0]} name="Before" />
-                <Bar dataKey="after" fill="var(--color-success)" radius={[4, 4, 0, 0]} name="After (PropLead)" />
+                <Bar
+                  dataKey="before"
+                  fill="var(--color-danger)"
+                  radius={[4, 4, 0, 0]}
+                  name="Before"
+                />
+                <Bar
+                  dataKey="after"
+                  fill="var(--color-success)"
+                  radius={[4, 4, 0, 0]}
+                  name="After (PropLead)"
+                />
               </BarChart>
             </ResponsiveContainer>
           </motion.div>

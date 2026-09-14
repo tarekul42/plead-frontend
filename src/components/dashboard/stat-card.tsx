@@ -33,9 +33,7 @@ export function StatCard({
         <div className="flex-1">
           <p className="text-sm text-muted">{title}</p>
           <p className="mt-1 text-2xl font-bold tracking-tight">{value}</p>
-          {description && (
-            <p className="mt-1 text-xs text-muted">{description}</p>
-          )}
+          {description && <p className="mt-1 text-xs text-muted">{description}</p>}
           {trend && (
             <p
               className={cn(
@@ -48,7 +46,12 @@ export function StatCard({
             </p>
           )}
         </div>
-        <div className={cn("flex h-11 w-11 items-center justify-center rounded-xl", colorMap[color].bg)}>
+        <div
+          className={cn(
+            "flex h-11 w-11 items-center justify-center rounded-xl",
+            colorMap[color].bg,
+          )}
+        >
           <Icon className={cn("h-5 w-5", colorMap[color].icon)} />
         </div>
       </div>

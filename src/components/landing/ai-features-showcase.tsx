@@ -7,13 +7,15 @@ const features = [
   {
     icon: Sparkles,
     title: "AI Lead-Property Matching",
-    description: "Automatically score and rank every lead against your property inventory. Get match scores (0-100), detailed reasons, and suggested next actions.",
+    description:
+      "Automatically score and rank every lead against your property inventory. Get match scores (0-100), detailed reasons, and suggested next actions.",
     highlights: ["Real-time scoring", "Natural language reasons", "Rule-based fallback"],
   },
   {
     icon: FileText,
     title: "AI Marketing Copy Generator",
-    description: "Generate compelling property descriptions and personalized lead outreach emails in seconds. Choose from multiple tones and styles.",
+    description:
+      "Generate compelling property descriptions and personalized lead outreach emails in seconds. Choose from multiple tones and styles.",
     highlights: ["Property descriptions", "Outreach emails", "Multiple tones"],
   },
 ];

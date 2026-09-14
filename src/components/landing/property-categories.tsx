@@ -2,7 +2,15 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Home, Building2, Building, Warehouse, TreePine, Store, type LucideIcon } from "lucide-react";
+import {
+  Home,
+  Building2,
+  Building,
+  Warehouse,
+  TreePine,
+  Store,
+  type LucideIcon,
+} from "lucide-react";
 
 const categories: { label: string; icon: LucideIcon; slug: string; count: string }[] = [
   { label: "Houses", icon: Home, slug: "house", count: "240+" },
