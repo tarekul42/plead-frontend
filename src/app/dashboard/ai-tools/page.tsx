@@ -4,7 +4,11 @@ import { useState } from "react";
 import { Sparkles, FileText, Mail, Loader2, Check } from "lucide-react";
 import { useLeads } from "@/lib/queries/use-leads";
 import { useProperties } from "@/lib/queries/use-properties";
-import { useMatchLeadProperties, useGeneratePropertyDescription, useGenerateOutreachEmail } from "@/lib/queries/use-ai-tools";
+import {
+  useMatchLeadProperties,
+  useGeneratePropertyDescription,
+  useGenerateOutreachEmail,
+} from "@/lib/queries/use-ai-tools";
 import type { AiMatchResult } from "@/types";
 
 type ToolType = "match" | "description" | "email";
@@ -34,9 +38,24 @@ export default function AiToolsPage() {
   const emailResult = emailMutation.data;
 
   const tools = [
-    { id: "match" as ToolType, icon: Sparkles, title: "Lead-Property Match", desc: "Score a lead against your property inventory" },
-    { id: "description" as ToolType, icon: FileText, title: "Property Description", desc: "Generate AI marketing copy for listings" },
-    { id: "email" as ToolType, icon: Mail, title: "Outreach Email", desc: "Generate personalized lead outreach emails" },
+    {
+      id: "match" as ToolType,
+      icon: Sparkles,
+      title: "Lead-Property Match",
+      desc: "Score a lead against your property inventory",
+    },
+    {
+      id: "description" as ToolType,
+      icon: FileText,
+      title: "Property Description",
+      desc: "Generate AI marketing copy for listings",
+    },
+    {
+      id: "email" as ToolType,
+      icon: Mail,
+      title: "Outreach Email",
+      desc: "Generate personalized lead outreach emails",
+    },
   ];
 
   return (
@@ -47,7 +66,9 @@ export default function AiToolsPage() {
         {tools.map((tool) => (
           <button
             key={tool.id}
-            onClick={() => { setActiveTool(tool.id); }}
+            onClick={() => {
+              setActiveTool(tool.id);
+            }}
             className={`flex flex-1 items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm transition ${
               activeTool === tool.id
                 ? "bg-brand text-white shadow-sm"
@@ -64,7 +85,9 @@ export default function AiToolsPage() {
         {activeTool === "match" && (
           <div>
             <h2 className="mb-2 text-xl font-semibold">Lead-Property Match Engine</h2>
-            <p className="mb-6 text-sm text-muted">Select a lead and optionally filter properties to find the best matches.</p>
+            <p className="mb-6 text-sm text-muted">
+              Select a lead and optionally filter properties to find the best matches.
+            </p>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="mb-1.5 block text-sm font-medium">Lead</label>
@@ -75,7 +98,9 @@ export default function AiToolsPage() {
                 >
                   <option value="">Select a lead...</option>
                   {leads.map((lead) => (
-                    <option key={lead._id} value={lead._id}>{lead.name}</option>
+                    <option key={lead._id} value={lead._id}>
+                      {lead.name}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -85,7 +110,11 @@ export default function AiToolsPage() {
               disabled={matchMutation.isPending || !matchLeadId}
               className="mt-6 flex items-center gap-2 rounded-lg bg-success px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
             >
-              {matchMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+              {matchMutation.isPending ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Sparkles className="h-4 w-4" />
+              )}
               {matchMutation.isPending ? "Analyzing..." : matchResult ? "Match Again" : "Run Match"}
             </button>
             {matchMutation.isError && (
@@ -93,7 +122,9 @@ export default function AiToolsPage() {
             )}
             {matchResult && (
               <div className="mt-6 space-y-3">
-                <h3 className="font-semibold text-success flex items-center gap-2"><Check className="h-4 w-4" /> Match Results</h3>
+                <h3 className="font-semibold text-success flex items-center gap-2">
+                  <Check className="h-4 w-4" /> Match Results
+                </h3>
                 {matchResult.matches.length === 0 ? (
                   <p className="text-sm text-muted">No matches found.</p>
                 ) : (
@@ -108,7 +139,9 @@ export default function AiToolsPage() {
                       <p className="mt-1 text-xs text-muted">{m.propertyLocation}</p>
                       <ul className="mt-2 space-y-1">
                         {m.reasons.map((r, j) => (
-                          <li key={j} className="text-xs text-muted">• {r}</li>
+                          <li key={j} className="text-xs text-muted">
+                            • {r}
+                          </li>
                         ))}
                       </ul>
                     </div>
@@ -122,7 +155,9 @@ export default function AiToolsPage() {
         {activeTool === "description" && (
           <div>
             <h2 className="mb-2 text-xl font-semibold">Property Description Generator</h2>
-            <p className="mb-6 text-sm text-muted">Generate compelling marketing descriptions for your property listings.</p>
+            <p className="mb-6 text-sm text-muted">
+              Generate compelling marketing descriptions for your property listings.
+            </p>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="mb-1.5 block text-sm font-medium">Property</label>
@@ -133,7 +168,9 @@ export default function AiToolsPage() {
                 >
                   <option value="">Select a property...</option>
                   {properties.map((p) => (
-                    <option key={p._id} value={p._id}>{p.title}</option>
+                    <option key={p._id} value={p._id}>
+                      {p.title}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -151,19 +188,32 @@ export default function AiToolsPage() {
               </div>
             </div>
             <button
-              onClick={() => descPropertyId && descriptionMutation.mutate({ propertyId: descPropertyId, tone: descTone })}
+              onClick={() =>
+                descPropertyId &&
+                descriptionMutation.mutate({ propertyId: descPropertyId, tone: descTone })
+              }
               disabled={descriptionMutation.isPending || !descPropertyId}
               className="mt-6 flex items-center gap-2 rounded-lg bg-success px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
             >
-              {descriptionMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-              {descriptionMutation.isPending ? "Generating..." : descResult ? "Generate Again" : "Generate Description"}
+              {descriptionMutation.isPending ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Sparkles className="h-4 w-4" />
+              )}
+              {descriptionMutation.isPending
+                ? "Generating..."
+                : descResult
+                  ? "Generate Again"
+                  : "Generate Description"}
             </button>
             {descriptionMutation.isError && (
               <p className="mt-4 text-sm text-danger">{descriptionMutation.error?.message}</p>
             )}
             {descResult && (
               <div className="mt-6 space-y-3">
-                <h3 className="font-semibold text-success flex items-center gap-2"><Check className="h-4 w-4" /> Generated Description</h3>
+                <h3 className="font-semibold text-success flex items-center gap-2">
+                  <Check className="h-4 w-4" /> Generated Description
+                </h3>
                 <div className="rounded-lg border border-border bg-background/50 p-4">
                   <p className="font-medium">{descResult.title}</p>
                   <p className="mt-2 text-sm text-muted">{descResult.description}</p>
@@ -172,7 +222,9 @@ export default function AiToolsPage() {
                       <p className="text-xs font-medium text-muted mb-1">Highlights:</p>
                       <ul className="space-y-1">
                         {descResult.highlights.map((h: string, i: number) => (
-                          <li key={i} className="text-xs text-muted">• {h}</li>
+                          <li key={i} className="text-xs text-muted">
+                            • {h}
+                          </li>
                         ))}
                       </ul>
                     </div>
@@ -190,7 +242,9 @@ export default function AiToolsPage() {
         {activeTool === "email" && (
           <div>
             <h2 className="mb-2 text-xl font-semibold">Outreach Email Generator</h2>
-            <p className="mb-6 text-sm text-muted">Generate personalized outreach emails for your leads.</p>
+            <p className="mb-6 text-sm text-muted">
+              Generate personalized outreach emails for your leads.
+            </p>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="mb-1.5 block text-sm font-medium">Lead</label>
@@ -201,7 +255,9 @@ export default function AiToolsPage() {
                 >
                   <option value="">Select a lead...</option>
                   {leads.map((lead) => (
-                    <option key={lead._id} value={lead._id}>{lead.name}</option>
+                    <option key={lead._id} value={lead._id}>
+                      {lead.name}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -214,7 +270,9 @@ export default function AiToolsPage() {
                 >
                   <option value="">Select a property...</option>
                   {properties.map((p) => (
-                    <option key={p._id} value={p._id}>{p.title}</option>
+                    <option key={p._id} value={p._id}>
+                      {p.title}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -232,22 +290,42 @@ export default function AiToolsPage() {
               </div>
             </div>
             <button
-              onClick={() => emailLeadId && emailPropertyId && emailMutation.mutate({ leadId: emailLeadId, propertyId: emailPropertyId, tone: emailTone })}
+              onClick={() =>
+                emailLeadId &&
+                emailPropertyId &&
+                emailMutation.mutate({
+                  leadId: emailLeadId,
+                  propertyId: emailPropertyId,
+                  tone: emailTone,
+                })
+              }
               disabled={emailMutation.isPending || !emailLeadId || !emailPropertyId}
               className="mt-6 flex items-center gap-2 rounded-lg bg-success px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
             >
-              {emailMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-              {emailMutation.isPending ? "Generating..." : emailResult ? "Generate Again" : "Generate Email"}
+              {emailMutation.isPending ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Sparkles className="h-4 w-4" />
+              )}
+              {emailMutation.isPending
+                ? "Generating..."
+                : emailResult
+                  ? "Generate Again"
+                  : "Generate Email"}
             </button>
             {emailMutation.isError && (
               <p className="mt-4 text-sm text-danger">{emailMutation.error?.message}</p>
             )}
             {emailResult && (
               <div className="mt-6 space-y-3">
-                <h3 className="font-semibold text-success flex items-center gap-2"><Check className="h-4 w-4" /> Generated Email</h3>
+                <h3 className="font-semibold text-success flex items-center gap-2">
+                  <Check className="h-4 w-4" /> Generated Email
+                </h3>
                 <div className="rounded-lg border border-border bg-background/50 p-4">
                   <p className="text-sm font-medium">Subject: {emailResult.subject}</p>
-                  <div className="mt-2 whitespace-pre-wrap text-sm text-muted">{emailResult.body}</div>
+                  <div className="mt-2 whitespace-pre-wrap text-sm text-muted">
+                    {emailResult.body}
+                  </div>
                   <p className="mt-3 text-xs text-muted">
                     Provided by {emailResult.provider} | {emailResult.tokensUsed} tokens
                     {emailResult.cached ? " (cached)" : ""}

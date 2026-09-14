@@ -22,11 +22,51 @@ const typeData = [
 ];
 
 const recentGenerations = [
-  { id: "1", type: "Lead Match", user: "Sarah M.", status: "success", duration: "1.2s", tokens: 245, date: "2 min ago" },
-  { id: "2", type: "Description", user: "James C.", status: "success", duration: "2.1s", tokens: 512, date: "15 min ago" },
-  { id: "3", type: "Outreach Email", user: "Emily R.", status: "success", duration: "1.8s", tokens: 389, date: "1 hour ago" },
-  { id: "4", type: "Lead Match", user: "Sarah M.", status: "success", duration: "0.9s", tokens: 198, date: "2 hours ago" },
-  { id: "5", type: "Description", user: "Michael P.", status: "error", duration: "3.4s", tokens: 0, date: "3 hours ago" },
+  {
+    id: "1",
+    type: "Lead Match",
+    user: "Sarah M.",
+    status: "success",
+    duration: "1.2s",
+    tokens: 245,
+    date: "2 min ago",
+  },
+  {
+    id: "2",
+    type: "Description",
+    user: "James C.",
+    status: "success",
+    duration: "2.1s",
+    tokens: 512,
+    date: "15 min ago",
+  },
+  {
+    id: "3",
+    type: "Outreach Email",
+    user: "Emily R.",
+    status: "success",
+    duration: "1.8s",
+    tokens: 389,
+    date: "1 hour ago",
+  },
+  {
+    id: "4",
+    type: "Lead Match",
+    user: "Sarah M.",
+    status: "success",
+    duration: "0.9s",
+    tokens: 198,
+    date: "2 hours ago",
+  },
+  {
+    id: "5",
+    type: "Description",
+    user: "Michael P.",
+    status: "error",
+    duration: "3.4s",
+    tokens: 0,
+    date: "3 hours ago",
+  },
 ];
 
 export default function AiUsagePage() {
@@ -40,8 +80,19 @@ export default function AiUsagePage() {
       <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard title="Total Generations" value="135" icon={Sparkles} description="This week" />
         <StatCard title="Avg Response" value="1.8s" icon={Zap} description="Across all providers" />
-        <StatCard title="Tokens Used" value="1,892" icon={Clock} description="This week" trend={{ value: "12% vs last week", positive: true }} />
-        <StatCard title="Success Rate" value="98.5%" icon={CheckCircle} description="200 total requests" />
+        <StatCard
+          title="Tokens Used"
+          value="1,892"
+          icon={Clock}
+          description="This week"
+          trend={{ value: "12% vs last week", positive: true }}
+        />
+        <StatCard
+          title="Success Rate"
+          value="98.5%"
+          icon={CheckCircle}
+          description="200 total requests"
+        />
       </div>
 
       <div className="mb-6 grid gap-6 lg:grid-cols-2">
@@ -75,13 +126,20 @@ export default function AiUsagePage() {
             </thead>
             <tbody>
               {recentGenerations.map((g) => (
-                <tr key={g.id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50">
+                <tr
+                  key={g.id}
+                  className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50"
+                >
                   <td className="p-4">{g.type}</td>
                   <td className="p-4 text-muted">{g.user}</td>
                   <td className="p-4">
-                    <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                      g.status === "success" ? "bg-success/10 text-success" : "bg-danger/10 text-danger"
-                    }`}>
+                    <span
+                      className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                        g.status === "success"
+                          ? "bg-success/10 text-success"
+                          : "bg-danger/10 text-danger"
+                      }`}
+                    >
                       {g.status}
                     </span>
                   </td>
