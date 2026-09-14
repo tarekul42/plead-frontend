@@ -1,6 +1,5 @@
+import type { ApiResponse, LeadListParams, PropertyListParams } from "@/types";
 import axios, { type AxiosInstance, type AxiosResponse } from "axios";
-import type { ApiResponse } from "@/types";
-import type { PropertyListParams, LeadListParams } from "@/types";
 
 class ApiError extends Error {
   constructor(
@@ -157,52 +156,37 @@ function extractPaginatedData<T>(response: AxiosResponse<ApiResponse<T[]>>) {
 export const propertiesApi = {
   list: (params?: PropertyListParams) =>
     apiClient.get("/properties", { params }).then(extractPaginatedData),
-  get: (slug: string) =>
-    apiClient.get(`/properties/${slug}`).then(extractData),
-  create: (data: unknown) =>
-    apiClient.post("/properties", data).then(extractData),
+  get: (slug: string) => apiClient.get(`/properties/${slug}`).then(extractData),
+  create: (data: unknown) => apiClient.post("/properties", data).then(extractData),
   update: (id: string, data: unknown) =>
     apiClient.patch(`/properties/${id}`, data).then(extractData),
-  delete: (id: string) =>
-    apiClient.delete(`/properties/${id}`).then(extractData),
+  delete: (id: string) => apiClient.delete(`/properties/${id}`).then(extractData),
 };
 
 export const leadsApi = {
-  list: (params?: LeadListParams) =>
-    apiClient.get("/leads", { params }).then(extractPaginatedData),
-  get: (id: string) =>
-    apiClient.get(`/leads/${id}`).then(extractData),
-  create: (data: unknown) =>
-    apiClient.post("/leads", data).then(extractData),
-  update: (id: string, data: unknown) =>
-    apiClient.patch(`/leads/${id}`, data).then(extractData),
-  delete: (id: string) =>
-    apiClient.delete(`/leads/${id}`).then(extractData),
+  list: (params?: LeadListParams) => apiClient.get("/leads", { params }).then(extractPaginatedData),
+  get: (id: string) => apiClient.get(`/leads/${id}`).then(extractData),
+  create: (data: unknown) => apiClient.post("/leads", data).then(extractData),
+  update: (id: string, data: unknown) => apiClient.patch(`/leads/${id}`, data).then(extractData),
+  delete: (id: string) => apiClient.delete(`/leads/${id}`).then(extractData),
 };
 
 export const usersApi = {
-  list: () =>
-    apiClient.get("/users").then(extractPaginatedData),
-  me: () =>
-    apiClient.get("/users/me").then(extractData),
+  list: () => apiClient.get("/users").then(extractPaginatedData),
+  me: () => apiClient.get("/users/me").then(extractData),
 };
 
 export const reviewsApi = {
   list: (params?: Record<string, unknown>) =>
     apiClient.get("/reviews", { params }).then(extractPaginatedData),
-  create: (data: unknown) =>
-    apiClient.post("/reviews", data).then(extractData),
-  update: (id: string, data: unknown) =>
-    apiClient.patch(`/reviews/${id}`, data).then(extractData),
-  delete: (id: string) =>
-    apiClient.delete(`/reviews/${id}`).then(extractData),
+  create: (data: unknown) => apiClient.post("/reviews", data).then(extractData),
+  update: (id: string, data: unknown) => apiClient.patch(`/reviews/${id}`, data).then(extractData),
+  delete: (id: string) => apiClient.delete(`/reviews/${id}`).then(extractData),
 };
 
 export const interactionsApi = {
-  list: () =>
-    apiClient.get("/interactions").then(extractPaginatedData),
-  listByLead: (leadId: string) =>
-    apiClient.get(`/leads/${leadId}/interactions`).then(extractData),
+  list: () => apiClient.get("/interactions").then(extractPaginatedData),
+  listByLead: (leadId: string) => apiClient.get(`/leads/${leadId}/interactions`).then(extractData),
   create: (leadId: string, data: unknown) =>
     apiClient.post(`/leads/${leadId}/interactions`, data).then(extractData),
 };
@@ -210,14 +194,10 @@ export const interactionsApi = {
 export const blogsApi = {
   list: (params?: Record<string, unknown>) =>
     apiClient.get("/blog", { params }).then(extractPaginatedData),
-  get: (slug: string) =>
-    apiClient.get(`/blog/${slug}`).then(extractData),
-  create: (data: unknown) =>
-    apiClient.post("/blog", data).then(extractData),
-  update: (id: string, data: unknown) =>
-    apiClient.patch(`/blog/${id}`, data).then(extractData),
-  delete: (id: string) =>
-    apiClient.delete(`/blog/${id}`).then(extractData),
+  get: (slug: string) => apiClient.get(`/blog/${slug}`).then(extractData),
+  create: (data: unknown) => apiClient.post("/blog", data).then(extractData),
+  update: (id: string, data: unknown) => apiClient.patch(`/blog/${id}`, data).then(extractData),
+  delete: (id: string) => apiClient.delete(`/blog/${id}`).then(extractData),
 };
 
 export const adminApi = {

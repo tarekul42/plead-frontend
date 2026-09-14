@@ -9,12 +9,7 @@ export const PROPERTY_TYPES = [
 
 export type PropertyType = (typeof PROPERTY_TYPES)[number];
 
-export const PROPERTY_STATUSES = [
-  "available",
-  "pending",
-  "sold",
-  "rented",
-] as const;
+export const PROPERTY_STATUSES = ["available", "pending", "sold", "rented"] as const;
 
 export type PropertyStatus = (typeof PROPERTY_STATUSES)[number];
 
@@ -29,14 +24,7 @@ export const LEAD_STATUSES = [
 
 export type LeadStatus = (typeof LEAD_STATUSES)[number];
 
-export const INTERACTION_TYPES = [
-  "call",
-  "email",
-  "meeting",
-  "note",
-  "tour",
-  "other",
-] as const;
+export const INTERACTION_TYPES = ["call", "email", "meeting", "note", "tour", "other"] as const;
 
 export type InteractionType = (typeof INTERACTION_TYPES)[number];
 
