@@ -22,9 +22,7 @@ export default function ContactPage() {
             <MessageSquare className="h-7 w-7 text-brand" />
           </div>
           <h1 className="mb-3 text-3xl font-bold md:text-4xl">Get in Touch</h1>
-          <p className="text-muted">
-            Have a question or feedback? We would love to hear from you.
-          </p>
+          <p className="text-muted">Have a question or feedback? We would love to hear from you.</p>
         </div>
 
         {submitted ? (

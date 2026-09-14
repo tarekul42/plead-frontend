@@ -4,7 +4,8 @@ import { Calendar } from "lucide-react";
 const posts = [
   {
     title: "How AI is Transforming Real Estate Lead Management",
-    excerpt: "Artificial intelligence is revolutionizing how agents qualify and convert leads. Learn how AI-powered lead scoring can 10x your conversion rate.",
+    excerpt:
+      "Artificial intelligence is revolutionizing how agents qualify and convert leads. Learn how AI-powered lead scoring can 10x your conversion rate.",
     date: "Jun 15, 2026",
     slug: "ai-real-estate-lead-management",
     tags: ["AI", "Leads", "Technology"],
@@ -12,7 +13,8 @@ const posts = [
   },
   {
     title: "5 Tips for Closing More Deals in 2026",
-    excerpt: "Proven strategies from top-performing agents across the country. Implement these techniques to boost your close rate this year.",
+    excerpt:
+      "Proven strategies from top-performing agents across the country. Implement these techniques to boost your close rate this year.",
     date: "Jun 8, 2026",
     slug: "closing-more-deals-2026",
     tags: ["Tips", "Sales", "Strategy"],
@@ -20,7 +22,8 @@ const posts = [
   },
   {
     title: "The Ultimate Guide to Property Marketing",
-    excerpt: "From listing photos to AI-generated descriptions, master every aspect of property marketing with this comprehensive guide.",
+    excerpt:
+      "From listing photos to AI-generated descriptions, master every aspect of property marketing with this comprehensive guide.",
     date: "May 25, 2026",
     slug: "property-marketing-guide",
     tags: ["Marketing", "Guide"],
@@ -28,7 +31,8 @@ const posts = [
   },
   {
     title: "Multi-Tenant SaaS: Why Data Isolation Matters",
-    excerpt: "Understanding how multi-tenant architecture protects your agency's data and why it matters for your business.",
+    excerpt:
+      "Understanding how multi-tenant architecture protects your agency's data and why it matters for your business.",
     date: "May 18, 2026",
     slug: "multi-tenant-saas-data-isolation",
     tags: ["SaaS", "Security", "Architecture"],
@@ -36,7 +40,8 @@ const posts = [
   },
   {
     title: "AI vs Traditional Lead Scoring: A Comparison",
-    excerpt: "We compare traditional rule-based lead scoring with modern AI-powered approaches. See which one delivers better results.",
+    excerpt:
+      "We compare traditional rule-based lead scoring with modern AI-powered approaches. See which one delivers better results.",
     date: "May 10, 2026",
     slug: "ai-vs-traditional-lead-scoring",
     tags: ["AI", "Leads", "Comparison"],
@@ -44,7 +49,8 @@ const posts = [
   },
   {
     title: "Getting Started with PropLead: A Step-by-Step Guide",
-    excerpt: "New to PropLead? Follow this guide to set up your account, add your first properties, and start matching leads.",
+    excerpt:
+      "New to PropLead? Follow this guide to set up your account, add your first properties, and start matching leads.",
     date: "May 1, 2026",
     slug: "getting-started-proplead-guide",
     tags: ["Guide", "Getting Started"],

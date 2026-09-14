@@ -61,9 +61,13 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
   return (
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <nav className="mb-8 flex items-center gap-2 text-sm text-muted">
-        <Link href="/" className="hover:text-foreground">Home</Link>
+        <Link href="/" className="hover:text-foreground">
+          Home
+        </Link>
         <ChevronRight className="h-3 w-3" />
-        <Link href="/blog" className="hover:text-foreground">Blog</Link>
+        <Link href="/blog" className="hover:text-foreground">
+          Blog
+        </Link>
         <ChevronRight className="h-3 w-3" />
         <span className="text-foreground">{post.title}</span>
       </nav>
@@ -83,10 +87,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
 
       <div className="mt-8 flex flex-wrap gap-2">
         {post.tags.map((tag) => (
-          <span
-            key={tag}
-            className="rounded-full bg-brand/5 px-3 py-1 text-sm text-brand"
-          >
+          <span key={tag} className="rounded-full bg-brand/5 px-3 py-1 text-sm text-brand">
             {tag}
           </span>
         ))}

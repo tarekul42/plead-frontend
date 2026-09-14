@@ -6,12 +6,30 @@ import { ChevronDown, Search } from "lucide-react";
 import Link from "next/link";
 
 const helpTopics = [
-  { q: "How do I get started?", a: "Sign up for a free account, set up your agency profile, and start adding properties. It takes about 5 minutes to get started." },
-  { q: "How do I add a property?", a: "Navigate to Dashboard → Properties → Add Property. Fill in the details, upload images, and click Save. You can also use the AI Description Generator to create compelling copy." },
-  { q: "How does AI lead matching work?", a: "Open any lead and click 'Match Properties'. The AI scores your property inventory against the lead's criteria (budget, location, beds) and returns ranked results with reasons." },
-  { q: "Can I import leads?", a: "You can manually add leads from the dashboard. Bulk import is coming soon. For now, you can use the Lead form to enter lead details one at a time." },
-  { q: "How do I manage my team?", a: "Admins can invite team members and assign roles (Agent, Manager). Managers can view all activity and reassign leads. Go to Dashboard → Users to manage." },
-  { q: "Is there a mobile app?", a: "PropLead is fully responsive and works great on mobile browsers. A native mobile app is on the roadmap." },
+  {
+    q: "How do I get started?",
+    a: "Sign up for a free account, set up your agency profile, and start adding properties. It takes about 5 minutes to get started.",
+  },
+  {
+    q: "How do I add a property?",
+    a: "Navigate to Dashboard → Properties → Add Property. Fill in the details, upload images, and click Save. You can also use the AI Description Generator to create compelling copy.",
+  },
+  {
+    q: "How does AI lead matching work?",
+    a: "Open any lead and click 'Match Properties'. The AI scores your property inventory against the lead's criteria (budget, location, beds) and returns ranked results with reasons.",
+  },
+  {
+    q: "Can I import leads?",
+    a: "You can manually add leads from the dashboard. Bulk import is coming soon. For now, you can use the Lead form to enter lead details one at a time.",
+  },
+  {
+    q: "How do I manage my team?",
+    a: "Admins can invite team members and assign roles (Agent, Manager). Managers can view all activity and reassign leads. Go to Dashboard → Users to manage.",
+  },
+  {
+    q: "Is there a mobile app?",
+    a: "PropLead is fully responsive and works great on mobile browsers. A native mobile app is on the roadmap.",
+  },
 ];
 
 export default function HelpPage() {
