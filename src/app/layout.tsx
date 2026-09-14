@@ -22,8 +22,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "PropLead AI",
-    description:
-      "AI-powered real estate lead engine. Match, convert, close.",
+    description: "AI-powered real estate lead engine. Match, convert, close.",
   },
   robots: {
     index: true,
@@ -31,20 +30,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider>
           <ClerkProviderWrapper>
             <QueryProvider>
-            {children}
-            <Toaster />
-          </QueryProvider>
+              {children}
+              <Toaster />
+            </QueryProvider>
           </ClerkProviderWrapper>
         </ThemeProvider>
       </body>

@@ -79,9 +79,18 @@ export default function DashboardPage() {
 }
 
 function AgentOverview() {
-  const { data: leadsData, isLoading: leadsLoading, isError: leadsError, refetch: refetchLeads } = useLeads({ limit: 100 });
+  const {
+    data: leadsData,
+    isLoading: leadsLoading,
+    isError: leadsError,
+    refetch: refetchLeads,
+  } = useLeads({ limit: 100 });
   const { data: interactionsData, isLoading: intLoading, isError: intError } = useInteractions();
-  const { data: statsData, isLoading: statsLoading, isError: statsError } = useQuery({
+  const {
+    data: statsData,
+    isLoading: statsLoading,
+    isError: statsError,
+  } = useQuery({
     queryKey: ["lead-stats"],
     queryFn: () => apiClient.get("/leads/stats").then((r) => r.data.data),
   });
@@ -89,11 +98,17 @@ function AgentOverview() {
   const leads = leadsData?.data || [];
   const interactions = interactionsData?.data || [];
   const statusCounts: Record<string, number> = {};
-  leads.forEach((l) => { statusCounts[l.status] = (statusCounts[l.status] || 0) + 1; });
+  leads.forEach((l) => {
+    statusCounts[l.status] = (statusCounts[l.status] || 0) + 1;
+  });
   const wonLeads = leads.filter((l) => l.status === "closed");
   const totalLeads = leads.length;
   const conversionRate = totalLeads > 0 ? ((wonLeads.length / totalLeads) * 100).toFixed(0) : "0";
-  const weeklyTrend = (statsData as LeadStatsResponse | undefined)?.weeklyTrend?.map((w) => ({ label: w.date ? w.date.slice(5) : w._id || "", value: w.count })) || [];
+  const weeklyTrend =
+    (statsData as LeadStatsResponse | undefined)?.weeklyTrend?.map((w) => ({
+      label: w.date ? w.date.slice(5) : w._id || "",
+      value: w.count,
+    })) || [];
   const dayIntData = getDayInteractions(interactions);
   const avgValue = avgLeadValue(leads);
 
@@ -145,7 +160,9 @@ function AgentOverview() {
         <div className="rounded-card border border-border bg-surface p-6 shadow-sm">
           <h3 className="mb-4 text-sm font-semibold">Leads Over Time (7 days)</h3>
           <div className="h-64">
-            <LineChart data={weeklyTrend.length > 0 ? weeklyTrend : [{ label: "No data", value: 0 }]} />
+            <LineChart
+              data={weeklyTrend.length > 0 ? weeklyTrend : [{ label: "No data", value: 0 }]}
+            />
           </div>
         </div>
 
@@ -177,7 +194,9 @@ function AgentOverview() {
         <div className="mb-4 flex items-center justify-between">
           <h3 className="text-sm font-semibold">Recent Leads</h3>
           <Link href="/dashboard/leads">
-            <Button variant="ghost" size="sm">View all</Button>
+            <Button variant="ghost" size="sm">
+              View all
+            </Button>
           </Link>
         </div>
         {leads.length > 0 ? (
@@ -193,7 +212,10 @@ function AgentOverview() {
               </thead>
               <tbody>
                 {leads.slice(0, 5).map((lead) => (
-                  <tr key={lead._id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50">
+                  <tr
+                    key={lead._id}
+                    className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50"
+                  >
                     <td className="p-4 font-medium">{lead.name}</td>
                     <td className="p-4">
                       <span className="rounded-full bg-brand/10 px-2.5 py-0.5 text-xs font-medium text-brand">
@@ -220,10 +242,22 @@ function AgentOverview() {
 }
 
 function ManagerOverview() {
-  const { data: leadsData, isLoading: leadsLoading, isError: leadsError } = useLeads({ limit: 100 });
-  const { data: propsData, isLoading: propsLoading, isError: propsError } = useProperties({ limit: 100 });
+  const {
+    data: leadsData,
+    isLoading: leadsLoading,
+    isError: leadsError,
+  } = useLeads({ limit: 100 });
+  const {
+    data: propsData,
+    isLoading: propsLoading,
+    isError: propsError,
+  } = useProperties({ limit: 100 });
   const { data: usersData, isLoading: usersLoading, isError: usersError } = useUsers();
-  const { data: statsData, isLoading: statsLoading, isError: statsError } = useQuery({
+  const {
+    data: statsData,
+    isLoading: statsLoading,
+    isError: statsError,
+  } = useQuery({
     queryKey: ["lead-stats-manager"],
     queryFn: () => apiClient.get("/leads/stats").then((r) => r.data.data),
   });
@@ -264,7 +298,12 @@ function ManagerOverview() {
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard title="Agency Leads" value={leads.length} icon={Users} description="All active leads" />
+        <StatCard
+          title="Agency Leads"
+          value={leads.length}
+          icon={Users}
+          description="All active leads"
+        />
         <StatCard title="Properties" value={properties.length} icon={Building2} />
         <StatCard title="Team Agents" value={agents.length} icon={Shield} />
         <StatCard
@@ -272,7 +311,10 @@ function ManagerOverview() {
           value={stats?.conversionRate ? `${stats.conversionRate}%` : "0%"}
           icon={TrendingUp}
           description="Lead-to-close"
-          trend={{ value: `${stats?.total || 0} total leads`, positive: (stats?.conversionRate || 0) > 20 }}
+          trend={{
+            value: `${stats?.total || 0} total leads`,
+            positive: (stats?.conversionRate || 0) > 20,
+          }}
         />
       </div>
 
@@ -280,32 +322,45 @@ function ManagerOverview() {
         <div className="rounded-card border border-border bg-surface p-6 shadow-sm">
           <h3 className="mb-4 text-sm font-semibold">Leads by Agent</h3>
           <div className="h-64">
-            {chartData.length > 0 ? <BarChart data={chartData} /> : (
-              <div className="flex h-full items-center justify-center text-sm text-muted">No agent data</div>
+            {chartData.length > 0 ? (
+              <BarChart data={chartData} />
+            ) : (
+              <div className="flex h-full items-center justify-center text-sm text-muted">
+                No agent data
+              </div>
             )}
           </div>
         </div>
         <div className="rounded-card border border-border bg-surface p-6 shadow-sm">
           <h3 className="mb-4 text-sm font-semibold">Top Performers</h3>
           <div className="space-y-3">
-            {sortedAgents.length > 0 ? sortedAgents.map((agent, i) => {
-              const rate = agent.leads > 0 ? Math.round((agent.closed / agent.leads) * 100) : 0;
-              return (
-                <div key={agent.name} className="flex items-center justify-between rounded-lg border border-border bg-background p-3">
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand/10 text-xs font-bold text-brand">
-                      {i + 1}
-                    </span>
-                    <div>
-                      <p className="text-sm font-medium">{agent.name}</p>
-                      <p className="text-xs text-muted">{agent.closed} closed / {agent.leads} leads</p>
+            {sortedAgents.length > 0 ? (
+              sortedAgents.map((agent, i) => {
+                const rate = agent.leads > 0 ? Math.round((agent.closed / agent.leads) * 100) : 0;
+                return (
+                  <div
+                    key={agent.name}
+                    className="flex items-center justify-between rounded-lg border border-border bg-background p-3"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand/10 text-xs font-bold text-brand">
+                        {i + 1}
+                      </span>
+                      <div>
+                        <p className="text-sm font-medium">{agent.name}</p>
+                        <p className="text-xs text-muted">
+                          {agent.closed} closed / {agent.leads} leads
+                        </p>
+                      </div>
                     </div>
+                    <span className="text-sm font-semibold text-success">{rate}%</span>
                   </div>
-                  <span className="text-sm font-semibold text-success">{rate}%</span>
-                </div>
-              );
-            }) : (
-              <div className="flex h-32 items-center justify-center text-sm text-muted">No team data yet</div>
+                );
+              })
+            ) : (
+              <div className="flex h-32 items-center justify-center text-sm text-muted">
+                No team data yet
+              </div>
             )}
           </div>
         </div>
@@ -315,9 +370,21 @@ function ManagerOverview() {
 }
 
 function AdminOverview() {
-  const { data: leadsData, isLoading: leadsLoading, isError: leadsError } = useLeads({ limit: 100 });
-  const { data: propsData, isLoading: propsLoading, isError: propsError } = useProperties({ limit: 100 });
-  const { data: adminStats, isLoading: statsLoading, isError: statsError } = useQuery({
+  const {
+    data: leadsData,
+    isLoading: leadsLoading,
+    isError: leadsError,
+  } = useLeads({ limit: 100 });
+  const {
+    data: propsData,
+    isLoading: propsLoading,
+    isError: propsError,
+  } = useProperties({ limit: 100 });
+  const {
+    data: adminStats,
+    isLoading: statsLoading,
+    isError: statsError,
+  } = useQuery({
     queryKey: ["admin-stats"],
     queryFn: () => apiClient.get("/admin/stats").then((r) => r.data.data),
   });
@@ -330,23 +397,37 @@ function AdminOverview() {
   const stats = (adminStats || {}) as AdminStatsResponse;
 
   const statusCounts: Record<string, number> = {};
-  leads.forEach((l) => { statusCounts[l.status] = (statusCounts[l.status] || 0) + 1; });
+  leads.forEach((l) => {
+    statusCounts[l.status] = (statusCounts[l.status] || 0) + 1;
+  });
 
   if (isLoading) return <DashboardLoading />;
   if (adminError) return <ErrorState message="Failed to load admin dashboard data." />;
 
   return (
     <div>
-      <PageHeader
-        title="Admin Overview"
-        description="Platform-wide metrics and system health."
-      />
+      <PageHeader title="Admin Overview" description="Platform-wide metrics and system health." />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard title="Total Users" value={stats?.totalUsers ?? 0} icon={Users} description={stats?.totalUsers ? "Active users" : "Loading..."} />
+        <StatCard
+          title="Total Users"
+          value={stats?.totalUsers ?? 0}
+          icon={Users}
+          description={stats?.totalUsers ? "Active users" : "Loading..."}
+        />
         <StatCard title="Properties" value={properties.length} icon={Building2} />
-        <StatCard title="AI Generations" value={stats?.aiCalls ?? 0} icon={Sparkles} description={stats?.aiCalls ? "All time" : "No AI calls yet"} />
-        <StatCard title="Active Leads" value={stats?.activeLeads ?? leads.length} icon={Star} color="warning" />
+        <StatCard
+          title="AI Generations"
+          value={stats?.aiCalls ?? 0}
+          icon={Sparkles}
+          description={stats?.aiCalls ? "All time" : "No AI calls yet"}
+        />
+        <StatCard
+          title="Active Leads"
+          value={stats?.activeLeads ?? leads.length}
+          icon={Star}
+          color="warning"
+        />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">

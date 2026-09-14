@@ -11,9 +11,7 @@ export default function NotFound() {
         The page you are looking for does not exist or has been moved.
       </p>
       <Link href="/">
-        <Button leftIcon={<Home className="h-4 w-4" />}>
-          Go home
-        </Button>
+        <Button leftIcon={<Home className="h-4 w-4" />}>Go home</Button>
       </Link>
     </div>
   );

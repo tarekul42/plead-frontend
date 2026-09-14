@@ -31,8 +31,16 @@ export default function ReviewsPage() {
 
       <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <StatCard title="Total Reviews" value={reviews.length} icon={Star} />
-        <StatCard title="Approved" value={reviews.filter((r) => r.isVerified).length} icon={Check} />
-        <StatCard title="Pending" value={reviews.filter((r) => !r.isVerified).length} icon={MoreHorizontal} />
+        <StatCard
+          title="Approved"
+          value={reviews.filter((r) => r.isVerified).length}
+          icon={Check}
+        />
+        <StatCard
+          title="Pending"
+          value={reviews.filter((r) => !r.isVerified).length}
+          icon={MoreHorizontal}
+        />
       </div>
 
       <div className="mb-4 flex gap-2">
@@ -60,7 +68,10 @@ export default function ReviewsPage() {
           </div>
         ) : reviews.length === 0 ? (
           <div className="py-12">
-            <EmptyState title="No reviews to moderate" message="Reviews from buyers will appear here." />
+            <EmptyState
+              title="No reviews to moderate"
+              message="Reviews from buyers will appear here."
+            />
           </div>
         ) : (
           <div className="divide-y divide-border">
@@ -70,20 +81,33 @@ export default function ReviewsPage() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
                       <p className="font-medium">Property Review</p>
-                      <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-                        review.isVerified ? "bg-success/10 text-success" : "bg-warning/10 text-warning"
-                      }`}>
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                          review.isVerified
+                            ? "bg-success/10 text-success"
+                            : "bg-warning/10 text-warning"
+                        }`}
+                      >
                         {review.isVerified ? "approved" : "pending"}
                       </span>
                     </div>
                     <div className="mt-1 flex items-center gap-3 text-xs text-muted">
                       <div className="flex items-center gap-0.5">
                         {Array.from({ length: 5 }).map((_, i) => (
-                          <Star key={i} className={`h-3 w-3 ${i < review.rating ? "text-warning fill-warning" : "text-border"}`} />
+                          <Star
+                            key={i}
+                            className={`h-3 w-3 ${i < review.rating ? "text-warning fill-warning" : "text-border"}`}
+                          />
                         ))}
                       </div>
                       <span>|</span>
-                      <span>{new Date(review.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
+                      <span>
+                        {new Date(review.createdAt).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </span>
                     </div>
                     {review.title && <p className="mt-1 text-sm font-medium">{review.title}</p>}
                     {review.comment && <p className="mt-1 text-sm text-muted">{review.comment}</p>}

@@ -37,7 +37,11 @@ export default function UsersPage() {
         <StatCard title="Total Users" value={users.length} icon={Shield} />
         <StatCard title="Active" value={users.filter((u) => u.isActive).length} icon={Check} />
         <StatCard title="Inactive" value={users.filter((u) => !u.isActive).length} icon={X} />
-        <StatCard title="Admins" value={users.filter((u) => u.role === "admin").length} icon={Shield} />
+        <StatCard
+          title="Admins"
+          value={users.filter((u) => u.role === "admin").length}
+          icon={Shield}
+        />
       </div>
 
       <div className="rounded-card border border-border bg-surface shadow-sm">
@@ -64,7 +68,10 @@ export default function UsersPage() {
               </thead>
               <tbody>
                 {users.map((user) => (
-                  <tr key={user._id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50">
+                  <tr
+                    key={user._id}
+                    className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50"
+                  >
                     <td className="p-4 font-medium">{user.name}</td>
                     <td className="p-4 text-muted">{user.email}</td>
                     <td className="p-4">
@@ -76,21 +83,37 @@ export default function UsersPage() {
                             className="rounded border border-border bg-background px-2 py-1 text-xs outline-none"
                           >
                             {roles.map((r) => (
-                              <option key={r} value={r}>{r}</option>
+                              <option key={r} value={r}>
+                                {r}
+                              </option>
                             ))}
                           </select>
-                          <button onClick={() => setEditingRole(null)} className="text-xs text-muted hover:text-foreground">Cancel</button>
+                          <button
+                            onClick={() => setEditingRole(null)}
+                            className="text-xs text-muted hover:text-foreground"
+                          >
+                            Cancel
+                          </button>
                         </div>
                       ) : (
                         <div className="flex items-center gap-2">
-                          <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                            user.role === "admin" ? "bg-danger/10 text-danger" :
-                            user.role === "manager" ? "bg-warning/10 text-warning" :
-                            "bg-brand/10 text-brand"
-                          }`}>
+                          <span
+                            className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                              user.role === "admin"
+                                ? "bg-danger/10 text-danger"
+                                : user.role === "manager"
+                                  ? "bg-warning/10 text-warning"
+                                  : "bg-brand/10 text-brand"
+                            }`}
+                          >
                             {user.role}
                           </span>
-                          <button onClick={() => setEditingRole(user._id)} className="text-xs text-muted hover:text-brand">Change</button>
+                          <button
+                            onClick={() => setEditingRole(user._id)}
+                            className="text-xs text-muted hover:text-brand"
+                          >
+                            Change
+                          </button>
                         </div>
                       )}
                     </td>
@@ -99,15 +122,20 @@ export default function UsersPage() {
                         onClick={() => toggleMutation.mutate(user._id)}
                         disabled={toggleMutation.isPending}
                         className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                          user.isActive
-                            ? "bg-success/10 text-success"
-                            : "bg-danger/10 text-danger"
+                          user.isActive ? "bg-success/10 text-success" : "bg-danger/10 text-danger"
                         }`}
                       >
                         {toggleMutation.isPending ? "..." : user.isActive ? "Active" : "Inactive"}
                       </button>
                     </td>
-                    <td className="p-4 text-muted">{user.createdAt ? new Date(user.createdAt).toLocaleDateString("en-US", { month: "short", year: "numeric" }) : "-"}</td>
+                    <td className="p-4 text-muted">
+                      {user.createdAt
+                        ? new Date(user.createdAt).toLocaleDateString("en-US", {
+                            month: "short",
+                            year: "numeric",
+                          })
+                        : "-"}
+                    </td>
                     <td className="p-4">
                       <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-border transition hover:bg-neutral-100 dark:hover:bg-surface">
                         <MoreHorizontal className="h-3.5 w-3.5" />
