@@ -15,12 +15,7 @@ import { LEAD_STATUS_LABELS, LEAD_STATUS_COLORS } from "@/lib/constants";
 import type { Lead } from "@/types";
 import { formatCompactPrice, formatDate } from "@/lib/utils";
 import { useDebounce } from "@/hooks/use-debounce";
-import {
-  Plus,
-  LayoutList,
-  Columns3,
-  Search,
-} from "lucide-react";
+import { Plus, LayoutList, Columns3, Search } from "lucide-react";
 
 function LeadsTable({ leads }: { leads: Lead[] }) {
   return (
@@ -52,8 +47,11 @@ function LeadsTable({ leads }: { leads: Lead[] }) {
               </td>
               <td className="p-4 text-muted">{lead.email}</td>
               <td className="p-4">
-                <Badge variant={(LEAD_STATUS_COLORS[lead.status] as BadgeProps["variant"]) || "default"}>
-                  {LEAD_STATUS_LABELS[lead.status as keyof typeof LEAD_STATUS_LABELS] || lead.status}
+                <Badge
+                  variant={(LEAD_STATUS_COLORS[lead.status] as BadgeProps["variant"]) || "default"}
+                >
+                  {LEAD_STATUS_LABELS[lead.status as keyof typeof LEAD_STATUS_LABELS] ||
+                    lead.status}
                 </Badge>
               </td>
               <td className="p-4 text-muted">
@@ -138,9 +136,7 @@ export default function LeadsPage() {
         description={`${total} total ${total === 1 ? "lead" : "leads"}`}
         action={
           <Link href="/dashboard/leads/new">
-            <Button leftIcon={<Plus className="h-4 w-4" />}>
-              Add Lead
-            </Button>
+            <Button leftIcon={<Plus className="h-4 w-4" />}>Add Lead</Button>
           </Link>
         }
       />

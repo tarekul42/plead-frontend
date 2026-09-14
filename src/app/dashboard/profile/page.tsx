@@ -47,7 +47,14 @@ export default function ProfilePage() {
         <div className="mb-8 flex items-center gap-4">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand/10">
             {user?.imageUrl ? (
-              <Image src={user.imageUrl} alt="Avatar" width={64} height={64} unoptimized className="h-full w-full rounded-full object-cover" />
+              <Image
+                src={user.imageUrl}
+                alt="Avatar"
+                width={64}
+                height={64}
+                unoptimized
+                className="h-full w-full rounded-full object-cover"
+              />
             ) : (
               <User className="h-8 w-8 text-brand" />
             )}
@@ -61,22 +68,30 @@ export default function ProfilePage() {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="firstName" className="text-sm font-medium text-foreground">First Name</label>
+              <label htmlFor="firstName" className="text-sm font-medium text-foreground">
+                First Name
+              </label>
               <Input id="firstName" defaultValue={user?.firstName || ""} />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="lastName" className="text-sm font-medium text-foreground">Last Name</label>
+              <label htmlFor="lastName" className="text-sm font-medium text-foreground">
+                Last Name
+              </label>
               <Input id="lastName" defaultValue={user?.lastName || ""} />
             </div>
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="title" className="text-sm font-medium text-foreground">Title</label>
+            <label htmlFor="title" className="text-sm font-medium text-foreground">
+              Title
+            </label>
             <Input id="title" placeholder="e.g., Senior Agent" />
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="phone" className="text-sm font-medium text-foreground">Phone</label>
+            <label htmlFor="phone" className="text-sm font-medium text-foreground">
+              Phone
+            </label>
             <Input id="phone" type="tel" placeholder="+1 (555) 123-4567" />
           </div>
 

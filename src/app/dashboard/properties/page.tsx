@@ -39,9 +39,7 @@ export default function DashboardPropertiesPage() {
         description={`${total} total ${total === 1 ? "property" : "properties"}`}
         action={
           <Link href="/dashboard/properties/new">
-            <Button leftIcon={<Plus className="h-4 w-4" />}>
-              Add Property
-            </Button>
+            <Button leftIcon={<Plus className="h-4 w-4" />}>Add Property</Button>
           </Link>
         }
       />
@@ -101,10 +99,14 @@ export default function DashboardPropertiesPage() {
                       <td className="p-4">
                         <Badge
                           variant={
-                            PROPERTY_STATUS_COLORS[property.status as keyof typeof PROPERTY_STATUS_COLORS] as BadgeProps["variant"] || "default"
+                            (PROPERTY_STATUS_COLORS[
+                              property.status as keyof typeof PROPERTY_STATUS_COLORS
+                            ] as BadgeProps["variant"]) || "default"
                           }
                         >
-                          {PROPERTY_STATUS_LABELS[property.status as keyof typeof PROPERTY_STATUS_LABELS] || property.status.replace("_", " ")}
+                          {PROPERTY_STATUS_LABELS[
+                            property.status as keyof typeof PROPERTY_STATUS_LABELS
+                          ] || property.status.replace("_", " ")}
                         </Badge>
                       </td>
                       <td className="p-4">
