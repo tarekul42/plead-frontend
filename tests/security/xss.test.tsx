@@ -97,9 +97,7 @@ describe("XSS Prevention: Content Display Components", () => {
 describe("XSS Prevention: URL Handling", () => {
   it("does not render javascript: URLs as clickable links", () => {
     // This tests that any link components properly validate URLs
-    const { container } = render(
-      <a href="javascript:alert(1)">Malicious Link</a>
-    );
+    const { container } = render(<a href="javascript:alert(1)">Malicious Link</a>);
 
     const link = container.querySelector("a");
     expect(link).toBeInTheDocument();
@@ -111,9 +109,7 @@ describe("XSS Prevention: URL Handling", () => {
   });
 
   it("does not render data: URLs with scripts", () => {
-    const { container } = render(
-      <a href="data:text/html,<script>alert(1)</script>">Data URL</a>
-    );
+    const { container } = render(<a href="data:text/html,<script>alert(1)</script>">Data URL</a>);
 
     const link = container.querySelector("a");
     expect(link).toBeInTheDocument();
@@ -124,9 +120,7 @@ describe("XSS Prevention: DOM Injection", () => {
   it("React escapes HTML entities by default", () => {
     const Component = ({ text }: { text: string }) => <div>{text}</div>;
 
-    const { container } = render(
-      <Component text='<script>alert("xss")</script>' />
-    );
+    const { container } = render(<Component text='<script>alert("xss")</script>' />);
 
     // Should be escaped as text content, not rendered as HTML
     expect(container.innerHTML).toContain("&lt;script&gt;");
@@ -150,7 +144,11 @@ describe("XSS Prevention: DOM Injection", () => {
         const fullPath = path.join(dir, entry.name);
         if (entry.isDirectory() && entry.name !== "node_modules") {
           results.push(...walkDir(fullPath));
-        } else if (entry.isFile() && /\.(tsx|ts)$/.test(entry.name) && !entry.name.match(/\.(test|spec)\./)) {
+        } else if (
+          entry.isFile() &&
+          /\.(tsx|ts)$/.test(entry.name) &&
+          !entry.name.match(/\.(test|spec)\./)
+        ) {
           results.push(fullPath);
         }
       }
@@ -212,7 +210,7 @@ describe("XSS Prevention: Event Handler Injection", () => {
     };
 
     const { container } = render(
-      <button {...(maliciousProps as Record<string, string>)}>Click me</button>
+      <button {...(maliciousProps as Record<string, string>)}>Click me</button>,
     );
 
     const button = container.querySelector("button");

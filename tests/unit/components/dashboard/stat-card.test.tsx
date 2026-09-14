@@ -11,9 +11,7 @@ describe("StatCard", () => {
   });
 
   it("renders description when provided", () => {
-    render(
-      <StatCard title="Revenue" value="$1.2M" description="Last 30 days" icon={Users} />,
-    );
+    render(<StatCard title="Revenue" value="$1.2M" description="Last 30 days" icon={Users} />);
     expect(screen.getByText("Last 30 days")).toBeInTheDocument();
   });
 

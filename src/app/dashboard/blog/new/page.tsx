@@ -17,7 +17,10 @@ export default function NewBlogPostPage() {
 
   return (
     <div className="max-w-3xl">
-      <Link href="/dashboard/blog" className="mb-4 inline-flex items-center gap-1 text-sm text-muted hover:text-foreground">
+      <Link
+        href="/dashboard/blog"
+        className="mb-4 inline-flex items-center gap-1 text-sm text-muted hover:text-foreground"
+      >
         <ArrowLeft className="h-4 w-4" />
         Back to blog
       </Link>
@@ -29,23 +32,41 @@ export default function NewBlogPostPage() {
           <div className="space-y-5">
             <div>
               <label className="mb-1.5 block text-sm font-medium">Title</label>
-              <input required className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand" />
+              <input
+                required
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand"
+              />
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">Slug</label>
-              <input required placeholder="my-blog-post" className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand" />
+              <input
+                required
+                placeholder="my-blog-post"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand"
+              />
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">Excerpt</label>
-              <textarea rows={2} placeholder="Brief summary of the post" className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand resize-y" />
+              <textarea
+                rows={2}
+                placeholder="Brief summary of the post"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand resize-y"
+              />
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">Content (Markdown)</label>
-              <textarea rows={12} required className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand resize-y font-mono" />
+              <textarea
+                rows={12}
+                required
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand resize-y font-mono"
+              />
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">Tags (comma-separated)</label>
-              <input placeholder="AI, Real Estate, Tips" className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand" />
+              <input
+                placeholder="AI, Real Estate, Tips"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-brand"
+              />
             </div>
           </div>
         </div>

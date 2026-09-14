@@ -19,9 +19,7 @@ export function ErrorState({
       </div>
       <h3 className="mb-2 text-lg font-semibold">Error</h3>
       <p className="mb-2 max-w-md text-sm text-muted">{message}</p>
-      {errorCode && (
-        <p className="mb-4 text-xs text-muted">Error code: {errorCode}</p>
-      )}
+      {errorCode && <p className="mb-4 text-xs text-muted">Error code: {errorCode}</p>}
       {onRetry && (
         <Button variant="primary" onClick={onRetry}>
           Try again

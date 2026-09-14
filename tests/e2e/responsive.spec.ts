@@ -36,7 +36,9 @@ test.describe("Responsive Layout", () => {
       await page.goto("/");
 
       // Mobile menu button or navigation should be present
-      const menuBtn = page.locator('button[aria-label*="menu" i], [data-testid="mobile-menu"], .hamburger');
+      const menuBtn = page.locator(
+        'button[aria-label*="menu" i], [data-testid="mobile-menu"], .hamburger',
+      );
       const nav = page.locator("nav");
 
       // Either a menu button or visible nav
@@ -187,7 +189,9 @@ test.describe("Responsive Layout", () => {
       if (count > 0) {
         // Images should not overflow their containers
         const firstImage = images.first();
-        const naturalWidth = await firstImage.evaluate((img) => (img as HTMLImageElement).naturalWidth);
+        const naturalWidth = await firstImage.evaluate(
+          (img) => (img as HTMLImageElement).naturalWidth,
+        );
         expect(naturalWidth).toBeGreaterThan(0);
       }
     });

@@ -9,10 +9,9 @@ describe("useDebounce", () => {
   });
 
   it("updates after delay", async () => {
-    const { result, rerender } = renderHook(
-      ({ value }) => useDebounce(value, 100),
-      { initialProps: { value: "initial" } },
-    );
+    const { result, rerender } = renderHook(({ value }) => useDebounce(value, 100), {
+      initialProps: { value: "initial" },
+    });
 
     expect(result.current).toBe("initial");
 
@@ -27,10 +26,9 @@ describe("useDebounce", () => {
   });
 
   it("cancels previous timeout on rapid changes", async () => {
-    const { result, rerender } = renderHook(
-      ({ value }) => useDebounce(value, 200),
-      { initialProps: { value: "a" } },
-    );
+    const { result, rerender } = renderHook(({ value }) => useDebounce(value, 200), {
+      initialProps: { value: "a" },
+    });
 
     rerender({ value: "b" });
     rerender({ value: "c" });

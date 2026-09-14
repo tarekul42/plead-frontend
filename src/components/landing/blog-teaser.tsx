@@ -7,7 +7,8 @@ import { Calendar } from "lucide-react";
 const posts = [
   {
     title: "How AI is Transforming Real Estate Lead Management",
-    excerpt: "Discover how artificial intelligence is revolutionizing the way agents qualify and convert leads.",
+    excerpt:
+      "Discover how artificial intelligence is revolutionizing the way agents qualify and convert leads.",
     date: "Jun 15, 2026",
     slug: "ai-real-estate-lead-management",
     tags: ["AI", "Leads"],
@@ -21,7 +22,8 @@ const posts = [
   },
   {
     title: "The Ultimate Guide to Property Marketing",
-    excerpt: "From listing photos to AI-generated descriptions — everything you need to market properties effectively.",
+    excerpt:
+      "From listing photos to AI-generated descriptions — everything you need to market properties effectively.",
     date: "May 25, 2026",
     slug: "property-marketing-guide",
     tags: ["Marketing", "Guide"],

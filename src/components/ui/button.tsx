@@ -7,8 +7,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-brand text-white hover:bg-brand-dark shadow-sm hover:shadow-md active:scale-[0.98]",
-        secondary: "border border-border bg-background text-foreground hover:bg-neutral-100 dark:hover:bg-surface-alt",
+        primary:
+          "bg-brand text-white hover:bg-brand-dark shadow-sm hover:shadow-md active:scale-[0.98]",
+        secondary:
+          "border border-border bg-background text-foreground hover:bg-neutral-100 dark:hover:bg-surface-alt",
         ghost: "text-foreground hover:bg-neutral-100 dark:hover:bg-surface-alt",
         outline: "border border-brand text-brand hover:bg-brand/5",
         success: "bg-success text-white hover:opacity-90 shadow-sm",
@@ -34,8 +36,7 @@ const buttonVariants = cva(
 );
 
 interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
 }
@@ -43,11 +44,7 @@ interface ButtonProps
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, leftIcon, rightIcon, children, ...props }, ref) => {
     return (
-      <button
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      >
+      <button className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
         {leftIcon && <span className="shrink-0">{leftIcon}</span>}
         {children}
         {rightIcon && <span className="shrink-0">{rightIcon}</span>}

@@ -22,17 +22,12 @@ export function FormField({
 }: FormFieldProps) {
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
-      <label
-        htmlFor={htmlFor}
-        className="text-sm font-medium text-foreground"
-      >
+      <label htmlFor={htmlFor} className="text-sm font-medium text-foreground">
         {label}
         {required && <span className="ml-0.5 text-danger">*</span>}
       </label>
       {children}
-      {hint && !error && (
-        <p className="text-xs text-muted">{hint}</p>
-      )}
+      {hint && !error && <p className="text-xs text-muted">{hint}</p>}
       {error && (
         <p className="text-xs text-danger" role="alert">
           {error.message}

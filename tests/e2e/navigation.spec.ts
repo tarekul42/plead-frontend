@@ -115,7 +115,9 @@ test.describe("Navigation and Routing", () => {
     await page.goto("/");
     await page.waitForTimeout(500);
 
-    const propertiesLink = page.getByRole("link", { name: /explore properties|properties/i }).first();
+    const propertiesLink = page
+      .getByRole("link", { name: /explore properties|properties/i })
+      .first();
     if (await propertiesLink.isVisible()) {
       await propertiesLink.click();
       await page.waitForURL(/\/properties/, { timeout: 5000 });
@@ -133,7 +135,9 @@ test.describe("Navigation and Routing", () => {
     await page.goto("/");
     await page.waitForTimeout(500);
 
-    const propertiesLink = page.getByRole("link", { name: /explore properties|properties/i }).first();
+    const propertiesLink = page
+      .getByRole("link", { name: /explore properties|properties/i })
+      .first();
     if (await propertiesLink.isVisible()) {
       await propertiesLink.click();
       await page.waitForURL(/\/properties/, { timeout: 5000 });

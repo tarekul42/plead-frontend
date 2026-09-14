@@ -7,17 +7,20 @@ const steps = [
   {
     icon: Search,
     title: "Capture Leads",
-    description: "Import leads from your website, social media, or manually. All lead data is organized and ready.",
+    description:
+      "Import leads from your website, social media, or manually. All lead data is organized and ready.",
   },
   {
     icon: Cpu,
     title: "AI Matches Properties",
-    description: "Our AI engine scores each lead against your inventory based on budget, location, and preferences.",
+    description:
+      "Our AI engine scores each lead against your inventory based on budget, location, and preferences.",
   },
   {
     icon: Handshake,
     title: "Close Deals Faster",
-    description: "Send personalized outreach, schedule viewings, and track every interaction until the deal closes.",
+    description:
+      "Send personalized outreach, schedule viewings, and track every interaction until the deal closes.",
   },
 ];
 

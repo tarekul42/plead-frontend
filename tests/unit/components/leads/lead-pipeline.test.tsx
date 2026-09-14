@@ -6,9 +6,15 @@ import type { Lead } from "@/types";
 // jsdom doesn't provide DataTransfer; mock it for drag-and-drop tests
 class MockDataTransfer {
   data = new Map<string, string>();
-  setData(type: string, value: string) { this.data.set(type, value); }
-  getData(type: string) { return this.data.get(type) || ""; }
-  clearData() { this.data.clear(); }
+  setData(type: string, value: string) {
+    this.data.set(type, value);
+  }
+  getData(type: string) {
+    return this.data.get(type) || "";
+  }
+  clearData() {
+    this.data.clear();
+  }
   setDragImage() {}
 }
 beforeAll(() => {
@@ -88,7 +94,9 @@ describe("LeadPipeline (Kanban)", () => {
     render(<LeadPipeline />);
 
     // John Doe should be in "New"
-    const newColumn = screen.getByText("New").closest("[data-column], [data-status]") || screen.getByText("New").parentElement?.parentElement;
+    const newColumn =
+      screen.getByText("New").closest("[data-column], [data-status]") ||
+      screen.getByText("New").parentElement?.parentElement;
     expect(newColumn).toHaveTextContent("John Doe");
   });
 

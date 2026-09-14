@@ -54,9 +54,7 @@ const createTestQueryClient = () =>
   });
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
-  <QueryClientProvider client={createTestQueryClient()}>
-    {children}
-  </QueryClientProvider>
+  <QueryClientProvider client={createTestQueryClient()}>{children}</QueryClientProvider>
 );
 
 describe("Auth Security: Token Handling", () => {
@@ -90,7 +88,7 @@ describe("Auth Security: Token Handling", () => {
         key.toLowerCase().includes("token") ||
         key.toLowerCase().includes("auth") ||
         key.toLowerCase().includes("session") ||
-        key.toLowerCase().includes("jwt")
+        key.toLowerCase().includes("jwt"),
     );
 
     // Clerk may store some data, but raw tokens should not be exposed
@@ -104,7 +102,7 @@ describe("Auth Security: Token Handling", () => {
       (key) =>
         key.toLowerCase().includes("token") ||
         key.toLowerCase().includes("auth") ||
-        key.toLowerCase().includes("jwt")
+        key.toLowerCase().includes("jwt"),
     );
 
     expect(sensitiveKeys.filter((k) => !k.startsWith("clerk"))).toHaveLength(0);
@@ -128,7 +126,7 @@ describe("Auth Security: RoleGuard Component", () => {
         <RoleGuard allowedRoles={["admin"]}>
           <div>Admin Content</div>
         </RoleGuard>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.queryByText("Admin Content")).not.toBeInTheDocument();
@@ -146,7 +144,7 @@ describe("Auth Security: RoleGuard Component", () => {
         <RoleGuard allowedRoles={["admin"]}>
           <div>Admin Content</div>
         </RoleGuard>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.queryByText("Admin Content")).not.toBeInTheDocument();
@@ -165,13 +163,10 @@ describe("Auth Security: RoleGuard Component", () => {
 
     render(
       <TestWrapper>
-        <RoleGuard
-          allowedRoles={["admin"]}
-          fallback={<div>Access Denied</div>}
-        >
+        <RoleGuard allowedRoles={["admin"]} fallback={<div>Access Denied</div>}>
           <div>Admin Content</div>
         </RoleGuard>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     await waitFor(() => {
@@ -195,7 +190,7 @@ describe("Auth Security: RoleGuard Component", () => {
         <RoleGuard allowedRoles={["admin"]}>
           <div>Admin Content</div>
         </RoleGuard>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     await waitFor(() => {
@@ -219,7 +214,7 @@ describe("Auth Security: RoleGuard Component", () => {
         <RoleGuard allowedRoles={["admin", "agent"]}>
           <div>Authorized Content</div>
         </RoleGuard>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     await waitFor(() => {
@@ -264,7 +259,7 @@ describe("Auth Security: CSRF Protection", () => {
       <form action="/api/submit" method="POST">
         <input type="hidden" name="csrf" value="token" />
         <button type="submit">Submit</button>
-      </form>
+      </form>,
     );
 
     const form = container.querySelector("form");

@@ -92,10 +92,17 @@ export function PropertyForm({ onSubmit, initialData }: PropertyFormProps) {
           <Input id="area" type="number" {...register("area")} />
         </FormField>
 
-        <FormField label="Property Type" error={errors.propertyType} htmlFor="propertyType" required>
+        <FormField
+          label="Property Type"
+          error={errors.propertyType}
+          htmlFor="propertyType"
+          required
+        >
           <Select id="propertyType" {...register("propertyType")}>
             {PROPERTY_TYPES.map(({ value, label }) => (
-              <option key={value} value={value}>{label}</option>
+              <option key={value} value={value}>
+                {label}
+              </option>
             ))}
           </Select>
         </FormField>

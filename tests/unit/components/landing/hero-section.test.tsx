@@ -15,7 +15,9 @@ describe("Hero (landing section)", () => {
 
   it("renders the description text", () => {
     render(<Hero />);
-    expect(screen.getByText(/Match the right lead to the right property in seconds/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Match the right lead to the right property in seconds/),
+    ).toBeInTheDocument();
   });
 
   it("renders the 'Start free' CTA link", () => {

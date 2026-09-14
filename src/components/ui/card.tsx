@@ -7,37 +7,22 @@ interface CardProps {
 
 export function Card({ className, children }: CardProps) {
   return (
-    <div
-      className={cn(
-        "rounded-card border border-border bg-surface shadow-sm",
-        className,
-      )}
-    >
+    <div className={cn("rounded-card border border-border bg-surface shadow-sm", className)}>
       {children}
     </div>
   );
 }
 
 export function CardHeader({ className, children }: CardProps) {
-  return (
-    <div className={cn("flex flex-col gap-1.5 p-6 pb-0", className)}>
-      {children}
-    </div>
-  );
+  return <div className={cn("flex flex-col gap-1.5 p-6 pb-0", className)}>{children}</div>;
 }
 
 export function CardTitle({ className, children }: CardProps) {
-  return (
-    <h3 className={cn("text-lg font-semibold leading-tight", className)}>
-      {children}
-    </h3>
-  );
+  return <h3 className={cn("text-lg font-semibold leading-tight", className)}>{children}</h3>;
 }
 
 export function CardDescription({ className, children }: CardProps) {
-  return (
-    <p className={cn("text-sm text-muted", className)}>{children}</p>
-  );
+  return <p className={cn("text-sm text-muted", className)}>{children}</p>;
 }
 
 export function CardContent({ className, children }: CardProps) {
@@ -46,12 +31,7 @@ export function CardContent({ className, children }: CardProps) {
 
 export function CardFooter({ className, children }: CardProps) {
   return (
-    <div
-      className={cn(
-        "flex items-center gap-2 border-t border-border p-6 pt-4",
-        className,
-      )}
-    >
+    <div className={cn("flex items-center gap-2 border-t border-border p-6 pt-4", className)}>
       {children}
     </div>
   );

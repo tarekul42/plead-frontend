@@ -10,9 +10,7 @@ describe("Pagination", () => {
   });
 
   it("returns null when totalPages <= 1", () => {
-    const { container } = render(
-      <Pagination page={1} totalPages={1} onPageChange={() => {}} />,
-    );
+    const { container } = render(<Pagination page={1} totalPages={1} onPageChange={() => {}} />);
     expect(container.innerHTML).toBe("");
   });
 

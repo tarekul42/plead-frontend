@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-} from "react";
+import { createContext, useContext, useState, useRef, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
 
 interface DropdownContextType {
@@ -74,7 +67,7 @@ export function DropdownMenuTrigger({
 }) {
   const { open, setOpen, triggerRef } = useDropdown();
 
-    if (asChild) {
+  if (asChild) {
     return (
       <div
         ref={triggerRef as unknown as React.RefObject<HTMLDivElement>}
@@ -99,11 +92,7 @@ export function DropdownMenuTrigger({
   );
 }
 
-export function DropdownMenuGroup({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function DropdownMenuGroup({ children }: { children: React.ReactNode }) {
   return <div className="space-y-0.5">{children}</div>;
 }
 
@@ -175,20 +164,9 @@ export function DropdownMenuLabel({
   children: React.ReactNode;
   className?: string;
 }) {
-  return (
-    <div
-      className={cn(
-        "border-b border-border px-3 py-2",
-        className,
-      )}
-    >
-      {children}
-    </div>
-  );
+  return <div className={cn("border-b border-border px-3 py-2", className)}>{children}</div>;
 }
 
 export function DropdownMenuSeparator({ className }: { className?: string }) {
-  return (
-    <div className={cn("my-1 border-t border-border", className)} />
-  );
+  return <div className={cn("my-1 border-t border-border", className)} />;
 }

@@ -32,7 +32,10 @@ const mockWebVitals = {
 };
 
 // Helper to classify web vital rating
-function getVitalRating(value: number, thresholds: { good: number; poor: number }): "good" | "needs-improvement" | "poor" {
+function getVitalRating(
+  value: number,
+  thresholds: { good: number; poor: number },
+): "good" | "needs-improvement" | "poor" {
   if (value <= thresholds.good) return "good";
   if (value <= thresholds.poor) return "needs-improvement";
   return "poor";

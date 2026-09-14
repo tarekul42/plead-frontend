@@ -8,8 +8,8 @@ test.describe("Property CRUD Operations", () => {
     const isOnSignIn = page.url().includes("sign-in");
     const isOnClerk = page.url().includes("clerk.accounts.dev");
     const rateLimitText = await page.locator("text=too many requests").first().isVisible();
-const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
-const isRateLimited = rateLimitText || rateLimitJson;
+    const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
+    const isRateLimited = rateLimitText || rateLimitJson;
     if (isOnSignIn || isOnClerk || isRateLimited) {
       test.skip();
     }
@@ -22,8 +22,11 @@ const isRateLimited = rateLimitText || rateLimitJson;
   test("displays property list or empty state", async ({ page }) => {
     await page.waitForTimeout(1000);
 
-    const hasProperties = await page.locator('table tbody tr').first().isVisible();
-    const hasEmptyState = await page.locator("text=No properties found").or(page.locator("text=no properties")).isVisible();
+    const hasProperties = await page.locator("table tbody tr").first().isVisible();
+    const hasEmptyState = await page
+      .locator("text=No properties found")
+      .or(page.locator("text=no properties"))
+      .isVisible();
 
     expect(hasProperties || hasEmptyState).toBeTruthy();
   });
@@ -65,7 +68,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
     if (await createBtn.first().isVisible()) {
       await createBtn.first().click();
 
-      const descriptionInput = page.locator('textarea[name="description"], textarea[placeholder*="description" i]');
+      const descriptionInput = page.locator(
+        'textarea[name="description"], textarea[placeholder*="description" i]',
+      );
       if (await descriptionInput.first().isVisible()) {
         await expect(descriptionInput.first()).toBeVisible();
       }
@@ -77,7 +82,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
     if (await createBtn.first().isVisible()) {
       await createBtn.first().click();
 
-      const locationInput = page.locator('input[name="location"], input[placeholder*="location" i]');
+      const locationInput = page.locator(
+        'input[name="location"], input[placeholder*="location" i]',
+      );
       if (await locationInput.first().isVisible()) {
         await expect(locationInput.first()).toBeVisible();
       }
@@ -89,7 +96,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
     if (await createBtn.first().isVisible()) {
       await createBtn.first().click();
 
-      const typeSelect = page.locator('select[name="propertyType"], [data-testid*="property-type"]');
+      const typeSelect = page.locator(
+        'select[name="propertyType"], [data-testid*="property-type"]',
+      );
       if (await typeSelect.first().isVisible()) {
         await expect(typeSelect.first()).toBeVisible();
       }
@@ -142,7 +151,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
     if (await createBtn.first().isVisible()) {
       await createBtn.first().click();
 
-      const typeSelect = page.locator('select[name="propertyType"], [data-testid*="property-type"]');
+      const typeSelect = page.locator(
+        'select[name="propertyType"], [data-testid*="property-type"]',
+      );
       if (await typeSelect.first().isVisible()) {
         // Try to select an option
         await typeSelect.first().selectOption({ index: 1 });
@@ -202,7 +213,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
   });
 
   test("property status filter is present", async ({ page }) => {
-    const statusFilter = page.locator('select[name="status"], [data-testid*="status"], button:has-text("status")');
+    const statusFilter = page.locator(
+      'select[name="status"], [data-testid*="status"], button:has-text("status")',
+    );
     if (await statusFilter.first().isVisible()) {
       await expect(statusFilter.first()).toBeVisible();
     }
@@ -215,8 +228,8 @@ test.describe("Public Properties Page", () => {
     await page.goto("/properties");
     await page.waitForTimeout(3000);
     const rateLimitText = await page.locator("text=too many requests").first().isVisible();
-const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
-const isRateLimited = rateLimitText || rateLimitJson;
+    const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
+    const isRateLimited = rateLimitText || rateLimitJson;
     if (isRateLimited) {
       test.skip();
     }

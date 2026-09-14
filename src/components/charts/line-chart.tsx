@@ -1,6 +1,13 @@
 "use client";
 
-import { LineChart as RechartsLine, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
+import {
+  LineChart as RechartsLine,
+  Line,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 
 interface LineChartProps {
   data: { label: string; value: number }[];

@@ -6,9 +6,7 @@ describe("EmptyState", () => {
   it("renders default title and message", () => {
     render(<EmptyState />);
     expect(screen.getByText("Nothing here yet")).toBeInTheDocument();
-    expect(
-      screen.getByText("Try adjusting your filters or check back later."),
-    ).toBeInTheDocument();
+    expect(screen.getByText("Try adjusting your filters or check back later.")).toBeInTheDocument();
   });
 
   it("renders custom title and message", () => {

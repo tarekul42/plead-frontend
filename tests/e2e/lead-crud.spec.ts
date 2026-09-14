@@ -9,8 +9,8 @@ test.describe("Lead CRUD Operations", () => {
     const isOnSignIn = page.url().includes("sign-in");
     const isOnClerk = page.url().includes("clerk.accounts.dev");
     const rateLimitText = await page.locator("text=too many requests").first().isVisible();
-const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
-const isRateLimited = rateLimitText || rateLimitJson;
+    const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
+    const isRateLimited = rateLimitText || rateLimitJson;
     if (isOnSignIn || isOnClerk || isRateLimited) {
       test.skip();
     }
@@ -22,7 +22,7 @@ const isRateLimited = rateLimitText || rateLimitJson;
 
   test("displays lead list or empty state", async ({ page }) => {
     // Either leads are shown or an empty state message
-    const hasLeads = await page.locator('table tbody tr').first().isVisible();
+    const hasLeads = await page.locator("table tbody tr").first().isVisible();
     const hasEmptyState = await page.locator("text=No leads found").isVisible();
 
     expect(hasLeads || hasEmptyState).toBeTruthy();

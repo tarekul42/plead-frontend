@@ -99,9 +99,7 @@ describe("LeadCard", () => {
   });
 
   it("applies different styling based on status", () => {
-    const { container: newContainer } = render(
-      <LeadCard lead={{ ...mockLead, status: "new" }} />,
-    );
+    const { container: newContainer } = render(<LeadCard lead={{ ...mockLead, status: "new" }} />);
     expect(newContainer.querySelector('[class*="new"]')).toBeInTheDocument();
 
     const { container: contactedContainer } = render(

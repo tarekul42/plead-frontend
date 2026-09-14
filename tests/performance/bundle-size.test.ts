@@ -54,7 +54,9 @@ describe("Bundle Size Regression", () => {
     it("should have .next build directory or be skipped gracefully", () => {
       const hasNextDir = existsSync(NEXT_DIR);
       if (!hasNextDir) {
-        console.warn("Build validation skipped: .next directory not found. Run bun run build first.");
+        console.warn(
+          "Build validation skipped: .next directory not found. Run bun run build first.",
+        );
       }
       expect(true).toBe(true);
     });

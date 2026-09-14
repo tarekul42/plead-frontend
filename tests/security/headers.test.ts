@@ -27,9 +27,7 @@ describe("Security Headers: Next.js Configuration", () => {
     // Config might be empty or minimal - that's okay for now
     // The important thing is the file exists for future configuration
     expect(
-      fs.existsSync(configPath) ||
-        fs.existsSync(configJsPath) ||
-        fs.existsSync(configMjsPath)
+      fs.existsSync(configPath) || fs.existsSync(configJsPath) || fs.existsSync(configMjsPath),
     ).toBe(true);
   });
 
@@ -135,9 +133,7 @@ describe("Security Headers: CORS Configuration", () => {
   it("documents CORS best practices", () => {
     const corsConfig = {
       // Only allow specific origins, not *
-      allowedOrigins: [
-        process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
-      ],
+      allowedOrigins: [process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"],
       // Only allow necessary methods
       allowedMethods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
       // Only allow necessary headers
@@ -197,12 +193,10 @@ describe("Security: Environment Variables", () => {
     ];
 
     // Check that no NEXT_PUBLIC_ vars match sensitive patterns
-    const publicEnvVars = Object.keys(process.env).filter((key) =>
-      key.startsWith("NEXT_PUBLIC_")
-    );
+    const publicEnvVars = Object.keys(process.env).filter((key) => key.startsWith("NEXT_PUBLIC_"));
 
     const violations = publicEnvVars.filter((key) =>
-      sensitivePatterns.some((pattern) => pattern.test(key))
+      sensitivePatterns.some((pattern) => pattern.test(key)),
     );
 
     if (violations.length > 0) {
@@ -210,10 +204,12 @@ describe("Security: Environment Variables", () => {
     }
 
     // NEXT_PUBLIC_API_URL is okay - it's just the API endpoint
-    const allowedPublicVars = ["NEXT_PUBLIC_API_URL", "NEXT_PUBLIC_APP_URL", "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY"];
-    const actualViolations = violations.filter(
-      (v) => !allowedPublicVars.includes(v)
-    );
+    const allowedPublicVars = [
+      "NEXT_PUBLIC_API_URL",
+      "NEXT_PUBLIC_APP_URL",
+      "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+    ];
+    const actualViolations = violations.filter((v) => !allowedPublicVars.includes(v));
 
     expect(actualViolations).toHaveLength(0);
   });
@@ -224,14 +220,11 @@ describe("Security: Middleware Configuration", () => {
   const middlewareJsPath = path.resolve(__dirname, "../../middleware.js");
 
   it("middleware file exists or is not required", () => {
-    const exists =
-      fs.existsSync(middlewarePath) || fs.existsSync(middlewareJsPath);
+    const exists = fs.existsSync(middlewarePath) || fs.existsSync(middlewareJsPath);
 
     // Middleware is optional but recommended for auth
     if (!exists) {
-      console.log(
-        "ℹ️ No middleware.ts found. Consider adding one for auth protection."
-      );
+      console.log("ℹ️ No middleware.ts found. Consider adding one for auth protection.");
     }
 
     // This test passes either way - middleware is optional

@@ -7,19 +7,17 @@ interface AvatarProps {
   children?: React.ReactNode;
 }
 
-const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
-  ({ className, children }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        "relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full",
-        className,
-      )}
-    >
-      {children}
-    </div>
-  ),
-);
+const Avatar = forwardRef<HTMLDivElement, AvatarProps>(({ className, children }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full",
+      className,
+    )}
+  >
+    {children}
+  </div>
+));
 Avatar.displayName = "Avatar";
 
 interface AvatarImageProps {
@@ -30,13 +28,7 @@ interface AvatarImageProps {
 
 const AvatarImage = forwardRef<HTMLImageElement, AvatarImageProps>(
   ({ src, alt = "", className }, ref) => (
-    <Image
-      ref={ref}
-      src={src}
-      alt={alt}
-      fill
-      className={cn("object-cover", className)}
-    />
+    <Image ref={ref} src={src} alt={alt} fill className={cn("object-cover", className)} />
   ),
 );
 AvatarImage.displayName = "AvatarImage";

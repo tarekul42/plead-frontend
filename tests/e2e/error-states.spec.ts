@@ -21,7 +21,10 @@ test.describe("Error States and Retry Behavior", () => {
     await page.waitForTimeout(2000);
 
     // Should show error state
-    const errorText = page.locator("text=Failed to load").or(page.locator("text=Something went wrong")).or(page.locator("text=Error"));
+    const errorText = page
+      .locator("text=Failed to load")
+      .or(page.locator("text=Something went wrong"))
+      .or(page.locator("text=Error"));
     const hasError = await errorText.first().isVisible();
 
     // Or show empty state as fallback
@@ -40,7 +43,10 @@ test.describe("Error States and Retry Behavior", () => {
     await page.waitForTimeout(2000);
 
     // Should handle network error gracefully
-    const errorText = page.locator("text=Failed to load").or(page.locator("text=Error")).or(page.locator("text=network error"));
+    const errorText = page
+      .locator("text=Failed to load")
+      .or(page.locator("text=Error"))
+      .or(page.locator("text=network error"));
     const hasError = await errorText.first().isVisible();
     const hasEmptyState = await page.locator("text=No properties found").isVisible();
 
@@ -123,7 +129,10 @@ test.describe("Error States and Retry Behavior", () => {
     await page.waitForTimeout(2000);
 
     // Should show 404 page or error message
-    const notFound = page.locator("text=404").or(page.locator("text=Not found")).or(page.locator("text=does not exist"));
+    const notFound = page
+      .locator("text=404")
+      .or(page.locator("text=Not found"))
+      .or(page.locator("text=does not exist"));
     const hasNotFound = await notFound.first().isVisible();
 
     // Or redirect to properties list
@@ -208,7 +217,10 @@ test.describe("Error States and Retry Behavior", () => {
     await page.waitForTimeout(2000);
 
     // Should show rate limit message or error
-    const rateLimit = page.locator("text=Too many requests").or(page.locator("text=rate limit")).or(page.locator("text=try again later"));
+    const rateLimit = page
+      .locator("text=Too many requests")
+      .or(page.locator("text=rate limit"))
+      .or(page.locator("text=try again later"));
     const error = page.locator("text=Error").or(page.locator("text=Failed"));
 
     const hasRateLimit = await rateLimit.first().isVisible();

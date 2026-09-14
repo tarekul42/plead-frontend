@@ -45,9 +45,21 @@ export function ConfirmDialogProvider({ children }: { children: ReactNode }) {
   };
 
   const variantStyles: Record<string, { bg: string; icon: string; button: string }> = {
-    danger: { bg: "bg-danger/10", icon: "text-danger", button: "bg-danger text-white hover:bg-danger/90" },
-    warning: { bg: "bg-warning/10", icon: "text-warning", button: "bg-warning text-white hover:bg-warning/90" },
-    default: { bg: "bg-brand/5", icon: "text-brand", button: "bg-brand text-white hover:bg-brand/90" },
+    danger: {
+      bg: "bg-danger/10",
+      icon: "text-danger",
+      button: "bg-danger text-white hover:bg-danger/90",
+    },
+    warning: {
+      bg: "bg-warning/10",
+      icon: "text-warning",
+      button: "bg-warning text-white hover:bg-warning/90",
+    },
+    default: {
+      bg: "bg-brand/5",
+      icon: "text-brand",
+      button: "bg-brand text-white hover:bg-brand/90",
+    },
   };
 
   const styles = variantStyles[state.variant || "default"];
@@ -58,7 +70,9 @@ export function ConfirmDialogProvider({ children }: { children: ReactNode }) {
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
         <div className="mx-4 w-full max-w-md rounded-2xl border border-border bg-surface p-6 shadow-xl">
           <div className="mb-4 flex items-start gap-4">
-            <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${styles.bg}`}>
+            <div
+              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${styles.bg}`}
+            >
               <AlertTriangle className={`h-5 w-5 ${styles.icon}`} />
             </div>
             <div className="min-w-0">

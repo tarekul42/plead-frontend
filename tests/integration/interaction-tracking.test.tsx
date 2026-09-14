@@ -72,7 +72,10 @@ vi.mock("@/lib/api-client", () => ({
         updatedAt: "2025-06-15T10:00:00Z",
       },
     }),
-    interceptors: { request: { use: vi.fn().mockReturnValue(0) }, response: { use: vi.fn().mockReturnValue(0) } },
+    interceptors: {
+      request: { use: vi.fn().mockReturnValue(0) },
+      response: { use: vi.fn().mockReturnValue(0) },
+    },
   },
   setAuthToken: vi.fn(),
   interactionsApi: {
@@ -100,7 +103,9 @@ function InteractionTimeline({ leadId }: { leadId: string }) {
     const fetchInteractions = async () => {
       try {
         const { interactionsApi } = await import("@/lib/api-client");
-        const response = await interactionsApi.listByLead(leadId) as { data?: typeof mockInteractions };
+        const response = (await interactionsApi.listByLead(leadId)) as {
+          data?: typeof mockInteractions;
+        };
         setInteractions((response.data || response) as typeof interactions);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to load interactions");
@@ -341,9 +346,7 @@ describe("Interaction Tracking: Add Interaction -> View Timeline", () => {
 
     await waitFor(() => {
       // Should handle error gracefully
-      expect(
-        screen.queryByTestId("error") || screen.queryByTestId("loading"),
-      ).toBeInTheDocument();
+      expect(screen.queryByTestId("error") || screen.queryByTestId("loading")).toBeInTheDocument();
     });
   });
 
