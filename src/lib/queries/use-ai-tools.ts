@@ -1,8 +1,8 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
 import { aiApi } from "@/lib/api-client";
-import type { AiMatchResponse, AiDescriptionResult, AiEmailResult } from "@/types";
+import type { AiDescriptionResult, AiEmailResult, AiMatchResponse } from "@/types";
+import { useMutation } from "@tanstack/react-query";
 
 export function useMatchLeadProperties() {
   return useMutation<AiMatchResponse, Error, { leadId: string; propertyIds?: string[] }>({

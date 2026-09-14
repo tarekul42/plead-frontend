@@ -1,9 +1,8 @@
 "use client";
 
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { leadsApi } from "@/lib/api-client";
-import type { PaginationMeta } from "@/types";
-import type { Lead, LeadListParams } from "@/types";
+import type { Lead, LeadListParams, PaginationMeta } from "@/types";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 type PaginatedLeads = { data: Lead[]; meta?: PaginationMeta };
 

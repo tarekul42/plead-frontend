@@ -119,11 +119,7 @@ export function ReviewSection({ propertyId }: ReviewSectionProps) {
                 <Button type="submit" disabled={createReview.isPending || !comment}>
                   {createReview.isPending ? "Submitting..." : "Submit Review"}
                 </Button>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  onClick={() => setShowForm(false)}
-                >
+                <Button type="button" variant="ghost" onClick={() => setShowForm(false)}>
                   Cancel
                 </Button>
               </div>
@@ -166,7 +162,7 @@ export function ReviewSection({ propertyId }: ReviewSectionProps) {
                     </div>
                     <div>
                       <p className="text-sm font-medium">
-                        {((review.userId as unknown as { name?: string })?.name) || "Anonymous"}
+                        {(review.userId as unknown as { name?: string })?.name || "Anonymous"}
                         {review.isVerified && (
                           <span className="ml-1.5 inline-flex items-center text-success">
                             <ThumbsUp className="h-3 w-3" />
@@ -191,9 +187,7 @@ export function ReviewSection({ propertyId }: ReviewSectionProps) {
                     ))}
                   </div>
                 </div>
-                {review.title && (
-                  <h4 className="mb-1 font-medium">{review.title}</h4>
-                )}
+                {review.title && <h4 className="mb-1 font-medium">{review.title}</h4>}
                 {review.comment && (
                   <p className="text-sm leading-relaxed text-muted">{review.comment}</p>
                 )}

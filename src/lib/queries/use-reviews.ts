@@ -1,9 +1,8 @@
 "use client";
 
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { reviewsApi } from "@/lib/api-client";
-import type { PaginationMeta } from "@/types";
-import type { Review } from "@/types";
+import type { PaginationMeta, Review } from "@/types";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 type PaginatedReviews = { data: Review[]; meta?: PaginationMeta };
 

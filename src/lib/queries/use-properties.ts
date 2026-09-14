@@ -1,14 +1,21 @@
 "use client";
 
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { propertiesApi } from "@/lib/api-client";
-import type { PaginationMeta } from "@/types";
-import type { Property, PropertyListParams } from "@/types";
+import type { PaginationMeta, Property, PropertyListParams } from "@/types";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 type PaginatedProperties = { data: Property[]; meta?: PaginationMeta };
 
 export function useProperties(params?: PropertyListParams) {
-  const hasFilters = params && (params.q || params.propertyType || params.priceMin || params.priceMax || params.beds || params.status || params.location);
+  const hasFilters =
+    params &&
+    (params.q ||
+      params.propertyType ||
+      params.priceMin ||
+      params.priceMax ||
+      params.beds ||
+      params.status ||
+      params.location);
   return useQuery({
     queryKey: ["properties", params ? JSON.stringify(params) : undefined],
     queryFn: () => propertiesApi.list(params) as Promise<PaginatedProperties>,
