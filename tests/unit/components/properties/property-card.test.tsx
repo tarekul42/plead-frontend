@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { PropertyCard } from "@/components/properties/property-card";
-import { mockProperties } from "@/src/test/mocks/handlers";
+import { mockProperties } from "@/test/mocks/handlers";
 
 describe("PropertyCard", () => {
   const property = mockProperties[0];

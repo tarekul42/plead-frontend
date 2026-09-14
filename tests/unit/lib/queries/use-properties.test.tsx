@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useProperties } from "@/lib/queries/use-properties";
-import { mockProperties } from "@/src/test/mocks/handlers";
+import { mockProperties } from "@/test/mocks/handlers";
 
 function createWrapper() {
   const qc = new QueryClient({
