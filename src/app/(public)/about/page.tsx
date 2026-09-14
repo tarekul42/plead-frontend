@@ -1,10 +1,26 @@
 import { Target, Users, Lightbulb, Shield } from "lucide-react";
 
 const values = [
-  { icon: Target, title: "Our Mission", text: "Empower real estate agents with AI tools that automate lead matching, so they can focus on closing deals — not data entry." },
-  { icon: Users, title: "Built for Teams", text: "Whether you're a solo agent or a 50-person agency, PropLead scales with you. Multi-tenant by design, simple by choice." },
-  { icon: Lightbulb, title: "AI-First", text: "We believe AI should be a practical daily tool, not a gimmick. Every feature is designed to save real time and deliver measurable results." },
-  { icon: Shield, title: "Privacy First", text: "Your data belongs to you. We never train on your data, never share it, and never lock you in. Export anytime." },
+  {
+    icon: Target,
+    title: "Our Mission",
+    text: "Empower real estate agents with AI tools that automate lead matching, so they can focus on closing deals — not data entry.",
+  },
+  {
+    icon: Users,
+    title: "Built for Teams",
+    text: "Whether you're a solo agent or a 50-person agency, PropLead scales with you. Multi-tenant by design, simple by choice.",
+  },
+  {
+    icon: Lightbulb,
+    title: "AI-First",
+    text: "We believe AI should be a practical daily tool, not a gimmick. Every feature is designed to save real time and deliver measurable results.",
+  },
+  {
+    icon: Shield,
+    title: "Privacy First",
+    text: "Your data belongs to you. We never train on your data, never share it, and never lock you in. Export anytime.",
+  },
 ];
 
 export default function AboutPage() {
@@ -13,9 +29,10 @@ export default function AboutPage() {
       <div className="mx-auto max-w-3xl text-center">
         <h1 className="mb-4 text-3xl font-bold md:text-4xl">About PropLead AI</h1>
         <p className="text-lg text-muted leading-relaxed">
-          PropLead AI is the first completely free AI-powered lead engine purpose-built for real estate agents.
-          We combine modern CRM capabilities with cutting-edge AI to help agents match leads to properties,
-          generate marketing copy, and close deals faster — all at zero cost.
+          PropLead AI is the first completely free AI-powered lead engine purpose-built for real
+          estate agents. We combine modern CRM capabilities with cutting-edge AI to help agents
+          match leads to properties, generate marketing copy, and close deals faster — all at zero
+          cost.
         </p>
       </div>
 

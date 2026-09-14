@@ -27,21 +27,22 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <div className="flex flex-1 items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
           <div className="mb-8 text-center">
-            <Link href="/" className="inline-flex items-center gap-2 text-2xl font-bold tracking-tight">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-2xl font-bold tracking-tight"
+            >
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-brand">
                 <Sparkles className="h-4 w-4 text-white" />
               </span>
               PropLead
             </Link>
-            <p className="mt-1 text-sm text-muted">
-              AI-powered real estate lead engine
-            </p>
+            <p className="mt-1 text-sm text-muted">AI-powered real estate lead engine</p>
           </div>
           {children}
         </div>
       </div>
 
-      <div className="hidden flex-1 flex-col items-center justify-center bg-gradient-to-br from-brand/5 via-background to-success/5 p-12 lg:flex">
+      <div className="hidden flex-1 flex-col items-center justify-center bg-linear-to-br from-brand/5 via-background to-success/5 p-12 lg:flex">
         <div className="max-w-md text-center">
           <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-brand shadow-glow">
             <Sparkles className="h-10 w-10 text-white" />
