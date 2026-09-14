@@ -2,6 +2,7 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
+import Image from "next/image";
 import { Save, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -46,7 +47,7 @@ export default function ProfilePage() {
         <div className="mb-8 flex items-center gap-4">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand/10">
             {user?.imageUrl ? (
-              <img src={user.imageUrl} alt="Avatar" className="h-full w-full rounded-full object-cover" />
+              <Image src={user.imageUrl} alt="Avatar" width={64} height={64} unoptimized className="h-full w-full rounded-full object-cover" />
             ) : (
               <User className="h-8 w-8 text-brand" />
             )}

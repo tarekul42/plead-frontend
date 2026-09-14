@@ -24,12 +24,27 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
 import { formatCompactPrice } from "@/lib/utils";
+import type { Lead, Interaction } from "@/types";
+
+interface LeadStatsResponse {
+  weeklyTrend?: Array<{ date?: string; _id?: string; count: number }>;
+  conversionRate?: number;
+  total?: number;
+}
+
+interface AdminStatsResponse {
+  totalUsers?: number;
+  aiCalls?: number;
+  activeLeads?: number;
+  totalLeads?: number;
+  totalReviews?: number;
+}
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function getDayInteractions(interactions: any[]) {
+function getDayInteractions(interactions: Interaction[]) {
   const counts: Record<string, number> = {};
   for (let i = 0; i < 7; i++) counts[DAY_NAMES[i]] = 0;
   const now = new Date();
@@ -46,10 +61,10 @@ function getDayInteractions(interactions: any[]) {
   return DAY_NAMES.map((name) => ({ label: name, value: counts[name] }));
 }
 
-function avgLeadValue(leads: any[]) {
-  const withBudget = leads.filter((l: any) => l.budget && l.budget > 0);
+function avgLeadValue(leads: Lead[]) {
+  const withBudget = leads.filter((l) => l.budget && l.budget > 0);
   if (withBudget.length === 0) return 0;
-  return withBudget.reduce((s: number, l: any) => s + l.budget, 0) / withBudget.length;
+  return withBudget.reduce((s, l) => s + l.budget!, 0) / withBudget.length;
 }
 
 export default function DashboardPage() {
@@ -74,11 +89,11 @@ function AgentOverview() {
   const leads = leadsData?.data || [];
   const interactions = interactionsData?.data || [];
   const statusCounts: Record<string, number> = {};
-  leads.forEach((l: any) => { statusCounts[l.status] = (statusCounts[l.status] || 0) + 1; });
-  const wonLeads = leads.filter((l: any) => l.status === "closed");
+  leads.forEach((l) => { statusCounts[l.status] = (statusCounts[l.status] || 0) + 1; });
+  const wonLeads = leads.filter((l) => l.status === "closed");
   const totalLeads = leads.length;
   const conversionRate = totalLeads > 0 ? ((wonLeads.length / totalLeads) * 100).toFixed(0) : "0";
-  const weeklyTrend = (statsData as any)?.weeklyTrend?.map((w: any) => ({ label: w.date ? w.date.slice(5) : w._id || "", value: w.count })) || [];
+  const weeklyTrend = (statsData as LeadStatsResponse | undefined)?.weeklyTrend?.map((w) => ({ label: w.date ? w.date.slice(5) : w._id || "", value: w.count })) || [];
   const dayIntData = getDayInteractions(interactions);
   const avgValue = avgLeadValue(leads);
 
@@ -177,7 +192,7 @@ function AgentOverview() {
                 </tr>
               </thead>
               <tbody>
-                {leads.slice(0, 5).map((lead: any) => (
+                {leads.slice(0, 5).map((lead) => (
                   <tr key={lead._id} className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50">
                     <td className="p-4 font-medium">{lead.name}</td>
                     <td className="p-4">
@@ -219,16 +234,16 @@ function ManagerOverview() {
   const leads = leadsData?.data || [];
   const properties = propsData?.data || [];
   const users = usersData?.data || [];
-  const agents = users.filter((u: any) => u.role === "agent");
-  const stats = statsData as any;
+  const agents = users.filter((u) => u.role === "agent");
+  const stats = statsData as LeadStatsResponse | undefined;
 
   const agentLeadCounts: Record<string, { name: string; leads: number; closed: number }> = {};
-  users.forEach((u: any) => {
+  users.forEach((u) => {
     if (u.role === "agent" || u.role === "manager") {
       agentLeadCounts[u._id] = { name: u.name, leads: 0, closed: 0 };
     }
   });
-  leads.forEach((l: any) => {
+  leads.forEach((l) => {
     const agentId = l.assignedAgentId;
     if (agentId && agentLeadCounts[agentId]) {
       agentLeadCounts[agentId].leads++;
@@ -312,10 +327,10 @@ function AdminOverview() {
 
   const leads = leadsData?.data || [];
   const properties = propsData?.data || [];
-  const stats = (adminStats || {}) as any;
+  const stats = (adminStats || {}) as AdminStatsResponse;
 
   const statusCounts: Record<string, number> = {};
-  leads.forEach((l: any) => { statusCounts[l.status] = (statusCounts[l.status] || 0) + 1; });
+  leads.forEach((l) => { statusCounts[l.status] = (statusCounts[l.status] || 0) + 1; });
 
   if (isLoading) return <DashboardLoading />;
   if (adminError) return <ErrorState message="Failed to load admin dashboard data." />;

@@ -225,7 +225,7 @@ describe("Property Listing: Search -> Filter -> Pagination", () => {
     mockPropertiesApiList.mockRejectedValueOnce(new Error("Server error"));
 
     function ErrorListingPage() {
-      const { data, isLoading, isError, refetch } = useProperties({});
+      const { isLoading, isError, refetch } = useProperties({});
 
       if (isLoading) return <div>Loading...</div>;
       if (isError)

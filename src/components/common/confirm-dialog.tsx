@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, createContext, useContext, type ReactNode } from "react";
+import { useState, createContext, useContext, type ReactNode } from "react";
 import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -32,11 +32,7 @@ interface ConfirmState extends ConfirmOptions {
 export function ConfirmDialogProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<ConfirmState>({ isOpen: false, message: "" });
 
-  const confirm = useCallback((options: ConfirmOptions): Promise<boolean> => {
-    return new Promise((resolve) => {
-      setState({ ...options, isOpen: true, resolve });
-    });
-  }, []);
+  if (!state.isOpen) return <>{children}</>;
 
   const handleConfirm = () => {
     state.resolve?.(true);
@@ -47,8 +43,6 @@ export function ConfirmDialogProvider({ children }: { children: ReactNode }) {
     state.resolve?.(false);
     setState((prev) => ({ ...prev, isOpen: false }));
   };
-
-  if (!state.isOpen) return <>{children}</>;
 
   const variantStyles: Record<string, { bg: string; icon: string; button: string }> = {
     danger: { bg: "bg-danger/10", icon: "text-danger", button: "bg-danger text-white hover:bg-danger/90" },

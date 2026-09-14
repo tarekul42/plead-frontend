@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Bed, Bath, Move, MapPin, Heart, Eye } from "lucide-react";
 import { formatPricePerSqft, formatCompactPrice } from "@/lib/utils";
@@ -28,10 +29,13 @@ export function PropertyCard({ property }: PropertyCardProps) {
         className="relative aspect-[4/3] overflow-hidden rounded-t-card bg-neutral-200 dark:bg-surface"
       >
         {property.images?.[0] ? (
-          <img
+          <Image
             src={property.images[0]}
             alt={property.title}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            unoptimized
+            className="object-cover transition duration-500 group-hover:scale-105"
           />
         ) : (
           <div className="flex h-full items-center justify-center text-muted">

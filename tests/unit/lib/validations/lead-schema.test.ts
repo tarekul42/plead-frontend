@@ -101,7 +101,8 @@ describe("leadSchema", () => {
   });
 
   it("requires assignedAgentId", () => {
-    const { assignedAgentId: _, ...withoutAgent } = validLead;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { assignedAgentId, ...withoutAgent } = validLead;
     const result = leadSchema.safeParse(withoutAgent);
     expect(result.success).toBe(false);
   });

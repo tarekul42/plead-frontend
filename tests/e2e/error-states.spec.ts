@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test.describe("Error States and Retry Behavior", () => {
   test.beforeEach(async ({ page }) => {
     const cookies = await page.context().cookies();
-    const hasSession = cookies.some((c: any) => c.name.includes("__session"));
+    const hasSession = cookies.some((c) => c.name.includes("__session"));
     if (hasSession) test.skip();
   });
 
@@ -232,6 +232,7 @@ test.describe("Error States and Retry Behavior", () => {
     // Should show loading indicator
     const loading = page.locator("text=Loading..., [data-testid='loading'], .animate-pulse");
     // Loading might be visible briefly
+    await loading.count();
     await page.waitForTimeout(500);
   });
 

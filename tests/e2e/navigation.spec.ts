@@ -100,6 +100,7 @@ test.describe("Navigation and Routing", () => {
 
   test("404 page is shown for unknown routes", async ({ page }) => {
     const response = await page.goto("/this-page-definitely-does-not-exist");
+    expect(response).not.toBeNull();
 
     // Should either show 404 page or handle gracefully
     const body = page.locator("body");

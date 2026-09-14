@@ -212,7 +212,7 @@ describe("XSS Prevention: Event Handler Injection", () => {
     };
 
     const { container } = render(
-      <button {...(maliciousProps as any)}>Click me</button>
+      <button {...(maliciousProps as Record<string, string>)}>Click me</button>
     );
 
     const button = container.querySelector("button");
@@ -232,7 +232,7 @@ describe("XSS Prevention: JSON Injection", () => {
     const parsed = JSON.parse(maliciousJson);
 
     expect(parsed.__proto__).toBeDefined(); // It's a regular property
-    expect(({} as any).admin).toBeUndefined(); // Prototype not polluted
+    expect(({} as Record<string, unknown>).admin).toBeUndefined(); // Prototype not polluted
   });
 
   it("JSON.stringify escapes HTML in output", () => {

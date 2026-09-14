@@ -3,7 +3,7 @@
  *
  * Verifies auth flow security, token handling, and protected route behavior.
  */
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -42,7 +42,7 @@ vi.mock("@/lib/api-client", () => ({
   },
 }));
 
-import { useUser, useAuth } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { RoleGuard } from "@/components/dashboard/role-guard";
 import apiClient, { setAuthToken } from "@/lib/api-client";
 
@@ -118,10 +118,10 @@ describe("Auth Security: RoleGuard Component", () => {
 
   it("renders nothing while auth is loading", () => {
     vi.mocked(useUser).mockReturnValue({
-      user: null,
+      user: undefined,
       isLoaded: false,
-      isSignedIn: false,
-    } as any);
+      isSignedIn: undefined,
+    } as ReturnType<typeof useUser>);
 
     render(
       <TestWrapper>
@@ -139,7 +139,7 @@ describe("Auth Security: RoleGuard Component", () => {
       user: null,
       isLoaded: true,
       isSignedIn: false,
-    } as any);
+    } as ReturnType<typeof useUser>);
 
     render(
       <TestWrapper>
@@ -157,7 +157,7 @@ describe("Auth Security: RoleGuard Component", () => {
       user: { id: "user-1" },
       isLoaded: true,
       isSignedIn: true,
-    } as any);
+    } as ReturnType<typeof useUser>);
 
     vi.mocked(apiClient.get).mockResolvedValue({
       data: { data: { _id: "user-1", role: "agent" } },
@@ -184,7 +184,7 @@ describe("Auth Security: RoleGuard Component", () => {
       user: { id: "admin-1" },
       isLoaded: true,
       isSignedIn: true,
-    } as any);
+    } as ReturnType<typeof useUser>);
 
     vi.mocked(apiClient.get).mockResolvedValue({
       data: { data: { _id: "admin-1", role: "admin" } },
@@ -208,7 +208,7 @@ describe("Auth Security: RoleGuard Component", () => {
       user: { id: "agent-1" },
       isLoaded: true,
       isSignedIn: true,
-    } as any);
+    } as ReturnType<typeof useUser>);
 
     vi.mocked(apiClient.get).mockResolvedValue({
       data: { data: { _id: "agent-1", role: "agent" } },
@@ -243,10 +243,10 @@ describe("Auth Security: Session Handling", () => {
 
     try {
       await apiClient.get("/protected");
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Error message should not contain token
-      expect(error.message).not.toContain("Bearer");
-      expect(error.message).not.toContain("token");
+      expect((error as Error).message).not.toContain("Bearer");
+      expect((error as Error).message).not.toContain("token");
     }
   });
 });

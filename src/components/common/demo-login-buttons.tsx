@@ -83,8 +83,9 @@ function DemoButtons() {
       } else {
         setError("Sign-in incomplete. Try again.");
       }
-    } catch (err: any) {
-      const clerkMsg = err.errors ? err.errors.map((e: any) => e.message).join(", ") : err.message || "";
+    } catch (err: unknown) {
+      const clerkErr = err as { errors?: { message: string }[]; message?: string };
+      const clerkMsg = clerkErr.errors ? clerkErr.errors.map((e) => e.message).join(", ") : clerkErr.message || "";
       setError(clerkMsg || "Sign-in failed");
     } finally {
       setLoadingRole(null);

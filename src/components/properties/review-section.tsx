@@ -10,9 +10,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { FormField } from "@/components/ui/form-field";
 import { formatDate } from "@/lib/utils";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/common/empty-state";
 import { reviewsApi } from "@/lib/api-client";
+import type { Review } from "@/types";
 
 interface ReviewSectionProps {
   propertyId: string;
@@ -29,7 +30,7 @@ export function ReviewSection({ propertyId }: ReviewSectionProps) {
 
   const createReview = useMutation({
     mutationFn: (data: { propertyId: string; rating: number; title?: string; comment?: string }) =>
-      reviewsApi.create(data as any),
+      reviewsApi.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["reviews"] });
       setShowForm(false);
@@ -42,7 +43,7 @@ export function ReviewSection({ propertyId }: ReviewSectionProps) {
   const reviews = data?.data || [];
   const avgRating =
     reviews.length > 0
-      ? reviews.reduce((sum: number, r: any) => sum + r.rating, 0) / reviews.length
+      ? reviews.reduce((sum: number, r: Review) => sum + r.rating, 0) / reviews.length
       : 0;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -155,7 +156,7 @@ export function ReviewSection({ propertyId }: ReviewSectionProps) {
         />
       ) : (
         <div className="space-y-4">
-          {reviews.map((review: any) => (
+          {reviews.map((review: Review) => (
             <Card key={review._id}>
               <CardContent className="p-6">
                 <div className="mb-3 flex items-center justify-between">
@@ -165,7 +166,7 @@ export function ReviewSection({ propertyId }: ReviewSectionProps) {
                     </div>
                     <div>
                       <p className="text-sm font-medium">
-                        {review.userId?.name || "Anonymous"}
+                        {((review.userId as unknown as { name?: string })?.name) || "Anonymous"}
                         {review.isVerified && (
                           <span className="ml-1.5 inline-flex items-center text-success">
                             <ThumbsUp className="h-3 w-3" />

@@ -42,6 +42,7 @@ test.describe("Responsive Layout", () => {
       // Either a menu button or visible nav
       const hasMenu = await menuBtn.isVisible();
       const hasNav = await nav.isVisible();
+      expect(hasMenu || hasNav).toBe(true);
 
       // On mobile, nav might be hidden behind a menu button
       // Just check that the page loaded

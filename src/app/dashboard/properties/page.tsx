@@ -5,10 +5,10 @@ import Link from "next/link";
 import { useProperties } from "@/lib/queries/use-properties";
 import { PageHeader } from "@/components/common/page-header";
 import { Pagination } from "@/components/common/pagination";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+import { Badge, type BadgeProps } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/common/empty-state";
 import { formatPrice } from "@/lib/utils";
@@ -87,7 +87,7 @@ export default function DashboardPropertiesPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {properties.map((property: any) => (
+                  {properties.map((property) => (
                     <tr
                       key={property._id}
                       className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50"
@@ -101,7 +101,7 @@ export default function DashboardPropertiesPage() {
                       <td className="p-4">
                         <Badge
                           variant={
-                            (PROPERTY_STATUS_COLORS as any)[property.status] as any || "default"
+                            PROPERTY_STATUS_COLORS[property.status as keyof typeof PROPERTY_STATUS_COLORS] as BadgeProps["variant"] || "default"
                           }
                         >
                           {PROPERTY_STATUS_LABELS[property.status as keyof typeof PROPERTY_STATUS_LABELS] || property.status.replace("_", " ")}

@@ -59,7 +59,7 @@ export function AiMatchPanel({ leadId }: AiMatchPanelProps) {
         </div>
       ) : (
         <div className="space-y-3">
-          {data?.matches?.map((match: any, i: number) => (
+          {data?.matches?.map((match: { propertyTitle: string; propertyLocation: string; score: number; reasons: string[] }, i: number) => (
             <div key={i} className="rounded-lg border border-border bg-background p-3">
               <div className="mb-1 flex items-center justify-between">
                 <p className="text-sm font-medium">{match.propertyTitle}</p>

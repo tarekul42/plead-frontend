@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor, fireEvent, act } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 vi.mock("@clerk/nextjs", () => ({
@@ -100,8 +100,8 @@ function InteractionTimeline({ leadId }: { leadId: string }) {
     const fetchInteractions = async () => {
       try {
         const { interactionsApi } = await import("@/lib/api-client");
-        const response = await interactionsApi.listByLead(leadId) as any;
-        setInteractions(response.data || response);
+        const response = await interactionsApi.listByLead(leadId) as { data?: typeof mockInteractions };
+        setInteractions((response.data || response) as typeof interactions);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to load interactions");
       } finally {

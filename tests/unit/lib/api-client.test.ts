@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, beforeEach, vi, type Mock } from "vitest";
 import apiClient, {
   propertiesApi,
   leadsApi,
@@ -7,7 +7,7 @@ import apiClient, {
 } from "@/lib/api-client";
 
 vi.mock("axios", () => {
-  const mockAxios: Record<string, any> = {
+  const mockAxios: Record<string, unknown> = {
     create: vi.fn(() => mockAxios),
     get: vi.fn(),
     post: vi.fn(),
@@ -19,7 +19,7 @@ vi.mock("axios", () => {
       response: { use: vi.fn().mockReturnValue(0) },
     },
   };
-  return { default: mockAxios as any };
+  return { default: mockAxios as unknown as typeof import("axios").default };
 });
 
 describe("api-client", () => {
@@ -36,19 +36,19 @@ describe("api-client", () => {
 
   describe("propertiesApi", () => {
     it("list calls GET /properties", async () => {
-      (apiClient.get as any).mockResolvedValue({ data: { success: true, data: [] } });
+      (apiClient.get as Mock).mockResolvedValue({ data: { success: true, data: [] } });
       await propertiesApi.list({ page: 1 });
       expect(apiClient.get).toHaveBeenCalledWith("/properties", { params: { page: 1 } });
     });
 
     it("get calls GET /properties/:slug", async () => {
-      (apiClient.get as any).mockResolvedValue({ data: { success: true, data: {} } });
+      (apiClient.get as Mock).mockResolvedValue({ data: { success: true, data: {} } });
       await propertiesApi.get("test-slug");
       expect(apiClient.get).toHaveBeenCalledWith("/properties/test-slug");
     });
 
     it("create calls POST /properties", async () => {
-      (apiClient.post as any).mockResolvedValue({ data: { success: true, data: {} } });
+      (apiClient.post as Mock).mockResolvedValue({ data: { success: true, data: {} } });
       await propertiesApi.create({ title: "Test" });
       expect(apiClient.post).toHaveBeenCalledWith("/properties", { title: "Test" });
     });
@@ -56,7 +56,7 @@ describe("api-client", () => {
 
   describe("leadsApi", () => {
     it("list calls GET /leads", async () => {
-      (apiClient.get as any).mockResolvedValue({ data: { success: true, data: [] } });
+      (apiClient.get as Mock).mockResolvedValue({ data: { success: true, data: [] } });
       await leadsApi.list();
       expect(apiClient.get).toHaveBeenCalledWith("/leads", { params: undefined });
     });
@@ -64,7 +64,7 @@ describe("api-client", () => {
 
   describe("interactionsApi", () => {
     it("listByLead calls GET /leads/:leadId/interactions", async () => {
-      (apiClient.get as any).mockResolvedValue({ data: { success: true, data: [] } });
+      (apiClient.get as Mock).mockResolvedValue({ data: { success: true, data: [] } });
       await interactionsApi.listByLead("lead-1");
       expect(apiClient.get).toHaveBeenCalledWith("/leads/lead-1/interactions");
     });

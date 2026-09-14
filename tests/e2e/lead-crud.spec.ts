@@ -124,6 +124,7 @@ const isRateLimited = rateLimitText || rateLimitJson;
         // Check for validation error messages
         const errorMessages = page.locator('.error, .text-danger, [role="alert"]');
         // Validation errors should appear or form should not submit
+        await errorMessages.count();
         await page.waitForTimeout(500);
       }
     }

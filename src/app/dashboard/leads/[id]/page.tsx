@@ -8,7 +8,7 @@ import { InteractionTimeline } from "@/components/interactions/interaction-timel
 import { PageHeader } from "@/components/common/page-header";
 import { ErrorState } from "@/components/common/error-state";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Badge, type BadgeProps } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LEAD_STATUS_LABELS, LEAD_STATUS_COLORS } from "@/lib/constants";
 import { formatCompactPrice, formatDate } from "@/lib/utils";
@@ -56,7 +56,7 @@ export default function LeadDetailPage({ params }: { params: Promise<{ id: strin
                   <h2 className="text-xl font-bold">{lead.name}</h2>
                   <p className="text-sm text-muted">{lead.email}</p>
                 </div>
-                <Badge variant={(LEAD_STATUS_COLORS as any)[lead.status] as any || "default"}>
+                <Badge variant={(LEAD_STATUS_COLORS[lead.status] as BadgeProps["variant"]) || "default"}>
                   {LEAD_STATUS_LABELS[lead.status as keyof typeof LEAD_STATUS_LABELS] || lead.status}
                 </Badge>
               </div>

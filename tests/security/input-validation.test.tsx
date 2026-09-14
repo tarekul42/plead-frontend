@@ -342,7 +342,7 @@ describe("Input Validation: Prototype Pollution Prevention", () => {
     });
 
     // Prototype should not be polluted
-    expect(({} as any).admin).toBeUndefined();
+    expect(({} as Record<string, unknown>).admin).toBeUndefined();
     expect(Object.prototype.hasOwnProperty.call({}, "admin")).toBe(false);
   });
 });

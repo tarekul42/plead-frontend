@@ -5,6 +5,7 @@ import { useProperties } from "@/lib/queries/use-properties";
 import { PropertyCard } from "@/components/properties/property-card";
 import { PropertySkeleton } from "@/components/properties/property-skeleton";
 import { ErrorState } from "@/components/common/error-state";
+import type { Property } from "@/types";
 
 export function FeaturedProperties() {
   const { data, isLoading, isError, refetch } = useProperties({
@@ -38,7 +39,7 @@ export function FeaturedProperties() {
 
         {data?.data && (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {data.data.map((property: any) => (
+            {data.data.map((property: Property) => (
               <PropertyCard key={property._id} property={property} />
             ))}
           </div>

@@ -36,7 +36,7 @@ function getTopLevelDirSize(dirPath: string, maxEntries = 20): number {
       const fullPath = join(dirPath, entry.name);
       if (entry.isFile()) {
         try {
-          totalSize += statSync(fullPath).size;
+          totalSize += getFileSize(fullPath);
         } catch {
           // skip unreadable
         }
@@ -70,6 +70,7 @@ describe("Bundle Size Regression", () => {
       // .next directory itself is a directory so top-level file size may be 0
       // Just verify the directory is accessible
       expect(topLevelSize).toBeGreaterThanOrEqual(0);
+      expect(topLevelSize).toBeLessThanOrEqual(BUNDLE_THRESHOLDS.totalBuild);
     });
   });
 

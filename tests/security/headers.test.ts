@@ -23,7 +23,7 @@ describe("Security Headers: Next.js Configuration", () => {
   };
 
   it("next.config file exists", () => {
-    const content = getConfigContent();
+    getConfigContent();
     // Config might be empty or minimal - that's okay for now
     // The important thing is the file exists for future configuration
     expect(

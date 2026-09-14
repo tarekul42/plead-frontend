@@ -77,7 +77,7 @@ function renderWithProviders(ui: React.ReactElement) {
 
 // Mock AI Copy Generator component
 function AiCopyGenerator() {
-  const [propertyId, setPropertyId] = React.useState("prop-1");
+  const [propertyId] = React.useState("prop-1");
   const [tone, setTone] = React.useState("luxury");
   const [generated, setGenerated] = React.useState<{
     title: string;
@@ -90,8 +90,8 @@ function AiCopyGenerator() {
     setIsGenerating(true);
     try {
       const { aiApi } = await import("@/lib/api-client");
-      const response = await aiApi.generatePropertyDescription({ propertyId, tone }) as any;
-      setGenerated(response.data || response);
+      const response = await aiApi.generatePropertyDescription({ propertyId, tone }) as { data?: { title: string; description: string; highlights: string[] } };
+      setGenerated((response.data || response) as typeof generated);
     } catch {
       // error handled gracefully
     } finally {

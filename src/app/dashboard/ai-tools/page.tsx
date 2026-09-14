@@ -74,7 +74,7 @@ export default function AiToolsPage() {
                   className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand"
                 >
                   <option value="">Select a lead...</option>
-                  {leads.map((lead: any) => (
+                  {leads.map((lead) => (
                     <option key={lead._id} value={lead._id}>{lead.name}</option>
                   ))}
                 </select>
@@ -132,7 +132,7 @@ export default function AiToolsPage() {
                   className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand"
                 >
                   <option value="">Select a property...</option>
-                  {properties.map((p: any) => (
+                  {properties.map((p) => (
                     <option key={p._id} value={p._id}>{p.title}</option>
                   ))}
                 </select>
@@ -200,7 +200,7 @@ export default function AiToolsPage() {
                   className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand"
                 >
                   <option value="">Select a lead...</option>
-                  {leads.map((lead: any) => (
+                  {leads.map((lead) => (
                     <option key={lead._id} value={lead._id}>{lead.name}</option>
                   ))}
                 </select>
@@ -213,7 +213,7 @@ export default function AiToolsPage() {
                   className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand"
                 >
                   <option value="">Select a property...</option>
-                  {properties.map((p: any) => (
+                  {properties.map((p) => (
                     <option key={p._id} value={p._id}>{p.title}</option>
                   ))}
                 </select>

@@ -3,7 +3,7 @@
  *
  * Verifies that the API client handles security concerns properly.
  */
-import { describe, it, expect, vi, beforeAll, afterEach, afterAll, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeAll, afterEach, afterAll } from "vitest";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 
@@ -89,8 +89,9 @@ describe("API Security: Authentication", () => {
     try {
       await apiClient.get("/protected");
       expect.fail("Should have thrown");
-    } catch (error: any) {
-      expect(error.message).toBe("Unauthorized");
+    } catch (error: unknown) {
+      expect(error).toBeInstanceOf(Error);
+      expect((error as Error).message).toBe("Unauthorized");
     }
   });
 
@@ -124,11 +125,11 @@ describe("API Security: Error Handling", () => {
     try {
       await apiClient.get("/error");
       expect.fail("Should have thrown");
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Error message should not contain stack trace
-      expect(error.message).not.toContain("at line");
-      expect(error.message).not.toContain("Error at");
-      expect(error.message).toBe("Internal error");
+      expect((error as Error).message).not.toContain("at line");
+      expect((error as Error).message).not.toContain("Error at");
+      expect((error as Error).message).toBe("Internal error");
     }
   });
 
@@ -142,7 +143,7 @@ describe("API Security: Error Handling", () => {
     try {
       await apiClient.get("/network-error");
       expect.fail("Should have thrown");
-    } catch (error: any) {
+    } catch (error: unknown) {
       expect(error).toBeInstanceOf(Error);
     }
   });
@@ -252,8 +253,8 @@ describe("API Security: Rate Limiting Awareness", () => {
     try {
       await apiClient.get("/rate-limited");
       expect.fail("Should have thrown");
-    } catch (error: any) {
-      expect(error.message).toBe("Too many requests");
+    } catch (error: unknown) {
+      expect((error as Error).message).toBe("Too many requests");
     }
   });
 });

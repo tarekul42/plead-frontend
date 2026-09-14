@@ -7,7 +7,6 @@ import {
   useRef,
   useEffect,
   useCallback,
-  type KeyboardEvent,
 } from "react";
 import { cn } from "@/lib/utils";
 

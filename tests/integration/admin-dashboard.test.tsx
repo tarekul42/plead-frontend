@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor, fireEvent, act } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import apiClient, { usersApi } from "@/lib/api-client";
 
@@ -107,7 +107,7 @@ function AdminDashboard() {
 
   const handleToggleStatus = async (userId: string) => {
     const { adminApi } = await import("@/lib/api-client");
-    const response = await adminApi.toggleUserStatus(userId);
+    await adminApi.toggleUserStatus(userId);
     setUsers((prev) => prev.map((u) => (u._id === userId ? { ...u, isActive: !u.isActive } : u)));
   };
 

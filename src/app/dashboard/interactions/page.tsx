@@ -49,7 +49,7 @@ export default function InteractionsPage() {
 
   const interactions = interactionsData?.data || [];
   const leads = leadsData?.data || [];
-  const leadNames = new Map(leads.map((l: any) => [l._id, l.name]));
+  const leadNames = new Map(leads.map((l) => [l._id, l.name]));
 
   const {
     register,
@@ -97,7 +97,7 @@ export default function InteractionsPage() {
               <FormField label="Lead" error={errors.leadId} htmlFor="leadId" required>
                 <Select id="leadId" {...register("leadId")}>
                   <option value="">Select a lead...</option>
-                  {leads.map((lead: any) => (
+                  {leads.map((lead) => (
                     <option key={lead._id} value={lead._id}>{lead.name}</option>
                   ))}
                 </Select>
@@ -135,7 +135,7 @@ export default function InteractionsPage() {
         </div>
       ) : (
         <div className="space-y-3">
-          {interactions.map((interaction: any) => {
+          {interactions.map((interaction) => {
             const Icon = typeIcons[interaction.type] || MoreHorizontal;
             return (
               <div key={interaction._id} className="rounded-card border border-border bg-surface p-4 shadow-sm">

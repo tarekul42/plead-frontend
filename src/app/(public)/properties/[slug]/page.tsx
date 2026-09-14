@@ -16,14 +16,15 @@ import {
   Bath,
   Move,
   MapPin,
-  ArrowLeft,
   Home,
   Eye,
   Calendar,
   ChevronRight,
   Heart,
   Share2,
+  type LucideIcon,
 } from "lucide-react";
+import type { Property } from "@/types";
 
 const statusVariants: Record<string, "success" | "warning" | "danger" | "brand"> = {
   available: "success",
@@ -32,7 +33,7 @@ const statusVariants: Record<string, "success" | "warning" | "danger" | "brand">
   rented: "brand",
 };
 
-function SpecCard({ icon: Icon, label, value }: { icon: any; label: string; value: string }) {
+function SpecCard({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
   return (
     <div className="rounded-card border border-border bg-surface p-4 transition hover:shadow-sm">
       <Icon className="mb-2 h-4 w-4 text-muted" />
@@ -42,7 +43,7 @@ function SpecCard({ icon: Icon, label, value }: { icon: any; label: string; valu
   );
 }
 
-function PropertyMap({ property }: { property: any }) {
+function PropertyMap({ property }: { property: Property }) {
   return (
     <div className="mt-8">
       <h2 className="mb-4 text-xl font-semibold">Location</h2>
@@ -62,8 +63,8 @@ function PropertyMap({ property }: { property: any }) {
 }
 
 function RelatedProperties({ currentId, propertyType }: { currentId: string; propertyType: string }) {
-  const { data, isLoading } = useProperties({ limit: 3, propertyType });
-  const related = data?.data?.filter((p: any) => p._id !== currentId) || [];
+  const { data } = useProperties({ limit: 3, propertyType });
+  const related = data?.data?.filter((p) => p._id !== currentId) || [];
 
   if (!related.length) return null;
 
@@ -71,7 +72,7 @@ function RelatedProperties({ currentId, propertyType }: { currentId: string; pro
     <div className="mt-16">
       <h2 className="mb-6 text-2xl font-bold">Similar Properties</h2>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {related.slice(0, 3).map((property: any) => (
+        {related.slice(0, 3).map((property) => (
           <PropertyCard key={property._id} property={property} />
         ))}
       </div>

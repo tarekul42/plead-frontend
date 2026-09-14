@@ -57,7 +57,7 @@ function renderWithProviders(ui: React.ReactElement) {
 // Mock Dashboard that requires auth
 function AuthenticatedDashboard() {
   const { user, isLoaded } = mockUseUser();
-  const router = mockUseRouter();
+  mockUseRouter();
 
   if (!isLoaded) return <div data-testid="loading">Loading...</div>;
   if (!user) return <div data-testid="redirect-to-signin">Redirecting to sign-in...</div>;

@@ -4,10 +4,10 @@ import { use, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Save, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { PROPERTY_TYPES, PROPERTY_STATUSES } from "@/lib/constants";
+import { PROPERTY_TYPES } from "@/lib/constants";
 
 export default function EditPropertyPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+  use(params);
   const router = useRouter();
   const [saved, setSaved] = useState(false);
 

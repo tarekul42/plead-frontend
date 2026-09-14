@@ -8,10 +8,11 @@ import { Pagination } from "@/components/common/pagination";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+import { Badge, type BadgeProps } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/common/empty-state";
 import { LEAD_STATUS_LABELS, LEAD_STATUS_COLORS } from "@/lib/constants";
+import type { Lead } from "@/types";
 import { formatCompactPrice, formatDate } from "@/lib/utils";
 import { useDebounce } from "@/hooks/use-debounce";
 import {
@@ -21,7 +22,7 @@ import {
   Search,
 } from "lucide-react";
 
-function LeadsTable({ leads }: { leads: any[] }) {
+function LeadsTable({ leads }: { leads: Lead[] }) {
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
@@ -36,7 +37,7 @@ function LeadsTable({ leads }: { leads: any[] }) {
           </tr>
         </thead>
         <tbody>
-          {leads.map((lead: any) => (
+          {leads.map((lead) => (
             <tr
               key={lead._id}
               className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50"
@@ -51,7 +52,7 @@ function LeadsTable({ leads }: { leads: any[] }) {
               </td>
               <td className="p-4 text-muted">{lead.email}</td>
               <td className="p-4">
-                <Badge variant={(LEAD_STATUS_COLORS as any)[lead.status] as any || "default"}>
+                <Badge variant={(LEAD_STATUS_COLORS[lead.status] as BadgeProps["variant"]) || "default"}>
                   {LEAD_STATUS_LABELS[lead.status as keyof typeof LEAD_STATUS_LABELS] || lead.status}
                 </Badge>
               </td>
@@ -70,13 +71,13 @@ function LeadsTable({ leads }: { leads: any[] }) {
   );
 }
 
-function LeadsKanban({ leads }: { leads: any[] }) {
+function LeadsKanban({ leads }: { leads: Lead[] }) {
   const statuses = ["new", "contacted", "qualified", "negotiating", "closed", "lost"];
 
   return (
     <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
       {statuses.map((status) => {
-        const statusLeads = leads.filter((l: any) => l.status === status);
+        const statusLeads = leads.filter((l) => l.status === status);
         return (
           <Card key={status}>
             <CardHeader className="pb-3">
@@ -89,7 +90,7 @@ function LeadsKanban({ leads }: { leads: any[] }) {
               {statusLeads.length === 0 ? (
                 <p className="py-6 text-center text-xs text-muted">No leads</p>
               ) : (
-                statusLeads.map((lead: any) => (
+                statusLeads.map((lead) => (
                   <Link
                     key={lead._id}
                     href={`/dashboard/leads/${lead._id}`}
@@ -113,7 +114,7 @@ function LeadsKanban({ leads }: { leads: any[] }) {
 export default function LeadsPage() {
   const [view, setView] = useState<"table" | "kanban">("table");
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState<string>("");
+  const [statusFilter] = useState<string>("");
   const [page, setPage] = useState(1);
   const limit = 12;
   const debouncedSearch = useDebounce(search, 300);
