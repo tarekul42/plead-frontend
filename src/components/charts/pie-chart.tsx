@@ -12,7 +12,15 @@ export function PieChart({ data }: PieChartProps) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <RechartsPie>
-        <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} innerRadius={40}>
+        <Pie
+          data={data}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          outerRadius={80}
+          innerRadius={40}
+        >
           {data.map((_, index) => (
             <Cell key={index} fill={COLORS[index % COLORS.length]} />
           ))}

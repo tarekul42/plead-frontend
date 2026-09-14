@@ -12,9 +12,24 @@ interface AiMatchPanelProps {
 export function AiMatchPanel({ leadId }: AiMatchPanelProps) {
   const [enabled, setEnabled] = useState(false);
 
-  const { data, isLoading, isError, refetch } = useQuery<{ matches: { propertyTitle: string; propertyLocation: string; score: number; reasons: string[] }[] }>({
+  const { data, isLoading, isError, refetch } = useQuery<{
+    matches: {
+      propertyTitle: string;
+      propertyLocation: string;
+      score: number;
+      reasons: string[];
+    }[];
+  }>({
     queryKey: ["ai-match", leadId],
-    queryFn: () => aiApi.matchLeadProperties({ leadId }) as Promise<{ matches: { propertyTitle: string; propertyLocation: string; score: number; reasons: string[] }[] }>,
+    queryFn: () =>
+      aiApi.matchLeadProperties({ leadId }) as Promise<{
+        matches: {
+          propertyTitle: string;
+          propertyLocation: string;
+          score: number;
+          reasons: string[];
+        }[];
+      }>,
     enabled,
   });
 
@@ -59,29 +74,45 @@ export function AiMatchPanel({ leadId }: AiMatchPanelProps) {
         </div>
       ) : (
         <div className="space-y-3">
-          {data?.matches?.map((match: { propertyTitle: string; propertyLocation: string; score: number; reasons: string[] }, i: number) => (
-            <div key={i} className="rounded-lg border border-border bg-background p-3">
-              <div className="mb-1 flex items-center justify-between">
-                <p className="text-sm font-medium">{match.propertyTitle}</p>
-                <span className={`text-xs font-bold ${
-                  match.score >= 80 ? "text-success" : match.score >= 60 ? "text-warning" : "text-muted"
-                }`}>
-                  {match.score}%
-                </span>
+          {data?.matches?.map(
+            (
+              match: {
+                propertyTitle: string;
+                propertyLocation: string;
+                score: number;
+                reasons: string[];
+              },
+              i: number,
+            ) => (
+              <div key={i} className="rounded-lg border border-border bg-background p-3">
+                <div className="mb-1 flex items-center justify-between">
+                  <p className="text-sm font-medium">{match.propertyTitle}</p>
+                  <span
+                    className={`text-xs font-bold ${
+                      match.score >= 80
+                        ? "text-success"
+                        : match.score >= 60
+                          ? "text-warning"
+                          : "text-muted"
+                    }`}
+                  >
+                    {match.score}%
+                  </span>
+                </div>
+                <p className="mb-2 text-xs text-muted">{match.propertyLocation}</p>
+                {match.reasons?.length > 0 && (
+                  <ul className="space-y-0.5">
+                    {match.reasons.map((r: string, j: number) => (
+                      <li key={j} className="flex items-start gap-1.5 text-xs text-muted">
+                        <span className="mt-0.5 h-1 w-1 shrink-0 rounded-full bg-success" />
+                        {r}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
-              <p className="mb-2 text-xs text-muted">{match.propertyLocation}</p>
-              {match.reasons?.length > 0 && (
-                <ul className="space-y-0.5">
-                  {match.reasons.map((r: string, j: number) => (
-                    <li key={j} className="flex items-start gap-1.5 text-xs text-muted">
-                      <span className="mt-0.5 h-1 w-1 shrink-0 rounded-full bg-success" />
-                      {r}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))}
+            ),
+          )}
           {(!data?.matches || data.matches.length === 0) && (
             <p className="py-4 text-center text-xs text-muted">No matching properties found.</p>
           )}

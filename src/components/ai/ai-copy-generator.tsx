@@ -42,7 +42,9 @@ export function AiCopyGenerator({ propertyId }: AiCopyGeneratorProps) {
       <h3 className="mb-3 text-sm font-semibold">AI Copy Generator</h3>
 
       <div className="mb-3">
-        <label htmlFor="tone" className="text-xs text-muted">Tone</label>
+        <label htmlFor="tone" className="text-xs text-muted">
+          Tone
+        </label>
         <select
           id="tone"
           value={tone}
@@ -50,7 +52,9 @@ export function AiCopyGenerator({ propertyId }: AiCopyGeneratorProps) {
           className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
         >
           {TONES.map((t) => (
-            <option key={t} value={t}>{t}</option>
+            <option key={t} value={t}>
+              {t}
+            </option>
           ))}
         </select>
       </div>
@@ -61,9 +65,13 @@ export function AiCopyGenerator({ propertyId }: AiCopyGeneratorProps) {
         className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
       >
         {loading ? (
-          <><Loader2 className="h-4 w-4 animate-spin" /> Generating...</>
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" /> Generating...
+          </>
         ) : (
-          <><Sparkles className="h-4 w-4" /> Generate</>
+          <>
+            <Sparkles className="h-4 w-4" /> Generate
+          </>
         )}
       </button>
 

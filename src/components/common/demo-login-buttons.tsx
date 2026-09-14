@@ -9,7 +9,10 @@ import { User, Building2, Shield, AlertCircle } from "lucide-react";
 import { DEMO_CREDENTIALS, type DemoRole } from "@/lib/constants";
 import { setAuthToken } from "@/lib/api-client";
 
-const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1").replace(/\/api\/v1\/?$/, "");
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1").replace(
+  /\/api\/v1\/?$/,
+  "",
+);
 
 const ICON_MAP: Record<string, typeof User> = {
   agent: User,
@@ -21,7 +24,10 @@ function SkeletonButtons() {
   return (
     <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
       {[0, 1, 2].map((i) => (
-        <div key={i} className="flex h-[72px] items-center justify-center rounded-xl bg-muted/40 animate-pulse" />
+        <div
+          key={i}
+          className="flex h-18 items-center justify-center rounded-xl bg-muted/40 animate-pulse"
+        />
       ))}
     </div>
   );
@@ -54,7 +60,10 @@ function DemoButtons() {
 
       if (!ticketRes.ok) {
         const body = await ticketRes.json().catch(() => ({}));
-        setError(body?.error?.message || "Failed to get demo sign-in ticket. Run `bun run seed` in the backend.");
+        setError(
+          body?.error?.message ||
+            "Failed to get demo sign-in ticket. Run `bun run seed` in the backend.",
+        );
         return;
       }
 
@@ -85,7 +94,9 @@ function DemoButtons() {
       }
     } catch (err: unknown) {
       const clerkErr = err as { errors?: { message: string }[]; message?: string };
-      const clerkMsg = clerkErr.errors ? clerkErr.errors.map((e) => e.message).join(", ") : clerkErr.message || "";
+      const clerkMsg = clerkErr.errors
+        ? clerkErr.errors.map((e) => e.message).join(", ")
+        : clerkErr.message || "";
       setError(clerkMsg || "Sign-in failed");
     } finally {
       setLoadingRole(null);
@@ -130,14 +141,8 @@ function DemoButtons() {
               onClick={() => login(cred.email, cred.password, role)}
               className="flex h-auto flex-col items-center gap-1.5 px-2 py-3 transition-all hover:border-brand/40 hover:bg-brand/5 disabled:opacity-40"
             >
-              {isLoading ? (
-                <Spinner size="sm" />
-              ) : (
-                <Icon className="h-5 w-5 text-brand" />
-              )}
-              <span className="text-xs font-semibold leading-none">
-                {cred.label}
-              </span>
+              {isLoading ? <Spinner size="sm" /> : <Icon className="h-5 w-5 text-brand" />}
+              <span className="text-xs font-semibold leading-none">{cred.label}</span>
               <span className="text-[10px] leading-tight text-muted">
                 {hasCreds ? "Auto-fill & sign in" : "Not configured"}
               </span>

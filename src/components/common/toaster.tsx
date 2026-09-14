@@ -43,13 +43,19 @@ export function Toaster() {
         setToasts((prev) => prev.filter((x) => x.id !== id));
       }, 4000);
     };
-    return () => { addToastFn = null; };
+    return () => {
+      addToastFn = null;
+    };
   }, []);
 
   if (toasts.length === 0) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 z-[100] flex flex-col gap-2" role="alert" aria-live="polite">
+    <div
+      className="fixed bottom-4 right-4 z-100 flex flex-col gap-2"
+      role="alert"
+      aria-live="polite"
+    >
       {toasts.map((t) => {
         const Icon = icons[t.type];
         return (
