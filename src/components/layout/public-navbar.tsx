@@ -31,7 +31,8 @@ export function PublicNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const links = isSignedIn ? loggedInLinks : publicLinks;
-  const initial = user?.firstName?.charAt(0) || user?.emailAddresses?.[0]?.emailAddress?.charAt(0) || "U";
+  const initial =
+    user?.firstName?.charAt(0) || user?.emailAddresses?.[0]?.emailAddress?.charAt(0) || "U";
 
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg">
@@ -75,7 +76,9 @@ export function PublicNavbar() {
           ) : (
             <div className="hidden items-center gap-2 sm:flex">
               <Link href="/sign-in">
-                <Button variant="ghost" size="sm">Sign in</Button>
+                <Button variant="ghost" size="sm">
+                  Sign in
+                </Button>
               </Link>
               <Link href="/sign-up">
                 <Button size="sm">Get started</Button>
@@ -116,7 +119,9 @@ export function PublicNavbar() {
             {!isSignedIn && (
               <div className="flex flex-col gap-2 pt-2">
                 <Link href="/sign-in">
-                  <Button variant="secondary" className="w-full">Sign in</Button>
+                  <Button variant="secondary" className="w-full">
+                    Sign in
+                  </Button>
                 </Link>
                 <Link href="/sign-up">
                   <Button className="w-full">Get started</Button>

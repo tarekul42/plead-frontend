@@ -22,7 +22,8 @@ export function ProfileDropdown() {
   const { theme, setTheme } = useTheme();
   const { role } = useCurrentUser();
 
-  const initial = user?.firstName?.charAt(0) || user?.emailAddresses?.[0]?.emailAddress?.charAt(0) || "U";
+  const initial =
+    user?.firstName?.charAt(0) || user?.emailAddresses?.[0]?.emailAddress?.charAt(0) || "U";
 
   return (
     <DropdownMenu>
@@ -67,18 +68,19 @@ export function ProfileDropdown() {
 
         <DropdownMenuItem onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
           {theme === "dark" ? (
-            <><Sun className="h-4 w-4" /> Light mode</>
+            <>
+              <Sun className="h-4 w-4" /> Light mode
+            </>
           ) : (
-            <><Moon className="h-4 w-4" /> Dark mode</>
+            <>
+              <Moon className="h-4 w-4" /> Dark mode
+            </>
           )}
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem
-          variant="danger"
-          onClick={() => signOut(() => router.push("/"))}
-        >
+        <DropdownMenuItem variant="danger" onClick={() => signOut(() => router.push("/"))}>
           <LogOut className="h-4 w-4" />
           Sign out
         </DropdownMenuItem>

@@ -66,7 +66,12 @@ export function DashboardSidebar({ mobile, onClose }: DashboardSidebarProps) {
   const links = role === "admin" ? adminLinks : role === "manager" ? managerLinks : agentLinks;
 
   return (
-    <aside className={cn("flex flex-col border-r border-border bg-surface", mobile ? "w-full" : "hidden w-64 shrink-0 lg:flex")}>
+    <aside
+      className={cn(
+        "flex flex-col border-r border-border bg-surface",
+        mobile ? "w-full" : "hidden w-64 shrink-0 lg:flex",
+      )}
+    >
       <div className="flex h-16 items-center gap-2 border-b border-border px-6">
         <Link href="/dashboard" className="text-xl font-bold tracking-tight">
           PropLead
@@ -79,7 +84,9 @@ export function DashboardSidebar({ mobile, onClose }: DashboardSidebarProps) {
       </div>
       <nav className="flex-1 space-y-1 overflow-y-auto p-4">
         {links.map((link) => {
-          const isActive = pathname === link.href || (link.href !== "/dashboard" && pathname.startsWith(link.href));
+          const isActive =
+            pathname === link.href ||
+            (link.href !== "/dashboard" && pathname.startsWith(link.href));
           return (
             <Link
               key={link.href}

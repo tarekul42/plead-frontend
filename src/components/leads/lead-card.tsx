@@ -50,9 +50,7 @@ export function LeadCard({ lead, onView, onEdit, onDelete }: LeadCardProps) {
         </span>
       </div>
 
-      <p className="mt-4 text-2xl font-bold text-brand">
-        {formatPrice(lead.budget)}
-      </p>
+      <p className="mt-4 text-2xl font-bold text-brand">{formatPrice(lead.budget)}</p>
 
       <div className="mt-4 space-y-1.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
         {lead.phone && (

@@ -26,7 +26,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
     <div className="group relative flex flex-col rounded-card border border-border bg-surface shadow-sm transition-all hover:shadow-md">
       <Link
         href={`/properties/${property.slug}`}
-        className="relative aspect-[4/3] overflow-hidden rounded-t-card bg-neutral-200 dark:bg-surface"
+        className="relative aspect-4/3 overflow-hidden rounded-t-card bg-neutral-200 dark:bg-surface"
       >
         {property.images?.[0] ? (
           <Image
@@ -42,7 +42,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
             <MapPin className="h-8 w-8" />
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
         <div className="absolute left-3 top-3 flex gap-2">
           <Badge variant={statusVariants[property.status] || "default"}>
             {property.status.replace("_", " ")}

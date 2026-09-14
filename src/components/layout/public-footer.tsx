@@ -39,8 +39,8 @@ export function PublicFooter() {
               PropLead
             </NextLink>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
-              AI-powered real estate lead engine. Match the right lead to the right property
-              in seconds — not hours.
+              AI-powered real estate lead engine. Match the right lead to the right property in
+              seconds — not hours.
             </p>
             <div className="mt-5 flex items-center gap-3">
               {socialLinks.map((social) => (

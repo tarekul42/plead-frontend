@@ -37,7 +37,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
 
   if (!images?.length) {
     return (
-      <div className="flex aspect-[16/9] items-center justify-center rounded-xl bg-neutral-200 dark:bg-surface">
+      <div className="flex aspect-video items-center justify-center rounded-xl bg-neutral-200 dark:bg-surface">
         <p className="text-muted">No images available</p>
       </div>
     );
@@ -46,7 +46,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
   return (
     <>
       <div className="relative overflow-hidden rounded-xl">
-        <div className="relative aspect-[16/9]">
+        <div className="relative aspect-video">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={images[current]}

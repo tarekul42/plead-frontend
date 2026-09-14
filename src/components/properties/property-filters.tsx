@@ -65,9 +65,7 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
           {PROPERTY_STATUSES.map((status) => (
             <button
               key={status}
-              onClick={() =>
-                update("status", filters.status === status ? undefined : status)
-              }
+              onClick={() => update("status", filters.status === status ? undefined : status)}
               className={`rounded-lg border px-3 py-1.5 text-xs transition ${
                 filters.status === status
                   ? "border-brand bg-brand/5 text-brand"
@@ -125,29 +123,35 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
             type="number"
             placeholder="Min"
             value={filters.priceMin || ""}
-            onChange={(e) => update("priceMin", e.target.value ? Number(e.target.value) : undefined)}
+            onChange={(e) =>
+              update("priceMin", e.target.value ? Number(e.target.value) : undefined)
+            }
             className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none transition focus:border-brand"
           />
           <input
             type="number"
             placeholder="Max"
             value={filters.priceMax || ""}
-            onChange={(e) => update("priceMax", e.target.value ? Number(e.target.value) : undefined)}
+            onChange={(e) =>
+              update("priceMax", e.target.value ? Number(e.target.value) : undefined)
+            }
             className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none transition focus:border-brand"
           />
         </div>
       </div>
 
       <button
-        onClick={() => onChange({
-          propertyType: undefined,
-          status: undefined,
-          bedsMin: undefined,
-          bathsMin: undefined,
-          priceMin: undefined,
-          priceMax: undefined,
-          sort: undefined,
-        })}
+        onClick={() =>
+          onChange({
+            propertyType: undefined,
+            status: undefined,
+            bedsMin: undefined,
+            bathsMin: undefined,
+            priceMin: undefined,
+            priceMax: undefined,
+            sort: undefined,
+          })
+        }
         className="w-full rounded-lg border border-border px-4 py-2 text-sm transition hover:bg-neutral-100 dark:hover:bg-surface"
       >
         Clear filters

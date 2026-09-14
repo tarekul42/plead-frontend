@@ -21,7 +21,8 @@ export function LeadPipeline({ onLeadClick, onStatusChange }: LeadPipelineProps)
   const [search, setSearch] = useState("");
 
   if (isLoading) return <div className="py-8 text-center text-sm text-muted">Loading...</div>;
-  if (isError) return <div className="py-8 text-center text-sm text-danger">Error: Failed to load</div>;
+  if (isError)
+    return <div className="py-8 text-center text-sm text-danger">Error: Failed to load</div>;
 
   const leads: Lead[] = data?.data ?? [];
   const filtered = search
