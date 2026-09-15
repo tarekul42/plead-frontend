@@ -1,7 +1,7 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 
 // Helper to check if Clerk rate limit is active
-async function isClerkRateLimited(page: any) {
+async function isClerkRateLimited(page: Page) {
   const rateLimitText = await page.locator("text=too many requests").first().isVisible();
   const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
   return rateLimitText || rateLimitJson;
@@ -34,7 +34,10 @@ test.describe("Agents Page", () => {
     await page.waitForTimeout(1000);
 
     const hasAgents = await page.locator('[data-testid="agent-list"], table').first().isVisible();
-    const hasEmptyState = await page.locator("text=No agents").or(page.locator("text=no agents")).isVisible();
+    const hasEmptyState = await page
+      .locator("text=No agents")
+      .or(page.locator("text=no agents"))
+      .isVisible();
 
     expect(hasAgents || hasEmptyState).toBeTruthy();
   });
@@ -44,7 +47,9 @@ test.describe("Agents Page", () => {
     const inviteBtn = page.getByRole("button", { name: /invite|add agent|new agent/i });
     if (await inviteBtn.first().isVisible()) {
       await inviteBtn.first().click();
-      await expect(page.locator("form, [data-testid='invite-form'], [role='dialog']")).toBeVisible();
+      await expect(
+        page.locator("form, [data-testid='invite-form'], [role='dialog']"),
+      ).toBeVisible();
     }
   });
 
@@ -111,7 +116,10 @@ test.describe("Public Blog Page", () => {
     await page.waitForTimeout(1000);
 
     const hasPosts = await page.locator('[data-testid="blog-list"], article').first().isVisible();
-    const hasEmptyState = await page.locator("text=No posts").or(page.locator("text=no blog")).isVisible();
+    const hasEmptyState = await page
+      .locator("text=No posts")
+      .or(page.locator("text=no blog"))
+      .isVisible();
 
     expect(hasPosts || hasEmptyState).toBeTruthy();
   });
@@ -120,7 +128,9 @@ test.describe("Public Blog Page", () => {
     if (await isClerkRateLimited(page)) return;
     await page.waitForTimeout(1000);
 
-    const titles = page.locator("article h2, article h3, [data-testid='blog-list'] h2, [data-testid='blog-list'] h3");
+    const titles = page.locator(
+      "article h2, article h3, [data-testid='blog-list'] h2, [data-testid='blog-list'] h3",
+    );
     if (await titles.first().isVisible()) {
       await expect(titles.first()).toBeVisible();
     }
@@ -176,7 +186,11 @@ test.describe("About Page", () => {
     if (await isClerkRateLimited(page)) return;
     await page.waitForTimeout(1000);
 
-    const aboutContent = page.locator("text=team").or(page.locator("text=mission")).or(page.locator("text=about")).or(page.locator("text=company"));
+    const aboutContent = page
+      .locator("text=team")
+      .or(page.locator("text=mission"))
+      .or(page.locator("text=about"))
+      .or(page.locator("text=company"));
     if (await aboutContent.first().isVisible()) {
       await expect(aboutContent.first()).toBeVisible();
     }
@@ -224,7 +238,9 @@ test.describe("Contact Page", () => {
     if (await isClerkRateLimited(page)) return;
     await page.waitForTimeout(1000);
 
-    const messageInput = page.locator('textarea[name="message"], textarea[placeholder*="message" i]');
+    const messageInput = page.locator(
+      'textarea[name="message"], textarea[placeholder*="message" i]',
+    );
     if (await messageInput.first().isVisible()) {
       await expect(messageInput.first()).toBeVisible();
     }
@@ -244,7 +260,9 @@ test.describe("Contact Page", () => {
       await emailInput.first().fill("test@example.com");
     }
 
-    const messageInput = page.locator('textarea[name="message"], textarea[placeholder*="message" i]');
+    const messageInput = page.locator(
+      'textarea[name="message"], textarea[placeholder*="message" i]',
+    );
     if (await messageInput.first().isVisible()) {
       await messageInput.first().fill("This is a test message from e2e tests.");
     }

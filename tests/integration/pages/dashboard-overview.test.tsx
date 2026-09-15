@@ -13,17 +13,22 @@ const mockGet = vi.hoisted(() => vi.fn());
 vi.mock("@/lib/api-client", () => ({
   default: {
     get: mockGet,
-    interceptors: { request: { use: vi.fn().mockReturnValue(0) }, response: { use: vi.fn().mockReturnValue(0) } },
+    interceptors: {
+      request: { use: vi.fn().mockReturnValue(0) },
+      response: { use: vi.fn().mockReturnValue(0) },
+    },
   },
   setAuthToken: vi.fn(),
   usersApi: {
     me: () => mockGet("/users/me").then((r: { data: { data: unknown } }) => r.data.data),
   },
   leadsApi: {
-    list: (params?: unknown) => mockGet("/leads", { params }).then((r: { data: unknown }) => r.data),
+    list: (params?: unknown) =>
+      mockGet("/leads", { params }).then((r: { data: unknown }) => r.data),
   },
   propertiesApi: {
-    list: (params?: unknown) => mockGet("/properties", { params }).then((r: { data: unknown }) => r.data),
+    list: (params?: unknown) =>
+      mockGet("/properties", { params }).then((r: { data: unknown }) => r.data),
   },
   interactionsApi: {
     list: () => Promise.resolve({ data: [], meta: undefined }),
@@ -40,14 +45,22 @@ import DashboardPage from "@/app/dashboard/page";
 beforeEach(() => {
   vi.mocked(mockGet).mockImplementation((url: string) => {
     if (url === "/users/me") {
-      return Promise.resolve({ data: { success: true, data: { _id: "agent-1", role: "agent", agencyId: "agency-1" } } });
+      return Promise.resolve({
+        data: { success: true, data: { _id: "agent-1", role: "agent", agencyId: "agency-1" } },
+      });
     }
     if (url === "/leads") {
       return Promise.resolve({
         data: {
           success: true,
           data: [
-            { _id: "lead-1", name: "John Doe", status: "new", budget: 500000, createdAt: "2025-01-15T00:00:00Z" },
+            {
+              _id: "lead-1",
+              name: "John Doe",
+              status: "new",
+              budget: 500000,
+              createdAt: "2025-01-15T00:00:00Z",
+            },
           ],
           meta: { total: 1, page: 1, limit: 5 },
         },

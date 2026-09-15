@@ -108,7 +108,7 @@ describe("Input Validation: Form Fields", () => {
       <form>
         <input type="email" data-testid="email" required />
         <button type="submit">Submit</button>
-      </form>
+      </form>,
     );
 
     const input = screen.getByTestId("email");
@@ -126,7 +126,7 @@ describe("Input Validation: Form Fields", () => {
     render(
       <form>
         <input type="number" data-testid="price" min={0} />
-      </form>
+      </form>,
     );
 
     const input = screen.getByTestId("price") as HTMLInputElement;
@@ -144,7 +144,7 @@ describe("Input Validation: Form Fields", () => {
     render(
       <form>
         <input type="number" data-testid="beds" min={0} max={20} />
-      </form>
+      </form>,
     );
 
     const input = screen.getByTestId("beds") as HTMLInputElement;
@@ -166,7 +166,7 @@ describe("Input Validation: Form Fields", () => {
     render(
       <form>
         <input type="url" data-testid="website" />
-      </form>
+      </form>,
     );
 
     const input = screen.getByTestId("website") as HTMLInputElement;
@@ -189,7 +189,7 @@ describe("Input Validation: Form Fields", () => {
     render(
       <form>
         <input type="tel" data-testid="phone" pattern="[0-9+\-\s()]+" />
-      </form>
+      </form>,
     );
 
     const input = screen.getByTestId("phone") as HTMLInputElement;
@@ -208,7 +208,7 @@ describe("Input Validation: Textarea Fields", () => {
     render(
       <form>
         <textarea data-testid="notes" maxLength={5000} />
-      </form>
+      </form>,
     );
 
     const textarea = screen.getByTestId("notes") as HTMLTextAreaElement;
@@ -228,7 +228,7 @@ Line 3`;
     render(
       <form>
         <textarea data-testid="notes" maxLength={10} />
-      </form>
+      </form>,
     );
 
     const textarea = screen.getByTestId("notes") as HTMLTextAreaElement;
@@ -254,7 +254,7 @@ describe("Input Validation: Select Fields", () => {
           <option value="inactive">Inactive</option>
           <option value="pending">Pending</option>
         </select>
-      </form>
+      </form>,
     );
 
     const select = screen.getByTestId("status") as HTMLSelectElement;
@@ -271,12 +271,8 @@ describe("Input Validation: File Uploads", () => {
   it("file input respects accept attribute", () => {
     render(
       <form>
-        <input
-          type="file"
-          data-testid="image"
-          accept="image/jpeg,image/png,image/webp"
-        />
-      </form>
+        <input type="file" data-testid="image" accept="image/jpeg,image/png,image/webp" />
+      </form>,
     );
 
     const input = screen.getByTestId("image") as HTMLInputElement;
@@ -292,12 +288,8 @@ describe("Input Validation: File Uploads", () => {
 
     render(
       <form>
-        <input
-          type="file"
-          data-testid="document"
-          data-max-size={maxSizeBytes}
-        />
-      </form>
+        <input type="file" data-testid="document" data-max-size={maxSizeBytes} />
+      </form>,
     );
 
     const input = screen.getByTestId("document");
@@ -311,7 +303,7 @@ describe("Input Validation: Hidden Fields", () => {
       <form>
         <input type="hidden" name="userId" value="user-123" />
         <input type="hidden" name="action" value="update" />
-      </form>
+      </form>,
     );
 
     // Hidden fields are visible in DOM - don't put secrets here
@@ -342,7 +334,7 @@ describe("Input Validation: Prototype Pollution Prevention", () => {
     });
 
     // Prototype should not be polluted
-    expect(({} as any).admin).toBeUndefined();
+    expect(({} as Record<string, unknown>).admin).toBeUndefined();
     expect(Object.prototype.hasOwnProperty.call({}, "admin")).toBe(false);
   });
 });

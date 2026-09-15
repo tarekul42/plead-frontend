@@ -24,7 +24,9 @@ test.describe("Admin Dashboard", () => {
   test("loads admin dashboard for admin users", async ({ page }) => {
     await page.waitForTimeout(3000);
 
-    const adminHeading = page.locator("text=Admin Dashboard, text=User Management, text=Agency Overview");
+    const adminHeading = page.locator(
+      "text=Admin Dashboard, text=User Management, text=Agency Overview",
+    );
     if (await adminHeading.first().isVisible()) {
       await expect(adminHeading.first()).toBeVisible();
     }
@@ -43,7 +45,9 @@ test.describe("Admin Dashboard", () => {
     await page.waitForTimeout(3000);
 
     // Check for user list or table
-    const userList = page.locator('[data-testid="user-list"], table, text=/agent@|manager@|admin@/');
+    const userList = page.locator(
+      '[data-testid="user-list"], table, text=/agent@|manager@|admin@/',
+    );
     if (await userList.first().isVisible()) {
       await expect(userList.first()).toBeVisible();
     }
@@ -131,7 +135,10 @@ test.describe("Admin Dashboard", () => {
   test("admin can filter users by role", async ({ page }) => {
     await page.waitForTimeout(3000);
 
-    const filterBtn = page.locator('button, select').filter({ hasText: /filter|role/i }).first();
+    const filterBtn = page
+      .locator("button, select")
+      .filter({ hasText: /filter|role/i })
+      .first();
     if (await filterBtn.isVisible()) {
       await filterBtn.click();
       await page.waitForTimeout(500);

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor, fireEvent, act } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import apiClient, { usersApi } from "@/lib/api-client";
 
@@ -56,7 +56,10 @@ vi.mock("@/lib/api-client", () => ({
       success: true,
       data: { _id: "agent-1", isActive: false },
     }),
-    interceptors: { request: { use: vi.fn().mockReturnValue(0) }, response: { use: vi.fn().mockReturnValue(0) } },
+    interceptors: {
+      request: { use: vi.fn().mockReturnValue(0) },
+      response: { use: vi.fn().mockReturnValue(0) },
+    },
   },
   setAuthToken: vi.fn(),
   usersApi: {
@@ -73,7 +76,7 @@ vi.mock("@/lib/api-client", () => ({
 
 // Set initial mock implementations
 vi.mocked(apiClient.get).mockResolvedValue({ data: { data: mockUser } });
-    vi.mocked(usersApi.list).mockResolvedValue({ data: mockUsers, meta: undefined });
+vi.mocked(usersApi.list).mockResolvedValue({ data: mockUsers, meta: undefined });
 
 import React from "react";
 import { RoleGuard } from "@/components/dashboard/role-guard";
@@ -94,7 +97,7 @@ function AdminDashboard() {
     const fetchUsers = async () => {
       try {
         const { usersApi } = await import("@/lib/api-client");
-        const response = await usersApi.list() as { data: typeof mockUsers };
+        const response = (await usersApi.list()) as { data: typeof mockUsers };
         setUsers(response.data);
       } catch {
         // handle error gracefully
@@ -107,7 +110,7 @@ function AdminDashboard() {
 
   const handleToggleStatus = async (userId: string) => {
     const { adminApi } = await import("@/lib/api-client");
-    const response = await adminApi.toggleUserStatus(userId);
+    await adminApi.toggleUserStatus(userId);
     setUsers((prev) => prev.map((u) => (u._id === userId ? { ...u, isActive: !u.isActive } : u)));
   };
 
@@ -171,7 +174,7 @@ describe("Admin Dashboard: Admin-only Features, User Management", () => {
     vi.mocked(apiClient.get).mockResolvedValue({
       data: { data: mockUser },
     });
-vi.mocked(usersApi.list).mockResolvedValue({ data: mockUsers, meta: undefined });
+    vi.mocked(usersApi.list).mockResolvedValue({ data: mockUsers, meta: undefined });
   });
 
   it("renders admin dashboard for admin users", async () => {

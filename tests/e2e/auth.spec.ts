@@ -1,15 +1,15 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 
 // Helper to check if Clerk rate limit is active
-async function isClerkRateLimited(page: any) {
+async function isClerkRateLimited(page: Page) {
   const rateLimitText = await page.locator("text=too many requests").first().isVisible();
   const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
   return rateLimitText || rateLimitJson;
 }
 
-async function isAuthenticated(page: any) {
+async function isAuthenticated(page: Page) {
   const cookies = await page.context().cookies();
-  return cookies.some((c: any) => c.name.includes("__session"));
+  return cookies.some((c) => c.name.includes("__session"));
 }
 
 test.describe("Authentication Flow", () => {
@@ -19,7 +19,10 @@ test.describe("Authentication Flow", () => {
   });
 
   test("demo login buttons are visible after Clerk loads", async ({ page }) => {
-    if (await isAuthenticated(page)) { test.skip(); return; }
+    if (await isAuthenticated(page)) {
+      test.skip();
+      return;
+    }
     test.setTimeout(30000);
     await page.goto("/sign-in");
     await page.waitForTimeout(15000);
@@ -30,7 +33,10 @@ test.describe("Authentication Flow", () => {
   });
 
   test("demo login buttons show all three roles", async ({ page }) => {
-    if (await isAuthenticated(page)) { test.skip(); return; }
+    if (await isAuthenticated(page)) {
+      test.skip();
+      return;
+    }
     test.setTimeout(30000);
     await page.goto("/sign-in");
     await page.waitForTimeout(15000);
@@ -47,7 +53,10 @@ test.describe("Authentication Flow", () => {
   });
 
   test("clicking demo login button attempts sign-in", async ({ page }) => {
-    if (await isAuthenticated(page)) { test.skip(); return; }
+    if (await isAuthenticated(page)) {
+      test.skip();
+      return;
+    }
     test.setTimeout(30000);
     await page.goto("/sign-in");
     await page.waitForTimeout(15000);
@@ -62,7 +71,10 @@ test.describe("Authentication Flow", () => {
   });
 
   test("redirects unauthenticated users from dashboard to sign-in", async ({ page }) => {
-    if (await isAuthenticated(page)) { test.skip(); return; }
+    if (await isAuthenticated(page)) {
+      test.skip();
+      return;
+    }
     test.setTimeout(30000);
     await page.goto("/dashboard");
     await page.waitForTimeout(5000);
@@ -74,7 +86,10 @@ test.describe("Authentication Flow", () => {
   });
 
   test("redirects unauthenticated users from leads to sign-in", async ({ page }) => {
-    if (await isAuthenticated(page)) { test.skip(); return; }
+    if (await isAuthenticated(page)) {
+      test.skip();
+      return;
+    }
     test.setTimeout(30000);
     await page.goto("/dashboard/leads");
     await page.waitForTimeout(5000);
@@ -86,7 +101,10 @@ test.describe("Authentication Flow", () => {
   });
 
   test("redirects unauthenticated users from properties dashboard to sign-in", async ({ page }) => {
-    if (await isAuthenticated(page)) { test.skip(); return; }
+    if (await isAuthenticated(page)) {
+      test.skip();
+      return;
+    }
     test.setTimeout(30000);
     await page.goto("/dashboard/properties");
     await page.waitForTimeout(5000);
@@ -98,7 +116,10 @@ test.describe("Authentication Flow", () => {
   });
 
   test("redirects unauthenticated users from profile to sign-in", async ({ page }) => {
-    if (await isAuthenticated(page)) { test.skip(); return; }
+    if (await isAuthenticated(page)) {
+      test.skip();
+      return;
+    }
     test.setTimeout(30000);
     await page.goto("/dashboard/profile");
     await page.waitForTimeout(5000);
@@ -110,7 +131,10 @@ test.describe("Authentication Flow", () => {
   });
 
   test("redirects unauthenticated users from admin to sign-in", async ({ page }) => {
-    if (await isAuthenticated(page)) { test.skip(); return; }
+    if (await isAuthenticated(page)) {
+      test.skip();
+      return;
+    }
     test.setTimeout(30000);
     const response = await page.goto("/dashboard/admin");
     await page.waitForTimeout(5000);

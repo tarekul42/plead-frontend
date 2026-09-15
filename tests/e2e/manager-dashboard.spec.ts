@@ -1,6 +1,6 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 
-async function isClerkRateLimited(page: any) {
+async function isClerkRateLimited(page: Page) {
   const rateLimitText = await page.locator("text=too many requests").first().isVisible();
   const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
   return rateLimitText || rateLimitJson;

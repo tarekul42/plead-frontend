@@ -23,7 +23,10 @@ const mockGet = vi.fn().mockResolvedValue({
 vi.mock("@/lib/api-client", () => ({
   default: {
     get: mockGet,
-    interceptors: { request: { use: vi.fn().mockReturnValue(0) }, response: { use: vi.fn().mockReturnValue(0) } },
+    interceptors: {
+      request: { use: vi.fn().mockReturnValue(0) },
+      response: { use: vi.fn().mockReturnValue(0) },
+    },
   },
   setAuthToken: vi.fn(),
 }));
@@ -70,7 +73,8 @@ function DashboardStatsPage() {
   }, []);
 
   if (isLoading) return <DashboardLoading />;
-  if (hasError) return <ErrorState message="Failed to load dashboard stats." onRetry={fetchStats} />;
+  if (hasError)
+    return <ErrorState message="Failed to load dashboard stats." onRetry={fetchStats} />;
   if (!stats) return null;
 
   return (
@@ -82,7 +86,9 @@ function DashboardStatsPage() {
         <StatCard title="Interactions" value={stats.totalInteractions} icon={MessageSquare} />
         <StatCard title="Conversion" value={`${stats.conversionRate * 100}%`} icon={TrendingUp} />
       </div>
-      <button onClick={fetchStats} data-testid="refresh-btn">Refresh</button>
+      <button onClick={fetchStats} data-testid="refresh-btn">
+        Refresh
+      </button>
     </div>
   );
 }
@@ -132,7 +138,7 @@ describe("Dashboard Stats: Loading, Error States, Refresh", () => {
     renderWithProviders(
       <div>
         <StatCard title="Test Stat" value={100} icon={Users} description="Test description" />
-      </div>
+      </div>,
     );
 
     expect(screen.getByText("Test Stat")).toBeInTheDocument();
@@ -149,7 +155,7 @@ describe("Dashboard Stats: Loading, Error States, Refresh", () => {
           icon={TrendingUp}
           trend={{ value: "+12% from last month", positive: true }}
         />
-      </div>
+      </div>,
     );
 
     expect(screen.getByText("Trending")).toBeInTheDocument();

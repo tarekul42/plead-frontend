@@ -8,8 +8,8 @@ test.describe("Blog CRUD Operations", () => {
     const isOnSignIn = page.url().includes("sign-in");
     const isOnClerk = page.url().includes("clerk.accounts.dev");
     const rateLimitText = await page.locator("text=too many requests").first().isVisible();
-const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
-const isRateLimited = rateLimitText || rateLimitJson;
+    const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
+    const isRateLimited = rateLimitText || rateLimitJson;
     if (isOnSignIn || isOnClerk || isRateLimited) {
       test.skip();
     }
@@ -22,8 +22,11 @@ const isRateLimited = rateLimitText || rateLimitJson;
   test("displays blog posts list or empty state", async ({ page }) => {
     await page.waitForTimeout(1000);
 
-    const hasBlogs = await page.locator('table tbody tr').first().isVisible();
-    const hasEmptyState = await page.locator("text=No posts yet").or(page.locator("text=No blog posts")).isVisible();
+    const hasBlogs = await page.locator("table tbody tr").first().isVisible();
+    const hasEmptyState = await page
+      .locator("text=No posts yet")
+      .or(page.locator("text=No blog posts"))
+      .isVisible();
 
     expect(hasBlogs || hasEmptyState).toBeTruthy();
   });
@@ -53,7 +56,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
     if (await createBtn.first().isVisible()) {
       await createBtn.click();
 
-      const contentInput = page.locator('textarea[name="content"], textarea[placeholder*="content" i]');
+      const contentInput = page.locator(
+        'textarea[name="content"], textarea[placeholder*="content" i]',
+      );
       if (await contentInput.isVisible()) {
         await expect(contentInput).toBeVisible();
       }
@@ -65,7 +70,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
     if (await createBtn.first().isVisible()) {
       await createBtn.click();
 
-      const excerptInput = page.locator('textarea[name="excerpt"], input[name="excerpt"], textarea[placeholder*="excerpt" i]');
+      const excerptInput = page.locator(
+        'textarea[name="excerpt"], input[name="excerpt"], textarea[placeholder*="excerpt" i]',
+      );
       if (await excerptInput.isVisible()) {
         await expect(excerptInput).toBeVisible();
       }
@@ -102,7 +109,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
     if (await createBtn.first().isVisible()) {
       await createBtn.click();
 
-      const contentInput = page.locator('textarea[name="content"], textarea[placeholder*="content" i]');
+      const contentInput = page.locator(
+        'textarea[name="content"], textarea[placeholder*="content" i]',
+      );
       if (await contentInput.isVisible()) {
         await contentInput.fill("This is the test content for the blog post.");
         await expect(contentInput).toHaveValue("This is the test content for the blog post.");

@@ -11,7 +11,7 @@
  * - INP (Interaction to Next Paint): < 200ms
  * - TTFB (Time to First Byte): < 800ms
  */
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 
 // Web Vitals thresholds (good/excellent)
 const WEB_VITALS_THRESHOLDS = {
@@ -32,7 +32,10 @@ const mockWebVitals = {
 };
 
 // Helper to classify web vital rating
-function getVitalRating(value: number, thresholds: { good: number; poor: number }): "good" | "needs-improvement" | "poor" {
+function getVitalRating(
+  value: number,
+  thresholds: { good: number; poor: number },
+): "good" | "needs-improvement" | "poor" {
   if (value <= thresholds.good) return "good";
   if (value <= thresholds.poor) return "needs-improvement";
   return "poor";
@@ -150,7 +153,7 @@ describe("Web Vitals: Performance Budgets", () => {
     };
 
     // All vitals should be "good" or "needs-improvement"
-    for (const [metric, rating] of Object.entries(results)) {
+    for (const [, rating] of Object.entries(results)) {
       expect(rating).not.toBe("poor");
     }
   });
@@ -175,7 +178,7 @@ describe("Web Vitals: Performance Monitoring Setup", () => {
   it("should be able to measure component render time", () => {
     const start = performance.now();
     // Simulate some work
-    const arr = Array.from({ length: 1000 }, (_, i) => i * 2);
+    Array.from({ length: 1000 }, (_, i) => i * 2);
     const end = performance.now();
 
     const duration = end - start;

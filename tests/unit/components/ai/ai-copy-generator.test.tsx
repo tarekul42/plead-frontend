@@ -17,7 +17,9 @@ describe("AiCopyGenerator", () => {
 
   it("renders the component", () => {
     render(<AiCopyGenerator propertyId="prop-1" />);
-    expect(screen.getByText(/AI Copy Generator|Generate Copy|Property Description/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/AI Copy Generator|Generate Copy|Property Description/i),
+    ).toBeInTheDocument();
   });
 
   it("has a tone selector", () => {

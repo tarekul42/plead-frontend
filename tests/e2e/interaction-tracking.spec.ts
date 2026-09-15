@@ -8,8 +8,8 @@ test.describe("Interaction Tracking", () => {
     const isOnSignIn = page.url().includes("sign-in");
     const isOnClerk = page.url().includes("clerk.accounts.dev");
     const rateLimitText = await page.locator("text=too many requests").first().isVisible();
-const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
-const isRateLimited = rateLimitText || rateLimitJson;
+    const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
+    const isRateLimited = rateLimitText || rateLimitJson;
     if (isOnSignIn || isOnClerk || isRateLimited) {
       test.skip();
     }
@@ -134,7 +134,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
       await leadLink.click();
       await page.waitForTimeout(1000);
 
-      const outcomeSelect = page.locator('select[name="outcome"], [data-testid*="interaction-outcome"]');
+      const outcomeSelect = page.locator(
+        'select[name="outcome"], [data-testid*="interaction-outcome"]',
+      );
       if (await outcomeSelect.isVisible()) {
         await expect(outcomeSelect).toBeVisible();
       }
@@ -147,7 +149,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
       await leadLink.click();
       await page.waitForTimeout(1000);
 
-      const typeSelect = page.locator('select[name="type"], [data-testid*="interaction-type"]').first();
+      const typeSelect = page
+        .locator('select[name="type"], [data-testid*="interaction-type"]')
+        .first();
       if (await typeSelect.isVisible()) {
         await typeSelect.selectOption("call");
         await expect(typeSelect).toHaveValue("call");
@@ -161,10 +165,14 @@ const isRateLimited = rateLimitText || rateLimitJson;
       await leadLink.click();
       await page.waitForTimeout(1000);
 
-      const notesField = page.locator('textarea[name="notes"], [data-testid*="interaction-notes"]').first();
+      const notesField = page
+        .locator('textarea[name="notes"], [data-testid*="interaction-notes"]')
+        .first();
       if (await notesField.isVisible()) {
         await notesField.fill("Had a great call with the lead about downtown properties.");
-        await expect(notesField).toHaveValue("Had a great call with the lead about downtown properties.");
+        await expect(notesField).toHaveValue(
+          "Had a great call with the lead about downtown properties.",
+        );
       }
     }
   });
@@ -175,7 +183,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
       await leadLink.click();
       await page.waitForTimeout(1000);
 
-      const outcomeSelect = page.locator('select[name="outcome"], [data-testid*="interaction-outcome"]').first();
+      const outcomeSelect = page
+        .locator('select[name="outcome"], [data-testid*="interaction-outcome"]')
+        .first();
       if (await outcomeSelect.isVisible()) {
         await outcomeSelect.selectOption("positive");
         await expect(outcomeSelect).toHaveValue("positive");
@@ -189,7 +199,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
       await leadLink.click();
       await page.waitForTimeout(1000);
 
-      const notesField = page.locator('textarea[name="notes"], [data-testid*="interaction-notes"]').first();
+      const notesField = page
+        .locator('textarea[name="notes"], [data-testid*="interaction-notes"]')
+        .first();
       if (await notesField.isVisible()) {
         await notesField.fill("Test interaction note");
       }
@@ -208,7 +220,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
       await leadLink.click();
       await page.waitForTimeout(1000);
 
-      const typeSelect = page.locator('select[name="type"], [data-testid*="interaction-type"]').first();
+      const typeSelect = page
+        .locator('select[name="type"], [data-testid*="interaction-type"]')
+        .first();
       if (await typeSelect.isVisible()) {
         const options = typeSelect.locator("option");
         const count = await options.count();

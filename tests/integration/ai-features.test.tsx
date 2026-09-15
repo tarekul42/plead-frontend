@@ -9,53 +9,65 @@ vi.mock("@clerk/nextjs", () => ({
   }),
 }));
 
-const mockMatchLeadProperties = vi.hoisted(() => vi.fn().mockResolvedValue({
-  matches: [
-    {
-      propertyId: "prop-1",
-      propertyTitle: "Modern Downtown Loft",
-      propertyLocation: "Austin, TX",
-      score: 92,
-      reasons: ["Matches budget ($550k within $500k-$600k range)", "Preferred location: Austin, TX"],
-    },
-    {
-      propertyId: "prop-2",
-      propertyTitle: "Suburban Family Home",
-      propertyLocation: "Round Rock, TX",
-      score: 78,
-      reasons: ["Property type match: house", "Within extended budget range"],
-    },
-  ],
-}));
+const mockMatchLeadProperties = vi.hoisted(() =>
+  vi.fn().mockResolvedValue({
+    matches: [
+      {
+        propertyId: "prop-1",
+        propertyTitle: "Modern Downtown Loft",
+        propertyLocation: "Austin, TX",
+        score: 92,
+        reasons: [
+          "Matches budget ($550k within $500k-$600k range)",
+          "Preferred location: Austin, TX",
+        ],
+      },
+      {
+        propertyId: "prop-2",
+        propertyTitle: "Suburban Family Home",
+        propertyLocation: "Round Rock, TX",
+        score: 78,
+        reasons: ["Property type match: house", "Within extended budget range"],
+      },
+    ],
+  }),
+);
 
-const mockGeneratePropertyDescription = vi.hoisted(() => vi.fn().mockResolvedValue({
-  success: true,
-  data: {
-    title: "Luxury Living in the Heart of Austin",
-    description: "Experience unparalleled urban living in this stunning modern loft...",
-    highlights: ["Open floor plan", "Floor-to-ceiling windows", "Rooftop terrace"],
-    provider: "anthropic",
-    tokensUsed: 450,
-    cached: false,
-  },
-}));
+const mockGeneratePropertyDescription = vi.hoisted(() =>
+  vi.fn().mockResolvedValue({
+    success: true,
+    data: {
+      title: "Luxury Living in the Heart of Austin",
+      description: "Experience unparalleled urban living in this stunning modern loft...",
+      highlights: ["Open floor plan", "Floor-to-ceiling windows", "Rooftop terrace"],
+      provider: "anthropic",
+      tokensUsed: 450,
+      cached: false,
+    },
+  }),
+);
 
-const mockGenerateOutreachEmail = vi.hoisted(() => vi.fn().mockResolvedValue({
-  success: true,
-  data: {
-    subject: "Your Perfect Home Awaits in Austin",
-    body: "Hi John,\n\nBased on your preferences, I found an amazing property...",
-    provider: "anthropic",
-    tokensUsed: 320,
-    cached: false,
-  },
-}));
+const mockGenerateOutreachEmail = vi.hoisted(() =>
+  vi.fn().mockResolvedValue({
+    success: true,
+    data: {
+      subject: "Your Perfect Home Awaits in Austin",
+      body: "Hi John,\n\nBased on your preferences, I found an amazing property...",
+      provider: "anthropic",
+      tokensUsed: 320,
+      cached: false,
+    },
+  }),
+);
 
 vi.mock("@/lib/api-client", () => ({
   default: {
     get: vi.fn().mockResolvedValue({ data: { data: {} } }),
     post: vi.fn().mockResolvedValue({ success: true, data: [] }),
-    interceptors: { request: { use: vi.fn().mockReturnValue(0) }, response: { use: vi.fn().mockReturnValue(0) } },
+    interceptors: {
+      request: { use: vi.fn().mockReturnValue(0) },
+      response: { use: vi.fn().mockReturnValue(0) },
+    },
   },
   setAuthToken: vi.fn(),
   aiApi: {
@@ -77,7 +89,7 @@ function renderWithProviders(ui: React.ReactElement) {
 
 // Mock AI Copy Generator component
 function AiCopyGenerator() {
-  const [propertyId, setPropertyId] = React.useState("prop-1");
+  const [propertyId] = React.useState("prop-1");
   const [tone, setTone] = React.useState("luxury");
   const [generated, setGenerated] = React.useState<{
     title: string;
@@ -90,8 +102,10 @@ function AiCopyGenerator() {
     setIsGenerating(true);
     try {
       const { aiApi } = await import("@/lib/api-client");
-      const response = await aiApi.generatePropertyDescription({ propertyId, tone }) as any;
-      setGenerated(response.data || response);
+      const response = (await aiApi.generatePropertyDescription({ propertyId, tone })) as {
+        data?: { title: string; description: string; highlights: string[] };
+      };
+      setGenerated((response.data || response) as typeof generated);
     } catch {
       // error handled gracefully
     } finally {
@@ -102,11 +116,7 @@ function AiCopyGenerator() {
   return (
     <div data-testid="ai-copy-generator">
       <h3>AI Copy Generator</h3>
-      <select
-        data-testid="tone-select"
-        value={tone}
-        onChange={(e) => setTone(e.target.value)}
-      >
+      <select data-testid="tone-select" value={tone} onChange={(e) => setTone(e.target.value)}>
         <option value="luxury">Luxury</option>
         <option value="standard">Standard</option>
         <option value="brief">Brief</option>
@@ -162,7 +172,9 @@ describe("AI Features: Match Results Display, Copy Generation", () => {
       expect(screen.getByText("Modern Downtown Loft")).toBeInTheDocument();
       expect(screen.getByText("92%")).toBeInTheDocument();
       expect(screen.getByText("Austin, TX")).toBeInTheDocument();
-      expect(screen.getByText("Matches budget ($550k within $500k-$600k range)")).toBeInTheDocument();
+      expect(
+        screen.getByText("Matches budget ($550k within $500k-$600k range)"),
+      ).toBeInTheDocument();
     });
   });
 
@@ -227,7 +239,9 @@ describe("AI Features: Match Results Display, Copy Generation", () => {
     await waitFor(() => {
       expect(screen.getByTestId("generated-copy")).toBeInTheDocument();
       expect(screen.getByText("Luxury Living in the Heart of Austin")).toBeInTheDocument();
-      expect(screen.getByText("Experience unparalleled urban living in this stunning modern loft...")).toBeInTheDocument();
+      expect(
+        screen.getByText("Experience unparalleled urban living in this stunning modern loft..."),
+      ).toBeInTheDocument();
     });
   });
 
@@ -244,8 +258,8 @@ describe("AI Features: Match Results Display, Copy Generation", () => {
   });
 
   it("shows loading state during copy generation", async () => {
-    mockGeneratePropertyDescription.mockImplementationOnce(
-      () => new Promise((resolve) => setTimeout(resolve, 500)).then(() => ({
+    mockGeneratePropertyDescription.mockImplementationOnce(() =>
+      new Promise((resolve) => setTimeout(resolve, 500)).then(() => ({
         success: true,
         data: {
           title: "Test",
@@ -255,7 +269,7 @@ describe("AI Features: Match Results Display, Copy Generation", () => {
           tokensUsed: 0,
           cached: false,
         },
-      }))
+      })),
     );
 
     renderWithProviders(<AiCopyGenerator />);

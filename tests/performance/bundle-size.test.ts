@@ -36,7 +36,7 @@ function getTopLevelDirSize(dirPath: string, maxEntries = 20): number {
       const fullPath = join(dirPath, entry.name);
       if (entry.isFile()) {
         try {
-          totalSize += statSync(fullPath).size;
+          totalSize += getFileSize(fullPath);
         } catch {
           // skip unreadable
         }
@@ -54,7 +54,9 @@ describe("Bundle Size Regression", () => {
     it("should have .next build directory or be skipped gracefully", () => {
       const hasNextDir = existsSync(NEXT_DIR);
       if (!hasNextDir) {
-        console.warn("Build validation skipped: .next directory not found. Run bun run build first.");
+        console.warn(
+          "Build validation skipped: .next directory not found. Run bun run build first.",
+        );
       }
       expect(true).toBe(true);
     });
@@ -70,6 +72,7 @@ describe("Bundle Size Regression", () => {
       // .next directory itself is a directory so top-level file size may be 0
       // Just verify the directory is accessible
       expect(topLevelSize).toBeGreaterThanOrEqual(0);
+      expect(topLevelSize).toBeLessThanOrEqual(BUNDLE_THRESHOLDS.totalBuild);
     });
   });
 

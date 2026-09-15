@@ -69,7 +69,10 @@ vi.mock("@/lib/api-client", () => ({
         },
       },
     }),
-    interceptors: { request: { use: vi.fn().mockReturnValue(0) }, response: { use: vi.fn().mockReturnValue(0) } },
+    interceptors: {
+      request: { use: vi.fn().mockReturnValue(0) },
+      response: { use: vi.fn().mockReturnValue(0) },
+    },
   },
   setAuthToken: vi.fn(),
   propertiesApi: {
@@ -225,7 +228,7 @@ describe("Property Listing: Search -> Filter -> Pagination", () => {
     mockPropertiesApiList.mockRejectedValueOnce(new Error("Server error"));
 
     function ErrorListingPage() {
-      const { data, isLoading, isError, refetch } = useProperties({});
+      const { isLoading, isError, refetch } = useProperties({});
 
       if (isLoading) return <div>Loading...</div>;
       if (isError)

@@ -8,8 +8,8 @@ test.describe("Profile Management", () => {
     const isOnSignIn = page.url().includes("sign-in");
     const isOnClerk = page.url().includes("clerk.accounts.dev");
     const rateLimitText = await page.locator("text=too many requests").first().isVisible();
-const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
-const isRateLimited = rateLimitText || rateLimitJson;
+    const rateLimitJson = await page.locator("text=too_many_requests").first().isVisible();
+    const isRateLimited = rateLimitText || rateLimitJson;
     if (isOnSignIn || isOnClerk || isRateLimited) {
       test.skip();
     }
@@ -20,7 +20,7 @@ const isRateLimited = rateLimitText || rateLimitJson;
   });
 
   test("profile page displays heading", async ({ page }) => {
-    await expect(page.locator('h1')).toBeVisible();
+    await expect(page.locator("h1")).toBeVisible();
   });
 
   test("profile form has first name input", async ({ page }) => {
@@ -53,7 +53,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
   test("profile form has phone input", async ({ page }) => {
     await page.waitForTimeout(1000);
 
-    const phoneInput = page.locator('input[name="phone"], input[type="tel"], input[placeholder*="phone" i]');
+    const phoneInput = page.locator(
+      'input[name="phone"], input[type="tel"], input[placeholder*="phone" i]',
+    );
     if (await phoneInput.first().isVisible()) {
       await expect(phoneInput.first()).toBeVisible();
     }
@@ -116,7 +118,9 @@ const isRateLimited = rateLimitText || rateLimitJson;
   test("profile shows user avatar", async ({ page }) => {
     await page.waitForTimeout(1000);
 
-    const avatar = page.locator('img[alt*="avatar" i], img[alt*="profile" i], [data-testid="avatar"]');
+    const avatar = page.locator(
+      'img[alt*="avatar" i], img[alt*="profile" i], [data-testid="avatar"]',
+    );
     if (await avatar.first().isVisible()) {
       await expect(avatar.first()).toBeVisible();
     }

@@ -3,7 +3,7 @@
  *
  * Verifies auth flow security, token handling, and protected route behavior.
  */
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -42,7 +42,7 @@ vi.mock("@/lib/api-client", () => ({
   },
 }));
 
-import { useUser, useAuth } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { RoleGuard } from "@/components/dashboard/role-guard";
 import apiClient, { setAuthToken } from "@/lib/api-client";
 
@@ -54,9 +54,7 @@ const createTestQueryClient = () =>
   });
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
-  <QueryClientProvider client={createTestQueryClient()}>
-    {children}
-  </QueryClientProvider>
+  <QueryClientProvider client={createTestQueryClient()}>{children}</QueryClientProvider>
 );
 
 describe("Auth Security: Token Handling", () => {
@@ -90,7 +88,7 @@ describe("Auth Security: Token Handling", () => {
         key.toLowerCase().includes("token") ||
         key.toLowerCase().includes("auth") ||
         key.toLowerCase().includes("session") ||
-        key.toLowerCase().includes("jwt")
+        key.toLowerCase().includes("jwt"),
     );
 
     // Clerk may store some data, but raw tokens should not be exposed
@@ -104,7 +102,7 @@ describe("Auth Security: Token Handling", () => {
       (key) =>
         key.toLowerCase().includes("token") ||
         key.toLowerCase().includes("auth") ||
-        key.toLowerCase().includes("jwt")
+        key.toLowerCase().includes("jwt"),
     );
 
     expect(sensitiveKeys.filter((k) => !k.startsWith("clerk"))).toHaveLength(0);
@@ -118,17 +116,17 @@ describe("Auth Security: RoleGuard Component", () => {
 
   it("renders nothing while auth is loading", () => {
     vi.mocked(useUser).mockReturnValue({
-      user: null,
+      user: undefined,
       isLoaded: false,
-      isSignedIn: false,
-    } as any);
+      isSignedIn: undefined,
+    } as ReturnType<typeof useUser>);
 
     render(
       <TestWrapper>
         <RoleGuard allowedRoles={["admin"]}>
           <div>Admin Content</div>
         </RoleGuard>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.queryByText("Admin Content")).not.toBeInTheDocument();
@@ -139,14 +137,14 @@ describe("Auth Security: RoleGuard Component", () => {
       user: null,
       isLoaded: true,
       isSignedIn: false,
-    } as any);
+    } as ReturnType<typeof useUser>);
 
     render(
       <TestWrapper>
         <RoleGuard allowedRoles={["admin"]}>
           <div>Admin Content</div>
         </RoleGuard>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.queryByText("Admin Content")).not.toBeInTheDocument();
@@ -157,7 +155,7 @@ describe("Auth Security: RoleGuard Component", () => {
       user: { id: "user-1" },
       isLoaded: true,
       isSignedIn: true,
-    } as any);
+    } as ReturnType<typeof useUser>);
 
     vi.mocked(apiClient.get).mockResolvedValue({
       data: { data: { _id: "user-1", role: "agent" } },
@@ -165,13 +163,10 @@ describe("Auth Security: RoleGuard Component", () => {
 
     render(
       <TestWrapper>
-        <RoleGuard
-          allowedRoles={["admin"]}
-          fallback={<div>Access Denied</div>}
-        >
+        <RoleGuard allowedRoles={["admin"]} fallback={<div>Access Denied</div>}>
           <div>Admin Content</div>
         </RoleGuard>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     await waitFor(() => {
@@ -184,7 +179,7 @@ describe("Auth Security: RoleGuard Component", () => {
       user: { id: "admin-1" },
       isLoaded: true,
       isSignedIn: true,
-    } as any);
+    } as ReturnType<typeof useUser>);
 
     vi.mocked(apiClient.get).mockResolvedValue({
       data: { data: { _id: "admin-1", role: "admin" } },
@@ -195,7 +190,7 @@ describe("Auth Security: RoleGuard Component", () => {
         <RoleGuard allowedRoles={["admin"]}>
           <div>Admin Content</div>
         </RoleGuard>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     await waitFor(() => {
@@ -208,7 +203,7 @@ describe("Auth Security: RoleGuard Component", () => {
       user: { id: "agent-1" },
       isLoaded: true,
       isSignedIn: true,
-    } as any);
+    } as ReturnType<typeof useUser>);
 
     vi.mocked(apiClient.get).mockResolvedValue({
       data: { data: { _id: "agent-1", role: "agent" } },
@@ -219,7 +214,7 @@ describe("Auth Security: RoleGuard Component", () => {
         <RoleGuard allowedRoles={["admin", "agent"]}>
           <div>Authorized Content</div>
         </RoleGuard>
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     await waitFor(() => {
@@ -243,10 +238,10 @@ describe("Auth Security: Session Handling", () => {
 
     try {
       await apiClient.get("/protected");
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Error message should not contain token
-      expect(error.message).not.toContain("Bearer");
-      expect(error.message).not.toContain("token");
+      expect((error as Error).message).not.toContain("Bearer");
+      expect((error as Error).message).not.toContain("token");
     }
   });
 });
@@ -264,7 +259,7 @@ describe("Auth Security: CSRF Protection", () => {
       <form action="/api/submit" method="POST">
         <input type="hidden" name="csrf" value="token" />
         <button type="submit">Submit</button>
-      </form>
+      </form>,
     );
 
     const form = container.querySelector("form");

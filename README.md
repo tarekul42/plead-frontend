@@ -16,23 +16,23 @@ PropLead is a full-featured real estate lead engine that helps agencies manage p
 
 ## 🛠️ Tech Stack
 
-| Category | Technology |
-|----------|------------|
-| Framework | Next.js 16 (App Router) |
-| UI Runtime | React 19 |
-| Language | TypeScript 6 |
-| Styling | Tailwind CSS v4 |
-| Authentication | Clerk (`@clerk/nextjs`) |
-| Server State | TanStack Query v5 |
-| Client State | Zustand |
-| Forms | React Hook Form + Zod |
-| Charts | Recharts |
-| Animations | Framer Motion |
-| HTTP Client | Axios |
-| Icons | Lucide React |
-| Theme | next-themes (light/dark) |
-| Testing | Vitest + Playwright |
-| Package Manager | Bun |
+| Category        | Technology               |
+| --------------- | ------------------------ |
+| Framework       | Next.js 16 (App Router)  |
+| UI Runtime      | React 19                 |
+| Language        | TypeScript 6             |
+| Styling         | Tailwind CSS v4          |
+| Authentication  | Clerk (`@clerk/nextjs`)  |
+| Server State    | TanStack Query v5        |
+| Client State    | Zustand                  |
+| Forms           | React Hook Form + Zod    |
+| Charts          | Recharts                 |
+| Animations      | Framer Motion            |
+| HTTP Client     | Axios                    |
+| Icons           | Lucide React             |
+| Theme           | next-themes (light/dark) |
+| Testing         | Vitest + Playwright      |
+| Package Manager | Bun                      |
 
 ---
 
@@ -106,46 +106,46 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Environment Variables
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `NEXT_PUBLIC_API_URL` | Backend API base URL | `http://localhost:8080/api/v1` |
-| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Clerk publishable key | `pk_test_xxx` |
-| `NEXT_CLERK_SECRET_KEY` | Clerk secret key | `sk_test_xxx` |
-| `NEXT_PUBLIC_CLERK_SIGN_IN_URL` | Sign-in page path | `/sign-in` |
-| `NEXT_PUBLIC_CLERK_SIGN_UP_URL` | Sign-up page path | `/sign-up` |
-| `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` | Post-login redirect | `/dashboard` |
-| `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL` | Post-registration redirect | `/dashboard` |
-| `NEXT_PUBLIC_DEMO_AGENT_EMAIL` | Demo agent email (one-click login) | `agent@proplead.ai` |
-| `NEXT_PUBLIC_DEMO_AGENT_PASSWORD` | Demo agent password | `Ag7$k9mX!pQ2` |
-| `NEXT_PUBLIC_DEMO_MANAGER_EMAIL` | Demo manager email | `manager@proplead.ai` |
-| `NEXT_PUBLIC_DEMO_MANAGER_PASSWORD` | Demo manager password | `Mgr8$jL3!nR5` |
-| `NEXT_PUBLIC_DEMO_ADMIN_EMAIL` | Demo admin email | `admin@proplead.ai` |
-| `NEXT_PUBLIC_DEMO_ADMIN_PASSWORD` | Demo admin password | `Adm4$vB7!wX1` |
-| `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name (upload widget) | `your-cloud-name` |
-| `NEXT_PUBLIC_SENTRY_DSN` | Sentry DSN (optional) | `https://xxx@ingest.sentry.io/xxx` |
+| Variable                              | Description                           | Example                            |
+| ------------------------------------- | ------------------------------------- | ---------------------------------- |
+| `NEXT_PUBLIC_API_URL`                 | Backend API base URL                  | `http://localhost:8080/api/v1`     |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`   | Clerk publishable key                 | `pk_test_xxx`                      |
+| `NEXT_CLERK_SECRET_KEY`               | Clerk secret key                      | `sk_test_xxx`                      |
+| `NEXT_PUBLIC_CLERK_SIGN_IN_URL`       | Sign-in page path                     | `/sign-in`                         |
+| `NEXT_PUBLIC_CLERK_SIGN_UP_URL`       | Sign-up page path                     | `/sign-up`                         |
+| `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` | Post-login redirect                   | `/dashboard`                       |
+| `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL` | Post-registration redirect            | `/dashboard`                       |
+| `NEXT_PUBLIC_DEMO_AGENT_EMAIL`        | Demo agent email (one-click login)    | `agent@proplead.ai`                |
+| `NEXT_PUBLIC_DEMO_AGENT_PASSWORD`     | Demo agent password                   | `Ag7$k9mX!pQ2`                     |
+| `NEXT_PUBLIC_DEMO_MANAGER_EMAIL`      | Demo manager email                    | `manager@proplead.ai`              |
+| `NEXT_PUBLIC_DEMO_MANAGER_PASSWORD`   | Demo manager password                 | `Mgr8$jL3!nR5`                     |
+| `NEXT_PUBLIC_DEMO_ADMIN_EMAIL`        | Demo admin email                      | `admin@proplead.ai`                |
+| `NEXT_PUBLIC_DEMO_ADMIN_PASSWORD`     | Demo admin password                   | `Adm4$vB7!wX1`                     |
+| `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`   | Cloudinary cloud name (upload widget) | `your-cloud-name`                  |
+| `NEXT_PUBLIC_SENTRY_DSN`              | Sentry DSN (optional)                 | `https://xxx@ingest.sentry.io/xxx` |
 
 ### Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `bun run dev` | Start Next.js dev server |
-| `bun run build` | Production build |
-| `bun run start` | Start production server |
+| Command             | Description                 |
+| ------------------- | --------------------------- |
+| `bun run dev`       | Start Next.js dev server    |
+| `bun run build`     | Production build            |
+| `bun run start`     | Start production server     |
 | `bun run typecheck` | Type-check without emitting |
-| `bun run lint` | Run ESLint |
-| `bun run test` | Run Vitest unit tests |
-| `bun run test:e2e` | Run Playwright E2E tests |
+| `bun run lint`      | Run ESLint                  |
+| `bun run test`      | Run Vitest unit tests       |
+| `bun run test:e2e`  | Run Playwright E2E tests    |
 
 ---
 
 ## 🔗 Links
 
-| Resource | URL |
-|----------|-----|
-| 🌐 **Live Demo** | https://plead-frontend.vercel.app |
+| Resource            | URL                                        |
+| ------------------- | ------------------------------------------ |
+| 🌐 **Live Demo**    | https://plead-frontend.vercel.app          |
 | 🖥️ **Backend Repo** | https://github.com/tarekul42/plead-backend |
-| 📚 **Live API** | https://plead-backend.vercel.app |
-| 📧 **Contact** | tarekulrifat142@gmail.com |
+| 📚 **Live API**     | https://plead-backend.vercel.app           |
+| 📧 **Contact**      | tarekulrifat142@gmail.com                  |
 
 ---
 

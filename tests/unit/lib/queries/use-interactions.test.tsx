@@ -3,7 +3,7 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http, HttpResponse } from "msw";
 import { useInteractions, useCreateInteraction } from "@/lib/queries/use-interactions";
-import { server } from "@/src/test/mocks/server";
+import { server } from "@/test/mocks/server";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1";
 

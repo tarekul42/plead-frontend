@@ -3,7 +3,7 @@
  *
  * Verifies that the API client handles security concerns properly.
  */
-import { describe, it, expect, vi, beforeAll, afterEach, afterAll, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeAll, afterEach, afterAll } from "vitest";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 
@@ -20,11 +20,9 @@ vi.mock("@/lib/api-client", async () => {
     (response) => response,
     (error) => {
       const message =
-        error.response?.data?.error?.message ||
-        error.message ||
-        "Something went wrong";
+        error.response?.data?.error?.message || error.message || "Something went wrong";
       return Promise.reject(new Error(message));
-    }
+    },
   );
 
   return {
@@ -51,10 +49,7 @@ const server = setupServer(
   http.get(`${API}/protected`, ({ request }) => {
     const auth = request.headers.get("Authorization");
     if (!auth || !auth.startsWith("Bearer ")) {
-      return HttpResponse.json(
-        { error: { message: "Unauthorized" } },
-        { status: 401 }
-      );
+      return HttpResponse.json({ error: { message: "Unauthorized" } }, { status: 401 });
     }
     return HttpResponse.json({ data: "secret" });
   }),
@@ -67,14 +62,14 @@ const server = setupServer(
   http.get(`${API}/error`, () => {
     return HttpResponse.json(
       { error: { message: "Internal error", stack: "Error at line 42..." } },
-      { status: 500 }
+      { status: 500 },
     );
   }),
 
   http.get(`${API}/timeout`, async () => {
     await new Promise((resolve) => setTimeout(resolve, 20000));
     return HttpResponse.json({ data: "late" });
-  })
+  }),
 );
 
 beforeAll(() => server.listen({ onUnhandledRequest: "bypass" }));
@@ -89,8 +84,9 @@ describe("API Security: Authentication", () => {
     try {
       await apiClient.get("/protected");
       expect.fail("Should have thrown");
-    } catch (error: any) {
-      expect(error.message).toBe("Unauthorized");
+    } catch (error: unknown) {
+      expect(error).toBeInstanceOf(Error);
+      expect((error as Error).message).toBe("Unauthorized");
     }
   });
 
@@ -105,9 +101,7 @@ describe("API Security: Authentication", () => {
     setAuthToken("my-token");
 
     // The interceptor should add the header
-    expect(apiClient.defaults.headers.common["Authorization"]).toBe(
-      "Bearer my-token"
-    );
+    expect(apiClient.defaults.headers.common["Authorization"]).toBe("Bearer my-token");
   });
 
   it("clearing token removes Authorization header", () => {
@@ -124,11 +118,11 @@ describe("API Security: Error Handling", () => {
     try {
       await apiClient.get("/error");
       expect.fail("Should have thrown");
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Error message should not contain stack trace
-      expect(error.message).not.toContain("at line");
-      expect(error.message).not.toContain("Error at");
-      expect(error.message).toBe("Internal error");
+      expect((error as Error).message).not.toContain("at line");
+      expect((error as Error).message).not.toContain("Error at");
+      expect((error as Error).message).toBe("Internal error");
     }
   });
 
@@ -136,13 +130,13 @@ describe("API Security: Error Handling", () => {
     server.use(
       http.get(`${API}/network-error`, () => {
         return HttpResponse.error();
-      })
+      }),
     );
 
     try {
       await apiClient.get("/network-error");
       expect.fail("Should have thrown");
-    } catch (error: any) {
+    } catch (error: unknown) {
       expect(error).toBeInstanceOf(Error);
     }
   });
@@ -156,7 +150,7 @@ describe("API Security: Request Validation", () => {
       http.post(`${API}/data`, ({ request }) => {
         capturedContentType = request.headers.get("Content-Type");
         return HttpResponse.json({ ok: true });
-      })
+      }),
     );
 
     await apiClient.post("/data", { test: "value" });
@@ -212,7 +206,7 @@ describe("API Security: Response Validation", () => {
         return new HttpResponse("not json {{{", {
           headers: { "Content-Type": "application/json" },
         });
-      })
+      }),
     );
 
     try {
@@ -227,7 +221,7 @@ describe("API Security: Response Validation", () => {
     server.use(
       http.get(`${API}/empty`, () => {
         return new HttpResponse(null, { status: 204 });
-      })
+      }),
     );
 
     const response = await apiClient.get("/empty");
@@ -244,16 +238,16 @@ describe("API Security: Rate Limiting Awareness", () => {
           {
             status: 429,
             headers: { "Retry-After": "60" },
-          }
+          },
         );
-      })
+      }),
     );
 
     try {
       await apiClient.get("/rate-limited");
       expect.fail("Should have thrown");
-    } catch (error: any) {
-      expect(error.message).toBe("Too many requests");
+    } catch (error: unknown) {
+      expect((error as Error).message).toBe("Too many requests");
     }
   });
 });

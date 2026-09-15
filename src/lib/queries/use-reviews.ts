@@ -1,0 +1,34 @@
+"use client";
+
+import { reviewsApi } from "@/lib/api-client";
+import type { PaginationMeta, Review } from "@/types";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+type PaginatedReviews = { data: Review[]; meta?: PaginationMeta };
+
+export function useReviews(params?: Record<string, unknown>) {
+  return useQuery({
+    queryKey: ["reviews", params ? JSON.stringify(params) : undefined],
+    queryFn: () => reviewsApi.list(params) as Promise<PaginatedReviews>,
+  });
+}
+
+export function useApproveReview() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => reviewsApi.update(id, { isVerified: true }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["reviews"] });
+    },
+  });
+}
+
+export function useDeleteReview() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => reviewsApi.delete(id),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["reviews"] });
+    },
+  });
+}

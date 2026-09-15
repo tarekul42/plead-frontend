@@ -100,6 +100,7 @@ test.describe("Navigation and Routing", () => {
 
   test("404 page is shown for unknown routes", async ({ page }) => {
     const response = await page.goto("/this-page-definitely-does-not-exist");
+    expect(response).not.toBeNull();
 
     // Should either show 404 page or handle gracefully
     const body = page.locator("body");
@@ -114,7 +115,9 @@ test.describe("Navigation and Routing", () => {
     await page.goto("/");
     await page.waitForTimeout(500);
 
-    const propertiesLink = page.getByRole("link", { name: /explore properties|properties/i }).first();
+    const propertiesLink = page
+      .getByRole("link", { name: /explore properties|properties/i })
+      .first();
     if (await propertiesLink.isVisible()) {
       await propertiesLink.click();
       await page.waitForURL(/\/properties/, { timeout: 5000 });
@@ -132,7 +135,9 @@ test.describe("Navigation and Routing", () => {
     await page.goto("/");
     await page.waitForTimeout(500);
 
-    const propertiesLink = page.getByRole("link", { name: /explore properties|properties/i }).first();
+    const propertiesLink = page
+      .getByRole("link", { name: /explore properties|properties/i })
+      .first();
     if (await propertiesLink.isVisible()) {
       await propertiesLink.click();
       await page.waitForURL(/\/properties/, { timeout: 5000 });

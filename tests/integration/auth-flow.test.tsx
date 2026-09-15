@@ -40,7 +40,10 @@ vi.mock("@/lib/api-client", () => ({
         },
       },
     }),
-    interceptors: { request: { use: vi.fn().mockReturnValue(0) }, response: { use: vi.fn().mockReturnValue(0) } },
+    interceptors: {
+      request: { use: vi.fn().mockReturnValue(0) },
+      response: { use: vi.fn().mockReturnValue(0) },
+    },
   },
   setAuthToken: vi.fn(),
 }));
@@ -57,7 +60,7 @@ function renderWithProviders(ui: React.ReactElement) {
 // Mock Dashboard that requires auth
 function AuthenticatedDashboard() {
   const { user, isLoaded } = mockUseUser();
-  const router = mockUseRouter();
+  mockUseRouter();
 
   if (!isLoaded) return <div data-testid="loading">Loading...</div>;
   if (!user) return <div data-testid="redirect-to-signin">Redirecting to sign-in...</div>;
