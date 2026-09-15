@@ -52,7 +52,6 @@ export default function ProfilePage() {
                 alt="Avatar"
                 width={64}
                 height={64}
-                unoptimized
                 className="h-full w-full rounded-full object-cover"
               />
             ) : (

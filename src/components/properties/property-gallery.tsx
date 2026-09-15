@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface PropertyGalleryProps {
@@ -47,11 +48,12 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
     <>
       <div className="relative overflow-hidden rounded-xl">
         <div className="relative aspect-video">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={images[current]}
             alt={`${title} - Image ${current + 1}`}
-            className="h-full w-full cursor-pointer object-cover transition"
+            fill
+            sizes="100vw"
+            className="cursor-pointer object-cover transition"
             onClick={() => setLightbox(true)}
           />
         </div>
@@ -95,10 +97,11 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
               i === current ? "border-brand" : "border-transparent opacity-60 hover:opacity-100"
             }`}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={img}
               alt={`${title} thumbnail ${i + 1}`}
+              width={96}
+              height={64}
               className="h-full w-full object-cover"
             />
           </button>
@@ -120,10 +123,11 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
           >
             <X className="h-5 w-5" />
           </button>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={images[current]}
             alt={`${title} - Full size`}
+            width={1200}
+            height={800}
             className="max-h-[85vh] max-w-[90vw] rounded-xl object-contain"
             onClick={(e) => e.stopPropagation()}
           />

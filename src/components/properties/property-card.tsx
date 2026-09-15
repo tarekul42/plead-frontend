@@ -34,7 +34,6 @@ export function PropertyCard({ property }: PropertyCardProps) {
             alt={property.title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            unoptimized
             className="object-cover transition duration-500 group-hover:scale-105"
           />
         ) : (
