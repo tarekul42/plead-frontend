@@ -1,5 +1,6 @@
 import { use } from "react";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ArrowLeft, Calendar, ChevronRight } from "lucide-react";
 
 const posts: Record<string, { title: string; content: string[]; date: string; tags: string[] }> = {
@@ -42,6 +43,31 @@ const posts: Record<string, { title: string; content: string[]; date: string; ta
     ],
   },
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = posts[slug];
+
+  if (!post) {
+    return { title: "Post Not Found" };
+  }
+
+  return {
+    title: post.title,
+    description: post.content[0]?.slice(0, 160),
+    openGraph: {
+      title: post.title,
+      description: post.content[0]?.slice(0, 160),
+      type: "article",
+      publishedTime: post.date,
+      tags: post.tags,
+    },
+  };
+}
 
 export default function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
