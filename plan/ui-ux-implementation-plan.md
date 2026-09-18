@@ -14,37 +14,37 @@ Zero hardcoded data. Everything from the backend. If the backend endpoint doesn'
 
 ### What Already Exists
 
-| Endpoint | Auth Required | Public Access? | Notes |
-|----------|--------------|----------------|-------|
-| `GET /properties` | No | Yes (with agencyId param) | Works, needs agencyId handling for public |
-| `GET /properties/:slug` | No | Yes | Works |
-| `GET /properties/:id/related` | No | Yes | Works |
-| `GET /blog` | YES | NO | Needs public version |
-| `GET /blog/:slug` | YES | NO | Needs public version |
-| `GET /reviews` | YES | NO | Needs public read |
-| `GET /properties/:id/reviews` | YES | NO | Needs public read |
-| `POST /reviews` | YES | NO | Needs public write for logged-in users |
-| `GET /users/me` | YES | NO | OK |
-| `GET /leads/stats` | YES | NO | OK (dashboard only) |
-| `GET /admin/stats` | YES | NO | OK (admin only) |
+| Endpoint                      | Auth Required | Public Access?            | Notes                                     |
+| ----------------------------- | ------------- | ------------------------- | ----------------------------------------- |
+| `GET /properties`             | No            | Yes (with agencyId param) | Works, needs agencyId handling for public |
+| `GET /properties/:slug`       | No            | Yes                       | Works                                     |
+| `GET /properties/:id/related` | No            | Yes                       | Works                                     |
+| `GET /blog`                   | YES           | NO                        | Needs public version                      |
+| `GET /blog/:slug`             | YES           | NO                        | Needs public version                      |
+| `GET /reviews`                | YES           | NO                        | Needs public read                         |
+| `GET /properties/:id/reviews` | YES           | NO                        | Needs public read                         |
+| `POST /reviews`               | YES           | NO                        | Needs public write for logged-in users    |
+| `GET /users/me`               | YES           | NO                        | OK                                        |
+| `GET /leads/stats`            | YES           | NO                        | OK (dashboard only)                       |
+| `GET /admin/stats`            | YES           | NO                        | OK (admin only)                           |
 
 ### What Needs to Be Built (Backend)
 
-| Priority | Endpoint | Purpose |
-|----------|----------|---------|
-| **CRITICAL** | `GET /public/blog` | Public blog listing (no auth, status=published only) |
-| **CRITICAL** | `GET /public/blog/:slug` | Public blog detail (no auth, status=published only) |
-| **CRITICAL** | `POST /contact` | Contact form submission |
-| **CRITICAL** | `POST /newsletter/subscribe` | Newsletter subscription |
-| **HIGH** | `GET /public/stats` | Platform-wide stats (property count, lead count, etc.) |
-| **HIGH** | `GET /properties/category-counts` | Count of properties per type |
-| **HIGH** | `POST /favorites` | Save a property to favorites |
-| **HIGH** | `DELETE /favorites/:propertyId` | Remove from favorites |
-| **HIGH** | `GET /favorites` | List user's saved properties |
-| **HIGH** | `GET /favorites/check/:propertyId` | Check if property is saved |
-| **MEDIUM** | `GET /public/testimonials` | Public testimonials |
-| **MEDIUM** | `GET /public/faq` | Public FAQ content |
-| **MEDIUM** | `GET /public/outcomes` | Outcomes chart data |
+| Priority     | Endpoint                           | Purpose                                                |
+| ------------ | ---------------------------------- | ------------------------------------------------------ |
+| **CRITICAL** | `GET /public/blog`                 | Public blog listing (no auth, status=published only)   |
+| **CRITICAL** | `GET /public/blog/:slug`           | Public blog detail (no auth, status=published only)    |
+| **CRITICAL** | `POST /contact`                    | Contact form submission                                |
+| **CRITICAL** | `POST /newsletter/subscribe`       | Newsletter subscription                                |
+| **HIGH**     | `GET /public/stats`                | Platform-wide stats (property count, lead count, etc.) |
+| **HIGH**     | `GET /properties/category-counts`  | Count of properties per type                           |
+| **HIGH**     | `POST /favorites`                  | Save a property to favorites                           |
+| **HIGH**     | `DELETE /favorites/:propertyId`    | Remove from favorites                                  |
+| **HIGH**     | `GET /favorites`                   | List user's saved properties                           |
+| **HIGH**     | `GET /favorites/check/:propertyId` | Check if property is saved                             |
+| **MEDIUM**   | `GET /public/testimonials`         | Public testimonials                                    |
+| **MEDIUM**   | `GET /public/faq`                  | Public FAQ content                                     |
+| **MEDIUM**   | `GET /public/outcomes`             | Outcomes chart data                                    |
 
 ---
 
@@ -67,7 +67,11 @@ import { blogSlugParamSchema, listBlogsQuerySchema } from "./blogs.validation";
 const blogsPublicRouter = Router();
 
 blogsPublicRouter.get("/", validate(listBlogsQuerySchema, "query"), BlogsPublicController.list);
-blogsPublicRouter.get("/:slug", validate(blogSlugParamSchema, "params"), BlogsPublicController.getBySlug);
+blogsPublicRouter.get(
+  "/:slug",
+  validate(blogSlugParamSchema, "params"),
+  BlogsPublicController.getBySlug,
+);
 
 export { blogsPublicRouter };
 ```
@@ -86,6 +90,7 @@ export { blogsPublicRouter };
 ### 0.2 — Contact Form Endpoint
 
 **New files:**
+
 - `src/modules/contact/contact.model.ts`
 - `src/modules/contact/contact.service.ts`
 - `src/modules/contact/contact.controller.ts`
@@ -93,6 +98,7 @@ export { blogsPublicRouter };
 - `src/modules/contact/contact.validation.ts`
 
 **Model:**
+
 ```ts
 interface IContact {
   name: string;
@@ -106,6 +112,7 @@ interface IContact {
 ```
 
 **Validation:**
+
 ```ts
 const createContactSchema = z.object({
   name: z.string().min(1).max(100),
@@ -125,6 +132,7 @@ const createContactSchema = z.object({
 ### 0.3 — Newsletter Subscribe Endpoint
 
 **New files:**
+
 - `src/modules/newsletter/newsletter.model.ts`
 - `src/modules/newsletter/newsletter.service.ts`
 - `src/modules/newsletter/newsletter.controller.ts`
@@ -132,6 +140,7 @@ const createContactSchema = z.object({
 - `src/modules/newsletter/newsletter.validation.ts`
 
 **Model:**
+
 ```ts
 interface INewsletter {
   email: string;
@@ -154,6 +163,7 @@ interface INewsletter {
 **Endpoint:** `GET /api/v1/public/stats` (no auth required)
 
 **Returns:**
+
 ```json
 {
   "propertiesListed": 1247,
@@ -176,6 +186,7 @@ interface INewsletter {
 **Endpoint:** `GET /api/v1/properties/category-counts` (no auth required)
 
 **Returns:**
+
 ```json
 {
   "house": 240,
@@ -194,12 +205,14 @@ interface INewsletter {
 ### 0.6 — Favorites/Saved Properties
 
 **New files:**
+
 - `src/modules/favorites/favorites.model.ts`
 - `src/modules/favorites/favorites.service.ts`
 - `src/modules/favorites/favorites.controller.ts`
 - `src/modules/favorites/favorites.routes.ts`
 
 **Model:**
+
 ```ts
 interface IFavorite {
   userId: mongoose.Types.ObjectId;
@@ -210,6 +223,7 @@ interface IFavorite {
 ```
 
 **Endpoints (auth required):**
+
 - `POST /api/v1/favorites` — `{ propertyId: string }`
 - `DELETE /api/v1/favorites/:propertyId`
 - `GET /api/v1/favorites` — list user's favorites
@@ -224,12 +238,14 @@ interface IFavorite {
 ### 0.7 — Public Testimonials
 
 **New files:**
+
 - `src/modules/testimonials/testimonials.model.ts`
 - `src/modules/testimonials/testimonials.service.ts`
 - `src/modules/testimonials/testimonials.controller.ts`
 - `src/modules/testimonials/testimonials.routes.ts`
 
 **Model:**
+
 ```ts
 interface ITestimonial {
   name: string;
@@ -252,11 +268,13 @@ interface ITestimonial {
 ### 0.8 — Public FAQ
 
 **New files:**
+
 - `src/modules/faq/faq.model.ts`
 - `src/modules/faq/faq.controller.ts`
 - `src/modules/faq/faq.routes.ts`
 
 **Model:**
+
 ```ts
 interface IFAQ {
   question: string;
@@ -283,6 +301,7 @@ interface IFAQ {
 **Problem:** `GET /properties` requires `agencyId` from `req.user` or query param. Public users aren't authenticated.
 
 **Fix:** For public property listing, either:
+
 - A) Pass `agencyId` as a required query param from the frontend (e.g., `?agencyId=xxx`)
 - B) Create a public endpoint that doesn't filter by agency
 - C) Use a default agency ID for public access
@@ -298,10 +317,16 @@ interface IFAQ {
 **File:** `src/lib/api-client.ts`
 
 Add:
+
 ```ts
 export const contactApi = {
-  submit: (data: { name: string; email: string; subject: string; message: string; propertyId?: string }) =>
-    apiClient.post("/contact", data).then(extractData),
+  submit: (data: {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    propertyId?: string;
+  }) => apiClient.post("/contact", data).then(extractData),
 };
 
 export const newsletterApi = {
@@ -336,7 +361,13 @@ export const propertiesApiExtended = {
 
 ```ts
 import { useQuery, useMutation, useQueryClient } from "@tanstack/query";
-import { publicApi, contactApi, newsletterApi, favoritesApi, propertiesApiExtended } from "@/lib/api-client";
+import {
+  publicApi,
+  contactApi,
+  newsletterApi,
+  favoritesApi,
+  propertiesApiExtended,
+} from "@/lib/api-client";
 
 // Public stats
 export function usePublicStats() {
@@ -388,7 +419,13 @@ export function useCheckFavorite(propertyId: string) {
 export function useToggleFavorite() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async ({ propertyId, isFavorited }: { propertyId: string; isFavorited: boolean }) => {
+    mutationFn: async ({
+      propertyId,
+      isFavorited,
+    }: {
+      propertyId: string;
+      isFavorited: boolean;
+    }) => {
       if (isFavorited) return favoritesApi.remove(propertyId);
       return favoritesApi.add(propertyId);
     },
@@ -409,6 +446,7 @@ export function useCategoryCounts() {
 ### 2.1 — Blog Pages → Use `usePublicBlogList` / `usePublicBlogPost`
 
 **Files:**
+
 - `src/components/landing/blog-teaser.tsx` — replace hardcoded array with `usePublicBlogList({ limit: 3 })`
 - `src/app/(public)/blog/page.tsx` — replace hardcoded array with `usePublicBlogList()`
 - `src/app/(public)/blog/[slug]/page.tsx` — replace hardcoded `posts` record with `usePublicBlogPost(slug)`
@@ -468,6 +506,7 @@ Replace `setTimeout` mock with `useSubscribeNewsletter()` mutation. Add loading 
 ### 2.8 — Save Button → Use `useCheckFavorite` + `useToggleFavorite`
 
 **Files:**
+
 - `src/components/properties/property-card.tsx`
 - `src/app/(public)/properties/[slug]/page.tsx`
 
@@ -478,6 +517,7 @@ Replace local `useState(false)` with `useCheckFavorite(propertyId)` and `useTogg
 ### 2.9 — Help Topics → Keep Hardcoded (or Build Endpoint)
 
 The help topics are static support content. Options:
+
 - A) Keep hardcoded (low risk, rarely changes)
 - B) Build a `GET /public/help-topics` endpoint
 
@@ -494,6 +534,7 @@ The hero section's mock AI match cards are marketing illustration, not real data
 ### 2.11 — Outcomes Chart → Keep as Marketing (or Build Endpoint)
 
 The outcomes chart shows demo before/after data. Options:
+
 - A) Keep hardcoded (marketing content)
 - B) Build `GET /public/outcomes` endpoint
 
@@ -578,9 +619,13 @@ Change hamburger from `md:hidden` to `sm:hidden`.
 ## Phase 4: Frontend — Accessibility & Mobile
 
 ### 4.1 — Add Skip-to-Content Link
+
 ### 4.2 — Add `aria-expanded` to Mobile Hamburger
+
 ### 4.3 — Fix Mobile Filter Drawer (animation + focus trap)
+
 ### 4.4 — Add Touch/Swipe to Property Gallery
+
 ### 4.5 — Improve Chip Remove Accessibility
 
 ---
@@ -588,9 +633,13 @@ Change hamburger from `md:hidden` to `sm:hidden`.
 ## Phase 5: Frontend — Design System
 
 ### 5.1 — Typography Scale
+
 ### 5.2 — PageHeader Component
+
 ### 5.3 — Section Component
+
 ### 5.4 — EmptyState Component
+
 ### 5.5 — Toast Integration Audit
 
 ---
@@ -598,10 +647,15 @@ Change hamburger from `md:hidden` to `sm:hidden`.
 ## Phase 6: Frontend — Landing Page Enhancements
 
 ### 6.1 — How It Works: Add CTA
+
 ### 6.2 — AI Features Showcase: Add Third Feature + CTA
+
 ### 6.3 — Testimonials: Visual Variety (from API data)
+
 ### 6.4 — Outcomes Chart: Add Y-Axis Label
+
 ### 6.5 — Final CTA: Copy Update
+
 ### 6.6 — Newsletter: Privacy Note (from real subscribe)
 
 ---
@@ -609,33 +663,40 @@ Change hamburger from `md:hidden` to `sm:hidden`.
 ## Phase 7: Frontend — Page Redesigns
 
 ### 7.1 — About Page Redesign
+
 ### 7.2 — Help Center Redesign
+
 ### 7.3 — 404 Page Redesign
+
 ### 7.4 — Error Page Improvements
+
 ### 7.5 — Legal Pages: Table of Contents
+
 ### 7.6 — Property Detail: Real Map (Leaflet)
+
 ### 7.7 — Property Detail: Status Capitalization + Back Link
 
 ---
 
 ## Execution Order
 
-| Step | What | Repo | Est. |
-|------|------|------|------|
-| 1 | Phase 0: Build all backend endpoints | plead-backend | High |
-| 2 | Phase 1: Update frontend API client + hooks | plead-frontend | Medium |
-| 3 | Phase 2: Replace all hardcoded data with API calls | plead-frontend | Medium |
-| 4 | Phase 3: Bug fixes (no backend) | plead-frontend | Low |
-| 5 | Phase 4: Accessibility + mobile | plead-frontend | Medium |
-| 6 | Phase 5: Design system | plead-frontend | Low |
-| 7 | Phase 6: Landing page enhancements | plead-frontend | Low |
-| 8 | Phase 7: Page redesigns | plead-frontend | Medium |
+| Step | What                                               | Repo           | Est.   |
+| ---- | -------------------------------------------------- | -------------- | ------ |
+| 1    | Phase 0: Build all backend endpoints               | plead-backend  | High   |
+| 2    | Phase 1: Update frontend API client + hooks        | plead-frontend | Medium |
+| 3    | Phase 2: Replace all hardcoded data with API calls | plead-frontend | Medium |
+| 4    | Phase 3: Bug fixes (no backend)                    | plead-frontend | Low    |
+| 5    | Phase 4: Accessibility + mobile                    | plead-frontend | Medium |
+| 6    | Phase 5: Design system                             | plead-frontend | Low    |
+| 7    | Phase 6: Landing page enhancements                 | plead-frontend | Low    |
+| 8    | Phase 7: Page redesigns                            | plead-frontend | Medium |
 
 ---
 
 ## Summary: What to Build
 
 ### Backend (plead-backend)
+
 1. Public blog endpoints (`/api/v1/public/blog`)
 2. Contact form endpoint (`/api/v1/contact`)
 3. Newsletter subscribe endpoint (`/api/v1/newsletter/subscribe`)
@@ -646,6 +707,7 @@ Change hamburger from `md:hidden` to `sm:hidden`.
 8. Public FAQ (`/api/v1/public/faq`)
 
 ### Frontend (plead-frontend)
+
 1. API client additions (8 new API modules)
 2. React Query hooks (use-public.ts)
 3. Replace hardcoded data in 10+ components

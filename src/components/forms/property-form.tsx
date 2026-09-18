@@ -26,7 +26,7 @@ const propertyFormSchema = z.object({
 type PropertyFormValues = z.infer<typeof propertyFormSchema>;
 
 interface PropertyFormProps {
-  onSubmit: (data: PropertyFormValues) => void | Promise<void>;
+  onSubmit: (_data: PropertyFormValues) => void | Promise<void>;
   initialData?: Partial<PropertyFormValues>;
 }
 

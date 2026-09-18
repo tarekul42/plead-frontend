@@ -12,8 +12,8 @@ const COLUMNS = [
 ];
 
 interface LeadPipelineProps {
-  onLeadClick?: (lead: Lead) => void;
-  onStatusChange?: (leadId: string, newStatus: string) => void;
+  onLeadClick?: (_lead: Lead) => void;
+  onStatusChange?: (_leadId: string, _newStatus: string) => void;
 }
 
 export function LeadPipeline({ onLeadClick, onStatusChange }: LeadPipelineProps) {

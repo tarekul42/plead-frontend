@@ -28,7 +28,7 @@ const leadFormSchema = z.object({
 type LeadFormValues = z.infer<typeof leadFormSchema>;
 
 interface LeadFormProps {
-  onSubmit: (data: LeadFormValues) => void | Promise<void>;
+  onSubmit: (_data: LeadFormValues) => void | Promise<void>;
   initialData?: Partial<LeadFormValues>;
 }
 

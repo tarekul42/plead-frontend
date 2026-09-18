@@ -102,7 +102,11 @@ export default function HelpPage() {
           {filtered.map((topic, i) => (
             <div key={i} className="rounded-card border border-border bg-surface shadow-sm">
               <button
-                onClick={() => setOpenIndex(openIndex === `${topic.category}-${i}` ? null : `${topic.category}-${i}`)}
+                onClick={() =>
+                  setOpenIndex(
+                    openIndex === `${topic.category}-${i}` ? null : `${topic.category}-${i}`,
+                  )
+                }
                 className="flex w-full items-center justify-between px-6 py-4 text-left"
               >
                 <div>

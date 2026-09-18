@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 interface PropertySearchBarProps {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (_value: string) => void;
 }
 
 export function PropertySearchBar({ value, onChange }: PropertySearchBarProps) {

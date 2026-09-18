@@ -67,9 +67,7 @@ export function NewsletterCta() {
                 {subscribe.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Subscribe"}
               </Button>
             </form>
-            <p className="mt-4 text-xs text-muted">
-              We respect your privacy. Unsubscribe anytime.
-            </p>
+            <p className="mt-4 text-xs text-muted">We respect your privacy. Unsubscribe anytime.</p>
           </>
         )}
       </div>

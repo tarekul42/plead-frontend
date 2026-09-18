@@ -18,7 +18,7 @@ import { publicRouter } from "./modules/public/public.routes";
 import { favoritesRouter } from "./modules/favorites/favorites.routes";
 
 // Public routes (no auth)
-app.use("/api/v1/public", publicRouter);         // stats, testimonials, faq
+app.use("/api/v1/public", publicRouter); // stats, testimonials, faq
 app.use("/api/v1/public/blog", blogsPublicRouter);
 app.use("/api/v1/contact", contactRouter);
 app.use("/api/v1/newsletter", newsletterRouter);
@@ -43,16 +43,12 @@ import { blogSlugParamSchema, listBlogsQuerySchema } from "./blogs.validation";
 
 const blogsPublicRouter = Router();
 
-blogsPublicRouter.get(
-  "/",
-  validate(listBlogsQuerySchema, "query"),
-  BlogsPublicController.list
-);
+blogsPublicRouter.get("/", validate(listBlogsQuerySchema, "query"), BlogsPublicController.list);
 
 blogsPublicRouter.get(
   "/:slug",
   validate(blogSlugParamSchema, "params"),
-  BlogsPublicController.getBySlug
+  BlogsPublicController.getBySlug,
 );
 
 export { blogsPublicRouter };
@@ -136,7 +132,7 @@ const contactSchema = new Schema<IContact>(
       default: "new",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 contactSchema.index({ status: 1, createdAt: -1 });
@@ -165,7 +161,13 @@ export const createContactSchema = z.object({
 import { ContactModel } from "./contact.model";
 
 export const ContactService = {
-  async create(data: { name: string; email: string; subject: string; message: string; propertyId?: string }) {
+  async create(data: {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    propertyId?: string;
+  }) {
     return ContactModel.create(data);
   },
 
@@ -210,12 +212,7 @@ import { globalRateLimit } from "../../core/middleware/rate-limit.middleware";
 
 const contactRouter = Router();
 
-contactRouter.post(
-  "/",
-  globalRateLimit,
-  validate(createContactSchema),
-  ContactController.submit
-);
+contactRouter.post("/", globalRateLimit, validate(createContactSchema), ContactController.submit);
 
 export { contactRouter };
 ```
@@ -251,7 +248,7 @@ const newsletterSchema = new Schema<INewsletter>(
     subscribedAt: { type: Date, default: Date.now },
     unsubscribedAt: { type: Date },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const NewsletterModel = mongoose.model<INewsletter>("Newsletter", newsletterSchema);
@@ -322,7 +319,7 @@ newsletterRouter.post(
   "/subscribe",
   globalRateLimit,
   validate(subscribeNewsletterSchema),
-  NewsletterController.subscribe
+  NewsletterController.subscribe,
 );
 
 export { newsletterRouter };
@@ -367,12 +364,14 @@ export const PublicController = {
       AiGeneratedCopyModel.countDocuments({ type: "match" }),
     ]);
 
-    res.json(success({
-      propertiesListed,
-      leadsTracked,
-      aiMatchesMade,
-      avgCloseTimeReduction: 52, // TODO: compute from real data
-    }));
+    res.json(
+      success({
+        propertiesListed,
+        leadsTracked,
+        aiMatchesMade,
+        avgCloseTimeReduction: 52, // TODO: compute from real data
+      }),
+    );
   }),
 
   testimonials: asyncHandler(async (_req: Request, res: Response) => {
@@ -383,9 +382,7 @@ export const PublicController = {
   }),
 
   faq: asyncHandler(async (_req: Request, res: Response) => {
-    const faq = await FAQModel.find()
-      .sort({ sortOrder: 1 })
-      .lean();
+    const faq = await FAQModel.find().sort({ sortOrder: 1 }).lean();
     res.json(success(faq));
   }),
 };
@@ -443,7 +440,7 @@ const favoriteSchema = new Schema<IFavorite>(
     propertyId: { type: Schema.Types.ObjectId, ref: "Property", required: true },
     agencyId: { type: Schema.Types.ObjectId, ref: "Agency", required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 favoriteSchema.index({ userId: 1, propertyId: 1 }, { unique: true });
@@ -490,7 +487,7 @@ export const FavoritesService = {
     return FavoriteModel.findOneAndUpdate(
       { userId, propertyId },
       { userId, propertyId, agencyId },
-      { upsert: true, new: true }
+      { upsert: true, new: true },
     );
   },
 
@@ -525,7 +522,7 @@ export const FavoritesController = {
     const favorite = await FavoritesService.add(
       req.user!.id,
       req.body.propertyId,
-      req.user!.agencyId
+      req.user!.agencyId,
     );
     res.status(201).json(success(favorite));
   }),
@@ -560,12 +557,12 @@ favoritesRouter.post("/", validate(addFavoriteSchema), FavoritesController.add);
 favoritesRouter.delete(
   "/:propertyId",
   validate(favoriteParamSchema, "params"),
-  FavoritesController.remove
+  FavoritesController.remove,
 );
 favoritesRouter.get(
   "/check/:propertyId",
   validate(favoriteParamSchema, "params"),
-  FavoritesController.check
+  FavoritesController.check,
 );
 
 export { favoritesRouter };
@@ -603,7 +600,7 @@ const testimonialSchema = new Schema<ITestimonial>(
     featured: { type: Boolean, default: false },
     sortOrder: { type: Number, default: 0 },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 testimonialSchema.index({ featured: 1, sortOrder: 1 });
@@ -638,7 +635,7 @@ const faqSchema = new Schema<IFAQ>(
     category: { type: String, required: true, default: "general" },
     sortOrder: { type: Number, default: 0 },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 faqSchema.index({ sortOrder: 1 });
@@ -653,6 +650,7 @@ export const FAQModel = mongoose.model<IFAQ>("FAQ", faqSchema);
 ## Files to Create/Modify Summary
 
 ### New Files (Backend)
+
 1. `src/modules/blogs/blogs.public.routes.ts`
 2. `src/modules/blogs/blogs.public.controller.ts`
 3. `src/modules/contact/contact.model.ts`
@@ -677,6 +675,7 @@ export const FAQModel = mongoose.model<IFAQ>("FAQ", faqSchema);
 22. `src/scripts/seed-public-data.ts` (seed testimonials + FAQ)
 
 ### Modified Files (Backend)
+
 1. `src/app.ts` — register new routers
 2. `src/modules/properties/properties.routes.ts` — add `category-counts` route
 3. `src/modules/properties/properties.controller.ts` — add `categoryCounts` method

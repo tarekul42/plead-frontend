@@ -276,7 +276,9 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
                     variant="secondary"
                     className="flex-1"
                     leftIcon={
-                      <Heart className={`h-4 w-4 ${isFavorited ? "fill-danger text-danger" : ""}`} />
+                      <Heart
+                        className={`h-4 w-4 ${isFavorited ? "fill-danger text-danger" : ""}`}
+                      />
                     }
                     onClick={() =>
                       toggleFav.mutate({

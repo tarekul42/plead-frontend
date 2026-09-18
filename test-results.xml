@@ -1,220 +1,220 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="405" failures="0" errors="0" time="12.446224806">
-    <testsuite name="tests/integration/admin-dashboard.test.tsx" timestamp="2026-09-18T21:33:38.915Z" hostname="t42d1" tests="10" failures="0" errors="0" skipped="0" time="0.353862142">
-        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; renders admin dashboard for admin users" time="0.105238">
+<testsuites name="vitest tests" tests="405" failures="0" errors="0" time="9.760935215">
+    <testsuite name="tests/integration/admin-dashboard.test.tsx" timestamp="2026-09-18T21:41:03.618Z" hostname="t42d1" tests="10" failures="0" errors="0" skipped="0" time="0.20362592">
+        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; renders admin dashboard for admin users" time="0.060960997">
         </testcase>
-        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; renders list of agency users" time="0.033084007">
+        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; renders list of agency users" time="0.01842871">
         </testcase>
-        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; displays user roles" time="0.021144091">
+        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; displays user roles" time="0.013903388">
         </testcase>
-        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; displays user active/inactive status" time="0.024065117">
+        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; displays user active/inactive status" time="0.026369879">
         </testcase>
-        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; toggles user active/inactive status" time="0.041483016">
+        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; toggles user active/inactive status" time="0.026632491">
         </testcase>
-        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; restricts access for non-admin users" time="0.001846507">
+        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; restricts access for non-admin users" time="0.002100766">
         </testcase>
-        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; handles user list loading state" time="0.01253021">
+        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; handles user list loading state" time="0.002612111">
         </testcase>
-        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; handles empty user list" time="0.016000999">
+        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; handles empty user list" time="0.009411244">
         </testcase>
-        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; renders agency stats section" time="0.072458694">
+        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; renders agency stats section" time="0.025815385">
         </testcase>
-        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; handles API errors when loading users" time="0.01387176">
-        </testcase>
-    </testsuite>
-    <testsuite name="tests/integration/ai-features.test.tsx" timestamp="2026-09-18T21:33:38.918Z" hostname="t42d1" tests="12" failures="0" errors="0" skipped="0" time="0.314942363">
-        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; renders AI match panel with trigger button" time="0.068293464">
-        </testcase>
-        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; shows loading state when matching is triggered" time="0.032068927">
-        </testcase>
-        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; displays match results with scores and reasons" time="0.053319464">
-        </testcase>
-        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; displays multiple match results" time="0.030238929">
-        </testcase>
-        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; shows error state when AI service fails" time="0.02848696">
-        </testcase>
-        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; shows message when no matches found" time="0.023419866">
-        </testcase>
-        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; renders AI copy generator with tone selector" time="0.024461646">
-        </testcase>
-        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; generates marketing copy on button click" time="0.013606648">
-        </testcase>
-        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; displays generated highlights" time="0.015507154">
-        </testcase>
-        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; shows loading state during copy generation" time="0.006672338">
-        </testcase>
-        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; handles different tone selections" time="0.004586998">
-        </testcase>
-        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; handles AI generation errors gracefully" time="0.009443529">
+        <testcase classname="tests/integration/admin-dashboard.test.tsx" name="Admin Dashboard: Admin-only Features, User Management &gt; handles API errors when loading users" time="0.01249444">
         </testcase>
     </testsuite>
-    <testsuite name="tests/integration/auth-flow.test.tsx" timestamp="2026-09-18T21:33:38.919Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="0.139638867">
-        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; renders dashboard for authenticated user" time="0.06318029">
+    <testsuite name="tests/integration/ai-features.test.tsx" timestamp="2026-09-18T21:41:03.620Z" hostname="t42d1" tests="12" failures="0" errors="0" skipped="0" time="0.249982172">
+        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; renders AI match panel with trigger button" time="0.043407801">
         </testcase>
-        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; redirects unauthenticated user to sign-in" time="0.009220544">
+        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; shows loading state when matching is triggered" time="0.025343879">
         </testcase>
-        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; shows loading state while Clerk loads" time="0.010292243">
+        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; displays match results with scores and reasons" time="0.035943227">
         </testcase>
-        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; renders sign-in page with auth options" time="0.017789528">
+        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; displays multiple match results" time="0.027713628">
         </testcase>
-        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; redirect to sign-in renders redirect component" time="0.010190266">
+        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; shows error state when AI service fails" time="0.029171714">
         </testcase>
-        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; dashboard loads user data after successful sign-in" time="0.008087057">
+        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; shows message when no matches found" time="0.016389032">
         </testcase>
-        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; handles session expiry gracefully" time="0.007779476">
+        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; renders AI copy generator with tone selector" time="0.01481595">
         </testcase>
-        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; handles Clerk loading failure" time="0.004331285">
+        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; generates marketing copy on button click" time="0.019453639">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/integration/blog-management.test.tsx" timestamp="2026-09-18T21:33:38.920Z" hostname="t42d1" tests="12" failures="0" errors="0" skipped="0" time="0.348193072">
-        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; renders blog list with posts from API" time="0.063967558">
+        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; displays generated highlights" time="0.00922702">
         </testcase>
-        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; displays blog post status (published/draft)" time="0.023479874">
+        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; shows loading state during copy generation" time="0.005755905">
         </testcase>
-        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; displays blog post tags" time="0.033196664">
+        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; handles different tone selections" time="0.005957549">
         </testcase>
-        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; renders create blog button" time="0.016989501">
-        </testcase>
-        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; renders blog editor with empty form for new post" time="0.032162694">
-        </testcase>
-        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; renders blog editor with existing data for edit" time="0.020548089">
-        </testcase>
-        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; save draft button calls API with draft status" time="0.094044131">
-        </testcase>
-        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; publish button calls API with published status" time="0.009909895">
-        </testcase>
-        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; shows saving state during save" time="0.008484216">
-        </testcase>
-        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; handles tags as comma-separated input" time="0.004430862">
-        </testcase>
-        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; handles blog deletion" time="0.019192638">
-        </testcase>
-        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; handles empty blog list" time="0.015218511">
+        <testcase classname="tests/integration/ai-features.test.tsx" name="AI Features: Match Results Display, Copy Generation &gt; handles AI generation errors gracefully" time="0.010146382">
         </testcase>
     </testsuite>
-    <testsuite name="tests/integration/dashboard-stats.test.tsx" timestamp="2026-09-18T21:33:38.922Z" hostname="t42d1" tests="9" failures="0" errors="0" skipped="0" time="0.470189998">
-        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; renders loading skeleton while fetching stats" time="0.055500023">
+    <testsuite name="tests/integration/auth-flow.test.tsx" timestamp="2026-09-18T21:41:03.621Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="0.081743575">
+        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; renders dashboard for authenticated user" time="0.035426003">
         </testcase>
-        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; renders stat cards after successful data load" time="0.069970037">
+        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; redirects unauthenticated user to sign-in" time="0.004842903">
         </testcase>
-        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; renders individual StatCard with correct props" time="0.099312361">
+        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; shows loading state while Clerk loads" time="0.00493868">
         </testcase>
-        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; renders StatCard with trend indicator" time="0.007837974">
+        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; renders sign-in page with auth options" time="0.006272379">
         </testcase>
-        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; shows error state when API fails" time="0.04795963">
+        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; redirect to sign-in renders redirect component" time="0.005988908">
         </testcase>
-        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; retry button re-fetches data" time="0.058259344">
+        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; dashboard loads user data after successful sign-in" time="0.006126324">
         </testcase>
-        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; refresh button triggers new API call" time="0.04307613">
+        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; handles session expiry gracefully" time="0.006370217">
         </testcase>
-        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; handles zero values correctly" time="0.029799972">
-        </testcase>
-        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; handles large numbers correctly" time="0.052729462">
+        <testcase classname="tests/integration/auth-flow.test.tsx" name="Auth Flow: Sign-in -&gt; Redirect -&gt; Dashboard Load &gt; handles Clerk loading failure" time="0.006681747">
         </testcase>
     </testsuite>
-    <testsuite name="tests/integration/interaction-tracking.test.tsx" timestamp="2026-09-18T21:33:38.923Z" hostname="t42d1" tests="13" failures="0" errors="0" skipped="0" time="0.189217725">
-        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; renders interaction timeline with entries from API" time="0.049890585">
+    <testsuite name="tests/integration/blog-management.test.tsx" timestamp="2026-09-18T21:41:03.622Z" hostname="t42d1" tests="12" failures="0" errors="0" skipped="0" time="0.213340175">
+        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; renders blog list with posts from API" time="0.064070193">
         </testcase>
-        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; displays interaction count" time="0.006552661">
+        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; displays blog post status (published/draft)" time="0.014102601">
         </testcase>
-        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; displays interaction types" time="0.006718057">
+        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; displays blog post tags" time="0.031612929">
         </testcase>
-        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; displays interaction notes" time="0.010803049">
+        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; renders create blog button" time="0.016259476">
         </testcase>
-        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; displays interaction outcomes" time="0.009717241">
+        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; renders blog editor with empty form for new post" time="0.007277659">
         </testcase>
-        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; displays formatted dates" time="0.010396561">
+        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; renders blog editor with existing data for edit" time="0.003721937">
         </testcase>
-        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; renders add interaction form with all fields" time="0.008877435">
+        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; save draft button calls API with draft status" time="0.020225085">
         </testcase>
-        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; interaction type selector shows all options" time="0.005405154">
+        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; publish button calls API with published status" time="0.009477173">
         </testcase>
-        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; submitting interaction form calls API" time="0.027294484">
+        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; shows saving state during save" time="0.013357574">
         </testcase>
-        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; shows submitting state during form submission" time="0.01216153">
+        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; handles tags as comma-separated input" time="0.011026195">
         </testcase>
-        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; handles empty timeline" time="0.005106233">
+        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; handles blog deletion" time="0.0085615">
         </testcase>
-        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; handles API error when loading timeline" time="0.004150271">
-        </testcase>
-        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; handles all interaction types correctly" time="0.026379261">
+        <testcase classname="tests/integration/blog-management.test.tsx" name="Blog Management: CRUD Flow &gt; handles empty blog list" time="0.008495622">
         </testcase>
     </testsuite>
-    <testsuite name="tests/integration/lead-management.test.tsx" timestamp="2026-09-18T21:33:38.925Z" hostname="t42d1" tests="10" failures="0" errors="0" skipped="0" time="0.356568224">
-        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; renders lead list with data from API" time="0.097077785">
+    <testsuite name="tests/integration/dashboard-stats.test.tsx" timestamp="2026-09-18T21:41:03.623Z" hostname="t42d1" tests="9" failures="0" errors="0" skipped="0" time="0.284169863">
+        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; renders loading skeleton while fetching stats" time="0.041611116">
         </testcase>
-        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; displays lead count from API response" time="0.03543119">
+        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; renders stat cards after successful data load" time="0.055009579">
         </testcase>
-        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; displays lead status badge" time="0.045046373">
+        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; renders individual StatCard with correct props" time="0.007656997">
         </testcase>
-        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; shows empty state when no leads exist" time="0.04376471">
+        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; renders StatCard with trend indicator" time="0.007130583">
         </testcase>
-        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; renders create lead form" time="0.012273076">
+        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; shows error state when API fails" time="0.015636314">
         </testcase>
-        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; create lead form calls API on submit" time="0.021102312">
+        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; retry button re-fetches data" time="0.042816599">
         </testcase>
-        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; renders status updater with current status selected" time="0.007558603">
+        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; refresh button triggers new API call" time="0.038466271">
         </testcase>
-        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; updating lead status calls API with new status" time="0.06146818">
+        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; handles zero values correctly" time="0.031041917">
         </testcase>
-        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; handles API error when loading leads" time="0.016262981">
-        </testcase>
-        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; handles API error when creating lead" time="0.009310832">
+        <testcase classname="tests/integration/dashboard-stats.test.tsx" name="Dashboard Stats: Loading, Error States, Refresh &gt; handles large numbers correctly" time="0.036810191">
         </testcase>
     </testsuite>
-    <testsuite name="tests/integration/pages/dashboard-overview.test.tsx" timestamp="2026-09-18T21:33:38.927Z" hostname="t42d1" tests="2" failures="0" errors="0" skipped="0" time="0.527174564">
-        <testcase classname="tests/integration/pages/dashboard-overview.test.tsx" name="DashboardPage integration &gt; renders agent overview with dashboard sections" time="0.202666492">
+    <testsuite name="tests/integration/interaction-tracking.test.tsx" timestamp="2026-09-18T21:41:03.624Z" hostname="t42d1" tests="13" failures="0" errors="0" skipped="0" time="0.265415202">
+        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; renders interaction timeline with entries from API" time="0.087438772">
         </testcase>
-        <testcase classname="tests/integration/pages/dashboard-overview.test.tsx" name="DashboardPage integration &gt; renders stat cards with data" time="0.319390409">
+        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; displays interaction count" time="0.016522468">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/integration/pages/leads-page.test.tsx" timestamp="2026-09-18T21:33:38.928Z" hostname="t42d1" tests="3" failures="0" errors="0" skipped="0" time="0.194980573">
-        <testcase classname="tests/integration/pages/leads-page.test.tsx" name="LeadsPage integration &gt; renders leads page heading" time="0.10727677">
+        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; displays interaction types" time="0.019472789">
         </testcase>
-        <testcase classname="tests/integration/pages/leads-page.test.tsx" name="LeadsPage integration &gt; renders view toggle buttons" time="0.029012214">
+        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; displays interaction notes" time="0.016070702">
         </testcase>
-        <testcase classname="tests/integration/pages/leads-page.test.tsx" name="LeadsPage integration &gt; renders lead count from API" time="0.05104457">
+        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; displays interaction outcomes" time="0.014097782">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/integration/pages/properties-page.test.tsx" timestamp="2026-09-18T21:33:38.930Z" hostname="t42d1" tests="3" failures="0" errors="0" skipped="0" time="0.108629411">
-        <testcase classname="tests/integration/pages/properties-page.test.tsx" name="DashboardPropertiesPage integration &gt; renders properties page heading" time="0.073459304">
+        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; displays formatted dates" time="0.007841282">
         </testcase>
-        <testcase classname="tests/integration/pages/properties-page.test.tsx" name="DashboardPropertiesPage integration &gt; renders Add Property link" time="0.016507484">
+        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; renders add interaction form with all fields" time="0.00890939">
         </testcase>
-        <testcase classname="tests/integration/pages/properties-page.test.tsx" name="DashboardPropertiesPage integration &gt; renders property count from API" time="0.013801962">
+        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; interaction type selector shows all options" time="0.005380466">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/integration/property-listing.test.tsx" timestamp="2026-09-18T21:33:38.930Z" hostname="t42d1" tests="9" failures="0" errors="0" skipped="0" time="0.527881707">
-        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; renders property listing page with heading" time="0.134591926">
+        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; submitting interaction form calls API" time="0.020778318">
         </testcase>
-        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; renders property cards from API data" time="0.068954315">
+        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; shows submitting state during form submission" time="0.010429153">
         </testcase>
-        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; displays property prices correctly" time="0.071000757">
+        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; handles empty timeline" time="0.005107875">
         </testcase>
-        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; renders pagination when there are multiple pages" time="0.021511111">
+        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; handles API error when loading timeline" time="0.00921382">
         </testcase>
-        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; shows empty state when no properties match filters" time="0.02431754">
-        </testcase>
-        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; handles filter changes trigger new API calls" time="0.111726785">
-        </testcase>
-        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; displays property status badges" time="0.04620066">
-        </testcase>
-        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; renders property details (beds, baths, area)" time="0.033851516">
-        </testcase>
-        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; handles server error gracefully" time="0.009240274">
+        <testcase classname="tests/integration/interaction-tracking.test.tsx" name="Interaction Tracking: Add Interaction -&gt; View Timeline &gt; handles all interaction types correctly" time="0.038198519">
         </testcase>
     </testsuite>
-    <testsuite name="tests/performance/bundle-size.test.ts" timestamp="2026-09-18T21:33:38.932Z" hostname="t42d1" tests="4" failures="0" errors="0" skipped="0" time="0.007099375">
-        <testcase classname="tests/performance/bundle-size.test.ts" name="Bundle Size Regression &gt; Build Output Validation &gt; should have .next build directory or be skipped gracefully" time="0.001180127">
+    <testsuite name="tests/integration/lead-management.test.tsx" timestamp="2026-09-18T21:41:03.626Z" hostname="t42d1" tests="10" failures="0" errors="0" skipped="0" time="0.304769836">
+        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; renders lead list with data from API" time="0.081435594">
         </testcase>
-        <testcase classname="tests/performance/bundle-size.test.ts" name="Bundle Size Regression &gt; Build Output Validation &gt; should have reasonable top-level file sizes if built" time="0.000847125">
+        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; displays lead count from API response" time="0.019714921">
         </testcase>
-        <testcase classname="tests/performance/bundle-size.test.ts" name="Bundle Size Regression &gt; Bundle Analysis Reference &gt; should document bundle analysis commands" time="0.00034064">
+        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; displays lead status badge" time="0.016563516">
         </testcase>
-        <testcase classname="tests/performance/bundle-size.test.ts" name="Bundle Size Regression &gt; Bundle Analysis Reference &gt; should document size optimization strategies" time="0.000170545">
+        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; shows empty state when no leads exist" time="0.0588792">
+        </testcase>
+        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; renders create lead form" time="0.008700756">
+        </testcase>
+        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; create lead form calls API on submit" time="0.017875597">
+        </testcase>
+        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; renders status updater with current status selected" time="0.005543231">
+        </testcase>
+        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; updating lead status calls API with new status" time="0.059064685">
+        </testcase>
+        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; handles API error when loading leads" time="0.015494359">
+        </testcase>
+        <testcase classname="tests/integration/lead-management.test.tsx" name="Lead Management: Create -&gt; View -&gt; Update Status &gt; handles API error when creating lead" time="0.01611352">
         </testcase>
     </testsuite>
-    <testsuite name="tests/performance/lighthouse.test.ts" timestamp="2026-09-18T21:33:38.933Z" hostname="t42d1" tests="3" failures="0" errors="0" skipped="3" time="0">
+    <testsuite name="tests/integration/pages/dashboard-overview.test.tsx" timestamp="2026-09-18T21:41:03.627Z" hostname="t42d1" tests="2" failures="0" errors="0" skipped="0" time="0.37411085">
+        <testcase classname="tests/integration/pages/dashboard-overview.test.tsx" name="DashboardPage integration &gt; renders agent overview with dashboard sections" time="0.097834027">
+        </testcase>
+        <testcase classname="tests/integration/pages/dashboard-overview.test.tsx" name="DashboardPage integration &gt; renders stat cards with data" time="0.271750481">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/pages/leads-page.test.tsx" timestamp="2026-09-18T21:41:03.627Z" hostname="t42d1" tests="3" failures="0" errors="0" skipped="0" time="0.135620868">
+        <testcase classname="tests/integration/pages/leads-page.test.tsx" name="LeadsPage integration &gt; renders leads page heading" time="0.086290516">
+        </testcase>
+        <testcase classname="tests/integration/pages/leads-page.test.tsx" name="LeadsPage integration &gt; renders view toggle buttons" time="0.019055971">
+        </testcase>
+        <testcase classname="tests/integration/pages/leads-page.test.tsx" name="LeadsPage integration &gt; renders lead count from API" time="0.018880386">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/pages/properties-page.test.tsx" timestamp="2026-09-18T21:41:03.628Z" hostname="t42d1" tests="3" failures="0" errors="0" skipped="0" time="0.099595572">
+        <testcase classname="tests/integration/pages/properties-page.test.tsx" name="DashboardPropertiesPage integration &gt; renders properties page heading" time="0.064300975">
+        </testcase>
+        <testcase classname="tests/integration/pages/properties-page.test.tsx" name="DashboardPropertiesPage integration &gt; renders Add Property link" time="0.014967165">
+        </testcase>
+        <testcase classname="tests/integration/pages/properties-page.test.tsx" name="DashboardPropertiesPage integration &gt; renders property count from API" time="0.015556327">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/property-listing.test.tsx" timestamp="2026-09-18T21:41:03.628Z" hostname="t42d1" tests="9" failures="0" errors="0" skipped="0" time="0.310424536">
+        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; renders property listing page with heading" time="0.095587315">
+        </testcase>
+        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; renders property cards from API data" time="0.031563291">
+        </testcase>
+        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; displays property prices correctly" time="0.034877721">
+        </testcase>
+        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; renders pagination when there are multiple pages" time="0.01282637">
+        </testcase>
+        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; shows empty state when no properties match filters" time="0.012652995">
+        </testcase>
+        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; handles filter changes trigger new API calls" time="0.047505477">
+        </testcase>
+        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; displays property status badges" time="0.029592641">
+        </testcase>
+        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; renders property details (beds, baths, area)" time="0.028270551">
+        </testcase>
+        <testcase classname="tests/integration/property-listing.test.tsx" name="Property Listing: Search -&gt; Filter -&gt; Pagination &gt; handles server error gracefully" time="0.012806191">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/performance/bundle-size.test.ts" timestamp="2026-09-18T21:41:03.629Z" hostname="t42d1" tests="4" failures="0" errors="0" skipped="0" time="0.006066396">
+        <testcase classname="tests/performance/bundle-size.test.ts" name="Bundle Size Regression &gt; Build Output Validation &gt; should have .next build directory or be skipped gracefully" time="0.001210033">
+        </testcase>
+        <testcase classname="tests/performance/bundle-size.test.ts" name="Bundle Size Regression &gt; Build Output Validation &gt; should have reasonable top-level file sizes if built" time="0.000622371">
+        </testcase>
+        <testcase classname="tests/performance/bundle-size.test.ts" name="Bundle Size Regression &gt; Bundle Analysis Reference &gt; should document bundle analysis commands" time="0.000267762">
+        </testcase>
+        <testcase classname="tests/performance/bundle-size.test.ts" name="Bundle Size Regression &gt; Bundle Analysis Reference &gt; should document size optimization strategies" time="0.000142485">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/performance/lighthouse.test.ts" timestamp="2026-09-18T21:41:03.629Z" hostname="t42d1" tests="3" failures="0" errors="0" skipped="3" time="0">
         <testcase classname="tests/performance/lighthouse.test.ts" name="Lighthouse CI Performance Audits &gt; Lighthouse CI is not installed - skipping performance audits" time="0">
             <skipped/>
         </testcase>
@@ -225,122 +225,122 @@
             <skipped/>
         </testcase>
     </testsuite>
-    <testsuite name="tests/performance/web-vitals.test.ts" timestamp="2026-09-18T21:33:38.934Z" hostname="t42d1" tests="19" failures="0" errors="0" skipped="0" time="0.012252457">
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; LCP (Largest Contentful Paint) &gt; should be under 2.5s for good rating" time="0.001621074">
+    <testsuite name="tests/performance/web-vitals.test.ts" timestamp="2026-09-18T21:41:03.630Z" hostname="t42d1" tests="19" failures="0" errors="0" skipped="0" time="0.023009521">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; LCP (Largest Contentful Paint) &gt; should be under 2.5s for good rating" time="0.00164295">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; LCP (Largest Contentful Paint) &gt; should classify LCP rating correctly" time="0.000562103">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; LCP (Largest Contentful Paint) &gt; should classify LCP rating correctly" time="0.004431646">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; LCP (Largest Contentful Paint) &gt; should warn when LCP exceeds poor threshold" time="0.000241563">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; LCP (Largest Contentful Paint) &gt; should warn when LCP exceeds poor threshold" time="0.00032846">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; CLS (Cumulative Layout Shift) &gt; should be under 0.1 for good rating" time="0.000201214">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; CLS (Cumulative Layout Shift) &gt; should be under 0.1 for good rating" time="0.000310501">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; CLS (Cumulative Layout Shift) &gt; should classify CLS rating correctly" time="0.000230134">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; CLS (Cumulative Layout Shift) &gt; should classify CLS rating correctly" time="0.000273872">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; CLS (Cumulative Layout Shift) &gt; should detect layout shift from dynamic content" time="0.000270452">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; CLS (Cumulative Layout Shift) &gt; should detect layout shift from dynamic content" time="0.000304771">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; CLS (Cumulative Layout Shift) &gt; should track CLS across page lifecycle" time="0.000204965">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; CLS (Cumulative Layout Shift) &gt; should track CLS across page lifecycle" time="0.000232963">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; FID (First Input Delay) &gt; should be under 100ms for good rating" time="0.000155286">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; FID (First Input Delay) &gt; should be under 100ms for good rating" time="0.000180105">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; FID (First Input Delay) &gt; should classify FID rating correctly" time="0.000841136">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; FID (First Input Delay) &gt; should classify FID rating correctly" time="0.000230553">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; INP (Interaction to Next Paint) &gt; should be under 200ms for good rating" time="0.000255033">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; INP (Interaction to Next Paint) &gt; should be under 200ms for good rating" time="0.000228004">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; INP (Interaction to Next Paint) &gt; should classify INP rating correctly" time="0.000167645">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; INP (Interaction to Next Paint) &gt; should classify INP rating correctly" time="0.002757626">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; TTFB (Time to First Byte) &gt; should be under 800ms for good rating" time="0.000124786">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; TTFB (Time to First Byte) &gt; should be under 800ms for good rating" time="0.000231863">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; TTFB (Time to First Byte) &gt; should classify TTFB rating correctly" time="0.000179805">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Core Metrics &gt; TTFB (Time to First Byte) &gt; should classify TTFB rating correctly" time="0.000249092">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Performance Budgets &gt; should meet all Core Web Vitals thresholds" time="0.000740079">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Performance Budgets &gt; should meet all Core Web Vitals thresholds" time="0.000851724">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Performance Budgets &gt; should have at least 3 vitals rated as good" time="0.000128836">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Performance Budgets &gt; should have at least 3 vitals rated as good" time="0.000191694">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Performance Monitoring Setup &gt; should have performance monitoring infrastructure" time="0.000134676">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Performance Monitoring Setup &gt; should have performance monitoring infrastructure" time="0.000148685">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Performance Monitoring Setup &gt; should be able to measure component render time" time="0.000319451">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Performance Monitoring Setup &gt; should be able to measure component render time" time="0.000263832">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Performance Monitoring Setup &gt; should support PerformanceObserver" time="0.000116526">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Performance Monitoring Setup &gt; should support PerformanceObserver" time="0.000134696">
         </testcase>
-        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Performance Monitoring Setup &gt; should support performance marks and measures" time="0.000639252">
-        </testcase>
-    </testsuite>
-    <testsuite name="tests/security/api-security.test.ts" timestamp="2026-09-18T21:33:38.940Z" hostname="t42d1" tests="19" failures="0" errors="0" skipped="0" time="0.103363872">
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Authentication &gt; requests without token receive 401" time="0.032348978">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Authentication &gt; requests with valid token succeed" time="0.00766391">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Authentication &gt; token is sent as Bearer token" time="0.000425498">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Authentication &gt; clearing token removes Authorization header" time="0.000325861">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Error Handling &gt; does not expose stack traces to client" time="0.006992798">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Error Handling &gt; handles network errors gracefully" time="0.006871892">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Request Validation &gt; sends JSON content type for POST requests" time="0.006801034">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Request Validation &gt; does not send credentials cross-origin by default" time="0.000288872">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Timeout Protection &gt; has timeout configured" time="0.000546814">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Timeout Protection &gt; rejects requests that exceed timeout" time="0.000366409">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: URL Validation &gt; baseURL is configured" time="0.000308331">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: URL Validation &gt; does not allow arbitrary URL override" time="0.004943828">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: URL Validation &gt; prevents SSRF via URL parameters" time="0.000252153">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Response Validation &gt; handles malformed JSON responses" time="0.006032596">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Response Validation &gt; handles empty responses" time="0.004748663">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Rate Limiting Awareness &gt; handles 429 Too Many Requests" time="0.010527737">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Sensitive Data Handling &gt; does not log request bodies with sensitive data" time="0.001606534">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Injection Prevention &gt; URL parameters are properly encoded" time="0.001278444">
-        </testcase>
-        <testcase classname="tests/security/api-security.test.ts" name="API Security: Injection Prevention &gt; path parameters are encoded" time="0.000401809">
+        <testcase classname="tests/performance/web-vitals.test.ts" name="Web Vitals: Performance Monitoring Setup &gt; should support performance marks and measures" time="0.001478335">
         </testcase>
     </testsuite>
-    <testsuite name="tests/security/auth.test.tsx" timestamp="2026-09-18T21:33:38.944Z" hostname="t42d1" tests="15" failures="0" errors="0" skipped="0" time="0.120105011">
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Token Handling &gt; setAuthToken sets Bearer token in headers" time="0.002401041">
+    <testsuite name="tests/security/api-security.test.ts" timestamp="2026-09-18T21:41:03.631Z" hostname="t42d1" tests="19" failures="0" errors="0" skipped="0" time="0.084785703">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Authentication &gt; requests without token receive 401" time="0.033077135">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Token Handling &gt; setAuthToken clears token when null is passed" time="0.001009401">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Authentication &gt; requests with valid token succeed" time="0.006522392">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Token Handling &gt; tokens should not be stored in localStorage" time="0.00104081">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Authentication &gt; token is sent as Bearer token" time="0.000398638">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Token Handling &gt; tokens should not be stored in sessionStorage" time="0.000472466">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Authentication &gt; clearing token removes Authorization header" time="0.000280331">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: RoleGuard Component &gt; renders nothing while auth is loading" time="0.028319035">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Error Handling &gt; does not expose stack traces to client" time="0.008251169">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: RoleGuard Component &gt; renders nothing when user is not authenticated" time="0.00416706">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Error Handling &gt; handles network errors gracefully" time="0.004116865">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: RoleGuard Component &gt; renders fallback when user role is not allowed" time="0.008192614">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Request Validation &gt; sends JSON content type for POST requests" time="0.0055834">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: RoleGuard Component &gt; renders children when user role is allowed" time="0.040372387">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Request Validation &gt; does not send credentials cross-origin by default" time="0.000230803">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: RoleGuard Component &gt; supports multiple allowed roles" time="0.015806475">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Timeout Protection &gt; has timeout configured" time="0.000476706">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Session Handling &gt; API client does not expose tokens in error messages" time="0.000588623">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Timeout Protection &gt; rejects requests that exceed timeout" time="0.000266972">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: CSRF Protection &gt; API requests include credentials for same-origin" time="0.000186575">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: URL Validation &gt; baseURL is configured" time="0.000229583">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: CSRF Protection &gt; forms should have proper action attributes" time="0.009819347">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: URL Validation &gt; does not allow arbitrary URL override" time="0.003982528">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Privilege Escalation Prevention &gt; role check is performed server-side (documented behavior)" time="0.000725859">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: URL Validation &gt; prevents SSRF via URL parameters" time="0.000232433">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Privilege Escalation Prevention &gt; user cannot modify their own role via API client" time="0.000480436">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Response Validation &gt; handles malformed JSON responses" time="0.004752756">
         </testcase>
-        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Logout Behavior &gt; logout should clear all auth state" time="0.000168665">
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Response Validation &gt; handles empty responses" time="0.004117675">
+        </testcase>
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Rate Limiting Awareness &gt; handles 429 Too Many Requests" time="0.004965219">
+        </testcase>
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Sensitive Data Handling &gt; does not log request bodies with sensitive data" time="0.000237072">
+        </testcase>
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Injection Prevention &gt; URL parameters are properly encoded" time="0.000318041">
+        </testcase>
+        <testcase classname="tests/security/api-security.test.ts" name="API Security: Injection Prevention &gt; path parameters are encoded" time="0.000247733">
         </testcase>
     </testsuite>
-    <testsuite name="tests/security/headers.test.ts" timestamp="2026-09-18T21:33:38.946Z" hostname="t42d1" tests="10" failures="0" errors="0" skipped="0" time="0.012782372">
-        <testcase classname="tests/security/headers.test.ts" name="Security Headers: Next.js Configuration &gt; next.config file exists" time="0.001858296">
+    <testsuite name="tests/security/auth.test.tsx" timestamp="2026-09-18T21:41:03.633Z" hostname="t42d1" tests="15" failures="0" errors="0" skipped="0" time="0.116755531">
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Token Handling &gt; setAuthToken sets Bearer token in headers" time="0.002033918">
         </testcase>
-        <testcase classname="tests/security/headers.test.ts" name="Security Headers: Next.js Configuration &gt; documents recommended security headers" time="0.001806458">
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Token Handling &gt; setAuthToken clears token when null is passed" time="0.000516964">
+        </testcase>
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Token Handling &gt; tokens should not be stored in localStorage" time="0.002038688">
+        </testcase>
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Token Handling &gt; tokens should not be stored in sessionStorage" time="0.000515335">
+        </testcase>
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: RoleGuard Component &gt; renders nothing while auth is loading" time="0.034787063">
+        </testcase>
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: RoleGuard Component &gt; renders nothing when user is not authenticated" time="0.00494564">
+        </testcase>
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: RoleGuard Component &gt; renders fallback when user role is not allowed" time="0.008198191">
+        </testcase>
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: RoleGuard Component &gt; renders children when user role is allowed" time="0.032539141">
+        </testcase>
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: RoleGuard Component &gt; supports multiple allowed roles" time="0.011049565">
+        </testcase>
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Session Handling &gt; API client does not expose tokens in error messages" time="0.000629221">
+        </testcase>
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: CSRF Protection &gt; API requests include credentials for same-origin" time="0.000187714">
+        </testcase>
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: CSRF Protection &gt; forms should have proper action attributes" time="0.008914789">
+        </testcase>
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Privilege Escalation Prevention &gt; role check is performed server-side (documented behavior)" time="0.00064469">
+        </testcase>
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Privilege Escalation Prevention &gt; user cannot modify their own role via API client" time="0.000496445">
+        </testcase>
+        <testcase classname="tests/security/auth.test.tsx" name="Auth Security: Logout Behavior &gt; logout should clear all auth state" time="0.000191185">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/security/headers.test.ts" timestamp="2026-09-18T21:41:03.634Z" hostname="t42d1" tests="10" failures="0" errors="0" skipped="0" time="0.011576327">
+        <testcase classname="tests/security/headers.test.ts" name="Security Headers: Next.js Configuration &gt; next.config file exists" time="0.001370559">
+        </testcase>
+        <testcase classname="tests/security/headers.test.ts" name="Security Headers: Next.js Configuration &gt; documents recommended security headers" time="0.001369238">
             <system-out>
 
 📋 Recommended Security Headers for next.config.js:
@@ -366,7 +366,7 @@ async headers() {
 
             </system-out>
         </testcase>
-        <testcase classname="tests/security/headers.test.ts" name="Security Headers: Content Security Policy &gt; documents recommended CSP directives" time="0.001534886">
+        <testcase classname="tests/security/headers.test.ts" name="Security Headers: Content Security Policy &gt; documents recommended CSP directives" time="0.001212913">
             <system-out>
 
 📋 Recommended CSP Header:
@@ -375,23 +375,23 @@ Content-Security-Policy: default-src &apos;self&apos;; script-src &apos;self&apo
 
             </system-out>
         </testcase>
-        <testcase classname="tests/security/headers.test.ts" name="Security Headers: Content Security Policy &gt; CSP should block inline scripts in production" time="0.000500755">
+        <testcase classname="tests/security/headers.test.ts" name="Security Headers: Content Security Policy &gt; CSP should block inline scripts in production" time="0.000395018">
         </testcase>
-        <testcase classname="tests/security/headers.test.ts" name="Security Headers: CORS Configuration &gt; documents CORS best practices" time="0.000426618">
+        <testcase classname="tests/security/headers.test.ts" name="Security Headers: CORS Configuration &gt; documents CORS best practices" time="0.000579123">
         </testcase>
-        <testcase classname="tests/security/headers.test.ts" name="Security Headers: Cookie Configuration &gt; documents secure cookie attributes" time="0.000308611">
+        <testcase classname="tests/security/headers.test.ts" name="Security Headers: Cookie Configuration &gt; documents secure cookie attributes" time="0.000286111">
         </testcase>
-        <testcase classname="tests/security/headers.test.ts" name="Security Headers: Cookie Configuration &gt; session cookies should have appropriate settings" time="0.000216854">
+        <testcase classname="tests/security/headers.test.ts" name="Security Headers: Cookie Configuration &gt; session cookies should have appropriate settings" time="0.000172664">
         </testcase>
-        <testcase classname="tests/security/headers.test.ts" name="Security: Environment Variables &gt; sensitive env vars should not be exposed to client" time="0.000408428">
+        <testcase classname="tests/security/headers.test.ts" name="Security: Environment Variables &gt; sensitive env vars should not be exposed to client" time="0.000512935">
         </testcase>
-        <testcase classname="tests/security/headers.test.ts" name="Security: Middleware Configuration &gt; middleware file exists or is not required" time="0.00070629">
+        <testcase classname="tests/security/headers.test.ts" name="Security: Middleware Configuration &gt; middleware file exists or is not required" time="0.000597912">
             <system-out>
 ℹ️ No middleware.ts found. Consider adding one for auth protection.
 
             </system-out>
         </testcase>
-        <testcase classname="tests/security/headers.test.ts" name="Security: Middleware Configuration &gt; documents recommended middleware patterns" time="0.00035953">
+        <testcase classname="tests/security/headers.test.ts" name="Security: Middleware Configuration &gt; documents recommended middleware patterns" time="0.000368868">
             <system-out>
 
 📋 Recommended middleware.ts:
@@ -415,179 +415,179 @@ export const config = {
             </system-out>
         </testcase>
     </testsuite>
-    <testsuite name="tests/security/input-validation.test.tsx" timestamp="2026-09-18T21:33:38.951Z" hostname="t42d1" tests="16" failures="0" errors="0" skipped="0" time="0.148717626">
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Search Components &gt; PropertySearchBar accepts and displays injection payloads as plain text" time="0.067601703">
+    <testsuite name="tests/security/input-validation.test.tsx" timestamp="2026-09-18T21:41:03.636Z" hostname="t42d1" tests="16" failures="0" errors="0" skipped="0" time="0.135833281">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Search Components &gt; PropertySearchBar accepts and displays injection payloads as plain text" time="0.04506761">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Search Components &gt; handles boundary values gracefully" time="0.009270193">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Search Components &gt; handles boundary values gracefully" time="0.008360406">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Search Components &gt; handles very long input without crashing" time="0.006827234">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Search Components &gt; handles very long input without crashing" time="0.007094144">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Form Fields &gt; email input validates format" time="0.01143441">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Form Fields &gt; email input validates format" time="0.006684117">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Form Fields &gt; number input rejects non-numeric values" time="0.005362756">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Form Fields &gt; number input rejects non-numeric values" time="0.004121595">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Form Fields &gt; number input respects min/max constraints" time="0.003849719">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Form Fields &gt; number input respects min/max constraints" time="0.003412966">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Form Fields &gt; URL input validates format" time="0.003731503">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Form Fields &gt; URL input validates format" time="0.009439143">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Form Fields &gt; tel input accepts phone number formats" time="0.004259017">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Form Fields &gt; tel input accepts phone number formats" time="0.007121794">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Textarea Fields &gt; textarea handles multiline injection attempts" time="0.007379678">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Textarea Fields &gt; textarea handles multiline injection attempts" time="0.009315456">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Textarea Fields &gt; textarea respects maxLength" time="0.003971535">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Textarea Fields &gt; textarea respects maxLength" time="0.006467124">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Select Fields &gt; select only accepts predefined values" time="0.005397454">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Select Fields &gt; select only accepts predefined values" time="0.007320458">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: File Uploads &gt; file input respects accept attribute" time="0.002697023">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: File Uploads &gt; file input respects accept attribute" time="0.00723684">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: File Uploads &gt; file input can have size limits documented" time="0.001850017">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: File Uploads &gt; file input can have size limits documented" time="0.004786935">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Hidden Fields &gt; hidden fields should not contain sensitive data in DOM" time="0.004391333">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Hidden Fields &gt; hidden fields should not contain sensitive data in DOM" time="0.003283121">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Prototype Pollution Prevention &gt; form data parsing should not allow prototype pollution" time="0.000845496">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: Prototype Pollution Prevention &gt; form data parsing should not allow prototype pollution" time="0.000776576">
         </testcase>
-        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: ReDoS Prevention &gt; regex patterns should not be vulnerable to ReDoS" time="0.000314321">
+        <testcase classname="tests/security/input-validation.test.tsx" name="Input Validation: ReDoS Prevention &gt; regex patterns should not be vulnerable to ReDoS" time="0.000266022">
         </testcase>
     </testsuite>
-    <testsuite name="tests/security/xss.test.tsx" timestamp="2026-09-18T21:33:38.954Z" hostname="t42d1" tests="12" failures="0" errors="0" skipped="0" time="0.833478552">
-        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: Search Components &gt; PropertySearchBar escapes malicious input in display" time="0.631202744">
+    <testsuite name="tests/security/xss.test.tsx" timestamp="2026-09-18T21:41:03.638Z" hostname="t42d1" tests="12" failures="0" errors="0" skipped="0" time="0.745864572">
+        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: Search Components &gt; PropertySearchBar escapes malicious input in display" time="0.567244941">
         </testcase>
-        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: Search Components &gt; search input does not allow javascript: protocol in value" time="0.142316404">
+        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: Search Components &gt; search input does not allow javascript: protocol in value" time="0.116422822">
         </testcase>
-        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: Content Display Components &gt; EmptyState escapes HTML in custom title" time="0.020373114">
+        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: Content Display Components &gt; EmptyState escapes HTML in custom title" time="0.016936875">
         </testcase>
-        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: Content Display Components &gt; EmptyState escapes HTML in custom message" time="0.005065234">
+        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: Content Display Components &gt; EmptyState escapes HTML in custom message" time="0.006336668">
         </testcase>
-        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: Content Display Components &gt; ErrorState escapes HTML in error message" time="0.004989587">
+        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: Content Display Components &gt; ErrorState escapes HTML in error message" time="0.008052015">
         </testcase>
-        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: URL Handling &gt; does not render javascript: URLs as clickable links" time="0.004398564">
+        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: URL Handling &gt; does not render javascript: URLs as clickable links" time="0.004745986">
         </testcase>
-        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: URL Handling &gt; does not render data: URLs with scripts" time="0.001840187">
+        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: URL Handling &gt; does not render data: URLs with scripts" time="0.002852663">
         </testcase>
-        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: DOM Injection &gt; React escapes HTML entities by default" time="0.001923255">
+        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: DOM Injection &gt; React escapes HTML entities by default" time="0.003767515">
         </testcase>
-        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: DOM Injection &gt; innerHTML is not used directly (codebase audit)" time="0.004027084">
+        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: DOM Injection &gt; innerHTML is not used directly (codebase audit)" time="0.003112236">
         </testcase>
-        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: Event Handler Injection &gt; event handlers cannot be injected via props" time="0.007326269">
+        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: Event Handler Injection &gt; event handlers cannot be injected via props" time="0.005757565">
             <system-err>
 Expected `onClick` listener to be a function, instead got a value of `string` type.
 Expected `onMouseOver` listener to be a function, instead got a value of `string` type.
 
             </system-err>
         </testcase>
-        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: JSON Injection &gt; JSON.parse handles malicious payloads safely" time="0.000321741">
+        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: JSON Injection &gt; JSON.parse handles malicious payloads safely" time="0.000410368">
         </testcase>
-        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: JSON Injection &gt; JSON.stringify escapes HTML in output" time="0.000214874">
-        </testcase>
-    </testsuite>
-    <testsuite name="tests/unit/components/ai/ai-copy-generator.test.tsx" timestamp="2026-09-18T21:33:38.956Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="0.483628445">
-        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; renders the component" time="0.044573877">
-        </testcase>
-        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; has a tone selector" time="0.163578401">
-        </testcase>
-        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; has a generate button" time="0.035289254">
-        </testcase>
-        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; shows loading state while generating" time="0.034320832">
-        </testcase>
-        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; displays generated copy after success" time="0.039314108">
-        </testcase>
-        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; shows error state on failure" time="0.039437335">
-        </testcase>
-        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; calls API with correct propertyId and tone" time="0.043538037">
-        </testcase>
-        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; displays highlights when provided" time="0.074149455">
+        <testcase classname="tests/security/xss.test.tsx" name="XSS Prevention: JSON Injection &gt; JSON.stringify escapes HTML in output" time="0.000380109">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/components/ai/ai-matcher.test.tsx" timestamp="2026-09-18T21:33:38.958Z" hostname="t42d1" tests="9" failures="0" errors="0" skipped="0" time="0.253965421">
-        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; renders the match button initially" time="0.041624862">
+    <testsuite name="tests/unit/components/ai/ai-copy-generator.test.tsx" timestamp="2026-09-18T21:41:03.639Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="0.270063653">
+        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; renders the component" time="0.046665772">
         </testcase>
-        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; shows loading state after clicking match" time="0.024547364">
+        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; has a tone selector" time="0.099838926">
         </testcase>
-        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; displays match results after successful fetch" time="0.02919768">
+        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; has a generate button" time="0.015106641">
         </testcase>
-        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; displays match scores with correct color coding" time="0.028058693">
+        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; shows loading state while generating" time="0.016641145">
         </testcase>
-        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; shows &apos;No matching properties found&apos; when results are empty" time="0.019930626">
+        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; displays generated copy after success" time="0.02731219">
         </testcase>
-        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; shows error state on failure" time="0.027217277">
+        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; shows error state on failure" time="0.020018122">
         </testcase>
-        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; shows retry button on error" time="0.039088935">
+        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; calls API with correct propertyId and tone" time="0.016689583">
         </testcase>
-        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; calls the API with the correct leadId" time="0.016988781">
-        </testcase>
-        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; shows refresh button after results load" time="0.022027946">
+        <testcase classname="tests/unit/components/ai/ai-copy-generator.test.tsx" name="AiCopyGenerator &gt; displays highlights when provided" time="0.022920504">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/components/charts/conversion-chart.test.tsx" timestamp="2026-09-18T21:33:38.960Z" hostname="t42d1" tests="5" failures="0" errors="0" skipped="0" time="0.196946577">
-        <testcase classname="tests/unit/components/charts/conversion-chart.test.tsx" name="BarChart (conversion chart) &gt; renders without crashing" time="0.138302896">
+    <testsuite name="tests/unit/components/ai/ai-matcher.test.tsx" timestamp="2026-09-18T21:41:03.640Z" hostname="t42d1" tests="9" failures="0" errors="0" skipped="0" time="0.22800536">
+        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; renders the match button initially" time="0.034182561">
         </testcase>
-        <testcase classname="tests/unit/components/charts/conversion-chart.test.tsx" name="BarChart (conversion chart) &gt; accepts custom color prop" time="0.021805582">
+        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; shows loading state after clicking match" time="0.028037328">
         </testcase>
-        <testcase classname="tests/unit/components/charts/conversion-chart.test.tsx" name="BarChart (conversion chart) &gt; handles empty data array" time="0.010465248">
+        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; displays match results after successful fetch" time="0.050463416">
         </testcase>
-        <testcase classname="tests/unit/components/charts/conversion-chart.test.tsx" name="BarChart (conversion chart) &gt; handles single data point" time="0.006666568">
+        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; displays match scores with correct color coding" time="0.024586353">
         </testcase>
-        <testcase classname="tests/unit/components/charts/conversion-chart.test.tsx" name="BarChart (conversion chart) &gt; handles large values" time="0.012353334">
+        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; shows &apos;No matching properties found&apos; when results are empty" time="0.015959995">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/unit/components/common/empty-state.test.tsx" timestamp="2026-09-18T21:33:38.961Z" hostname="t42d1" tests="3" failures="0" errors="0" skipped="0" time="0.233100527">
-        <testcase classname="tests/unit/components/common/empty-state.test.tsx" name="EmptyState &gt; renders default title and message" time="0.051954184">
+        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; shows error state on failure" time="0.015609015">
         </testcase>
-        <testcase classname="tests/unit/components/common/empty-state.test.tsx" name="EmptyState &gt; renders custom title and message" time="0.009145227">
+        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; shows retry button on error" time="0.018597074">
         </testcase>
-        <testcase classname="tests/unit/components/common/empty-state.test.tsx" name="EmptyState &gt; renders action element" time="0.166499175">
+        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; calls the API with the correct leadId" time="0.010539319">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/unit/components/common/error-state.test.tsx" timestamp="2026-09-18T21:33:38.961Z" hostname="t42d1" tests="4" failures="0" errors="0" skipped="0" time="0.292181687">
-        <testcase classname="tests/unit/components/common/error-state.test.tsx" name="ErrorState &gt; renders default message" time="0.060958485">
-        </testcase>
-        <testcase classname="tests/unit/components/common/error-state.test.tsx" name="ErrorState &gt; renders custom message" time="0.007180373">
-        </testcase>
-        <testcase classname="tests/unit/components/common/error-state.test.tsx" name="ErrorState &gt; renders retry button when onRetry is provided" time="0.205921561">
-        </testcase>
-        <testcase classname="tests/unit/components/common/error-state.test.tsx" name="ErrorState &gt; does not render retry button without onRetry" time="0.008235073">
+        <testcase classname="tests/unit/components/ai/ai-matcher.test.tsx" name="AiMatchPanel &gt; shows refresh button after results load" time="0.024543323">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/components/common/pagination.test.tsx" timestamp="2026-09-18T21:33:38.962Z" hostname="t42d1" tests="5" failures="0" errors="0" skipped="0" time="0.317669774">
-        <testcase classname="tests/unit/components/common/pagination.test.tsx" name="Pagination &gt; renders page numbers" time="0.051542707">
+    <testsuite name="tests/unit/components/charts/conversion-chart.test.tsx" timestamp="2026-09-18T21:41:03.641Z" hostname="t42d1" tests="5" failures="0" errors="0" skipped="0" time="0.096904044">
+        <testcase classname="tests/unit/components/charts/conversion-chart.test.tsx" name="BarChart (conversion chart) &gt; renders without crashing" time="0.053490794">
         </testcase>
-        <testcase classname="tests/unit/components/common/pagination.test.tsx" name="Pagination &gt; returns null when totalPages &lt;= 1" time="0.003224547">
+        <testcase classname="tests/unit/components/charts/conversion-chart.test.tsx" name="BarChart (conversion chart) &gt; accepts custom color prop" time="0.010749194">
         </testcase>
-        <testcase classname="tests/unit/components/common/pagination.test.tsx" name="Pagination &gt; disables previous button on first page" time="0.180158443">
+        <testcase classname="tests/unit/components/charts/conversion-chart.test.tsx" name="BarChart (conversion chart) &gt; handles empty data array" time="0.00985238">
         </testcase>
-        <testcase classname="tests/unit/components/common/pagination.test.tsx" name="Pagination &gt; disables next button on last page" time="0.056873603">
+        <testcase classname="tests/unit/components/charts/conversion-chart.test.tsx" name="BarChart (conversion chart) &gt; handles single data point" time="0.007143203">
         </testcase>
-        <testcase classname="tests/unit/components/common/pagination.test.tsx" name="Pagination &gt; calls onPageChange when clicking a visible page number" time="0.017874985">
-        </testcase>
-    </testsuite>
-    <testsuite name="tests/unit/components/dashboard/stat-card.test.tsx" timestamp="2026-09-18T21:33:38.963Z" hostname="t42d1" tests="4" failures="0" errors="0" skipped="0" time="0.077718991">
-        <testcase classname="tests/unit/components/dashboard/stat-card.test.tsx" name="StatCard &gt; renders title and value" time="0.045821389">
-        </testcase>
-        <testcase classname="tests/unit/components/dashboard/stat-card.test.tsx" name="StatCard &gt; renders description when provided" time="0.008174285">
-        </testcase>
-        <testcase classname="tests/unit/components/dashboard/stat-card.test.tsx" name="StatCard &gt; renders positive trend" time="0.008855145">
-        </testcase>
-        <testcase classname="tests/unit/components/dashboard/stat-card.test.tsx" name="StatCard &gt; renders negative trend" time="0.007587671">
+        <testcase classname="tests/unit/components/charts/conversion-chart.test.tsx" name="BarChart (conversion chart) &gt; handles large values" time="0.010752754">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/components/forms/lead-form.test.tsx" timestamp="2026-09-18T21:33:38.964Z" hostname="t42d1" tests="11" failures="0" errors="0" skipped="0" time="0.920833227">
-        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; renders all required fields" time="0.116752549">
+    <testsuite name="tests/unit/components/common/empty-state.test.tsx" timestamp="2026-09-18T21:41:03.642Z" hostname="t42d1" tests="3" failures="0" errors="0" skipped="0" time="0.199505786">
+        <testcase classname="tests/unit/components/common/empty-state.test.tsx" name="EmptyState &gt; renders default title and message" time="0.041723422">
         </testcase>
-        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; renders optional fields" time="0.05659829">
+        <testcase classname="tests/unit/components/common/empty-state.test.tsx" name="EmptyState &gt; renders custom title and message" time="0.009143511">
         </testcase>
-        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; renders a submit button" time="0.254148446">
+        <testcase classname="tests/unit/components/common/empty-state.test.tsx" name="EmptyState &gt; renders action element" time="0.143896806">
         </testcase>
-        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; shows validation error for empty name" time="0.083404709">
+    </testsuite>
+    <testsuite name="tests/unit/components/common/error-state.test.tsx" timestamp="2026-09-18T21:41:03.642Z" hostname="t42d1" tests="4" failures="0" errors="0" skipped="0" time="0.183401525">
+        <testcase classname="tests/unit/components/common/error-state.test.tsx" name="ErrorState &gt; renders default message" time="0.034925798">
         </testcase>
-        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; shows validation error for invalid email" time="0.098927293">
+        <testcase classname="tests/unit/components/common/error-state.test.tsx" name="ErrorState &gt; renders custom message" time="0.007367836">
         </testcase>
-        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; shows validation error for negative budget" time="0.060160999">
+        <testcase classname="tests/unit/components/common/error-state.test.tsx" name="ErrorState &gt; renders retry button when onRetry is provided" time="0.131222751">
         </testcase>
-        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; calls onSubmit with valid data" time="0.064694958">
+        <testcase classname="tests/unit/components/common/error-state.test.tsx" name="ErrorState &gt; does not render retry button without onRetry" time="0.005453615">
         </testcase>
-        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; submits with only required fields" time="0.054658767">
+    </testsuite>
+    <testsuite name="tests/unit/components/common/pagination.test.tsx" timestamp="2026-09-18T21:41:03.642Z" hostname="t42d1" tests="5" failures="0" errors="0" skipped="0" time="0.200430438">
+        <testcase classname="tests/unit/components/common/pagination.test.tsx" name="Pagination &gt; renders page numbers" time="0.044122049">
         </testcase>
-        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; displays loading state during submission" time="0.087296028">
+        <testcase classname="tests/unit/components/common/pagination.test.tsx" name="Pagination &gt; returns null when totalPages &lt;= 1" time="0.002087707">
+        </testcase>
+        <testcase classname="tests/unit/components/common/pagination.test.tsx" name="Pagination &gt; disables previous button on first page" time="0.117409001">
+        </testcase>
+        <testcase classname="tests/unit/components/common/pagination.test.tsx" name="Pagination &gt; disables next button on last page" time="0.019894705">
+        </testcase>
+        <testcase classname="tests/unit/components/common/pagination.test.tsx" name="Pagination &gt; calls onPageChange when clicking a visible page number" time="0.01150712">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/dashboard/stat-card.test.tsx" timestamp="2026-09-18T21:41:03.643Z" hostname="t42d1" tests="4" failures="0" errors="0" skipped="0" time="0.071749669">
+        <testcase classname="tests/unit/components/dashboard/stat-card.test.tsx" name="StatCard &gt; renders title and value" time="0.045988232">
+        </testcase>
+        <testcase classname="tests/unit/components/dashboard/stat-card.test.tsx" name="StatCard &gt; renders description when provided" time="0.007805153">
+        </testcase>
+        <testcase classname="tests/unit/components/dashboard/stat-card.test.tsx" name="StatCard &gt; renders positive trend" time="0.00689794">
+        </testcase>
+        <testcase classname="tests/unit/components/dashboard/stat-card.test.tsx" name="StatCard &gt; renders negative trend" time="0.005855822">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/forms/lead-form.test.tsx" timestamp="2026-09-18T21:41:03.643Z" hostname="t42d1" tests="11" failures="0" errors="0" skipped="0" time="0.697733795">
+        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; renders all required fields" time="0.085440724">
+        </testcase>
+        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; renders optional fields" time="0.036618488">
+        </testcase>
+        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; renders a submit button" time="0.12077425">
+        </testcase>
+        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; shows validation error for empty name" time="0.087723234">
+        </testcase>
+        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; shows validation error for invalid email" time="0.082496273">
+        </testcase>
+        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; shows validation error for negative budget" time="0.058961388">
+        </testcase>
+        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; calls onSubmit with valid data" time="0.066477819">
+        </testcase>
+        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; submits with only required fields" time="0.053677759">
+        </testcase>
+        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; displays loading state during submission" time="0.053145205">
             <system-err>
 An update to LeadForm inside a test was not wrapped in act(...).
 
@@ -602,27 +602,27 @@ This ensures that you&apos;re testing the behavior the user would see in the bro
 
             </system-err>
         </testcase>
-        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; has a status selector" time="0.024462005">
+        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; has a status selector" time="0.02400135">
         </testcase>
-        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; has a source selector" time="0.015186222">
+        <testcase classname="tests/unit/components/forms/lead-form.test.tsx" name="LeadForm &gt; has a source selector" time="0.015163769">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/components/forms/property-form.test.tsx" timestamp="2026-09-18T21:33:38.967Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="1.017141735">
-        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; renders all required fields" time="0.111410854">
+    <testsuite name="tests/unit/components/forms/property-form.test.tsx" timestamp="2026-09-18T21:41:03.644Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="0.781564417">
+        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; renders all required fields" time="0.089610127">
         </testcase>
-        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; renders a submit button" time="0.291467512">
+        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; renders a submit button" time="0.139578688">
         </testcase>
-        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; shows validation errors for empty required fields" time="0.100557036">
+        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; shows validation errors for empty required fields" time="0.09509664">
         </testcase>
-        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; shows validation error for short description" time="0.147572343">
+        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; shows validation error for short description" time="0.139283907">
         </testcase>
-        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; shows validation error for negative price" time="0.089987811">
+        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; shows validation error for negative price" time="0.089736832">
         </testcase>
-        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; calls onSubmit with valid data" time="0.070755573">
+        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; calls onSubmit with valid data" time="0.079059507">
         </testcase>
-        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; has a property type selector with options" time="0.048432735">
+        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; has a property type selector with options" time="0.0401643">
         </testcase>
-        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; displays loading state during submission" time="0.149613534">
+        <testcase classname="tests/unit/components/forms/property-form.test.tsx" name="PropertyForm &gt; displays loading state during submission" time="0.104739427">
             <system-err>
 An update to PropertyForm inside a test was not wrapped in act(...).
 
@@ -638,362 +638,362 @@ This ensures that you&apos;re testing the behavior the user would see in the bro
             </system-err>
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/components/interactions/interaction-timeline.test.tsx" timestamp="2026-09-18T21:33:38.968Z" hostname="t42d1" tests="9" failures="0" errors="0" skipped="0" time="0.159946234">
-        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; renders a list of interactions" time="0.079117561">
+    <testsuite name="tests/unit/components/interactions/interaction-timeline.test.tsx" timestamp="2026-09-18T21:41:03.645Z" hostname="t42d1" tests="9" failures="0" errors="0" skipped="0" time="0.119122529">
+        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; renders a list of interactions" time="0.05691953">
         </testcase>
-        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; shows loading state" time="0.004546519">
+        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; shows loading state" time="0.003952239">
         </testcase>
-        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; shows empty state when no interactions" time="0.004023624">
+        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; shows empty state when no interactions" time="0.002731527">
         </testcase>
-        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; displays interaction types" time="0.018446068">
+        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; displays interaction types" time="0.009735304">
         </testcase>
-        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; displays formatted dates" time="0.015137354">
+        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; displays formatted dates" time="0.009760413">
         </testcase>
-        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; displays outcome badges" time="0.013461512">
+        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; displays outcome badges" time="0.008956248">
         </testcase>
-        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; renders in chronological order (newest first)" time="0.005588149">
+        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; renders in chronological order (newest first)" time="0.011099853">
         </testcase>
-        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; shows error state on fetch failure" time="0.003442291">
+        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; shows error state on fetch failure" time="0.002595841">
         </testcase>
-        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; filters interactions by leadId" time="0.009836477">
-        </testcase>
-    </testsuite>
-    <testsuite name="tests/unit/components/landing/hero-section.test.tsx" timestamp="2026-09-18T21:33:38.969Z" hostname="t42d1" tests="9" failures="0" errors="0" skipped="0" time="0.352820972">
-        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the main heading" time="0.09897142">
-        </testcase>
-        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the gradient subtitle" time="0.040403497">
-        </testcase>
-        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the description text" time="0.039152632">
-        </testcase>
-        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the &apos;Start free&apos; CTA link" time="0.034809837">
-        </testcase>
-        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the &apos;Explore properties&apos; link" time="0.033285212">
-        </testcase>
-        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the AI badge" time="0.02396336">
-        </testcase>
-        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the dashboard preview with match scores" time="0.025805307">
-        </testcase>
-        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders property cards in the preview" time="0.027978435">
-        </testcase>
-        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the animated arrow indicator" time="0.022839183">
+        <testcase classname="tests/unit/components/interactions/interaction-timeline.test.tsx" name="InteractionTimeline &gt; filters interactions by leadId" time="0.00788216">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/components/layout/dashboard-sidebar.test.tsx" timestamp="2026-09-18T21:33:38.971Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="0.283654212">
-        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; renders the PropLead brand link" time="0.084422789">
+    <testsuite name="tests/unit/components/landing/hero-section.test.tsx" timestamp="2026-09-18T21:41:03.646Z" hostname="t42d1" tests="9" failures="0" errors="0" skipped="0" time="0.40299034">
+        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the main heading" time="0.095052091">
         </testcase>
-        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; renders agent navigation links by default" time="0.041616352">
+        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the gradient subtitle" time="0.039448661">
         </testcase>
-        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; renders manager-specific links" time="0.045305445">
+        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the description text" time="0.043220816">
         </testcase>
-        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; renders admin-specific links" time="0.033509885">
+        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the &apos;Start free&apos; CTA link" time="0.035300267">
         </testcase>
-        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; shows the role badge when loaded" time="0.022744356">
+        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the &apos;Explore properties&apos; link" time="0.039705072">
         </testcase>
-        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; does not show role badge while loading" time="0.013983697">
+        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the AI badge" time="0.022436187">
         </testcase>
-        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; highlights the active link based on pathname" time="0.015344518">
+        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the dashboard preview with match scores" time="0.06382209">
         </testcase>
-        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; brand links to /dashboard" time="0.01666462">
+        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders property cards in the preview" time="0.037785791">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/unit/components/leads/lead-card.test.tsx" timestamp="2026-09-18T21:33:38.972Z" hostname="t42d1" tests="14" failures="0" errors="0" skipped="0" time="0.373349485">
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders the lead name" time="0.069026993">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders the lead email" time="0.01423278">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders the lead phone when provided" time="0.010358972">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders formatted budget" time="0.0149418">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders the preferred location" time="0.014535921">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders status badge" time="0.00694129">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders source when provided" time="0.007494775">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; calls onView when view button is clicked" time="0.147499025">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; calls onEdit when edit button is clicked" time="0.021914939">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; calls onDelete when delete button is clicked" time="0.016951252">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders without optional fields" time="0.006329427">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; shows created date" time="0.007159504">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; applies different styling based on status" time="0.01634112">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; is accessible as a card region" time="0.013821412">
+        <testcase classname="tests/unit/components/landing/hero-section.test.tsx" name="Hero (landing section) &gt; renders the animated arrow indicator" time="0.019544626">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/components/leads/lead-pipeline.test.tsx" timestamp="2026-09-18T21:33:38.973Z" hostname="t42d1" tests="11" failures="0" errors="0" skipped="0" time="0.229697524">
-        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; renders all pipeline columns" time="0.085857497">
+    <testsuite name="tests/unit/components/layout/dashboard-sidebar.test.tsx" timestamp="2026-09-18T21:41:03.647Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="0.247847096">
+        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; renders the PropLead brand link" time="0.068669183">
         </testcase>
-        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; renders leads in correct columns based on status" time="0.013603938">
+        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; renders agent navigation links by default" time="0.042292254">
         </testcase>
-        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; shows loading state" time="0.004057213">
+        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; renders manager-specific links" time="0.036280687">
         </testcase>
-        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; shows empty state when no leads" time="0.004372924">
+        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; renders admin-specific links" time="0.02271446">
         </testcase>
-        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; calls onLeadClick when a lead card is clicked" time="0.020952067">
+        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; shows the role badge when loaded" time="0.025403438">
         </testcase>
-        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; supports drag and drop to change lead status" time="0.017123997">
+        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; does not show role badge while loading" time="0.016639344">
         </testcase>
-        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; displays lead count per column" time="0.01247381">
+        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; highlights the active link based on pathname" time="0.015392852">
         </testcase>
-        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; shows error state on fetch failure" time="0.004285376">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; renders column colors" time="0.011758332">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; has a filter or search input" time="0.008923643">
-        </testcase>
-        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; filters leads by search query" time="0.02846083">
+        <testcase classname="tests/unit/components/layout/dashboard-sidebar.test.tsx" name="DashboardSidebar &gt; brand links to /dashboard" time="0.014189499">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/components/properties/property-card.test.tsx" timestamp="2026-09-18T21:33:38.974Z" hostname="t42d1" tests="6" failures="0" errors="0" skipped="0" time="0.548665449">
-        <testcase classname="tests/unit/components/properties/property-card.test.tsx" name="PropertyCard &gt; renders property title as link" time="0.3505702">
+    <testsuite name="tests/unit/components/leads/lead-card.test.tsx" timestamp="2026-09-18T21:41:03.648Z" hostname="t42d1" tests="14" failures="0" errors="0" skipped="0" time="0.350985141">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders the lead name" time="0.075429057">
         </testcase>
-        <testcase classname="tests/unit/components/properties/property-card.test.tsx" name="PropertyCard &gt; renders price formatted in USD" time="0.047119624">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders the lead email" time="0.007751655">
         </testcase>
-        <testcase classname="tests/unit/components/properties/property-card.test.tsx" name="PropertyCard &gt; renders location" time="0.02637526">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders the lead phone when provided" time="0.009412614">
         </testcase>
-        <testcase classname="tests/unit/components/properties/property-card.test.tsx" name="PropertyCard &gt; renders beds, baths, and area" time="0.037062283">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders formatted budget" time="0.008760034">
         </testcase>
-        <testcase classname="tests/unit/components/properties/property-card.test.tsx" name="PropertyCard &gt; renders status badge" time="0.032724048">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders the preferred location" time="0.009433233">
         </testcase>
-        <testcase classname="tests/unit/components/properties/property-card.test.tsx" name="PropertyCard &gt; renders fallback icon when no images" time="0.024451226">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders status badge" time="0.006217551">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/unit/components/ui/form-card.test.tsx" timestamp="2026-09-18T21:33:38.975Z" hostname="t42d1" tests="4" failures="0" errors="0" skipped="0" time="0.067558644">
-        <testcase classname="tests/unit/components/ui/form-card.test.tsx" name="FormCard &gt; renders title when provided" time="0.045278146">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders source when provided" time="0.004716646">
         </testcase>
-        <testcase classname="tests/unit/components/ui/form-card.test.tsx" name="FormCard &gt; renders children" time="0.005502042">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; calls onView when view button is clicked" time="0.137717414">
         </testcase>
-        <testcase classname="tests/unit/components/ui/form-card.test.tsx" name="FormCard &gt; does not render title heading when not provided" time="0.005122602">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; calls onEdit when edit button is clicked" time="0.024701049">
         </testcase>
-        <testcase classname="tests/unit/components/ui/form-card.test.tsx" name="FormGrid &gt; renders children" time="0.006164772">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; calls onDelete when delete button is clicked" time="0.018231026">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/unit/hooks/use-current-user.test.ts" timestamp="2026-09-18T21:33:38.975Z" hostname="t42d1" tests="5" failures="0" errors="0" skipped="0" time="0.18334413">
-        <testcase classname="tests/unit/hooks/use-current-user.test.ts" name="useCurrentUser &gt; returns loading state when Clerk is not loaded" time="0.022343186">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; renders without optional fields" time="0.006659087">
         </testcase>
-        <testcase classname="tests/unit/hooks/use-current-user.test.ts" name="useCurrentUser &gt; returns loading when Clerk is loaded but no clerkUser (nothing to fetch)" time="0.003642675">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; shows created date" time="0.007795173">
         </testcase>
-        <testcase classname="tests/unit/hooks/use-current-user.test.ts" name="useCurrentUser &gt; fetches user data when clerkUser is loaded" time="0.065344118">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; applies different styling based on status" time="0.011197959">
         </testcase>
-        <testcase classname="tests/unit/hooks/use-current-user.test.ts" name="useCurrentUser &gt; returns role from user data" time="0.062369404">
-        </testcase>
-        <testcase classname="tests/unit/hooks/use-current-user.test.ts" name="useCurrentUser &gt; calls /users/me endpoint" time="0.012236257">
+        <testcase classname="tests/unit/components/leads/lead-card.test.tsx" name="LeadCard &gt; is accessible as a card region" time="0.010718304">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/hooks/use-debounce.test.ts" timestamp="2026-09-18T21:33:38.976Z" hostname="t42d1" tests="3" failures="0" errors="0" skipped="0" time="0.486960595">
-        <testcase classname="tests/unit/hooks/use-debounce.test.ts" name="useDebounce &gt; returns initial value immediately" time="0.013793863">
+    <testsuite name="tests/unit/components/leads/lead-pipeline.test.tsx" timestamp="2026-09-18T21:41:03.649Z" hostname="t42d1" tests="11" failures="0" errors="0" skipped="0" time="0.207674338">
+        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; renders all pipeline columns" time="0.090999824">
         </testcase>
-        <testcase classname="tests/unit/hooks/use-debounce.test.ts" name="useDebounce &gt; updates after delay" time="0.154753876">
+        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; renders leads in correct columns based on status" time="0.015197048">
         </testcase>
-        <testcase classname="tests/unit/hooks/use-debounce.test.ts" name="useDebounce &gt; cancels previous timeout on rapid changes" time="0.31030884">
+        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; shows loading state" time="0.004677117">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/unit/lib/api-client.test.ts" timestamp="2026-09-18T21:33:38.976Z" hostname="t42d1" tests="6" failures="0" errors="0" skipped="0" time="0.008597372">
-        <testcase classname="tests/unit/lib/api-client.test.ts" name="api-client &gt; setAuthToken &gt; stores token and clears it" time="0.00138165">
+        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; shows empty state when no leads" time="0.004042617">
         </testcase>
-        <testcase classname="tests/unit/lib/api-client.test.ts" name="api-client &gt; propertiesApi &gt; list calls GET /properties" time="0.00141311">
+        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; calls onLeadClick when a lead card is clicked" time="0.019450709">
         </testcase>
-        <testcase classname="tests/unit/lib/api-client.test.ts" name="api-client &gt; propertiesApi &gt; get calls GET /properties/:slug" time="0.000382949">
+        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; supports drag and drop to change lead status" time="0.015938485">
         </testcase>
-        <testcase classname="tests/unit/lib/api-client.test.ts" name="api-client &gt; propertiesApi &gt; create calls POST /properties" time="0.000283942">
+        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; displays lead count per column" time="0.008695225">
         </testcase>
-        <testcase classname="tests/unit/lib/api-client.test.ts" name="api-client &gt; leadsApi &gt; list calls GET /leads" time="0.000414728">
+        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; shows error state on fetch failure" time="0.004843482">
         </testcase>
-        <testcase classname="tests/unit/lib/api-client.test.ts" name="api-client &gt; interactionsApi &gt; listByLead calls GET /leads/:leadId/interactions" time="0.000238184">
+        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; renders column colors" time="0.010679865">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/unit/lib/queries/use-interactions.test.tsx" timestamp="2026-09-18T21:33:38.977Z" hostname="t42d1" tests="5" failures="0" errors="0" skipped="0" time="0.345091325">
-        <testcase classname="tests/unit/lib/queries/use-interactions.test.tsx" name="useInteractions &gt; fetches interactions list" time="0.090334469">
+        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; has a filter or search input" time="0.00722519">
         </testcase>
-        <testcase classname="tests/unit/lib/queries/use-interactions.test.tsx" name="useInteractions &gt; returns interactions with expected shape" time="0.056796514">
-        </testcase>
-        <testcase classname="tests/unit/lib/queries/use-interactions.test.tsx" name="useInteractions &gt; handles server error gracefully" time="0.068325553">
-        </testcase>
-        <testcase classname="tests/unit/lib/queries/use-interactions.test.tsx" name="useCreateInteraction &gt; creates a new interaction for a lead" time="0.058254413">
-        </testcase>
-        <testcase classname="tests/unit/lib/queries/use-interactions.test.tsx" name="useCreateInteraction &gt; invalidates interactions cache on success" time="0.056926451">
+        <testcase classname="tests/unit/components/leads/lead-pipeline.test.tsx" name="LeadPipeline (Kanban) &gt; filters leads by search query" time="0.019822428">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/lib/queries/use-leads.test.tsx" timestamp="2026-09-18T21:33:38.978Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="0.468520826">
-        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useLeads &gt; fetches leads list" time="0.071997458">
+    <testsuite name="tests/unit/components/properties/property-card.test.tsx" timestamp="2026-09-18T21:41:03.650Z" hostname="t42d1" tests="6" failures="0" errors="0" skipped="0" time="0.434110787">
+        <testcase classname="tests/unit/components/properties/property-card.test.tsx" name="PropertyCard &gt; renders property title as link" time="0.239006837">
         </testcase>
-        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useLeads &gt; passes params to the query" time="0.063851503">
+        <testcase classname="tests/unit/components/properties/property-card.test.tsx" name="PropertyCard &gt; renders price formatted in USD" time="0.030747766">
         </testcase>
-        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useLeads &gt; handles server error gracefully" time="0.065986491">
+        <testcase classname="tests/unit/components/properties/property-card.test.tsx" name="PropertyCard &gt; renders location" time="0.051486265">
         </testcase>
-        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useLead &gt; fetches a single lead by id" time="0.062667176">
+        <testcase classname="tests/unit/components/properties/property-card.test.tsx" name="PropertyCard &gt; renders beds, baths, and area" time="0.024501336">
         </testcase>
-        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useLead &gt; does not fetch when id is empty" time="0.013367876">
+        <testcase classname="tests/unit/components/properties/property-card.test.tsx" name="PropertyCard &gt; renders status badge" time="0.040742601">
         </testcase>
-        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useLead &gt; returns error for non-existent lead" time="0.062106232">
-        </testcase>
-        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useCreateLead &gt; creates a new lead" time="0.060638725">
-        </testcase>
-        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useUpdateLead &gt; updates an existing lead" time="0.061818621">
+        <testcase classname="tests/unit/components/properties/property-card.test.tsx" name="PropertyCard &gt; renders fallback icon when no images" time="0.022738229">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/lib/queries/use-properties.test.tsx" timestamp="2026-09-18T21:33:38.979Z" hostname="t42d1" tests="1" failures="0" errors="0" skipped="0" time="0.194942123">
-        <testcase classname="tests/unit/lib/queries/use-properties.test.tsx" name="useProperties &gt; fetches properties list" time="0.175816784">
+    <testsuite name="tests/unit/components/ui/form-card.test.tsx" timestamp="2026-09-18T21:41:03.651Z" hostname="t42d1" tests="4" failures="0" errors="0" skipped="0" time="0.060126392">
+        <testcase classname="tests/unit/components/ui/form-card.test.tsx" name="FormCard &gt; renders title when provided" time="0.037418922">
+        </testcase>
+        <testcase classname="tests/unit/components/ui/form-card.test.tsx" name="FormCard &gt; renders children" time="0.006595949">
+        </testcase>
+        <testcase classname="tests/unit/components/ui/form-card.test.tsx" name="FormCard &gt; does not render title heading when not provided" time="0.005865142">
+        </testcase>
+        <testcase classname="tests/unit/components/ui/form-card.test.tsx" name="FormGrid &gt; renders children" time="0.003000329">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/lib/utils.test.ts" timestamp="2026-09-18T21:33:38.979Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="0.072924089">
-        <testcase classname="tests/unit/lib/utils.test.ts" name="cn &gt; merges class names" time="0.018028861">
+    <testsuite name="tests/unit/hooks/use-current-user.test.ts" timestamp="2026-09-18T21:41:03.651Z" hostname="t42d1" tests="5" failures="0" errors="0" skipped="0" time="0.141968584">
+        <testcase classname="tests/unit/hooks/use-current-user.test.ts" name="useCurrentUser &gt; returns loading state when Clerk is not loaded" time="0.015783451">
         </testcase>
-        <testcase classname="tests/unit/lib/utils.test.ts" name="cn &gt; handles conditional classes" time="0.001110318">
+        <testcase classname="tests/unit/hooks/use-current-user.test.ts" name="useCurrentUser &gt; returns loading when Clerk is loaded but no clerkUser (nothing to fetch)" time="0.002911402">
         </testcase>
-        <testcase classname="tests/unit/lib/utils.test.ts" name="cn &gt; resolves tailwind conflicts" time="0.004021504">
+        <testcase classname="tests/unit/hooks/use-current-user.test.ts" name="useCurrentUser &gt; fetches user data when clerkUser is loaded" time="0.057408575">
         </testcase>
-        <testcase classname="tests/unit/lib/utils.test.ts" name="formatPrice &gt; formats USD currency" time="0.027714652">
+        <testcase classname="tests/unit/hooks/use-current-user.test.ts" name="useCurrentUser &gt; returns role from user data" time="0.054769575">
         </testcase>
-        <testcase classname="tests/unit/lib/utils.test.ts" name="formatPrice &gt; handles zero" time="0.000611993">
-        </testcase>
-        <testcase classname="tests/unit/lib/utils.test.ts" name="formatPrice &gt; handles decimal values" time="0.000306601">
-        </testcase>
-        <testcase classname="tests/unit/lib/utils.test.ts" name="formatDate &gt; formats ISO date string" time="0.004699574">
-        </testcase>
-        <testcase classname="tests/unit/lib/utils.test.ts" name="formatDate &gt; formats Date object" time="0.00379448">
+        <testcase classname="tests/unit/hooks/use-current-user.test.ts" name="useCurrentUser &gt; calls /users/me endpoint" time="0.006338727">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/lib/validations/lead-schema.test.ts" timestamp="2026-09-18T21:33:38.980Z" hostname="t42d1" tests="18" failures="0" errors="0" skipped="0" time="0.014503312">
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; validates a correct lead object" time="0.00380057">
+    <testsuite name="tests/unit/hooks/use-debounce.test.ts" timestamp="2026-09-18T21:41:03.652Z" hostname="t42d1" tests="3" failures="0" errors="0" skipped="0" time="0.430632233">
+        <testcase classname="tests/unit/hooks/use-debounce.test.ts" name="useDebounce &gt; returns initial value immediately" time="0.010435483">
         </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; requires name" time="0.001528676">
+        <testcase classname="tests/unit/hooks/use-debounce.test.ts" name="useDebounce &gt; updates after delay" time="0.153399618">
         </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; requires valid email" time="0.00035173">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; rejects invalid email formats" time="0.000363259">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional phone" time="0.000285372">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional budget" time="0.000160236">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; requires positive budget when provided" time="0.000172355">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows zero budget" time="0.000116056">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional preferredLocation" time="0.000193025">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional bedsDesired" time="0.000213624">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; requires bedsDesired to be non-negative when provided" time="0.000118316">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; requires bathsDesired to be non-negative when provided" time="0.000100117">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional notes" time="0.000088738">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional status" time="0.000118667">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional source" time="0.000090748">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; requires assignedAgentId" time="0.000162525">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows minimal required fields only" time="0.00137546">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; coerces string numbers for numeric fields" time="0.000213644">
+        <testcase classname="tests/unit/hooks/use-debounce.test.ts" name="useDebounce &gt; cancels previous timeout on rapid changes" time="0.263199132">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/lib/validations/property-schema.test.ts" timestamp="2026-09-18T21:33:38.982Z" hostname="t42d1" tests="18" failures="0" errors="0" skipped="0" time="0.019435681">
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; validates a correct property object" time="0.004658036">
+    <testsuite name="tests/unit/lib/api-client.test.ts" timestamp="2026-09-18T21:41:03.652Z" hostname="t42d1" tests="6" failures="0" errors="0" skipped="0" time="0.006950289">
+        <testcase classname="tests/unit/lib/api-client.test.ts" name="api-client &gt; setAuthToken &gt; stores token and clears it" time="0.001088957">
         </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires title with minimum 3 characters" time="0.001603524">
+        <testcase classname="tests/unit/lib/api-client.test.ts" name="api-client &gt; propertiesApi &gt; list calls GET /properties" time="0.000890853">
         </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires title with maximum 200 characters" time="0.000865765">
+        <testcase classname="tests/unit/lib/api-client.test.ts" name="api-client &gt; propertiesApi &gt; get calls GET /properties/:slug" time="0.000279212">
         </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires description with minimum 10 characters" time="0.000616222">
+        <testcase classname="tests/unit/lib/api-client.test.ts" name="api-client &gt; propertiesApi &gt; create calls POST /properties" time="0.000235863">
         </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires description with maximum 2000 characters" time="0.000524215">
+        <testcase classname="tests/unit/lib/api-client.test.ts" name="api-client &gt; leadsApi &gt; list calls GET /leads" time="0.000246703">
         </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires positive price" time="0.000559834">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; allows zero price" time="0.000387718">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires location" time="0.000656841">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; allows beds between 0 and 100" time="0.000762468">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; allows baths between 0 and 100" time="0.000331931">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires positive area" time="0.000167305">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires valid propertyType enum" time="0.000248183">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; accepts all valid property types" time="0.000788777">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; allows optional status" time="0.000161446">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; accepts valid status values" time="0.000287462">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires at least one image" time="0.00038344">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; allows optional fields" time="0.000185085">
-        </testcase>
-        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; coerces string numbers for numeric fields" time="0.000152805">
+        <testcase classname="tests/unit/lib/api-client.test.ts" name="api-client &gt; interactionsApi &gt; listByLead calls GET /leads/:leadId/interactions" time="0.000171445">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/store/filters-store.test.ts" timestamp="2026-09-18T21:33:38.986Z" hostname="t42d1" tests="6" failures="0" errors="0" skipped="0" time="0.00762669">
-        <testcase classname="tests/unit/store/filters-store.test.ts" name="filters-store &gt; sets search term" time="0.001454888">
+    <testsuite name="tests/unit/lib/queries/use-interactions.test.tsx" timestamp="2026-09-18T21:41:03.653Z" hostname="t42d1" tests="5" failures="0" errors="0" skipped="0" time="0.323767741">
+        <testcase classname="tests/unit/lib/queries/use-interactions.test.tsx" name="useInteractions &gt; fetches interactions list" time="0.071675332">
         </testcase>
-        <testcase classname="tests/unit/store/filters-store.test.ts" name="filters-store &gt; toggles property type" time="0.000461406">
+        <testcase classname="tests/unit/lib/queries/use-interactions.test.tsx" name="useInteractions &gt; returns interactions with expected shape" time="0.055286659">
         </testcase>
-        <testcase classname="tests/unit/store/filters-store.test.ts" name="filters-store &gt; sets price range" time="0.000281782">
+        <testcase classname="tests/unit/lib/queries/use-interactions.test.tsx" name="useInteractions &gt; handles server error gracefully" time="0.077838584">
         </testcase>
-        <testcase classname="tests/unit/store/filters-store.test.ts" name="filters-store &gt; sets beds" time="0.000203084">
+        <testcase classname="tests/unit/lib/queries/use-interactions.test.tsx" name="useCreateInteraction &gt; creates a new interaction for a lead" time="0.055775036">
         </testcase>
-        <testcase classname="tests/unit/store/filters-store.test.ts" name="filters-store &gt; sets status" time="0.000183775">
-        </testcase>
-        <testcase classname="tests/unit/store/filters-store.test.ts" name="filters-store &gt; resets all filters" time="0.00068616">
+        <testcase classname="tests/unit/lib/queries/use-interactions.test.tsx" name="useCreateInteraction &gt; invalidates interactions cache on success" time="0.056326068">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/store/ui-store.test.ts" timestamp="2026-09-18T21:33:38.987Z" hostname="t42d1" tests="3" failures="0" errors="0" skipped="0" time="0.004779622">
-        <testcase classname="tests/unit/store/ui-store.test.ts" name="ui-store &gt; starts with sidebar closed" time="0.001085708">
+    <testsuite name="tests/unit/lib/queries/use-leads.test.tsx" timestamp="2026-09-18T21:41:03.653Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="0.424881238">
+        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useLeads &gt; fetches leads list" time="0.066721103">
         </testcase>
-        <testcase classname="tests/unit/store/ui-store.test.ts" name="ui-store &gt; toggles sidebar open" time="0.000275512">
+        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useLeads &gt; passes params to the query" time="0.056046477">
         </testcase>
-        <testcase classname="tests/unit/store/ui-store.test.ts" name="ui-store &gt; toggles sidebar closed" time="0.000171955">
+        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useLeads &gt; handles server error gracefully" time="0.067248256">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/unit/utils/cn.test.ts" timestamp="2026-09-18T21:33:38.987Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="0.034459197">
-        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; merges class names" time="0.020540449">
+        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useLead &gt; fetches a single lead by id" time="0.054660629">
         </testcase>
-        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; handles conditional classes" time="0.00101343">
+        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useLead &gt; does not fetch when id is empty" time="0.004642839">
         </testcase>
-        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; resolves Tailwind conflicts using tailwind-merge" time="0.001662002">
+        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useLead &gt; returns error for non-existent lead" time="0.057112834">
         </testcase>
-        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; flattens arrays of classes" time="0.000511945">
+        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useCreateLead &gt; creates a new lead" time="0.058080825">
         </testcase>
-        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; handles null and undefined inputs" time="0.000821126">
-        </testcase>
-        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; handles objects" time="0.000260612">
-        </testcase>
-        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; returns empty string for no inputs" time="0.000409218">
-        </testcase>
-        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; merges complex Tailwind utility classes correctly" time="0.000340271">
+        <testcase classname="tests/unit/lib/queries/use-leads.test.tsx" name="useUpdateLead &gt; updates an existing lead" time="0.056142053">
         </testcase>
     </testsuite>
-    <testsuite name="tests/unit/utils/format.test.ts" timestamp="2026-09-18T21:33:38.988Z" hostname="t42d1" tests="9" failures="0" errors="0" skipped="0" time="0.027083029">
-        <testcase classname="tests/unit/utils/format.test.ts" name="formatPrice &gt; formats a number as USD currency" time="0.013587638">
+    <testsuite name="tests/unit/lib/queries/use-properties.test.tsx" timestamp="2026-09-18T21:41:03.654Z" hostname="t42d1" tests="1" failures="0" errors="0" skipped="0" time="0.095084979">
+        <testcase classname="tests/unit/lib/queries/use-properties.test.tsx" name="useProperties &gt; fetches properties list" time="0.08881421">
         </testcase>
-        <testcase classname="tests/unit/utils/format.test.ts" name="formatPrice &gt; formats zero" time="0.000522905">
+    </testsuite>
+    <testsuite name="tests/unit/lib/utils.test.ts" timestamp="2026-09-18T21:41:03.654Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="0.037293116">
+        <testcase classname="tests/unit/lib/utils.test.ts" name="cn &gt; merges class names" time="0.01016659">
         </testcase>
-        <testcase classname="tests/unit/utils/format.test.ts" name="formatPrice &gt; formats small amounts" time="0.000380689">
+        <testcase classname="tests/unit/lib/utils.test.ts" name="cn &gt; handles conditional classes" time="0.000673969">
         </testcase>
-        <testcase classname="tests/unit/utils/format.test.ts" name="formatPrice &gt; formats millions" time="0.000712209">
+        <testcase classname="tests/unit/lib/utils.test.ts" name="cn &gt; resolves tailwind conflicts" time="0.000368498">
         </testcase>
-        <testcase classname="tests/unit/utils/format.test.ts" name="formatPrice &gt; does not include decimal places" time="0.000327061">
+        <testcase classname="tests/unit/lib/utils.test.ts" name="formatPrice &gt; formats USD currency" time="0.013269487">
         </testcase>
-        <testcase classname="tests/unit/utils/format.test.ts" name="formatDate &gt; formats an ISO date string" time="0.004014544">
+        <testcase classname="tests/unit/lib/utils.test.ts" name="formatPrice &gt; handles zero" time="0.000565713">
         </testcase>
-        <testcase classname="tests/unit/utils/format.test.ts" name="formatDate &gt; formats a Date object" time="0.000565743">
+        <testcase classname="tests/unit/lib/utils.test.ts" name="formatPrice &gt; handles decimal values" time="0.000378829">
         </testcase>
-        <testcase classname="tests/unit/utils/format.test.ts" name="formatDate &gt; formats December correctly" time="0.000366859">
+        <testcase classname="tests/unit/lib/utils.test.ts" name="formatDate &gt; formats ISO date string" time="0.00428937">
         </testcase>
-        <testcase classname="tests/unit/utils/format.test.ts" name="formatDate &gt; pads single-digit days" time="0.000574813">
+        <testcase classname="tests/unit/lib/utils.test.ts" name="formatDate &gt; formats Date object" time="0.000457236">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/lib/validations/lead-schema.test.ts" timestamp="2026-09-18T21:41:03.655Z" hostname="t42d1" tests="18" failures="0" errors="0" skipped="0" time="0.014003954">
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; validates a correct lead object" time="0.003825654">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; requires name" time="0.001066707">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; requires valid email" time="0.000504684">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; rejects invalid email formats" time="0.000570372">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional phone" time="0.000362919">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional budget" time="0.000225433">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; requires positive budget when provided" time="0.000238883">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows zero budget" time="0.000178275">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional preferredLocation" time="0.000202243">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional bedsDesired" time="0.000225293">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; requires bedsDesired to be non-negative when provided" time="0.000161725">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; requires bathsDesired to be non-negative when provided" time="0.000144706">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional notes" time="0.000121626">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional status" time="0.000127126">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows optional source" time="0.000128446">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; requires assignedAgentId" time="0.000204624">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; allows minimal required fields only" time="0.000197524">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/lead-schema.test.ts" name="leadSchema &gt; coerces string numbers for numeric fields" time="0.000179444">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/lib/validations/property-schema.test.ts" timestamp="2026-09-18T21:41:03.656Z" hostname="t42d1" tests="18" failures="0" errors="0" skipped="0" time="0.02861698">
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; validates a correct property object" time="0.007431734">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires title with minimum 3 characters" time="0.00494504">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires title with maximum 200 characters" time="0.000714468">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires description with minimum 10 characters" time="0.000404508">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires description with maximum 2000 characters" time="0.000360409">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires positive price" time="0.000444196">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; allows zero price" time="0.000281361">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires location" time="0.000556583">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; allows beds between 0 and 100" time="0.000679959">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; allows baths between 0 and 100" time="0.000276402">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires positive area" time="0.000151476">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires valid propertyType enum" time="0.000243233">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; accepts all valid property types" time="0.000722488">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; allows optional status" time="0.000133986">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; accepts valid status values" time="0.000266662">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; requires at least one image" time="0.00032573">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; allows optional fields" time="0.000170784">
+        </testcase>
+        <testcase classname="tests/unit/lib/validations/property-schema.test.ts" name="propertySchema &gt; coerces string numbers for numeric fields" time="0.000145226">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/store/filters-store.test.ts" timestamp="2026-09-18T21:41:03.658Z" hostname="t42d1" tests="6" failures="0" errors="0" skipped="0" time="0.005699717">
+        <testcase classname="tests/unit/store/filters-store.test.ts" name="filters-store &gt; sets search term" time="0.001054988">
+        </testcase>
+        <testcase classname="tests/unit/store/filters-store.test.ts" name="filters-store &gt; toggles property type" time="0.000300081">
+        </testcase>
+        <testcase classname="tests/unit/store/filters-store.test.ts" name="filters-store &gt; sets price range" time="0.000203734">
+        </testcase>
+        <testcase classname="tests/unit/store/filters-store.test.ts" name="filters-store &gt; sets beds" time="0.000137756">
+        </testcase>
+        <testcase classname="tests/unit/store/filters-store.test.ts" name="filters-store &gt; sets status" time="0.000139175">
+        </testcase>
+        <testcase classname="tests/unit/store/filters-store.test.ts" name="filters-store &gt; resets all filters" time="0.00064615">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/store/ui-store.test.ts" timestamp="2026-09-18T21:41:03.658Z" hostname="t42d1" tests="3" failures="0" errors="0" skipped="0" time="0.004313588">
+        <testcase classname="tests/unit/store/ui-store.test.ts" name="ui-store &gt; starts with sidebar closed" time="0.00100818">
+        </testcase>
+        <testcase classname="tests/unit/store/ui-store.test.ts" name="ui-store &gt; toggles sidebar open" time="0.000290771">
+        </testcase>
+        <testcase classname="tests/unit/store/ui-store.test.ts" name="ui-store &gt; toggles sidebar closed" time="0.000173395">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/utils/cn.test.ts" timestamp="2026-09-18T21:41:03.658Z" hostname="t42d1" tests="8" failures="0" errors="0" skipped="0" time="0.01973587">
+        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; merges class names" time="0.012773302">
+        </testcase>
+        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; handles conditional classes" time="0.000430047">
+        </testcase>
+        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; resolves Tailwind conflicts using tailwind-merge" time="0.000748877">
+        </testcase>
+        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; flattens arrays of classes" time="0.000203814">
+        </testcase>
+        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; handles null and undefined inputs" time="0.000201724">
+        </testcase>
+        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; handles objects" time="0.000140376">
+        </testcase>
+        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; returns empty string for no inputs" time="0.000132146">
+        </testcase>
+        <testcase classname="tests/unit/utils/cn.test.ts" name="cn &gt; merges complex Tailwind utility classes correctly" time="0.000255413">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/utils/format.test.ts" timestamp="2026-09-18T21:41:03.659Z" hostname="t42d1" tests="9" failures="0" errors="0" skipped="0" time="0.029081716">
+        <testcase classname="tests/unit/utils/format.test.ts" name="formatPrice &gt; formats a number as USD currency" time="0.013510139">
+        </testcase>
+        <testcase classname="tests/unit/utils/format.test.ts" name="formatPrice &gt; formats zero" time="0.000698048">
+        </testcase>
+        <testcase classname="tests/unit/utils/format.test.ts" name="formatPrice &gt; formats small amounts" time="0.000430217">
+        </testcase>
+        <testcase classname="tests/unit/utils/format.test.ts" name="formatPrice &gt; formats millions" time="0.000310531">
+        </testcase>
+        <testcase classname="tests/unit/utils/format.test.ts" name="formatPrice &gt; does not include decimal places" time="0.000352749">
+        </testcase>
+        <testcase classname="tests/unit/utils/format.test.ts" name="formatDate &gt; formats an ISO date string" time="0.004408046">
+        </testcase>
+        <testcase classname="tests/unit/utils/format.test.ts" name="formatDate &gt; formats a Date object" time="0.000695589">
+        </testcase>
+        <testcase classname="tests/unit/utils/format.test.ts" name="formatDate &gt; formats December correctly" time="0.000371279">
+        </testcase>
+        <testcase classname="tests/unit/utils/format.test.ts" name="formatDate &gt; pads single-digit days" time="0.000508505">
         </testcase>
     </testsuite>
 </testsuites>

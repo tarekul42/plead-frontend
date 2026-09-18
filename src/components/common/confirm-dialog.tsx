@@ -5,7 +5,7 @@ import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ConfirmDialogContextType {
-  confirm: (options: ConfirmOptions) => Promise<boolean>;
+  confirm: (_options: ConfirmOptions) => Promise<boolean>;
 }
 
 interface ConfirmOptions {
@@ -26,7 +26,7 @@ export function useConfirm() {
 
 interface ConfirmState extends ConfirmOptions {
   isOpen: boolean;
-  resolve?: (value: boolean) => void;
+  resolve?: (_value: boolean) => void;
 }
 
 export function ConfirmDialogProvider({ children }: { children: ReactNode }) {

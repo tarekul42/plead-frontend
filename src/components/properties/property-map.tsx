@@ -24,12 +24,7 @@ interface PropertyMapProps {
 export function PropertyMap({ lat, lng, title, location }: PropertyMapProps) {
   return (
     <div className="h-64 overflow-hidden rounded-xl border border-border">
-      <MapContainer
-        center={[lat, lng]}
-        zoom={15}
-        scrollWheelZoom={false}
-        className="h-full w-full"
-      >
+      <MapContainer center={[lat, lng]} zoom={15} scrollWheelZoom={false} className="h-full w-full">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

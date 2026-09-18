@@ -20,7 +20,10 @@ export function Faq() {
           </div>
           <div className="space-y-3">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="h-16 animate-pulse rounded-card border border-border bg-surface" />
+              <div
+                key={i}
+                className="h-16 animate-pulse rounded-card border border-border bg-surface"
+              />
             ))}
           </div>
         </div>
@@ -39,7 +42,10 @@ export function Faq() {
         </div>
         <div className="space-y-3">
           {faqs.map((faq: FaqItem, i: number) => (
-            <div key={faq._id ?? i} className="rounded-card border border-border bg-surface shadow-sm">
+            <div
+              key={faq._id ?? i}
+              className="rounded-card border border-border bg-surface shadow-sm"
+            >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="flex w-full items-center justify-between px-6 py-4 text-left"

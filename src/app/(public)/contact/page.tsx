@@ -102,7 +102,13 @@ export default function ContactPage() {
             <Button
               type="submit"
               className="w-full"
-              leftIcon={submitContact.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+              leftIcon={
+                submitContact.isPending ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Send className="h-4 w-4" />
+                )
+              }
               disabled={submitContact.isPending}
             >
               {submitContact.isPending ? "Sending..." : "Send Message"}

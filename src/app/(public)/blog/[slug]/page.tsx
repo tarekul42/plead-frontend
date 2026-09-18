@@ -31,7 +31,11 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
   }
 
   const date = post.publishedAt
-    ? new Date(post.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+    ? new Date(post.publishedAt).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })
     : "";
   const tags = post.tags || [];
   const content = post.content;

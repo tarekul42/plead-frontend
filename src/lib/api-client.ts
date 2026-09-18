@@ -257,15 +257,12 @@ export const favoritesApi = {
   list: (params?: Record<string, unknown>) =>
     apiClient.get("/favorites", { params }).then(extractPaginatedData),
   add: (propertyId: string) => apiClient.post("/favorites", { propertyId }).then(extractData),
-  remove: (propertyId: string) =>
-    apiClient.delete(`/favorites/${propertyId}`).then(extractData),
-  check: (propertyId: string) =>
-    apiClient.get(`/favorites/check/${propertyId}`).then(extractData),
+  remove: (propertyId: string) => apiClient.delete(`/favorites/${propertyId}`).then(extractData),
+  check: (propertyId: string) => apiClient.get(`/favorites/check/${propertyId}`).then(extractData),
 };
 
 export const propertiesApiExtended = {
-  categoryCounts: () =>
-    apiClient.get("/properties/category-counts").then(extractData),
+  categoryCounts: () => apiClient.get("/properties/category-counts").then(extractData),
 };
 
 export { ApiError };

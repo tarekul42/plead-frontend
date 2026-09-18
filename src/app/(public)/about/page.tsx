@@ -61,16 +61,14 @@ export default function AboutPage() {
             deals.
           </p>
           <div className="space-y-3">
-            {[
-              "100% free core platform",
-              "AI-powered lead matching",
-              "No credit card required",
-            ].map((item) => (
-              <div key={item} className="flex items-center gap-2 text-sm">
-                <CheckCircle2 className="h-4 w-4 text-success" />
-                <span>{item}</span>
-              </div>
-            ))}
+            {["100% free core platform", "AI-powered lead matching", "No credit card required"].map(
+              (item) => (
+                <div key={item} className="flex items-center gap-2 text-sm">
+                  <CheckCircle2 className="h-4 w-4 text-success" />
+                  <span>{item}</span>
+                </div>
+              ),
+            )}
           </div>
         </div>
         <div className="rounded-card border border-border bg-surface p-8 shadow-sm">
@@ -101,7 +99,10 @@ export default function AboutPage() {
         <h2 className="mb-8 text-center text-2xl font-bold md:text-3xl">Our Values</h2>
         <div className="grid gap-8 md:grid-cols-2">
           {values.map((v) => (
-            <div key={v.title} className="rounded-card border border-border bg-surface p-8 shadow-sm">
+            <div
+              key={v.title}
+              className="rounded-card border border-border bg-surface p-8 shadow-sm"
+            >
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-brand/5">
                 <v.icon className="h-6 w-6 text-brand" />
               </div>

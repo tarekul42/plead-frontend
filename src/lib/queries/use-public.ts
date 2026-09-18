@@ -94,8 +94,13 @@ export function usePublicBlogPost(slug: string) {
 
 export function useSubmitContact() {
   return useMutation({
-    mutationFn: (data: { name: string; email: string; subject: string; message: string; propertyId?: string }) =>
-      contactApi.submit(data) as Promise<{ success: boolean }>,
+    mutationFn: (data: {
+      name: string;
+      email: string;
+      subject: string;
+      message: string;
+      propertyId?: string;
+    }) => contactApi.submit(data) as Promise<{ success: boolean }>,
   });
 }
 
@@ -109,7 +114,8 @@ export function useSubscribeNewsletter() {
 export function useFavorites() {
   return useQuery<PaginatedResponse<{ _id: string; propertyId: string }>>({
     queryKey: ["favorites"],
-    queryFn: () => favoritesApi.list() as Promise<PaginatedResponse<{ _id: string; propertyId: string }>>,
+    queryFn: () =>
+      favoritesApi.list() as Promise<PaginatedResponse<{ _id: string; propertyId: string }>>,
   });
 }
 

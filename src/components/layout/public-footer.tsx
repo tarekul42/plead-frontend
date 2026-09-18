@@ -19,9 +19,7 @@ const footerLinks = {
   ],
 };
 
-const socialLinks = [
-  { icon: Mail, href: "mailto:hello@proplead.ai", label: "Email" },
-];
+const socialLinks = [{ icon: Mail, href: "mailto:hello@proplead.ai", label: "Email" }];
 
 export function PublicFooter() {
   return (

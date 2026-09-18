@@ -20,7 +20,10 @@ export function Testimonials() {
           </div>
           <div className="grid gap-8 md:grid-cols-3">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-64 animate-pulse rounded-card border border-border bg-surface p-6">
+              <div
+                key={i}
+                className="h-64 animate-pulse rounded-card border border-border bg-surface p-6"
+              >
                 <div className="mb-4 h-8 w-8 rounded bg-muted/20" />
                 <div className="mb-2 h-3 w-full rounded bg-muted/20" />
                 <div className="mb-4 h-3 w-3/4 rounded bg-muted/20" />
@@ -45,7 +48,8 @@ export function Testimonials() {
           {testimonials.map((t: Testimonial, i: number) => {
             const name = t.name;
             const role = t.role;
-            const company = (t as unknown as Record<string, unknown>)?.company as string | undefined;
+            const company = (t as unknown as Record<string, unknown>)?.company as
+              string | undefined;
             const quote = t.content;
             const initials = name
               .split(" ")

@@ -6,9 +6,9 @@ import { cn, formatDate } from "@/lib/utils";
 
 interface LeadCardProps {
   lead: Lead;
-  onView?: (lead: Lead) => void;
-  onEdit?: (lead: Lead) => void;
-  onDelete?: (lead: Lead) => void;
+  onView?: (_lead: Lead) => void;
+  onEdit?: (_lead: Lead) => void;
+  onDelete?: (_lead: Lead) => void;
 }
 
 const statusStyles: Record<string, string> = {

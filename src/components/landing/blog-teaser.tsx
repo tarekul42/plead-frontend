@@ -21,7 +21,10 @@ export function BlogTeaser() {
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-48 animate-pulse rounded-card border border-border bg-background p-6">
+              <div
+                key={i}
+                className="h-48 animate-pulse rounded-card border border-border bg-background p-6"
+              >
                 <div className="mb-3 h-3 w-24 rounded bg-muted/20" />
                 <div className="mb-2 h-5 w-3/4 rounded bg-muted/20" />
                 <div className="mb-4 h-3 w-full rounded bg-muted/20" />
@@ -55,7 +58,11 @@ export function BlogTeaser() {
             const tags = post.tags || [];
             const publishedAt = post.publishedAt;
             const date = publishedAt
-              ? new Date(publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+              ? new Date(publishedAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })
               : "";
 
             return (

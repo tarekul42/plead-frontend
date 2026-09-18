@@ -18,7 +18,10 @@ export default function BlogPage() {
       {isLoading ? (
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="h-64 animate-pulse rounded-card border border-border bg-surface p-6">
+            <div
+              key={i}
+              className="h-64 animate-pulse rounded-card border border-border bg-surface p-6"
+            >
               <div className="mb-3 h-3 w-24 rounded bg-muted/20" />
               <div className="mb-2 h-5 w-3/4 rounded bg-muted/20" />
               <div className="mb-4 h-3 w-full rounded bg-muted/20" />
@@ -37,10 +40,15 @@ export default function BlogPage() {
             const slug = post.slug;
             const tags = post.tags || [];
             const publishedAt = post.publishedAt;
-            const author = (post as unknown as Record<string, unknown>)?.authorId as Record<string, unknown> | undefined;
+            const author = (post as unknown as Record<string, unknown>)?.authorId as
+              Record<string, unknown> | undefined;
             const authorName = author?.name as string | undefined;
             const date = publishedAt
-              ? new Date(publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+              ? new Date(publishedAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })
               : "";
 
             return (
