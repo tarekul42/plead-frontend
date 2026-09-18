@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Bed, Bath, Move, MapPin, Heart, Eye } from "lucide-react";
 import { formatPricePerSqft, formatCompactPrice } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { useCheckFavorite, useToggleFavorite } from "@/lib/queries/use-public";
 import type { Property } from "@/types";
 
 interface PropertyCardProps {
@@ -20,7 +20,9 @@ const statusVariants: Record<string, "success" | "warning" | "danger" | "brand">
 };
 
 export function PropertyCard({ property }: PropertyCardProps) {
-  const [saved, setSaved] = useState(false);
+  const { data: favData } = useCheckFavorite(property._id);
+  const toggleFav = useToggleFavorite();
+  const isFavorited = favData?.isFavorited ?? false;
 
   return (
     <div className="group relative flex flex-col rounded-card border border-border bg-surface shadow-sm transition-all hover:shadow-md">
@@ -50,13 +52,16 @@ export function PropertyCard({ property }: PropertyCardProps) {
         <button
           onClick={(e) => {
             e.preventDefault();
-            setSaved(!saved);
+            toggleFav.mutate({
+              propertyId: property._id,
+              isFavorited,
+            });
           }}
           className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/80 backdrop-blur-sm transition hover:bg-background"
-          aria-label={saved ? "Remove from saved" : "Save property"}
+          aria-label={isFavorited ? "Remove from saved" : "Save property"}
         >
           <Heart
-            className={`h-4 w-4 transition ${saved ? "fill-danger text-danger" : "text-foreground"}`}
+            className={`h-4 w-4 transition ${isFavorited ? "fill-danger text-danger" : "text-foreground"}`}
           />
         </button>
       </Link>

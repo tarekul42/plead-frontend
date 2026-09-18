@@ -11,17 +11,27 @@ import {
   Store,
   type LucideIcon,
 } from "lucide-react";
+import { useCategoryCounts } from "@/lib/queries/use-public";
+import { PROPERTY_CATEGORIES } from "@/lib/constants";
 
-const categories: { label: string; icon: LucideIcon; slug: string; count: string }[] = [
-  { label: "Houses", icon: Home, slug: "house", count: "240+" },
-  { label: "Condos", icon: Building2, slug: "condo", count: "180+" },
-  { label: "Apartments", icon: Building, slug: "apartment", count: "320+" },
-  { label: "Townhouses", icon: Warehouse, slug: "townhouse", count: "95+" },
-  { label: "Land", icon: TreePine, slug: "land", count: "60+" },
-  { label: "Commercial", icon: Store, slug: "commercial", count: "45+" },
-];
+const iconMap: Record<string, LucideIcon> = {
+  Home,
+  Building2,
+  Building,
+  Warehouse,
+  TreePine,
+  Store,
+};
 
 export function PropertyCategories() {
+  const { data: counts } = useCategoryCounts();
+
+  const categories = PROPERTY_CATEGORIES.map((cat) => ({
+    ...cat,
+    Icon: iconMap[cat.icon] ?? Building2,
+    count: counts?.[cat.slug] ?? 0,
+  }));
+
   return (
     <section className="bg-surface py-16">
       <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
@@ -40,7 +50,7 @@ export function PropertyCategories() {
                 className="flex flex-col items-center gap-3 rounded-card border border-border p-6 text-center shadow-sm transition hover:border-brand/30 hover:shadow-md"
               >
                 <div className="rounded-full bg-brand/5 p-3">
-                  <cat.icon className="h-6 w-6 text-brand" />
+                  <cat.Icon className="h-6 w-6 text-brand" />
                 </div>
                 <div>
                   <p className="font-medium">{cat.label}</p>

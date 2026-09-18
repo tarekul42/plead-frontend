@@ -4,12 +4,14 @@ import { useState } from "react";
 import { Mail, Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useSubscribeNewsletter } from "@/lib/queries/use-public";
 
 export function NewsletterCta() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const subscribe = useSubscribeNewsletter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,15 +22,14 @@ export function NewsletterCta() {
       return;
     }
 
-    setLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await subscribe.mutateAsync({ email });
       setSubmitted(true);
       setEmail("");
-    } catch {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      setError(message);
     }
   };
 
@@ -50,21 +51,26 @@ export function NewsletterCta() {
             <span className="font-medium text-lg">Thanks for subscribing!</span>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="mx-auto flex max-w-md gap-3">
-            <div className="flex-1">
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-              />
-              {error && <p className="mt-1.5 text-left text-xs text-danger">{error}</p>}
-            </div>
-            <Button type="submit" disabled={loading}>
-              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Subscribe"}
-            </Button>
-          </form>
+          <>
+            <form onSubmit={handleSubmit} className="mx-auto flex max-w-md gap-3">
+              <div className="flex-1">
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                />
+                {error && <p className="mt-1.5 text-left text-xs text-danger">{error}</p>}
+              </div>
+              <Button type="submit" disabled={subscribe.isPending}>
+                {subscribe.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Subscribe"}
+              </Button>
+            </form>
+            <p className="mt-4 text-xs text-muted">
+              We respect your privacy. Unsubscribe anytime.
+            </p>
+          </>
         )}
       </div>
     </section>

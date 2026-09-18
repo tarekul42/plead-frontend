@@ -1,8 +1,11 @@
 "use client";
 
-import { use, useState } from "react";
+import { use } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 import { useProperty, useProperties } from "@/lib/queries/use-properties";
+import { useCheckFavorite, useToggleFavorite } from "@/lib/queries/use-public";
 import { PropertyGallery } from "@/components/properties/property-gallery";
 import { PropertySkeleton } from "@/components/properties/property-skeleton";
 import { PropertyCard } from "@/components/properties/property-card";
@@ -31,6 +34,13 @@ const statusVariants: Record<string, "success" | "warning" | "danger" | "brand">
   pending: "warning",
   sold: "danger",
   rented: "brand",
+};
+
+const statusLabels: Record<string, string> = {
+  available: "Available",
+  pending: "Pending",
+  sold: "Sold",
+  rented: "Rented",
 };
 
 function SpecCard({
@@ -97,7 +107,29 @@ function RelatedProperties({
 export default function PropertyDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const { data, isLoading, isError, refetch } = useProperty(slug);
-  const [saved, setSaved] = useState(false);
+  const { isSignedIn } = useUser();
+  const router = useRouter();
+
+  const property = data as Property | undefined;
+  const { data: favData } = useCheckFavorite(property?._id ?? "");
+  const toggleFav = useToggleFavorite();
+  const isFavorited = favData?.isFavorited ?? false;
+
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+    } catch {
+      // Clipboard API may fail in some environments
+    }
+  };
+
+  const handleInquire = () => {
+    if (isSignedIn) {
+      router.push(`/contact?property=${property?._id}`);
+    } else {
+      router.push("/sign-in");
+    }
+  };
 
   if (isLoading) {
     return (
@@ -121,8 +153,6 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
       </div>
     );
   }
-
-  const property = data;
 
   if (!property) {
     return (
@@ -169,7 +199,11 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
                 value={`${property.area?.toLocaleString()} sqft`}
               />
               <SpecCard icon={Home} label="Type" value={property.propertyType} />
-              <SpecCard icon={Home} label="Status" value={property.status.replace("_", " ")} />
+              <SpecCard
+                icon={Home}
+                label="Status"
+                value={statusLabels[property.status] ?? property.status}
+              />
               <SpecCard icon={Eye} label="Views" value={property.views?.toLocaleString() || "0"} />
               <SpecCard
                 icon={Calendar}
@@ -197,7 +231,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
               </p>
               <div className="mt-3">
                 <Badge variant={statusVariants[property.status] || "default"}>
-                  {property.status.replace("_", " ")}
+                  {statusLabels[property.status] ?? property.status}
                 </Badge>
               </div>
 
@@ -233,26 +267,31 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
               </div>
 
               <div className="mt-6 flex flex-col gap-3">
-                <Link href="/sign-up">
-                  <Button className="w-full" size="lg">
-                    Inquire Now
-                  </Button>
-                </Link>
+                <Button className="w-full" size="lg" onClick={handleInquire}>
+                  Inquire Now
+                </Button>
                 <div className="flex gap-2">
                   <Button
                     variant="secondary"
                     className="flex-1"
                     leftIcon={
-                      <Heart className={`h-4 w-4 ${saved ? "fill-danger text-danger" : ""}`} />
+                      <Heart className={`h-4 w-4 ${isFavorited ? "fill-danger text-danger" : ""}`} />
                     }
-                    onClick={() => setSaved(!saved)}
+                    onClick={() =>
+                      toggleFav.mutate({
+                        propertyId: property._id,
+                        isFavorited,
+                      })
+                    }
+                    disabled={toggleFav.isPending}
                   >
-                    {saved ? "Saved" : "Save"}
+                    {isFavorited ? "Saved" : "Save"}
                   </Button>
                   <Button
                     variant="secondary"
                     className="flex-1"
                     leftIcon={<Share2 className="h-4 w-4" />}
+                    onClick={handleShare}
                   >
                     Share
                   </Button>

@@ -3,20 +3,14 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Building2, Users, Sparkles, TrendingDown } from "lucide-react";
+import { usePublicStats } from "@/lib/queries/use-public";
 
-const stats = [
-  { label: "Properties Listed", value: 1247, suffix: "+", icon: Building2, color: "brand" },
-  { label: "Leads Tracked", value: 5832, suffix: "+", icon: Users, color: "success" },
-  { label: "AI Matches Made", value: 28491, suffix: "+", icon: Sparkles, color: "warning" },
-  {
-    label: "Avg Deal Time",
-    value: 52,
-    prefix: "",
-    suffix: "%",
-    icon: TrendingDown,
-    color: "danger",
-  },
-];
+const colorMap: Record<string, string> = {
+  brand: "text-brand",
+  success: "text-success",
+  warning: "text-warning",
+  danger: "text-danger",
+};
 
 function AnimatedCounter({
   to,
@@ -70,6 +64,40 @@ function AnimatedCounter({
 }
 
 export function StatsBar() {
+  const { data: statsData } = usePublicStats();
+
+  const stats = [
+    {
+      label: "Properties Listed",
+      value: statsData?.propertiesListed ?? 0,
+      suffix: "+",
+      icon: Building2,
+      color: "brand",
+    },
+    {
+      label: "Leads Tracked",
+      value: statsData?.leadsTracked ?? 0,
+      suffix: "+",
+      icon: Users,
+      color: "success",
+    },
+    {
+      label: "AI Matches Made",
+      value: statsData?.aiMatchesMade ?? 0,
+      suffix: "+",
+      icon: Sparkles,
+      color: "warning",
+    },
+    {
+      label: "Faster Closes",
+      value: statsData?.avgCloseTimeReduction ?? 52,
+      prefix: "",
+      suffix: "%",
+      icon: TrendingDown,
+      color: "success",
+    },
+  ];
+
   return (
     <section className="border-y border-border bg-surface py-16">
       <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
@@ -84,7 +112,7 @@ export function StatsBar() {
               className="text-center"
             >
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand/5">
-                <stat.icon className={`h-6 w-6 text-${stat.color}`} />
+                <stat.icon className={`h-6 w-6 ${colorMap[stat.color] ?? "text-brand"}`} />
               </div>
               <AnimatedCounter to={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
               <p className="mt-2 text-sm text-muted">{stat.label}</p>

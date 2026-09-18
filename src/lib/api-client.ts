@@ -229,5 +229,44 @@ export const uploadApi = {
   },
 };
 
+export const contactApi = {
+  submit: (data: {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    propertyId?: string;
+  }) => apiClient.post("/contact", data).then(extractData),
+};
+
+export const newsletterApi = {
+  subscribe: (data: { email: string }) =>
+    apiClient.post("/newsletter/subscribe", data).then(extractData),
+};
+
+export const publicApi = {
+  stats: () => apiClient.get("/public/stats").then(extractData),
+  testimonials: () => apiClient.get("/public/testimonials").then(extractData),
+  faq: () => apiClient.get("/public/faq").then(extractData),
+  blogList: (params?: Record<string, unknown>) =>
+    apiClient.get("/public/blog", { params }).then(extractPaginatedData),
+  blogGet: (slug: string) => apiClient.get(`/public/blog/${slug}`).then(extractData),
+};
+
+export const favoritesApi = {
+  list: (params?: Record<string, unknown>) =>
+    apiClient.get("/favorites", { params }).then(extractPaginatedData),
+  add: (propertyId: string) => apiClient.post("/favorites", { propertyId }).then(extractData),
+  remove: (propertyId: string) =>
+    apiClient.delete(`/favorites/${propertyId}`).then(extractData),
+  check: (propertyId: string) =>
+    apiClient.get(`/favorites/check/${propertyId}`).then(extractData),
+};
+
+export const propertiesApiExtended = {
+  categoryCounts: () =>
+    apiClient.get("/properties/category-counts").then(extractData),
+};
+
 export { ApiError };
 export default apiClient;
