@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
@@ -12,6 +12,7 @@ interface PropertyGalleryProps {
 export function PropertyGallery({ images, title }: PropertyGalleryProps) {
   const [current, setCurrent] = useState(0);
   const [lightbox, setLightbox] = useState(false);
+  const touchStart = useRef<number | null>(null);
 
   const goNext = useCallback(() => {
     setCurrent((p) => (p === images.length - 1 ? 0 : p + 1));
@@ -20,6 +21,20 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
   const goPrev = useCallback(() => {
     setCurrent((p) => (p === 0 ? images.length - 1 : p - 1));
   }, [images.length]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStart.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart.current === null) return;
+    const diff = touchStart.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) goNext();
+      else goPrev();
+    }
+    touchStart.current = null;
+  };
 
   useEffect(() => {
     if (!lightbox) return;
@@ -46,7 +61,11 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
 
   return (
     <>
-      <div className="relative overflow-hidden rounded-xl">
+      <div
+        className="relative overflow-hidden rounded-xl"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className="relative aspect-video">
           <Image
             src={images[current]}

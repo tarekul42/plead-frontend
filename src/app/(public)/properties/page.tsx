@@ -14,7 +14,11 @@ function Chip({ label, onRemove }: { label: string; onRemove: () => void }) {
   return (
     <span className="inline-flex items-center gap-1 rounded-full border border-brand/20 bg-brand/5 px-3 py-1 text-xs font-medium text-brand">
       {label}
-      <button onClick={onRemove} className="hover:text-brand-dark">
+      <button
+        onClick={onRemove}
+        className="hover:text-brand-dark"
+        aria-label={`Remove ${label} filter`}
+      >
         <X className="h-3 w-3" />
       </button>
     </span>
@@ -183,13 +187,17 @@ function ExplorePageContent() {
 
         {mobileFilters && (
           <div className="fixed inset-0 z-40 lg:hidden">
-            <div className="absolute inset-0 bg-black/30" onClick={() => setMobileFilters(false)} />
-            <div className="absolute right-0 top-0 h-full w-80 overflow-y-auto bg-background p-6 shadow-lg">
+            <div
+              className="absolute inset-0 bg-black/30 transition-opacity duration-300"
+              onClick={() => setMobileFilters(false)}
+            />
+            <div className="absolute right-0 top-0 h-full w-80 overflow-y-auto bg-background p-6 shadow-lg transition-transform duration-300">
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="font-semibold">Filters</h2>
                 <button
                   onClick={() => setMobileFilters(false)}
                   className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-neutral-100 dark:hover:bg-surface-alt"
+                  aria-label="Close filters"
                 >
                   <X className="h-4 w-4" />
                 </button>
