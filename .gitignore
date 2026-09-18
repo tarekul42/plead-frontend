@@ -27,6 +27,5 @@ coverage/
 .clerk/
 
 # misc
-proxy.ts
 *.tsbuildinfo
 .DS_Store
