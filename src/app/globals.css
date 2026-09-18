@@ -99,7 +99,7 @@ button:not(:disabled) {
 }
 
 .bg-gradient-hero {
-  background: radial-gradient(ellipse at top right, color-mix(in srgb, var(--color-brand) 8%, transparent), transparent 50%);
+  background: radial-gradient(ellipse at top right, color-mix(in srgb, var(--color-brand) 12%, transparent), transparent 50%);
 }
 
 .bg-gradient-card {
@@ -112,7 +112,6 @@ button:not(:disabled) {
 
 .bg-gradient-property {
   background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-dark) 100%);
-  opacity: 0.8;
 }
 
 .bg-gradient-cta {
@@ -159,7 +158,7 @@ button:not(:disabled) {
 }
 
 .bg-section-tinted {
-  background-color: color-mix(in srgb, var(--color-brand) 4%, var(--color-background));
+  background-color: color-mix(in srgb, var(--color-brand) 5%, var(--color-background));
 }
 
 .text-balance {
