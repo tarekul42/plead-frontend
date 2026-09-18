@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #7c3aed;
-  --color-brand-light: #8b5cf6;
-  --color-brand-dark: #6d28d9;
+  --color-brand: #e11d48;
+  --color-brand-light: #f43f5e;
+  --color-brand-dark: #be123c;
   --color-success: #16a34a;
   --color-success-light: #22c55e;
   --color-warning: #eab308;
   --color-warning-light: #facc15;
   --color-danger: #dc2626;
   --color-danger-light: #ef4444;
-  --color-background: #faf9ff;
-  --color-surface: #f3f1ff;
-  --color-foreground: #0f0d15;
-  --color-muted: #6b6580;
-  --color-border: #e4e0f0;
+  --color-background: #fffbfa;
+  --color-surface: #fff1f2;
+  --color-foreground: #1c1017;
+  --color-muted: #7c6f75;
+  --color-border: #f0dbde;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
   --radius-card: 12px;
@@ -27,25 +27,25 @@
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-glow: 0 0 20px rgb(124 58 237 / 0.2);
+  --shadow-glow: 0 0 20px rgb(225 29 72 / 0.2);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dark {
-  --color-background: #0f0d15;
-  --color-surface: #1a1725;
-  --color-foreground: #f0ecf9;
-  --color-muted: #9b93b0;
-  --color-border: #2d2740;
-  --color-brand: #8b5cf6;
-  --color-brand-light: #a78bfa;
-  --color-brand-dark: #7c3aed;
+  --color-background: #1c1017;
+  --color-surface: #2a1c22;
+  --color-foreground: #fdf0f2;
+  --color-muted: #b09aa2;
+  --color-border: #432c34;
+  --color-brand: #f43f5e;
+  --color-brand-light: #fb7185;
+  --color-brand-dark: #e11d48;
   --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.3);
-  --shadow-glow: 0 0 20px rgb(139 92 246 / 0.3);
+  --shadow-glow: 0 0 20px rgb(244 63 94 / 0.3);
 }
 
 * {
@@ -126,15 +126,15 @@ button:not(:disabled) {
 }
 
 .glass {
-  background: rgba(250, 249, 255, 0.8);
+  background: rgba(255, 251, 250, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(228, 224, 240, 0.5);
+  border: 1px solid rgba(240, 219, 222, 0.5);
 }
 
 .dark .glass {
-  background: rgba(15, 13, 21, 0.8);
-  border: 1px solid rgba(45, 39, 64, 0.5);
+  background: rgba(28, 16, 23, 0.8);
+  border: 1px solid rgba(67, 44, 52, 0.5);
 }
 
 .shimmer {
