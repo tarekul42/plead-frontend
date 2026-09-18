@@ -41,7 +41,7 @@ export function PublicNavbar() {
           PropLead
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-1 sm:flex">
           {links.map((link) => {
             const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
             return (
@@ -87,8 +87,9 @@ export function PublicNavbar() {
           )}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg transition hover:bg-neutral-100 dark:hover:bg-surface-alt md:hidden"
-            aria-label="Toggle menu"
+            className="flex h-9 w-9 items-center justify-center rounded-lg transition hover:bg-neutral-100 dark:hover:bg-surface-alt sm:hidden"
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -96,7 +97,7 @@ export function PublicNavbar() {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-border bg-background md:hidden">
+        <div className="border-t border-border bg-background sm:hidden">
           <div className="space-y-1 px-4 py-4">
             {links.map((link) => {
               const isActive = pathname === link.href || pathname.startsWith(link.href + "/");

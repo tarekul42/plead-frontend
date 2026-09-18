@@ -121,20 +121,24 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
         <div className="flex gap-2">
           <input
             type="number"
+            min="0"
             placeholder="Min"
             value={filters.priceMin || ""}
-            onChange={(e) =>
-              update("priceMin", e.target.value ? Number(e.target.value) : undefined)
-            }
+            onChange={(e) => {
+              const val = Number(e.target.value);
+              if (val >= 0) update("priceMin", val > 0 ? val : undefined);
+            }}
             className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none transition focus:border-brand"
           />
           <input
             type="number"
+            min="0"
             placeholder="Max"
             value={filters.priceMax || ""}
-            onChange={(e) =>
-              update("priceMax", e.target.value ? Number(e.target.value) : undefined)
-            }
+            onChange={(e) => {
+              const val = Number(e.target.value);
+              if (val >= 0) update("priceMax", val > 0 ? val : undefined);
+            }}
             className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none transition focus:border-brand"
           />
         </div>

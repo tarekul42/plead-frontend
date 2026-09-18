@@ -5,6 +5,12 @@ import Link from "next/link";
 import { ArrowDown, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const colorMap: Record<string, { bg: string; text: string }> = {
+  success: { bg: "bg-success/10", text: "text-success" },
+  brand: { bg: "bg-brand/10", text: "text-brand" },
+  warning: { bg: "bg-warning/10", text: "text-warning" },
+};
+
 const mockMatches = [
   {
     title: "Modern 3BR in Brooklyn",
@@ -114,9 +120,9 @@ export function Hero() {
                 >
                   <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                     <div
-                      className={`h-8 w-8 sm:h-10 sm:w-10 shrink-0 rounded-full bg-${match.color}/10 flex items-center justify-center`}
+                      className={`h-8 w-8 sm:h-10 sm:w-10 shrink-0 rounded-full ${colorMap[match.color]?.bg ?? "bg-brand/10"} flex items-center justify-center`}
                     >
-                      <div className={`h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-${match.color}`} />
+                      <div className={`h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full ${colorMap[match.color]?.text ?? "text-brand"}`} />
                     </div>
                     <div className="min-w-0">
                       <p className="text-xs sm:text-sm font-medium truncate">{match.title}</p>
@@ -126,7 +132,7 @@ export function Hero() {
                     </div>
                   </div>
                   <span
-                    className={`shrink-0 rounded-full bg-${match.color}/10 px-2 sm:px-3 py-1 text-[10px] sm:text-xs font-semibold text-${match.color}`}
+                    className={`shrink-0 rounded-full ${colorMap[match.color]?.bg ?? "bg-brand/10"} px-2 sm:px-3 py-1 text-[10px] sm:text-xs font-semibold ${colorMap[match.color]?.text ?? "text-brand"}`}
                   >
                     {match.score}%
                   </span>

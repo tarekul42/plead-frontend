@@ -1,31 +1,25 @@
 import NextLink from "next/link";
-import { Globe, ExternalLink, LinkIcon, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 
 const footerLinks = {
   Product: [
     { label: "Explore", href: "/properties" },
     { label: "How it Works", href: "/#how-it-works" },
-    { label: "Pricing", href: "/pricing" },
     { label: "AI Features", href: "/#ai-features" },
   ],
   Company: [
     { label: "About", href: "/about" },
     { label: "Blog", href: "/blog" },
-    { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact" },
   ],
   Legal: [
     { label: "Privacy", href: "/privacy" },
     { label: "Terms", href: "/terms" },
-    { label: "Cookies", href: "/cookies" },
     { label: "Help", href: "/help" },
   ],
 };
 
 const socialLinks = [
-  { icon: Globe, href: "https://github.com", label: "GitHub" },
-  { icon: ExternalLink, href: "https://twitter.com", label: "Twitter" },
-  { icon: LinkIcon, href: "https://linkedin.com", label: "LinkedIn" },
   { icon: Mail, href: "mailto:hello@proplead.ai", label: "Email" },
 ];
 
