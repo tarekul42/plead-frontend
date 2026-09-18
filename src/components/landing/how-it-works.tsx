@@ -39,7 +39,7 @@ export function HowItWorks() {
 
         <div className="relative">
           {/* Connecting line — desktop only */}
-          <div className="absolute left-0 right-0 top-16 hidden h-0.5 bg-gradient-to-r from-brand/20 via-brand to-brand/20 lg:block" />
+          <div className="absolute left-[16.7%] right-[16.7%] top-8 hidden border-t border-dashed border-border lg:block" />
 
           <div className="grid gap-8 lg:grid-cols-3">
             {steps.map((step, i) => (
