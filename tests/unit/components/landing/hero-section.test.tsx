@@ -35,26 +35,25 @@ describe("Hero (landing section)", () => {
 
   it("renders the AI badge", () => {
     render(<Hero />);
-    expect(screen.getByText("AI-Powered Real Estate Platform")).toBeInTheDocument();
+    expect(screen.getByText("AI-Powered Real Estate")).toBeInTheDocument();
   });
 
-  it("renders the dashboard preview with match scores", () => {
+  it("renders the product demo tabs", () => {
     render(<Hero />);
-    expect(screen.getByText("92%")).toBeInTheDocument();
-    expect(screen.getByText("85%")).toBeInTheDocument();
-    expect(screen.getByText("71%")).toBeInTheDocument();
+    expect(screen.getByText("Property")).toBeInTheDocument();
+    expect(screen.getByText("AI Match")).toBeInTheDocument();
+    expect(screen.getByText("Outreach")).toBeInTheDocument();
   });
 
-  it("renders property cards in the preview", () => {
+  it("renders the first slide property title", () => {
     render(<Hero />);
     expect(screen.getByText("Modern 3BR in Brooklyn")).toBeInTheDocument();
-    expect(screen.getByText("Luxury Condo, Manhattan")).toBeInTheDocument();
-    expect(screen.getByText("Cozy Studio, Downtown")).toBeInTheDocument();
   });
 
-  it("renders the animated arrow indicator", () => {
+  it("renders trust badges", () => {
     render(<Hero />);
-    const arrow = document.querySelector("svg.lucide-arrow-down");
-    expect(arrow).toBeInTheDocument();
+    expect(screen.getByText("No credit card")).toBeInTheDocument();
+    expect(screen.getByText("Free forever")).toBeInTheDocument();
+    expect(screen.getByText("Cancel anytime")).toBeInTheDocument();
   });
 });

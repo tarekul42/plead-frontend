@@ -1,70 +1,84 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Cpu, Handshake, Search } from "lucide-react";
-import Link from "next/link";
+import { Cpu, Handshake, Search } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { SectionHeader } from "@/components/landing/section-header";
 
 const steps = [
   {
+    number: "01",
     icon: Search,
-    title: "Capture Leads",
-    description:
-      "Import leads from your website, social media, or manually. All lead data is organized and ready.",
+    title: "Add your leads & properties",
+    description: "Import your pipeline and listings in minutes. Our AI gets to work instantly.",
+    color: "brand",
   },
   {
+    number: "02",
     icon: Cpu,
-    title: "AI Matches Properties",
-    description:
-      "Our AI engine scores each lead against your inventory based on budget, location, and preferences.",
+    title: "AI matches them automatically",
+    description: "Our engine scores every lead against your inventory and finds the best fits.",
+    color: "success",
   },
   {
+    number: "03",
     icon: Handshake,
-    title: "Close Deals Faster",
+    title: "Close deals faster",
     description:
-      "Send personalized outreach, schedule viewings, and track every interaction until the deal closes.",
+      "Get AI-written outreach, track your pipeline, and focus on what matters — relationships.",
+    color: "warning",
   },
 ];
 
+const colorMap: Record<string, { bg: string; text: string; line: string }> = {
+  brand: { bg: "bg-brand", text: "text-white", line: "from-brand to-success" },
+  success: { bg: "bg-success", text: "text-white", line: "from-success to-warning" },
+  warning: { bg: "bg-warning", text: "text-white", line: "from-warning to-brand" },
+};
+
 export function HowItWorks() {
   return (
-    <section className="py-16">
+    <section className="section-padding">
       <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <h2 className="text-2xl font-bold md:text-3xl">How It Works</h2>
-          <p className="mt-2 text-muted">Three simple steps to transform your workflow</p>
-        </div>
-        <div className="relative grid gap-8 md:grid-cols-3">
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="relative text-center"
-            >
-              {i < steps.length - 1 && (
-                <div className="absolute right-0 top-8 hidden h-px w-full border-t border-dashed border-border md:-right-1/2 md:block" />
-              )}
-              <div className="relative mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-brand/5">
-                <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">
-                  {i + 1}
-                </span>
-                <step.icon className="h-7 w-7 text-brand" />
-              </div>
-              <h3 className="mb-3 text-lg font-semibold">{step.title}</h3>
-              <p className="text-sm text-muted">{step.description}</p>
-            </motion.div>
-          ))}
-        </div>
-        <div className="text-center mt-12">
-          <Link href="/sign-up">
-            <Button size="lg" rightIcon={<ArrowRight className="h-4 w-4" />}>
-              Get Started Free
-            </Button>
-          </Link>
+        <SectionHeader
+          eyebrow="How it works"
+          title="Three steps to smarter selling"
+          subtitle="No complex setup. No training required. Just results."
+        />
+
+        <div className="relative">
+          {/* Connecting line — desktop only */}
+          <div className="absolute left-0 right-0 top-16 hidden h-0.5 bg-gradient-to-r from-brand via-success to-warning lg:block" />
+
+          <div className="grid gap-8 lg:grid-cols-3">
+            {steps.map((step, i) => {
+              const colors = colorMap[step.color];
+              return (
+                <motion.div
+                  key={step.number}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15, duration: 0.5 }}
+                  className="relative text-center"
+                >
+                  {/* Number circle */}
+                  <div className="relative z-10 mx-auto mb-6">
+                    <div
+                      className={`mx-auto flex h-16 w-16 items-center justify-center rounded-full ${colors.bg} ${colors.text} text-lg font-bold shadow-lg`}
+                    >
+                      {step.number}
+                    </div>
+                  </div>
+
+                  <h3 className="mb-3 text-xl font-semibold">{step.title}</h3>
+                  <p className="mx-auto max-w-xs text-sm leading-relaxed text-muted">
+                    {step.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

@@ -3,6 +3,7 @@
 import { Check, Loader2, Mail } from "lucide-react";
 import { useState } from "react";
 
+import { SectionHeader } from "@/components/landing/section-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSubscribeNewsletter } from "@/lib/queries/use-public";
@@ -35,42 +36,55 @@ export function NewsletterCta() {
   };
 
   return (
-    <section className="bg-surface py-20">
-      <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
-        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-brand shadow-glow">
-          <Mail className="h-6 w-6 text-white" />
-        </div>
-        <h2 className="mb-3 text-3xl font-bold md:text-4xl">Stay Updated</h2>
-        <p className="mb-10 text-muted text-lg leading-relaxed">
-          Get the latest tips, product updates, and industry insights delivered to your inbox.
-        </p>
-        {submitted ? (
-          <div className="flex items-center justify-center gap-2 text-success">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-success/10">
-              <Check className="h-5 w-5" />
+    <section className="section-padding">
+      <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
+        <div className="relative overflow-hidden rounded-2xl bg-grid">
+          <div className="bg-gradient-hero pointer-events-none absolute inset-0" />
+          <div className="relative px-6 py-16 text-center sm:px-12 md:py-20">
+            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-brand shadow-glow">
+              <Mail className="h-6 w-6 text-white" />
             </div>
-            <span className="font-medium text-lg">Thanks for subscribing!</span>
-          </div>
-        ) : (
-          <>
-            <form onSubmit={handleSubmit} className="mx-auto flex max-w-md gap-3">
-              <div className="flex-1">
-                <Input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                />
-                {error && <p className="mt-1.5 text-left text-xs text-danger">{error}</p>}
+            <SectionHeader
+              eyebrow="Newsletter"
+              title="Stay ahead of the market"
+              subtitle="Weekly insights, AI tips, and industry trends — delivered every Thursday."
+              className="mb-8"
+            />
+            {submitted ? (
+              <div className="flex items-center justify-center gap-2 text-success">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-success/10">
+                  <Check className="h-5 w-5" />
+                </div>
+                <span className="font-medium">Thanks for subscribing!</span>
               </div>
-              <Button type="submit" disabled={subscribe.isPending}>
-                {subscribe.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Subscribe"}
-              </Button>
-            </form>
-            <p className="mt-4 text-xs text-muted">We respect your privacy. Unsubscribe anytime.</p>
-          </>
-        )}
+            ) : (
+              <>
+                <form onSubmit={handleSubmit} className="mx-auto flex max-w-md gap-3">
+                  <div className="flex-1">
+                    <Input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email"
+                      required
+                    />
+                    {error && <p className="mt-1.5 text-left text-xs text-danger">{error}</p>}
+                  </div>
+                  <Button type="submit" disabled={subscribe.isPending}>
+                    {subscribe.isPending ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      "Subscribe"
+                    )}
+                  </Button>
+                </form>
+                <p className="mt-4 text-xs text-muted">
+                  Join 2,000+ subscribers. Unsubscribe anytime.
+                </p>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );

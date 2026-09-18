@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Building2, Sparkles, TrendingDown, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+import { SectionHeader } from "@/components/landing/section-header";
 import { usePublicStats } from "@/lib/queries/use-public";
 
 const colorMap: Record<string, string> = {
@@ -56,7 +57,7 @@ function AnimatedCounter({
   }, [to]);
 
   return (
-    <span ref={ref} className="text-3xl font-bold tracking-tight md:text-4xl">
+    <span ref={ref} className="text-gradient-brand text-3xl font-bold tracking-tight md:text-4xl">
       {prefix}
       {count.toLocaleString()}
       {suffix}
@@ -100,25 +101,28 @@ export function StatsBar() {
   ];
 
   return (
-    <section className="border-y border-border bg-surface py-16">
+    <section className="section-padding border-y border-border">
       <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="text-center"
-            >
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand/5">
-                <stat.icon className={`h-6 w-6 ${colorMap[stat.color] ?? "text-brand"}`} />
-              </div>
-              <AnimatedCounter to={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
-              <p className="mt-2 text-sm text-muted">{stat.label}</p>
-            </motion.div>
-          ))}
+        <SectionHeader eyebrow="Trusted by agents" title="Results that speak for themselves" />
+        <div className="gradient-border rounded-2xl bg-surface p-8 md:p-12">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                className="text-center"
+              >
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand/5">
+                  <stat.icon className={`h-6 w-6 ${colorMap[stat.color] ?? "text-brand"}`} />
+                </div>
+                <AnimatedCounter to={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
+                <p className="mt-2 text-sm text-muted">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
