@@ -124,9 +124,9 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-grid">
+    <section className="relative flex min-h-screen overflow-hidden bg-grid">
       <div className="bg-gradient-hero pointer-events-none absolute inset-0" />
-      <div className="relative mx-auto max-w-container px-4 pb-20 pt-20 sm:px-6 lg:px-8">
+      <div className="relative mx-auto flex min-h-screen max-w-container items-center px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left: Text */}
           <div>
