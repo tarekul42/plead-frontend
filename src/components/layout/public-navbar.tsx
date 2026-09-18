@@ -4,7 +4,7 @@ import { useUser } from "@clerk/nextjs";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ThemeToggle } from "@/components/common/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -30,15 +30,29 @@ export function PublicNavbar() {
   const { isSignedIn, user } = useUser();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const links = isSignedIn ? loggedInLinks : publicLinks;
   const initial =
     user?.firstName?.charAt(0) || user?.emailAddresses?.[0]?.emailAddress?.charAt(0) || "U";
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg">
-      <div className="mx-auto flex h-16 max-w-container items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="text-xl font-bold tracking-tight">
+    <nav
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300",
+        scrolled
+          ? "border-b border-border bg-background/80 backdrop-blur-lg shadow-sm"
+          : "border-b border-transparent bg-transparent",
+      )}
+    >
+      <div className="mx-auto flex h-full max-w-container items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Link href="/" className="text-xl font-bold tracking-tight text-foreground">
           PropLead
         </Link>
 
@@ -50,10 +64,12 @@ export function PublicNavbar() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "rounded-lg px-3 py-2 text-sm transition",
+                  "rounded-lg px-3 py-2 text-sm font-medium transition",
                   isActive
-                    ? "bg-brand/5 text-brand font-medium"
-                    : "text-muted hover:bg-neutral-100 dark:hover:bg-surface-alt hover:text-foreground",
+                    ? "bg-brand/10 text-brand"
+                    : scrolled
+                      ? "text-muted hover:bg-neutral-100 dark:hover:bg-surface-alt hover:text-foreground"
+                      : "text-foreground/70 hover:text-foreground hover:bg-white/10",
                 )}
               >
                 {link.label}
@@ -67,7 +83,12 @@ export function PublicNavbar() {
           {isSignedIn ? (
             <Link
               href="/dashboard"
-              className="flex items-center gap-2 rounded-lg bg-brand/10 p-1.5 pr-3 text-sm font-medium text-brand transition hover:bg-brand/15"
+              className={cn(
+                "flex items-center gap-2 rounded-lg p-1.5 pr-3 text-sm font-medium transition",
+                scrolled
+                  ? "bg-brand/10 text-brand hover:bg-brand/15"
+                  : "bg-white/10 text-foreground hover:bg-white/20",
+              )}
             >
               <div className="flex h-7 w-7 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">
                 {initial}
@@ -77,18 +98,36 @@ export function PublicNavbar() {
           ) : (
             <div className="hidden items-center gap-2 sm:flex">
               <Link href="/sign-in">
-                <Button variant="ghost" size="sm">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={cn(
+                    !scrolled && "text-foreground hover:bg-white/10 hover:text-foreground",
+                  )}
+                >
                   Sign in
                 </Button>
               </Link>
               <Link href="/sign-up">
-                <Button size="sm">Get started</Button>
+                <Button
+                  size="sm"
+                  className={cn(
+                    !scrolled && "bg-foreground text-background hover:bg-foreground/90",
+                  )}
+                >
+                  Get started
+                </Button>
               </Link>
             </div>
           )}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg transition hover:bg-neutral-100 dark:hover:bg-surface-alt sm:hidden"
+            className={cn(
+              "flex h-9 w-9 items-center justify-center rounded-lg transition sm:hidden",
+              scrolled
+                ? "hover:bg-neutral-100 dark:hover:bg-surface-alt"
+                : "hover:bg-white/10",
+            )}
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >

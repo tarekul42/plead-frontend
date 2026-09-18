@@ -11,7 +11,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         Skip to content
       </a>
       <PublicNavbar />
-      <main id="main-content" className="min-h-screen">
+      <main id="main-content">
         {children}
       </main>
       <PublicFooter />
