@@ -17,7 +17,7 @@ const data = [
 
 export function OutcomesChart() {
   return (
-    <section className="section-padding bg-surface">
+    <section className="section-padding">
       <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Proven results"

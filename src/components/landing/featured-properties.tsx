@@ -28,7 +28,7 @@ export function FeaturedProperties() {
   });
 
   return (
-    <section className="section-padding bg-surface">
+    <section className="section-padding">
       <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeader
