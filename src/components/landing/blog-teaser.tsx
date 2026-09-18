@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
-import { usePublicBlogList } from "@/lib/queries/use-public";
+import { usePublicBlogList, type BlogPost } from "@/lib/queries/use-public";
 
 export function BlogTeaser() {
   const { data, isLoading } = usePublicBlogList({ limit: 3 });
@@ -48,12 +48,12 @@ export function BlogTeaser() {
           </Link>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
-          {posts.map((post: Record<string, unknown>, i: number) => {
-            const title = post.title as string;
-            const excerpt = (post.excerpt || (post.content as string)?.slice(0, 120) + "...") as string;
-            const slug = post.slug as string;
-            const tags = (post.tags || []) as string[];
-            const publishedAt = post.publishedAt as string;
+          {posts.map((post: BlogPost, i: number) => {
+            const title = post.title;
+            const excerpt = post.excerpt || post.content?.slice(0, 120) + "...";
+            const slug = post.slug;
+            const tags = post.tags || [];
+            const publishedAt = post.publishedAt;
             const date = publishedAt
               ? new Date(publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
               : "";

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Calendar } from "lucide-react";
-import { usePublicBlogList } from "@/lib/queries/use-public";
+import { usePublicBlogList, type BlogPost } from "@/lib/queries/use-public";
 
 export default function BlogPage() {
   const { data, isLoading } = usePublicBlogList();
@@ -31,13 +31,14 @@ export default function BlogPage() {
         </div>
       ) : (
         <div data-testid="blog-list" className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post: Record<string, unknown>) => {
-            const title = post.title as string;
-            const excerpt = (post.excerpt || (post.content as string)?.slice(0, 160) + "...") as string;
-            const slug = post.slug as string;
-            const tags = (post.tags || []) as string[];
-            const publishedAt = post.publishedAt as string;
-            const author = (post.authorId as Record<string, unknown>)?.name as string | undefined;
+          {posts.map((post: BlogPost) => {
+            const title = post.title;
+            const excerpt = post.excerpt || post.content?.slice(0, 160) + "...";
+            const slug = post.slug;
+            const tags = post.tags || [];
+            const publishedAt = post.publishedAt;
+            const author = (post as unknown as Record<string, unknown>)?.authorId as Record<string, unknown> | undefined;
+            const authorName = author?.name as string | undefined;
             const date = publishedAt
               ? new Date(publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
               : "";
@@ -51,10 +52,10 @@ export default function BlogPage() {
                 <div className="mb-3 flex items-center gap-2 text-xs text-muted">
                   <Calendar className="h-3 w-3" />
                   <span>{date}</span>
-                  {author && (
+                  {authorName && (
                     <>
                       <span className="text-border">|</span>
-                      <span>{author}</span>
+                      <span>{authorName}</span>
                     </>
                   )}
                 </div>

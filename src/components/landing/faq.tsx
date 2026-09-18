@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { useFaq } from "@/lib/queries/use-public";
+import { useFaq, type FaqItem } from "@/lib/queries/use-public";
 
 export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -38,13 +38,13 @@ export function Faq() {
           <p className="mt-2 text-muted">Everything you need to know</p>
         </div>
         <div className="space-y-3">
-          {faqs.map((faq: Record<string, unknown>, i: number) => (
-            <div key={i} className="rounded-card border border-border bg-surface shadow-sm">
+          {faqs.map((faq: FaqItem, i: number) => (
+            <div key={faq._id ?? i} className="rounded-card border border-border bg-surface shadow-sm">
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="flex w-full items-center justify-between px-6 py-4 text-left"
               >
-                <span className="font-medium pr-4">{faq.question as string}</span>
+                <span className="font-medium pr-4">{faq.question}</span>
                 <ChevronDown
                   className={`h-4 w-4 shrink-0 text-muted transition-transform duration-200 ${
                     openIndex === i ? "rotate-180" : ""
@@ -61,7 +61,7 @@ export function Faq() {
                     className="overflow-hidden"
                   >
                     <p className="border-t border-border px-6 py-4 text-sm text-muted leading-relaxed">
-                      {faq.answer as string}
+                      {faq.answer}
                     </p>
                   </motion.div>
                 )}

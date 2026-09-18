@@ -26,11 +26,14 @@ const iconMap: Record<string, LucideIcon> = {
 export function PropertyCategories() {
   const { data: counts } = useCategoryCounts();
 
-  const categories = PROPERTY_CATEGORIES.map((cat) => ({
-    ...cat,
-    Icon: iconMap[cat.icon] ?? Building2,
-    count: counts?.[cat.slug] ?? 0,
-  }));
+  const categories = PROPERTY_CATEGORIES.map((cat) => {
+    const countItem = counts?.find((c) => c._id === cat.slug);
+    return {
+      ...cat,
+      Icon: iconMap[cat.icon] ?? Building2,
+      count: countItem?.count ?? 0,
+    };
+  });
 
   return (
     <section className="bg-surface py-16">

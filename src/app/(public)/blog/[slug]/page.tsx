@@ -30,13 +30,12 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
     );
   }
 
-  const publishedAt = post.publishedAt as string;
-  const date = publishedAt
-    ? new Date(publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+  const date = post.publishedAt
+    ? new Date(post.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
     : "";
-  const tags = (post.tags || []) as string[];
-  const content = post.content as string;
-  const title = post.title as string;
+  const tags = post.tags || [];
+  const content = post.content;
+  const title = post.title;
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">

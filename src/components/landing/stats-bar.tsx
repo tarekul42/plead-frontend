@@ -90,7 +90,7 @@ export function StatsBar() {
     },
     {
       label: "Faster Closes",
-      value: statsData?.avgCloseTimeReduction ?? 52,
+      value: Number(statsData?.avgCloseTimeReduction ?? 52),
       prefix: "",
       suffix: "%",
       icon: TrendingDown,

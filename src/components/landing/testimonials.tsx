@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
-import { useTestimonials } from "@/lib/queries/use-public";
+import { useTestimonials, type Testimonial } from "@/lib/queries/use-public";
 
 const avatarColors = ["bg-brand/10", "bg-success/10", "bg-warning/10"];
 
@@ -42,11 +42,11 @@ export function Testimonials() {
           <p className="mt-2 text-muted">Hear from real estate professionals</p>
         </div>
         <div className="grid gap-8 md:grid-cols-3">
-          {testimonials.map((t: Record<string, unknown>, i: number) => {
-            const name = t.name as string;
-            const role = t.role as string;
-            const company = t.company as string;
-            const quote = t.quote as string;
+          {testimonials.map((t: Testimonial, i: number) => {
+            const name = t.name;
+            const role = t.role;
+            const company = (t as unknown as Record<string, unknown>)?.company as string | undefined;
+            const quote = t.content;
             const initials = name
               .split(" ")
               .map((n: string) => n[0])
@@ -56,7 +56,7 @@ export function Testimonials() {
 
             return (
               <motion.div
-                key={name}
+                key={t._id ?? i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
