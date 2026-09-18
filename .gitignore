@@ -29,3 +29,6 @@ coverage/
 # misc
 *.tsbuildinfo
 .DS_Store
+
+# internal docs
+plan/
