@@ -7,9 +7,9 @@
  * Thresholds are based on typical Next.js application sizes and should be
  * adjusted based on your application's specific needs.
  */
-import { describe, it, expect } from "vitest";
 import { existsSync, readdirSync, statSync } from "fs";
 import { join } from "path";
+import { describe, expect, it } from "vitest";
 
 const NEXT_DIR = join(process.cwd(), ".next");
 

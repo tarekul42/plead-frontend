@@ -1,30 +1,31 @@
 "use client";
 
-import { useCurrentUser } from "@/hooks/use-current-user";
-import { StatCard } from "@/components/dashboard/stat-card";
-import { LineChart, PieChart, BarChart } from "@/components/charts/chart-wrapper";
-import { DashboardLoading } from "@/components/common/dashboard-loading";
-import { ErrorState } from "@/components/common/error-state";
-import { EmptyState } from "@/components/common/empty-state";
-import { PageHeader } from "@/components/common/page-header";
-import { useLeads } from "@/lib/queries/use-leads";
-import { useProperties } from "@/lib/queries/use-properties";
-import { useInteractions } from "@/lib/queries/use-interactions";
-import { useUsers } from "@/lib/queries/use-users";
+import { useQuery } from "@tanstack/react-query";
 import {
   Building2,
-  Users,
-  TrendingUp,
-  MessageSquare,
-  Sparkles,
-  Shield,
   DollarSign,
+  MessageSquare,
+  Shield,
+  Sparkles,
   Star,
+  TrendingUp,
+  Users,
 } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
+
+import { BarChart, LineChart, PieChart } from "@/components/charts/chart-wrapper";
+import { DashboardLoading } from "@/components/common/dashboard-loading";
+import { EmptyState } from "@/components/common/empty-state";
+import { ErrorState } from "@/components/common/error-state";
+import { PageHeader } from "@/components/common/page-header";
+import { StatCard } from "@/components/dashboard/stat-card";
+import { useCurrentUser } from "@/hooks/use-current-user";
 import apiClient from "@/lib/api-client";
+import { useInteractions } from "@/lib/queries/use-interactions";
+import { useLeads } from "@/lib/queries/use-leads";
+import { useProperties } from "@/lib/queries/use-properties";
+import { useUsers } from "@/lib/queries/use-users";
 import { formatCompactPrice } from "@/lib/utils";
-import type { Lead, Interaction } from "@/types";
+import type { Interaction, Lead } from "@/types";
 
 interface LeadStatsResponse {
   weeklyTrend?: Array<{ date?: string; _id?: string; count: number }>;
@@ -40,6 +41,7 @@ interface AdminStatsResponse {
   totalReviews?: number;
 }
 import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 
 const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

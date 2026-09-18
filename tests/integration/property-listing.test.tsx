@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { render, screen, waitFor } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("@clerk/nextjs", () => ({
   useUser: () => ({
@@ -80,10 +80,10 @@ vi.mock("@/lib/api-client", () => ({
   },
 }));
 
-import { useProperties } from "@/lib/queries/use-properties";
-import { PropertyCard } from "@/components/properties/property-card";
-import { Pagination } from "@/components/common/pagination";
 import { EmptyState } from "@/components/common/empty-state";
+import { Pagination } from "@/components/common/pagination";
+import { PropertyCard } from "@/components/properties/property-card";
+import { useProperties } from "@/lib/queries/use-properties";
 
 function renderWithProviders(ui: React.ReactElement) {
   const qc = new QueryClient({

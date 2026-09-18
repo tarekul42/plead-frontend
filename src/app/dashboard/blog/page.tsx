@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { Calendar, Edit2, Eye, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { Plus, Edit2, Trash2, Eye, Calendar } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
+import { useState } from "react";
+
 import { EmptyState } from "@/components/common/empty-state";
+import { buttonVariants } from "@/components/ui/button";
 
 const posts = [
   {

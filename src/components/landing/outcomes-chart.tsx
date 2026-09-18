@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 import { TrendingDown, TrendingUp } from "lucide-react";
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 const data = [
   { month: "Jan", before: 90, after: 47 },

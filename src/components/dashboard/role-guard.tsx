@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
+
 import { useCurrentUser } from "@/hooks/use-current-user";
 
 export function RoleGuard({

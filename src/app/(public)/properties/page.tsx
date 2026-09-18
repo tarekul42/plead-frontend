@@ -1,14 +1,15 @@
 "use client";
 
+import { RotateCcw, SlidersHorizontal, X } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useMemo, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useProperties } from "@/lib/queries/use-properties";
-import { PropertySearchBar } from "@/components/properties/property-search-bar";
+
+import { Pagination } from "@/components/common/pagination";
 import { PropertyFilters } from "@/components/properties/property-filters";
 import { PropertyGrid } from "@/components/properties/property-grid";
-import { Pagination } from "@/components/common/pagination";
+import { PropertySearchBar } from "@/components/properties/property-search-bar";
 import { Button } from "@/components/ui/button";
-import { SlidersHorizontal, X, RotateCcw } from "lucide-react";
+import { useProperties } from "@/lib/queries/use-properties";
 
 function Chip({ label, onRemove }: { label: string; onRemove: () => void }) {
   return (

@@ -1,11 +1,12 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { useState } from "react";
-import Image from "next/image";
 import { Save, User } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import Image from "next/image";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProfilePage() {

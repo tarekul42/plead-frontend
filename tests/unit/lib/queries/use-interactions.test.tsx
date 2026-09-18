@@ -1,8 +1,9 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { renderHook, waitFor } from "@testing-library/react";
 import { http, HttpResponse } from "msw";
-import { useInteractions, useCreateInteraction } from "@/lib/queries/use-interactions";
+import { beforeEach, describe, expect, it } from "vitest";
+
+import { useCreateInteraction, useInteractions } from "@/lib/queries/use-interactions";
 import { server } from "@/test/mocks/server";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1";

@@ -1,10 +1,12 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/providers/theme-provider";
+
+import { Toaster } from "@/components/common/toaster";
 import { ClerkProviderWrapper } from "@/providers/clerk-provider";
 import { QueryProvider } from "@/providers/query-provider";
-import { Toaster } from "@/components/common/toaster";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 const inter = Inter({
   subsets: ["latin"],

@@ -3,9 +3,9 @@
  *
  * Verifies auth flow security, token handling, and protected route behavior.
  */
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { render, screen, waitFor } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock Clerk
 vi.mock("@clerk/nextjs", () => ({
@@ -43,6 +43,7 @@ vi.mock("@/lib/api-client", () => ({
 }));
 
 import { useUser } from "@clerk/nextjs";
+
 import { RoleGuard } from "@/components/dashboard/role-guard";
 import apiClient, { setAuthToken } from "@/lib/api-client";
 

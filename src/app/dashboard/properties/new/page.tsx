@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { ArrowLeft, Save, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { PROPERTY_TYPES, PROPERTY_STATUSES } from "@/lib/constants";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+import { PROPERTY_STATUSES, PROPERTY_TYPES } from "@/lib/constants";
 
 export default function NewPropertyPage() {
   const router = useRouter();

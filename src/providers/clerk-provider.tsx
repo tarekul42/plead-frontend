@@ -2,6 +2,7 @@
 
 import { ClerkProvider, useAuth } from "@clerk/nextjs";
 import { ReactNode, useEffect } from "react";
+
 import { setAuthToken, setTokenGetter } from "@/lib/api-client";
 
 function AuthTokenSetter() {

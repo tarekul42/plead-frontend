@@ -1,7 +1,7 @@
 "use client";
 
-import { useInteractions } from "@/lib/queries/use-interactions";
 import { Badge } from "@/components/ui/badge";
+import { useInteractions } from "@/lib/queries/use-interactions";
 import { formatDate } from "@/lib/utils";
 import type { Interaction } from "@/types";
 

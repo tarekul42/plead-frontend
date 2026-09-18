@@ -1,6 +1,6 @@
 "use client";
 
-import { PROPERTY_TYPES, PROPERTY_STATUSES } from "@/lib/constants";
+import { PROPERTY_STATUSES, PROPERTY_TYPES } from "@/lib/constants";
 
 interface Filters {
   propertyType?: string;

@@ -1,9 +1,10 @@
 "use client";
 
-import { use, useState } from "react";
-import { useRouter } from "next/navigation";
 import { ArrowLeft, Save, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { use, useState } from "react";
+
 import { PROPERTY_TYPES } from "@/lib/constants";
 
 export default function EditPropertyPage({ params }: { params: Promise<{ id: string }> }) {

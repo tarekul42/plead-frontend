@@ -3,9 +3,9 @@
  *
  * Verifies that the API client handles security concerns properly.
  */
-import { describe, it, expect, vi, beforeAll, afterEach, afterAll } from "vitest";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 
 // Mock the API client module
 vi.mock("@/lib/api-client", async () => {

@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { Shield, Check, X, MoreHorizontal, Loader2 } from "lucide-react";
-import { useUsers } from "@/lib/queries/use-users";
-import { adminApi } from "@/lib/api-client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { StatCard } from "@/components/dashboard/stat-card";
+import { Check, Loader2, MoreHorizontal, Shield, X } from "lucide-react";
+import { useState } from "react";
+
 import { EmptyState } from "@/components/common/empty-state";
+import { StatCard } from "@/components/dashboard/stat-card";
+import { adminApi } from "@/lib/api-client";
+import { useUsers } from "@/lib/queries/use-users";
 
 const roles = ["agent", "manager", "admin"];
 

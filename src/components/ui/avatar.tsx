@@ -1,5 +1,6 @@
-import { forwardRef } from "react";
 import Image from "next/image";
+import { forwardRef } from "react";
+
 import { cn } from "@/lib/utils";
 
 interface AvatarProps {
@@ -54,4 +55,4 @@ const AvatarFallback = forwardRef<HTMLDivElement, AvatarFallbackProps>(
 );
 AvatarFallback.displayName = "AvatarFallback";
 
-export { Avatar, AvatarImage, AvatarFallback };
+export { Avatar, AvatarFallback, AvatarImage };

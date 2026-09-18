@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useState } from "react";
+
 import { ThemeToggle } from "@/components/common/theme-toggle";
-import { ProfileDropdown } from "./profile-dropdown";
+
 import { DashboardSidebar } from "./dashboard-sidebar";
+import { ProfileDropdown } from "./profile-dropdown";
 
 export function DashboardNavbar() {
   const [mobileMenu, setMobileMenu] = useState(false);

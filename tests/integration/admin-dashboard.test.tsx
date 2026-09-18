@@ -1,6 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
 import apiClient, { usersApi } from "@/lib/api-client";
 
 const mockUser = {
@@ -79,6 +80,7 @@ vi.mocked(apiClient.get).mockResolvedValue({ data: { data: mockUser } });
 vi.mocked(usersApi.list).mockResolvedValue({ data: mockUsers, meta: undefined });
 
 import React from "react";
+
 import { RoleGuard } from "@/components/dashboard/role-guard";
 
 function renderWithProviders(ui: React.ReactElement) {

@@ -1,4 +1,5 @@
-import { PackageOpen, FileX2, SearchX } from "lucide-react";
+import { FileX2, PackageOpen, SearchX } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 
 interface EmptyStateProps {

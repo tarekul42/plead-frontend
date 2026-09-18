@@ -1,8 +1,9 @@
 "use client";
 
-import type { Lead } from "@/types";
-import { Eye, Pencil, Trash2, Phone, MapPin, Calendar } from "lucide-react";
+import { Calendar, Eye, MapPin, Pencil, Phone, Trash2 } from "lucide-react";
+
 import { cn, formatDate } from "@/lib/utils";
+import type { Lead } from "@/types";
 
 interface LeadCardProps {
   lead: Lead;

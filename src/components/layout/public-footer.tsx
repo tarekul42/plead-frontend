@@ -1,5 +1,5 @@
-import NextLink from "next/link";
 import { Mail } from "lucide-react";
+import NextLink from "next/link";
 
 const footerLinks = {
   Product: [

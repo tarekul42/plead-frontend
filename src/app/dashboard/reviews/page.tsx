@@ -1,11 +1,12 @@
 "use client";
 
+import { Check, MoreHorizontal, Star, X } from "lucide-react";
 import { useState } from "react";
-import { Star, Check, X, MoreHorizontal } from "lucide-react";
-import { useReviews, useApproveReview, useDeleteReview } from "@/lib/queries/use-reviews";
+
+import { EmptyState } from "@/components/common/empty-state";
 import { StatCard } from "@/components/dashboard/stat-card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { EmptyState } from "@/components/common/empty-state";
+import { useApproveReview, useDeleteReview, useReviews } from "@/lib/queries/use-reviews";
 
 const statusMap = [
   { label: "All", value: "all", filter: undefined },

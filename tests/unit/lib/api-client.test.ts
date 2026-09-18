@@ -1,8 +1,9 @@
-import { describe, it, expect, beforeEach, vi, type Mock } from "vitest";
+import { beforeEach, describe, expect, it, type Mock, vi } from "vitest";
+
 import apiClient, {
-  propertiesApi,
-  leadsApi,
   interactionsApi,
+  leadsApi,
+  propertiesApi,
   setAuthToken,
 } from "@/lib/api-client";
 

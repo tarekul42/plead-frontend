@@ -1,29 +1,30 @@
 "use client";
 
-import { use } from "react";
-import Link from "next/link";
-import { useLead } from "@/lib/queries/use-leads";
-import { AiMatchPanel } from "@/components/ai/ai-match-panel";
-import { InteractionTimeline } from "@/components/interactions/interaction-timeline";
-import { PageHeader } from "@/components/common/page-header";
-import { ErrorState } from "@/components/common/error-state";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge, type BadgeProps } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { LEAD_STATUS_LABELS, LEAD_STATUS_COLORS } from "@/lib/constants";
-import { formatCompactPrice, formatDate } from "@/lib/utils";
 import {
   ArrowLeft,
-  Mail,
-  Phone,
-  MapPin,
+  Bath,
+  Bed,
+  Calendar,
   DollarSign,
   Home,
-  Bed,
-  Bath,
-  Calendar,
+  Mail,
+  MapPin,
   MessageSquare,
+  Phone,
 } from "lucide-react";
+import Link from "next/link";
+import { use } from "react";
+
+import { AiMatchPanel } from "@/components/ai/ai-match-panel";
+import { ErrorState } from "@/components/common/error-state";
+import { PageHeader } from "@/components/common/page-header";
+import { InteractionTimeline } from "@/components/interactions/interaction-timeline";
+import { Badge, type BadgeProps } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { LEAD_STATUS_COLORS, LEAD_STATUS_LABELS } from "@/lib/constants";
+import { useLead } from "@/lib/queries/use-leads";
+import { formatCompactPrice, formatDate } from "@/lib/utils";
 
 export default function LeadDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);

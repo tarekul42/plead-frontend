@@ -1,11 +1,12 @@
 "use client";
 
+import { Bath, Bed, Eye, Heart, MapPin, Move } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Bed, Bath, Move, MapPin, Heart, Eye } from "lucide-react";
-import { formatPricePerSqft, formatCompactPrice } from "@/lib/utils";
+
 import { Badge } from "@/components/ui/badge";
 import { useCheckFavorite, useToggleFavorite } from "@/lib/queries/use-public";
+import { formatCompactPrice, formatPricePerSqft } from "@/lib/utils";
 import type { Property } from "@/types";
 
 interface PropertyCardProps {

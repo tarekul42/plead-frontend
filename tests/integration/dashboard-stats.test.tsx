@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor, act } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { act, render, screen, waitFor } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("@clerk/nextjs", () => ({
   useUser: () => ({
@@ -31,10 +31,11 @@ vi.mock("@/lib/api-client", () => ({
   setAuthToken: vi.fn(),
 }));
 
-import { StatCard } from "@/components/dashboard/stat-card";
+import { Home, MessageSquare, TrendingUp, Users } from "lucide-react";
+
 import { DashboardLoading } from "@/components/common/dashboard-loading";
 import { ErrorState } from "@/components/common/error-state";
-import { Users, Home, MessageSquare, TrendingUp } from "lucide-react";
+import { StatCard } from "@/components/dashboard/stat-card";
 
 function renderWithProviders(ui: React.ReactElement) {
   const qc = new QueryClient({

@@ -1,6 +1,7 @@
 "use client";
 
-import { UserCheck, Home, TrendingUp, Star } from "lucide-react";
+import { Home, Star, TrendingUp, UserCheck } from "lucide-react";
+
 import { StatCard } from "@/components/dashboard/stat-card";
 
 const agents = [

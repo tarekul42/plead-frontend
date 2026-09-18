@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Building2, Sparkles, TrendingDown, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Building2, Users, Sparkles, TrendingDown } from "lucide-react";
+
 import { usePublicStats } from "@/lib/queries/use-public";
 
 const colorMap: Record<string, string> = {

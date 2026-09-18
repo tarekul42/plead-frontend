@@ -1,20 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { Edit2, Plus, Search, Sparkles, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { useProperties } from "@/lib/queries/use-properties";
+import { useState } from "react";
+
+import { EmptyState } from "@/components/common/empty-state";
 import { PageHeader } from "@/components/common/page-header";
 import { Pagination } from "@/components/common/pagination";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Badge, type BadgeProps } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { EmptyState } from "@/components/common/empty-state";
-import { formatPrice } from "@/lib/utils";
 import { useDebounce } from "@/hooks/use-debounce";
-import { PROPERTY_STATUS_LABELS, PROPERTY_STATUS_COLORS } from "@/lib/constants";
-import { Plus, Edit2, Trash2, Sparkles, Search } from "lucide-react";
+import { PROPERTY_STATUS_COLORS, PROPERTY_STATUS_LABELS } from "@/lib/constants";
+import { useProperties } from "@/lib/queries/use-properties";
+import { formatPrice } from "@/lib/utils";
 
 export default function DashboardPropertiesPage() {
   const [search, setSearch] = useState("");

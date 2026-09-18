@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor, fireEvent, act } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("@clerk/nextjs", () => ({
   useUser: () => ({
@@ -78,6 +78,7 @@ vi.mock("@/lib/api-client", () => ({
 }));
 
 import React from "react";
+
 import { AiMatchPanel } from "@/components/ai/ai-match-panel";
 
 function renderWithProviders(ui: React.ReactElement) {

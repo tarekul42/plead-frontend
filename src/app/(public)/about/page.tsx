@@ -1,5 +1,6 @@
+import { ArrowRight, CheckCircle2, Lightbulb, Shield, Target, Users } from "lucide-react";
 import Link from "next/link";
-import { Target, Users, Lightbulb, Shield, ArrowRight, CheckCircle2 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 const values = [

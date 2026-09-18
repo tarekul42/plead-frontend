@@ -1,8 +1,9 @@
 "use client";
 
+import { AlertCircle, Loader2, Sparkles } from "lucide-react";
 import { useState } from "react";
+
 import { aiApi } from "@/lib/api-client";
-import { Sparkles, Loader2, AlertCircle } from "lucide-react";
 
 interface AiCopyGeneratorProps {
   propertyId: string;

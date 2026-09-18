@@ -1,4 +1,4 @@
-import { test, expect, type Page } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 
 async function isClerkRateLimited(page: Page) {
   const rateLimitText = await page.locator("text=too many requests").first().isVisible();

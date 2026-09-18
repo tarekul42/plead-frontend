@@ -1,21 +1,22 @@
 "use client";
 
+import {
+  BarChart3,
+  Building2,
+  FileText,
+  LayoutDashboard,
+  MessageSquare,
+  Shield,
+  Sparkles,
+  Star,
+  UserCircle,
+  Users,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { cn } from "@/lib/utils";
-import {
-  LayoutDashboard,
-  Users,
-  Building2,
-  Sparkles,
-  UserCircle,
-  BarChart3,
-  Shield,
-  MessageSquare,
-  FileText,
-  Star,
-} from "lucide-react";
 
 const agentLinks = [
   { href: "/dashboard", label: "Overview", icon: LayoutDashboard },

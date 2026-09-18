@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  LineChart as RechartsLine,
   Line,
-  XAxis,
-  YAxis,
+  LineChart as RechartsLine,
   ResponsiveContainer,
   Tooltip,
+  XAxis,
+  YAxis,
 } from "recharts";
 
 interface LineChartProps {

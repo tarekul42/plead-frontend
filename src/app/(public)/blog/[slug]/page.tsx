@@ -1,8 +1,9 @@
 "use client";
 
-import { use } from "react";
-import Link from "next/link";
 import { ArrowLeft, Calendar, ChevronRight, Loader2 } from "lucide-react";
+import Link from "next/link";
+import { use } from "react";
+
 import { usePublicBlogPost } from "@/lib/queries/use-public";
 
 export default function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {

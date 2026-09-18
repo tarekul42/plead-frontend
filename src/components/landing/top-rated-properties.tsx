@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useProperties } from "@/lib/queries/use-properties";
+
+import { ErrorState } from "@/components/common/error-state";
 import { PropertyCard } from "@/components/properties/property-card";
 import { PropertySkeleton } from "@/components/properties/property-skeleton";
-import { ErrorState } from "@/components/common/error-state";
+import { useProperties } from "@/lib/queries/use-properties";
 import type { Property } from "@/types";
 
 export function TopRatedProperties() {

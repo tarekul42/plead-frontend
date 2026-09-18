@@ -1,9 +1,10 @@
 "use client";
 
-import { Sparkles, Zap, Clock, CheckCircle } from "lucide-react";
-import { StatCard } from "@/components/dashboard/stat-card";
+import { CheckCircle, Clock, Sparkles, Zap } from "lucide-react";
+
 import { LineChart } from "@/components/charts/line-chart";
 import { PieChart } from "@/components/charts/pie-chart";
+import { StatCard } from "@/components/dashboard/stat-card";
 
 const usageData = [
   { label: "Mon", value: 24 },

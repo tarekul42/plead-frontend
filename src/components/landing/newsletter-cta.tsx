@@ -1,7 +1,8 @@
 "use client";
 
+import { Check, Loader2, Mail } from "lucide-react";
 import { useState } from "react";
-import { Mail, Check, Loader2 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSubscribeNewsletter } from "@/lib/queries/use-public";

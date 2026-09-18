@@ -1,7 +1,8 @@
-import { PropertyCard } from "./property-card";
-import { PropertySkeleton } from "./property-skeleton";
 import { EmptyState } from "@/components/common/empty-state";
 import type { Property } from "@/types";
+
+import { PropertyCard } from "./property-card";
+import { PropertySkeleton } from "./property-skeleton";
 
 interface PropertyGridProps {
   properties?: Property[];

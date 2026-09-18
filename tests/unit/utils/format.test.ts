@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
-import { formatPrice, formatDate } from "@/lib/utils";
+import { describe, expect, it } from "vitest";
+
+import { formatDate, formatPrice } from "@/lib/utils";
 
 describe("formatPrice", () => {
   it("formats a number as USD currency", () => {

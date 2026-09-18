@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+
 import { Skeleton } from "@/components/ui/skeleton";
 
 const LineChart = dynamic(
@@ -27,4 +28,4 @@ const BarChart = dynamic(
   },
 );
 
-export { LineChart, PieChart, BarChart };
+export { BarChart, LineChart, PieChart };

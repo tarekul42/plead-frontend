@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart as RechartsBar, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
+import { Bar, BarChart as RechartsBar, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 interface BarChartProps {
   data: { label: string; value: number }[];

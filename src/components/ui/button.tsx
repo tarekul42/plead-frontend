@@ -1,5 +1,6 @@
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import { type ButtonHTMLAttributes, forwardRef, type ReactNode } from "react";
+
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(

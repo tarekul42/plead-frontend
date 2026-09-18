@@ -1,6 +1,7 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+
 import { PropertyCard } from "@/components/properties/property-card";
 import { mockProperties } from "@/test/mocks/handlers";
 

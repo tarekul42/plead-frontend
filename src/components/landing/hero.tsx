@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowDown, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { ArrowDown, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 const colorMap: Record<string, { bg: string; text: string }> = {

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { useFaq, type FaqItem } from "@/lib/queries/use-public";
+import { useState } from "react";
+
+import { type FaqItem, useFaq } from "@/lib/queries/use-public";
 
 export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);

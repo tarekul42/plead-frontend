@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("@clerk/nextjs", () => ({
   useUser: () => ({
@@ -120,8 +120,8 @@ vi.mock("@/lib/api-client", () => ({
   },
 }));
 
-import { useLeads, useCreateLead, useUpdateLead } from "@/lib/queries/use-leads";
 import { EmptyState } from "@/components/common/empty-state";
+import { useCreateLead, useLeads, useUpdateLead } from "@/lib/queries/use-leads";
 
 function renderWithProviders(ui: React.ReactElement) {
   const qc = new QueryClient({

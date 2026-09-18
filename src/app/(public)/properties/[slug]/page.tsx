@@ -1,33 +1,34 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import { useProperty, useProperties } from "@/lib/queries/use-properties";
-import { useCheckFavorite, useToggleFavorite } from "@/lib/queries/use-public";
-import { PropertyGallery } from "@/components/properties/property-gallery";
-import { PropertySkeleton } from "@/components/properties/property-skeleton";
-import { PropertyCard } from "@/components/properties/property-card";
-import { ErrorState } from "@/components/common/error-state";
-import { ReviewSection } from "@/components/properties/review-section";
-import { formatPrice, formatDate, formatPricePerSqft } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
-  Bed,
   Bath,
-  Move,
-  MapPin,
-  Home,
-  Eye,
+  Bed,
   Calendar,
   ChevronRight,
+  Eye,
   Heart,
-  Share2,
+  Home,
   type LucideIcon,
+  MapPin,
+  Move,
+  Share2,
 } from "lucide-react";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+import { ErrorState } from "@/components/common/error-state";
+import { PropertyCard } from "@/components/properties/property-card";
+import { PropertyGallery } from "@/components/properties/property-gallery";
+import { PropertySkeleton } from "@/components/properties/property-skeleton";
+import { ReviewSection } from "@/components/properties/review-section";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useProperties, useProperty } from "@/lib/queries/use-properties";
+import { useCheckFavorite, useToggleFavorite } from "@/lib/queries/use-public";
+import { formatDate, formatPrice, formatPricePerSqft } from "@/lib/utils";
 import type { Property } from "@/types";
 
 const PropertyMap = dynamic(

@@ -1,18 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import {
-  Home,
-  Building2,
   Building,
-  Warehouse,
-  TreePine,
-  Store,
+  Building2,
+  Home,
   type LucideIcon,
+  Store,
+  TreePine,
+  Warehouse,
 } from "lucide-react";
-import { useCategoryCounts } from "@/lib/queries/use-public";
+import Link from "next/link";
+
 import { PROPERTY_CATEGORIES } from "@/lib/constants";
+import { useCategoryCounts } from "@/lib/queries/use-public";
 
 const iconMap: Record<string, LucideIcon> = {
   Home,

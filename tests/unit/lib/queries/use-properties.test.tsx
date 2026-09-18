@@ -1,6 +1,7 @@
-import { describe, it, expect } from "vitest";
-import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { renderHook, waitFor } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+
 import { useProperties } from "@/lib/queries/use-properties";
 import { mockProperties } from "@/test/mocks/handlers";
 

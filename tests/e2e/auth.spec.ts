@@ -1,4 +1,4 @@
-import { test, expect, type Page } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 
 // Helper to check if Clerk rate limit is active
 async function isClerkRateLimited(page: Page) {

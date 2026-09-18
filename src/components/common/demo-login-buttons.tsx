@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { ClerkLoaded, ClerkLoading, useSignIn, useClerk } from "@clerk/nextjs";
+import { ClerkLoaded, ClerkLoading, useClerk, useSignIn } from "@clerk/nextjs";
+import { AlertCircle, Building2, Shield, User } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { User, Building2, Shield, AlertCircle } from "lucide-react";
-import { DEMO_CREDENTIALS, type DemoRole } from "@/lib/constants";
 import { setAuthToken } from "@/lib/api-client";
+import { DEMO_CREDENTIALS, type DemoRole } from "@/lib/constants";
 
 const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1").replace(
   /\/api\/v1\/?$/,

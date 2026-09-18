@@ -4,9 +4,9 @@
  * Verifies that proper security headers are configured.
  * Note: These tests check configuration files since headers are set at runtime.
  */
-import { describe, it, expect } from "vitest";
 import * as fs from "fs";
 import * as path from "path";
+import { describe, expect, it } from "vitest";
 
 describe("Security Headers: Next.js Configuration", () => {
   const configPath = path.resolve(__dirname, "../../next.config.ts");

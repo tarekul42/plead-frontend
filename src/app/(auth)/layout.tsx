@@ -1,5 +1,5 @@
+import { Quote, Shield, Sparkles, TrendingUp, Users } from "lucide-react";
 import Link from "next/link";
-import { Sparkles, TrendingUp, Users, Shield, Quote } from "lucide-react";
 
 const benefits = [
   { icon: Sparkles, value: "AI-Powered", label: "Smart lead matching" },

@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowRight, BarChart3, FileText, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { Sparkles, FileText, BarChart3, ArrowRight } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 const features = [

@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
-import { cn, formatPrice, formatDate } from "@/lib/utils";
+import { describe, expect, it } from "vitest";
+
+import { cn, formatDate, formatPrice } from "@/lib/utils";
 
 describe("cn", () => {
   it("merges class names", () => {

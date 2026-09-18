@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
+
 import { ErrorState } from "@/components/common/error-state";
 
 interface ErrorBoundaryProps {

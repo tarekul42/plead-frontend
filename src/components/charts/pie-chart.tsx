@@ -1,6 +1,6 @@
 "use client";
 
-import { PieChart as RechartsPie, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import { Cell, Pie, PieChart as RechartsPie, ResponsiveContainer, Tooltip } from "recharts";
 
 const COLORS = ["#2563EB", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6", "#EC4899"];
 

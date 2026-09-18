@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
-import { useTestimonials, type Testimonial } from "@/lib/queries/use-public";
+
+import { type Testimonial, useTestimonials } from "@/lib/queries/use-public";
 
 const avatarColors = ["bg-brand/10", "bg-success/10", "bg-warning/10"];
 

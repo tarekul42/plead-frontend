@@ -1,5 +1,6 @@
-import type { ApiResponse, LeadListParams, PropertyListParams } from "@/types";
 import axios, { type AxiosInstance, type AxiosResponse } from "axios";
+
+import type { ApiResponse, LeadListParams, PropertyListParams } from "@/types";
 
 class ApiError extends Error {
   constructor(

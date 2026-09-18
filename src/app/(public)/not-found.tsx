@@ -1,5 +1,5 @@
+import { FileText, HelpCircle, Home, Search } from "lucide-react";
 import Link from "next/link";
-import { Search, Home, FileText, HelpCircle } from "lucide-react";
 
 const suggestions = [
   { icon: Home, label: "Explore Properties", href: "/properties" },

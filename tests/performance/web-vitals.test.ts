@@ -11,7 +11,7 @@
  * - INP (Interaction to Next Paint): < 200ms
  * - TTFB (Time to First Byte): < 800ms
  */
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 
 // Web Vitals thresholds (good/excellent)
 const WEB_VITALS_THRESHOLDS = {

@@ -4,14 +4,14 @@
  * Verifies that user-generated content is properly escaped and that
  * dangerous patterns are not present in the codebase.
  */
-import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { describe, expect, it, vi } from "vitest";
 
-// Components that render user-generated content
-import { PropertySearchBar } from "@/components/properties/property-search-bar";
 import { EmptyState } from "@/components/common/empty-state";
 import { ErrorState } from "@/components/common/error-state";
+// Components that render user-generated content
+import { PropertySearchBar } from "@/components/properties/property-search-bar";
 
 // XSS attack payloads for testing
 const XSS_PAYLOADS = [

@@ -1,7 +1,8 @@
 "use client";
 
+import { Check, Loader2, Mail, MessageSquare, Send } from "lucide-react";
 import { useState } from "react";
-import { Mail, MessageSquare, Send, Check, Loader2 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";

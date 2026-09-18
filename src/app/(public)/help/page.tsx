@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Search, BookOpen, MessageSquare, Lightbulb, Settings } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { BookOpen, ChevronDown, Lightbulb, MessageSquare, Search, Settings } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 const categories = [
   {

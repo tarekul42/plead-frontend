@@ -1,19 +1,20 @@
 "use client";
 
 import { useClerk, useUser } from "@clerk/nextjs";
+import { ExternalLink, LogOut, Moon, Settings, Sun, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { LogOut, User, Settings, ExternalLink, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useCurrentUser } from "@/hooks/use-current-user";
+
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 export function ProfileDropdown() {
   const { user } = useUser();

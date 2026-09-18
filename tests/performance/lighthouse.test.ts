@@ -12,7 +12,7 @@
  * Or run via CI:
  *   npx lhci autorun
  */
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 
 // Check if LHCI is available
 let lhciAvailable = false;

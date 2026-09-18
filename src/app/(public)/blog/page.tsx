@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { Calendar } from "lucide-react";
-import { usePublicBlogList, type BlogPost } from "@/lib/queries/use-public";
+import Link from "next/link";
+
+import { type BlogPost, usePublicBlogList } from "@/lib/queries/use-public";
 
 export default function BlogPage() {
   const { data, isLoading } = usePublicBlogList();

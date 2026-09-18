@@ -1,14 +1,15 @@
 "use client";
 
+import { Check, FileText, Loader2, Mail, Sparkles } from "lucide-react";
 import { useState } from "react";
-import { Sparkles, FileText, Mail, Loader2, Check } from "lucide-react";
+
+import {
+  useGenerateOutreachEmail,
+  useGeneratePropertyDescription,
+  useMatchLeadProperties,
+} from "@/lib/queries/use-ai-tools";
 import { useLeads } from "@/lib/queries/use-leads";
 import { useProperties } from "@/lib/queries/use-properties";
-import {
-  useMatchLeadProperties,
-  useGeneratePropertyDescription,
-  useGenerateOutreachEmail,
-} from "@/lib/queries/use-ai-tools";
 import type { AiMatchResult } from "@/types";
 
 type ToolType = "match" | "description" | "email";

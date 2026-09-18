@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import { useLeads } from "@/lib/queries/use-leads";
 import type { Lead } from "@/types";
 
