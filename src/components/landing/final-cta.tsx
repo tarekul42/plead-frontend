@@ -18,7 +18,7 @@ export function FinalCta() {
         >
           {/* Decorative elements */}
           <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-brand/20 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-success/20 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-brand/15 blur-3xl" />
 
           <div className="relative z-10">
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">Ready to close your next deal?</h2>

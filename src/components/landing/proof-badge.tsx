@@ -11,7 +11,7 @@ interface ProofBadgeProps {
 
 const variantStyles = {
   default: "bg-surface text-muted border-border",
-  success: "bg-success/5 text-success border-success/20",
+  success: "bg-brand/5 text-brand border-brand/20",
   brand: "bg-brand/5 text-brand border-brand/20",
 };
 

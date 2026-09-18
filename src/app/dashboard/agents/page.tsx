@@ -84,7 +84,7 @@ export default function AgentsPage() {
               {agents.map((agent) => (
                 <tr
                   key={agent.name}
-                  className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50"
+                  className="border-b border-border last:border-0 hover:bg-surface"
                 >
                   <td className="p-4">
                     <div>

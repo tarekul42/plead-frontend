@@ -50,7 +50,7 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
               className={`rounded-lg border px-3 py-1.5 text-xs transition ${
                 filters.propertyType === type
                   ? "border-brand bg-brand/5 text-brand"
-                  : "border-border hover:bg-neutral-100 dark:hover:bg-surface"
+                  : "border-border hover:bg-border"
               }`}
             >
               {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -69,7 +69,7 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
               className={`rounded-lg border px-3 py-1.5 text-xs transition ${
                 filters.status === status
                   ? "border-brand bg-brand/5 text-brand"
-                  : "border-border hover:bg-neutral-100 dark:hover:bg-surface"
+                  : "border-border hover:bg-border"
               }`}
             >
               {status.replace("_", " ").replace(/\b\w/g, (c) => c.toUpperCase())}
@@ -88,7 +88,7 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
               className={`flex h-9 w-9 items-center justify-center rounded-lg border text-xs transition ${
                 filters.bedsMin === n
                   ? "border-brand bg-brand/5 text-brand"
-                  : "border-border hover:bg-neutral-100 dark:hover:bg-surface"
+                  : "border-border hover:bg-border"
               }`}
             >
               {n}
@@ -107,7 +107,7 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
               className={`flex h-9 w-9 items-center justify-center rounded-lg border text-xs transition ${
                 filters.bathsMin === n
                   ? "border-brand bg-brand/5 text-brand"
-                  : "border-border hover:bg-neutral-100 dark:hover:bg-surface"
+                  : "border-border hover:bg-border"
               }`}
             >
               {n}
@@ -156,7 +156,7 @@ export function PropertyFilters({ filters, onChange }: PropertyFiltersProps) {
             sort: undefined,
           })
         }
-        className="w-full rounded-lg border border-border px-4 py-2 text-sm transition hover:bg-neutral-100 dark:hover:bg-surface"
+        className="w-full rounded-lg border border-border px-4 py-2 text-sm transition hover:bg-border"
       >
         Clear filters
       </button>

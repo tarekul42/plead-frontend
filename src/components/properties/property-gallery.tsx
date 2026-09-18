@@ -53,7 +53,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
 
   if (!images?.length) {
     return (
-      <div className="flex aspect-video items-center justify-center rounded-xl bg-neutral-200 dark:bg-surface">
+      <div className="flex aspect-video items-center justify-center rounded-xl bg-surface">
         <p className="text-muted">No images available</p>
       </div>
     );

@@ -149,7 +149,7 @@ export function DropdownMenuItem({
         "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition",
         variant === "danger"
           ? "text-danger hover:bg-danger/5"
-          : "text-foreground hover:bg-neutral-100 dark:hover:bg-surface-alt",
+          : "text-foreground hover:bg-border",
         className,
       )}
     >

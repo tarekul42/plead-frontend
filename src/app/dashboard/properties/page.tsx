@@ -89,7 +89,7 @@ export default function DashboardPropertiesPage() {
                   {properties.map((property) => (
                     <tr
                       key={property._id}
-                      className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50"
+                      className="border-b border-border last:border-0 hover:bg-surface"
                     >
                       <td className="p-4 font-medium">{property.title}</td>
                       <td className="p-4 text-muted">{property.location}</td>
@@ -114,7 +114,7 @@ export default function DashboardPropertiesPage() {
                         <div className="flex items-center gap-2">
                           <Link
                             href={`/dashboard/properties/${property._id}/edit`}
-                            className="flex h-8 w-8 items-center justify-center rounded-lg border border-border transition hover:bg-neutral-100 dark:hover:bg-surface-alt"
+                            className="flex h-8 w-8 items-center justify-center rounded-lg border border-border transition hover:bg-border"
                           >
                             <Edit2 className="h-3.5 w-3.5" />
                           </Link>

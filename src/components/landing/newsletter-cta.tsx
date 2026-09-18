@@ -51,8 +51,8 @@ export function NewsletterCta() {
               className="mb-8"
             />
             {submitted ? (
-              <div className="flex items-center justify-center gap-2 text-success">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-success/10">
+              <div className="flex items-center justify-center gap-2 text-brand">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10">
                   <Check className="h-5 w-5" />
                 </div>
                 <span className="font-medium">Thanks for subscribing!</span>

@@ -42,7 +42,7 @@ export default function SignInPage() {
             dividerLine: "hidden",
             dividerText: "hidden",
             alternativeMethodsBlockButton:
-              "border border-border rounded-lg hover:bg-neutral-100 dark:hover:bg-surface-alt text-foreground font-medium",
+              "border border-border rounded-lg hover:bg-border text-foreground font-medium",
           },
         }}
       />

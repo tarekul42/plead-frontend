@@ -33,7 +33,7 @@ export function ClerkProviderWrapper({ children }: { children: ReactNode }) {
         elements: {
           card: "shadow-sm border border-border",
           socialButtonsBlockButton:
-            "border border-border hover:bg-neutral-100 dark:hover:bg-surface",
+            "border border-border hover:bg-border",
           formButtonPrimary: "bg-[#2563EB] hover:opacity-90 shadow-none",
           formFieldInput: "border-border rounded-lg focus:border-[#2563EB]",
         },

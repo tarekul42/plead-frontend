@@ -128,7 +128,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
       <div className="mx-auto max-w-container px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <div className="aspect-video animate-pulse rounded-xl bg-neutral-200 dark:bg-surface" />
+            <div className="aspect-video animate-pulse rounded-xl bg-surface" />
           </div>
           <div className="space-y-4">
             <PropertySkeleton />

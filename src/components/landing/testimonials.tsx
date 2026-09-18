@@ -9,10 +9,10 @@ import { type Testimonial, useTestimonials } from "@/lib/queries/use-public";
 
 const avatarGradients = [
   "from-brand to-brand-dark",
-  "from-success to-success-light",
-  "from-warning to-warning-light",
-  "from-purple-500 to-purple-600",
-  "from-rose-500 to-rose-600",
+  "from-brand-light to-brand",
+  "from-brand to-brand-dark",
+  "from-brand-light to-brand",
+  "from-brand to-brand-dark",
 ];
 
 export function Testimonials() {
@@ -74,7 +74,7 @@ export function Testimonials() {
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star
                     key={i}
-                    className={`h-4 w-4 ${i < (testimonials[current]?.rating ?? 0) ? "fill-warning text-warning" : "text-neutral-200"}`}
+                    className={`h-4 w-4 ${i < (testimonials[current]?.rating ?? 0) ? "fill-brand text-brand" : "text-border"}`}
                   />
                 ))}
               </div>
@@ -117,7 +117,7 @@ export function Testimonials() {
                   key={i}
                   onClick={() => setCurrent(i)}
                   className={`h-2 rounded-full transition ${
-                    i === current ? "w-6 bg-brand" : "w-2 bg-neutral-200"
+                    i === current ? "w-6 bg-brand" : "w-2 bg-border"
                   }`}
                   aria-label={`Go to testimonial ${i + 1}`}
                 />

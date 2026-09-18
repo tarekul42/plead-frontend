@@ -68,7 +68,7 @@ export function PublicNavbar() {
                   isActive
                     ? "bg-brand/10 text-brand"
                     : scrolled
-                      ? "text-muted hover:bg-neutral-100 dark:hover:bg-surface-alt hover:text-foreground"
+                      ? "text-muted hover:bg-border hover:text-foreground"
                       : "text-foreground/70 hover:text-foreground hover:bg-white/10",
                 )}
               >
@@ -125,7 +125,7 @@ export function PublicNavbar() {
             className={cn(
               "flex h-9 w-9 items-center justify-center rounded-lg transition sm:hidden",
               scrolled
-                ? "hover:bg-neutral-100 dark:hover:bg-surface-alt"
+                ? "hover:bg-border"
                 : "hover:bg-white/10",
             )}
             aria-expanded={mobileOpen}
@@ -150,7 +150,7 @@ export function PublicNavbar() {
                     "block rounded-lg px-3 py-2.5 text-sm transition",
                     isActive
                       ? "bg-brand/5 text-brand font-medium"
-                      : "text-muted hover:bg-neutral-100 dark:hover:bg-surface-alt",
+                      : "text-muted hover:bg-border",
                   )}
                 >
                   {link.label}

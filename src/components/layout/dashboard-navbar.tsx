@@ -17,7 +17,7 @@ export function DashboardNavbar() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setMobileMenu(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg transition hover:bg-neutral-100 dark:hover:bg-surface-alt lg:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-lg transition hover:bg-border lg:hidden"
             aria-label="Open menu"
           >
             <Menu className="h-5 w-5" />

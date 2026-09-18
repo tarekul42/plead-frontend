@@ -197,7 +197,7 @@ function ExplorePageContent() {
                 <h2 className="font-semibold">Filters</h2>
                 <button
                   onClick={() => setMobileFilters(false)}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-neutral-100 dark:hover:bg-surface-alt"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-border"
                   aria-label="Close filters"
                 >
                   <X className="h-4 w-4" />

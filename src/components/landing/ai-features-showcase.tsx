@@ -66,13 +66,13 @@ function MatchVisual({ visual }: { visual: (typeof features)[0]["visual"] }) {
               Budget: {visual?.lead?.budget} · {visual?.lead?.location}
             </p>
           </div>
-          <span className="rounded-full bg-success/10 px-3 py-1 text-xs font-semibold text-success">
+          <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold text-brand">
             {visual?.score}% match
           </span>
         </div>
       </div>
-      <div className="rounded-xl border border-success/20 bg-success/5 p-4">
-        <p className="mb-1 text-xs font-medium text-success">Why this match?</p>
+      <div className="rounded-xl border border-brand/20 bg-brand/5 p-4">
+        <p className="mb-1 text-xs font-medium text-brand">Why this match?</p>
         <p className="text-sm text-muted">{visual?.reason}</p>
       </div>
       <div className="rounded-xl border border-border bg-background/80 p-4 backdrop-blur-sm">
@@ -103,7 +103,7 @@ function WriteVisual({ visual }: { visual: (typeof features)[1]["visual"] }) {
           <span className="rounded-full bg-brand/10 px-2 py-0.5 text-[10px] font-medium text-brand">
             {visual.tone}
           </span>
-          <span className="rounded-full bg-success/10 px-2 py-0.5 text-[10px] font-medium text-success">
+          <span className="rounded-full bg-brand/10 px-2 py-0.5 text-[10px] font-medium text-brand">
             Personalized
           </span>
         </div>
@@ -124,7 +124,7 @@ function AnalyzeVisual({ visual }: { visual: (typeof features)[2]["visual"] }) {
             <p className="text-xs text-muted">{m.label}</p>
             <p className="text-lg font-bold">{m.value}</p>
           </div>
-          <span className="rounded-full bg-success/10 px-2 py-0.5 text-xs font-medium text-success">
+          <span className="rounded-full bg-brand/10 px-2 py-0.5 text-xs font-medium text-brand">
             {m.trend}
           </span>
         </div>
@@ -192,7 +192,7 @@ export function AiFeaturesShowcase() {
                 {active.highlights.map((h) => (
                   <span
                     key={h}
-                    className="flex items-center gap-1 rounded-full bg-success/5 px-3 py-1 text-xs font-medium text-success"
+                    className="flex items-center gap-1 rounded-full bg-brand/5 px-3 py-1 text-xs font-medium text-brand"
                   >
                     <CheckCircle2 className="h-3 w-3" />
                     {h}

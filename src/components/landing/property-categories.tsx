@@ -26,12 +26,12 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 const gradients = [
-  "from-blue-500/20 to-blue-600/10",
-  "from-emerald-500/20 to-emerald-600/10",
-  "from-amber-500/20 to-amber-600/10",
-  "from-purple-500/20 to-purple-600/10",
-  "from-rose-500/20 to-rose-600/10",
-  "from-cyan-500/20 to-cyan-600/10",
+  "from-brand/10 to-brand/5",
+  "from-brand/15 to-brand/5",
+  "from-brand/20 to-brand/10",
+  "from-brand/10 to-brand/8",
+  "from-brand/15 to-brand/8",
+  "from-brand/12 to-brand/5",
 ];
 
 export function PropertyCategories() {

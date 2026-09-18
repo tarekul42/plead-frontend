@@ -10,18 +10,11 @@
   --color-warning-light: #fbbf24;
   --color-danger: #ef4444;
   --color-danger-light: #f87171;
-  --color-primary-1: #0f172a;
-  --color-primary-2: #1e293b;
-  --color-primary-3: #334155;
-  --color-neutral-100: #f1f5f9;
-  --color-neutral-200: #e2e8f0;
-  --color-neutral-300: #cbd5e1;
   --color-background: #ffffff;
-  --color-surface: #ffffff;
-  --color-surface-alt: #f8fafc;
-  --color-border: #e2e8f0;
+  --color-surface: #f8fafc;
   --color-foreground: #0f172a;
   --color-muted: #64748b;
+  --color-border: #e2e8f0;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
   --radius-card: 12px;
@@ -41,19 +34,18 @@
 .dark {
   --color-background: #0f172a;
   --color-surface: #1e293b;
-  --color-surface-alt: #0f172a;
-  --color-border: #334155;
   --color-foreground: #f1f5f9;
   --color-muted: #94a3b8;
-  --color-neutral-100: #1e293b;
-  --color-neutral-200: #334155;
-  --color-neutral-300: #475569;
+  --color-border: #334155;
+  --color-brand: #3b82f6;
+  --color-brand-light: #60a5fa;
+  --color-brand-dark: #2563eb;
   --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.2);
   --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.2);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.2);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.2);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.2);
-  --shadow-glow: 0 0 20px rgb(37 99 235 / 0.25);
+  --shadow-glow: 0 0 20px rgb(59 130 246 / 0.25);
 }
 
 * {
@@ -87,7 +79,7 @@ button:not(:disabled) {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-neutral-300);
+  background: var(--color-border);
   border-radius: 3px;
 }
 
@@ -111,19 +103,15 @@ button:not(:disabled) {
 }
 
 .bg-gradient-card {
-  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-success) 100%);
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-dark) 100%);
 }
 
 .bg-gradient-brand {
   background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-dark) 100%);
 }
 
-.bg-gradient-success {
-  background: linear-gradient(135deg, var(--color-success) 0%, var(--color-success-light) 100%);
-}
-
 .text-gradient-brand {
-  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-success) 100%);
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -144,9 +132,9 @@ button:not(:disabled) {
 .shimmer {
   background: linear-gradient(
     90deg,
-    var(--color-neutral-100) 25%,
-    var(--color-neutral-200) 50%,
-    var(--color-neutral-100) 75%
+    var(--color-surface) 25%,
+    var(--color-border) 50%,
+    var(--color-surface) 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
@@ -158,19 +146,11 @@ button:not(:disabled) {
 }
 
 .bg-section-alt {
-  background-color: var(--color-surface-alt);
+  background-color: var(--color-surface);
 }
 
 .bg-section-tinted {
-  background-color: color-mix(in srgb, var(--color-brand) 3%, var(--color-background));
-}
-
-.bg-section-warm {
-  background-color: color-mix(in srgb, var(--color-warning) 3%, var(--color-background));
-}
-
-.bg-section-cool {
-  background-color: color-mix(in srgb, var(--color-success) 3%, var(--color-background));
+  background-color: color-mix(in srgb, var(--color-brand) 4%, var(--color-background));
 }
 
 .text-balance {
@@ -211,7 +191,7 @@ button:not(:disabled) {
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, var(--color-brand), var(--color-success));
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-dark));
   z-index: -1;
   opacity: 0.3;
   transition: opacity 0.3s ease;

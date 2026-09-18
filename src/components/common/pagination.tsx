@@ -37,7 +37,7 @@ export function Pagination({
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={page <= 1}
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-border transition hover:bg-neutral-100 dark:hover:bg-surface-alt disabled:cursor-not-allowed disabled:opacity-30"
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-border transition hover:bg-border disabled:cursor-not-allowed disabled:opacity-30"
           aria-label="Previous page"
         >
           <ChevronLeft className="h-4 w-4" />
@@ -57,7 +57,7 @@ export function Pagination({
                   "flex h-9 w-9 items-center justify-center rounded-lg text-sm transition",
                   p === page
                     ? "bg-brand text-white shadow-sm"
-                    : "border border-border hover:bg-neutral-100 dark:hover:bg-surface-alt",
+                    : "border border-border hover:bg-border",
                 )}
                 aria-current={p === page ? "page" : undefined}
               >
@@ -68,7 +68,7 @@ export function Pagination({
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={page >= totalPages}
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-border transition hover:bg-neutral-100 dark:hover:bg-surface-alt disabled:cursor-not-allowed disabled:opacity-30"
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-border transition hover:bg-border disabled:cursor-not-allowed disabled:opacity-30"
           aria-label="Next page"
         >
           <ChevronRight className="h-4 w-4" />

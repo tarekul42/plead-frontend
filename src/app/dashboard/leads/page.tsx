@@ -36,7 +36,7 @@ function LeadsTable({ leads }: { leads: Lead[] }) {
           {leads.map((lead) => (
             <tr
               key={lead._id}
-              className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50"
+              className="border-b border-border last:border-0 hover:bg-surface"
             >
               <td className="p-4">
                 <Link
@@ -160,7 +160,7 @@ export default function LeadsPage() {
             className={`flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium transition ${
               view === "table"
                 ? "bg-brand text-white"
-                : "text-muted hover:bg-neutral-100 dark:hover:bg-surface-alt"
+                : "text-muted hover:bg-border"
             }`}
           >
             <LayoutList className="h-4 w-4" />
@@ -171,7 +171,7 @@ export default function LeadsPage() {
             className={`flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium transition ${
               view === "kanban"
                 ? "bg-brand text-white"
-                : "text-muted hover:bg-neutral-100 dark:hover:bg-surface-alt"
+                : "text-muted hover:bg-border"
             }`}
           >
             <Columns3 className="h-4 w-4" />

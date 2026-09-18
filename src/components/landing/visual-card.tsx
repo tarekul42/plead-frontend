@@ -12,14 +12,14 @@ interface VisualCardProps {
 
 const gradientStyles = {
   brand: "from-brand/10 to-brand/5",
-  success: "from-success/10 to-success/5",
-  warning: "from-warning/10 to-warning/5",
+  success: "from-brand/15 to-brand/5",
+  warning: "from-brand/8 to-brand/3",
 };
 
 const iconStyles = {
   brand: "text-brand",
-  success: "text-success",
-  warning: "text-warning",
+  success: "text-brand",
+  warning: "text-brand",
 };
 
 export function VisualCard({

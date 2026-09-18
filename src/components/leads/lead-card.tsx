@@ -44,7 +44,7 @@ export function LeadCard({ lead, onView, onEdit, onDelete }: LeadCardProps) {
         <span
           className={cn(
             "shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium",
-            statusStyles[lead.status] || "bg-neutral-100 text-muted",
+            statusStyles[lead.status] || "bg-surface text-muted",
           )}
         >
           {lead.status}
@@ -81,7 +81,7 @@ export function LeadCard({ lead, onView, onEdit, onDelete }: LeadCardProps) {
             <button
               aria-label="View details"
               onClick={() => onView(lead)}
-              className="rounded-md p-1.5 text-muted transition hover:bg-neutral-100 hover:text-brand dark:hover:bg-neutral-800"
+              className="rounded-md p-1.5 text-muted transition hover:bg-border hover:text-brand"
             >
               <Eye className="h-4 w-4" />
             </button>
@@ -90,7 +90,7 @@ export function LeadCard({ lead, onView, onEdit, onDelete }: LeadCardProps) {
             <button
               aria-label="Edit"
               onClick={() => onEdit(lead)}
-              className="rounded-md p-1.5 text-muted transition hover:bg-neutral-100 hover:text-brand dark:hover:bg-neutral-800"
+              className="rounded-md p-1.5 text-muted transition hover:bg-border hover:text-brand"
             >
               <Pencil className="h-4 w-4" />
             </button>
@@ -99,7 +99,7 @@ export function LeadCard({ lead, onView, onEdit, onDelete }: LeadCardProps) {
             <button
               aria-label="Delete"
               onClick={() => onDelete(lead)}
-              className="rounded-md p-1.5 text-muted transition hover:bg-neutral-100 hover:text-danger dark:hover:bg-neutral-800"
+              className="rounded-md p-1.5 text-muted transition hover:bg-border hover:text-danger"
             >
               <Trash2 className="h-4 w-4" />
             </button>

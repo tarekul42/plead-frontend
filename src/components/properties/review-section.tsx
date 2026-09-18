@@ -92,7 +92,7 @@ export function ReviewSection({ propertyId }: ReviewSectionProps) {
                         className={`h-6 w-6 ${
                           n <= rating
                             ? "fill-warning text-warning"
-                            : "text-neutral-300 dark:text-neutral-600"
+                            : "text-muted"
                         }`}
                       />
                     </button>
@@ -133,9 +133,9 @@ export function ReviewSection({ propertyId }: ReviewSectionProps) {
         <div className="space-y-4">
           {Array.from({ length: 3 }).map((_, i) => (
             <div key={i} className="animate-pulse rounded-card border border-border bg-surface p-6">
-              <div className="mb-3 h-4 w-32 rounded bg-neutral-200 dark:bg-neutral-800" />
-              <div className="mb-2 h-3 w-48 rounded bg-neutral-200 dark:bg-neutral-800" />
-              <div className="h-3 w-full rounded bg-neutral-200 dark:bg-neutral-800" />
+              <div className="mb-3 h-4 w-32 rounded bg-border" />
+              <div className="mb-2 h-3 w-48 rounded bg-border" />
+              <div className="h-3 w-full rounded bg-border" />
             </div>
           ))}
         </div>
@@ -182,7 +182,7 @@ export function ReviewSection({ propertyId }: ReviewSectionProps) {
                         className={`h-4 w-4 ${
                           i < review.rating
                             ? "fill-warning text-warning"
-                            : "text-neutral-300 dark:text-neutral-600"
+                            : "text-muted"
                         }`}
                       />
                     ))}

@@ -29,7 +29,7 @@ export function ProfileDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-2 rounded-lg p-1.5 transition hover:bg-neutral-100 dark:hover:bg-surface-alt">
+        <button className="flex items-center gap-2 rounded-lg p-1.5 transition hover:bg-border">
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand/10 text-sm font-semibold text-brand">
             {initial}
           </div>

@@ -82,14 +82,14 @@ export default function NewBlogPostPage() {
           </button>
           <button
             type="button"
-            className="flex items-center gap-2 rounded-lg border border-border px-6 py-2.5 text-sm transition hover:bg-neutral-100 dark:hover:bg-surface"
+            className="flex items-center gap-2 rounded-lg border border-border px-6 py-2.5 text-sm transition hover:bg-border"
           >
             <Eye className="h-4 w-4" />
             Save as Draft
           </button>
           <Link
             href="/dashboard/blog"
-            className="rounded-lg border border-border px-6 py-2.5 text-sm transition hover:bg-neutral-100 dark:hover:bg-surface"
+            className="rounded-lg border border-border px-6 py-2.5 text-sm transition hover:bg-border"
           >
             Cancel
           </Link>

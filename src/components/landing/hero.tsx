@@ -71,8 +71,8 @@ function MatchSlide({ slide }: { slide: (typeof demoSlides)[1] }) {
           </div>
           <Badge variant="success">{slide.score}% match</Badge>
         </div>
-        <div className="rounded-lg bg-success/5 p-3">
-          <p className="mb-1 text-xs font-medium text-success">Why this match?</p>
+        <div className="rounded-lg bg-brand/5 p-3">
+          <p className="mb-1 text-xs font-medium text-brand">Why this match?</p>
           <p className="text-xs text-muted">{slide.reason}</p>
         </div>
       </div>
@@ -104,7 +104,7 @@ function EmailSlide({ slide }: { slide: (typeof demoSlides)[2] }) {
           <span className="rounded-full bg-brand/10 px-2 py-0.5 text-[10px] font-medium text-brand">
             Professional
           </span>
-          <span className="rounded-full bg-success/10 px-2 py-0.5 text-[10px] font-medium text-success">
+          <span className="rounded-full bg-brand/10 px-2 py-0.5 text-[10px] font-medium text-brand">
             Personalized
           </span>
         </div>
@@ -186,13 +186,13 @@ export function Hero() {
               className="mt-8 flex flex-wrap items-center gap-4 text-sm text-muted"
             >
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-success" /> No credit card
+                <CheckCircle2 className="h-4 w-4 text-brand" /> No credit card
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-success" /> Free forever
+                <CheckCircle2 className="h-4 w-4 text-brand" /> Free forever
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-success" /> Cancel anytime
+                <CheckCircle2 className="h-4 w-4 text-brand" /> Cancel anytime
               </span>
             </motion.div>
           </div>
@@ -245,7 +245,7 @@ export function Hero() {
 
               {/* Close button decoration */}
               <button
-                className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full bg-surface text-muted transition hover:bg-neutral-200 dark:hover:bg-neutral-300"
+                className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full bg-surface text-muted transition hover:bg-border"
                 aria-label="Close demo"
               >
                 <X className="h-3 w-3" />
@@ -254,7 +254,7 @@ export function Hero() {
 
             {/* Decorative glow */}
             <div className="pointer-events-none absolute -bottom-8 -right-8 h-48 w-48 rounded-full bg-brand/10 blur-3xl" />
-            <div className="pointer-events-none absolute -left-8 -top-8 h-32 w-32 rounded-full bg-success/10 blur-3xl" />
+            <div className="pointer-events-none absolute -left-8 -top-8 h-32 w-32 rounded-full bg-brand/10 blur-3xl" />
           </motion.div>
         </div>
       </div>

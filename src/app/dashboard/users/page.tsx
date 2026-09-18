@@ -71,7 +71,7 @@ export default function UsersPage() {
                 {users.map((user) => (
                   <tr
                     key={user._id}
-                    className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50"
+                    className="border-b border-border last:border-0 hover:bg-surface"
                   >
                     <td className="p-4 font-medium">{user.name}</td>
                     <td className="p-4 text-muted">{user.email}</td>
@@ -138,7 +138,7 @@ export default function UsersPage() {
                         : "-"}
                     </td>
                     <td className="p-4">
-                      <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-border transition hover:bg-neutral-100 dark:hover:bg-surface">
+                      <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-border transition hover:bg-border">
                         <MoreHorizontal className="h-3.5 w-3.5" />
                       </button>
                     </td>

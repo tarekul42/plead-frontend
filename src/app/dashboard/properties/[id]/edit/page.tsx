@@ -136,7 +136,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
           </button>
           <Link
             href="/dashboard/properties"
-            className="rounded-lg border border-border px-6 py-2.5 text-sm transition hover:bg-neutral-100 dark:hover:bg-surface"
+            className="rounded-lg border border-border px-6 py-2.5 text-sm transition hover:bg-border"
           >
             Cancel
           </Link>

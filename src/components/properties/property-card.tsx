@@ -29,7 +29,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
     <div className="group relative flex flex-col rounded-card border border-border bg-surface shadow-sm transition-all hover:shadow-md">
       <Link
         href={`/properties/${property.slug}`}
-        className="relative aspect-4/3 overflow-hidden rounded-t-card bg-neutral-200 dark:bg-surface"
+        className="relative aspect-4/3 overflow-hidden rounded-t-card bg-surface"
       >
         {property.images?.[0] ? (
           <Image
@@ -96,7 +96,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
           </div>
           <Link
             href={`/properties/${property.slug}`}
-            className="flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-medium transition hover:bg-neutral-100 dark:hover:bg-surface-alt"
+            className="flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-medium transition hover:bg-border"
           >
             <Eye className="h-3 w-3" />
             View Details

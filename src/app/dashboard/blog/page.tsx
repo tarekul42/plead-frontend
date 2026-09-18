@@ -82,7 +82,7 @@ export default function BlogManagementPage() {
                 {blogPosts.map((post) => (
                   <tr
                     key={post.id}
-                    className="border-b border-border last:border-0 hover:bg-neutral-50 dark:hover:bg-surface/50"
+                    className="border-b border-border last:border-0 hover:bg-surface"
                   >
                     <td className="p-4 font-medium">{post.title}</td>
                     <td className="p-4">
@@ -108,7 +108,7 @@ export default function BlogManagementPage() {
                       <div className="flex items-center gap-2">
                         <Link
                           href={`/dashboard/blog/${post.id}/edit`}
-                          className="flex h-8 w-8 items-center justify-center rounded-lg border border-border transition hover:bg-neutral-100 dark:hover:bg-surface"
+                          className="flex h-8 w-8 items-center justify-center rounded-lg border border-border transition hover:bg-border"
                         >
                           <Edit2 className="h-3.5 w-3.5" />
                         </Link>

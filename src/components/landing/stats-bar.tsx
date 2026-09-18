@@ -9,9 +9,7 @@ import { usePublicStats } from "@/lib/queries/use-public";
 
 const colorMap: Record<string, string> = {
   brand: "text-brand",
-  success: "text-success",
-  warning: "text-warning",
-  danger: "text-danger",
+  muted: "text-muted",
 };
 
 function AnimatedCounter({
@@ -81,14 +79,14 @@ export function StatsBar() {
       value: statsData?.leadsTracked ?? 0,
       suffix: "+",
       icon: Users,
-      color: "success",
+      color: "brand",
     },
     {
       label: "AI Matches Made",
       value: statsData?.aiMatchesMade ?? 0,
       suffix: "+",
       icon: Sparkles,
-      color: "warning",
+      color: "brand",
     },
     {
       label: "Faster Closes",
@@ -96,7 +94,7 @@ export function StatsBar() {
       prefix: "",
       suffix: "%",
       icon: TrendingDown,
-      color: "success",
+      color: "brand",
     },
   ];
 

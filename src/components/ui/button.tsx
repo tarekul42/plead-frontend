@@ -11,8 +11,8 @@ const buttonVariants = cva(
         primary:
           "bg-brand text-white hover:bg-brand-dark shadow-sm hover:shadow-md active:scale-[0.98]",
         secondary:
-          "border border-border bg-background text-foreground hover:bg-neutral-100 dark:hover:bg-surface-alt",
-        ghost: "text-foreground hover:bg-neutral-100 dark:hover:bg-surface-alt",
+          "border border-border bg-background text-foreground hover:bg-border",
+        ghost: "text-foreground hover:bg-border",
         outline: "border border-brand text-brand hover:bg-brand/5",
         success: "bg-success text-white hover:opacity-90 shadow-sm",
         danger: "bg-danger text-white hover:opacity-90 shadow-sm",

@@ -97,7 +97,7 @@ export function DashboardSidebar({ mobile, onClose }: DashboardSidebarProps) {
                 "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition",
                 isActive
                   ? "bg-brand/10 text-brand font-medium"
-                  : "text-muted hover:bg-neutral-100 dark:hover:bg-surface-alt hover:text-foreground",
+                  : "text-muted hover:bg-border hover:text-foreground",
               )}
             >
               <link.icon className={cn("h-4 w-4 shrink-0", isActive && "text-brand")} />

@@ -52,7 +52,7 @@ export default function ReviewsPage() {
             className={`rounded-lg px-4 py-1.5 text-xs transition ${
               filter === s.value
                 ? "bg-brand text-white"
-                : "border border-border hover:bg-neutral-100 dark:hover:bg-surface"
+                : "border border-border hover:bg-border"
             }`}
           >
             {s.label}

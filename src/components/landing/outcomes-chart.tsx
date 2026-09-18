@@ -34,18 +34,18 @@ export function OutcomesChart() {
           >
             <div className="grid gap-6 sm:grid-cols-2">
               {/* Before card */}
-              <div className="rounded-2xl border border-danger/20 bg-danger/5 p-6">
-                <div className="mb-3 flex items-center gap-2 text-sm text-danger">
+              <div className="rounded-2xl border border-border bg-surface p-6">
+                <div className="mb-3 flex items-center gap-2 text-sm text-muted">
                   <TrendingDown className="h-4 w-4" />
-                  <span className="font-medium">Without PropLead</span>
+                  <span className="font-medium text-foreground">Without PropLead</span>
                 </div>
                 <p className="text-3xl font-bold">90 days</p>
                 <p className="mt-1 text-sm text-muted">Average lead-to-close time</p>
               </div>
 
               {/* After card */}
-              <div className="rounded-2xl border border-success/20 bg-success/5 p-6">
-                <div className="mb-3 flex items-center gap-2 text-sm text-success">
+              <div className="rounded-2xl border border-brand/20 bg-brand/5 p-6">
+                <div className="mb-3 flex items-center gap-2 text-sm text-brand">
                   <TrendingUp className="h-4 w-4" />
                   <span className="font-medium">With PropLead</span>
                 </div>
@@ -73,11 +73,11 @@ export function OutcomesChart() {
           >
             <div className="mb-4 flex items-center gap-4 text-sm">
               <span className="flex items-center gap-2">
-                <span className="h-3 w-3 rounded-full bg-danger" />
+                <span className="h-3 w-3 rounded-full bg-border" />
                 Before
               </span>
               <span className="flex items-center gap-2">
-                <span className="h-3 w-3 rounded-full bg-success" />
+                <span className="h-3 w-3 rounded-full bg-brand" />
                 After (PropLead)
               </span>
             </div>
@@ -110,13 +110,13 @@ export function OutcomesChart() {
                   />
                   <Bar
                     dataKey="before"
-                    fill="var(--color-danger)"
+                    fill="var(--color-border)"
                     radius={[4, 4, 0, 0]}
                     name="Before"
                   />
                   <Bar
                     dataKey="after"
-                    fill="var(--color-success)"
+                    fill="var(--color-brand)"
                     radius={[4, 4, 0, 0]}
                     name="After (PropLead)"
                   />
