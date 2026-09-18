@@ -36,7 +36,7 @@ export function NewsletterCta() {
   };
 
   return (
-    <section className="section-padding">
+    <section className="section-padding bg-section-alt">
       <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-2xl bg-grid">
           <div className="bg-gradient-hero pointer-events-none absolute inset-0" />

@@ -138,7 +138,7 @@ export function AiFeaturesShowcase() {
   const active = features[activeTab];
 
   return (
-    <section className="section-padding">
+    <section className="section-padding bg-section-tinted">
       <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="AI-Powered Features"

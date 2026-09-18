@@ -12,7 +12,7 @@ export function BlogTeaser() {
 
   if (isLoading) {
     return (
-      <section className="section-padding">
+    <section className="section-padding bg-section-tinted">
         <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
           <div className="mb-8 flex items-end justify-between">
             <div>
@@ -40,7 +40,7 @@ export function BlogTeaser() {
   if (posts.length === 0) return null;
 
   return (
-    <section className="section-padding">
+    <section className="section-padding bg-section-tinted">
       <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
         <div className="mb-8 flex items-end justify-between">
           <div>

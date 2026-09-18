@@ -157,6 +157,22 @@ button:not(:disabled) {
   background-size: 24px 24px;
 }
 
+.bg-section-alt {
+  background-color: var(--color-surface-alt);
+}
+
+.bg-section-tinted {
+  background-color: color-mix(in srgb, var(--color-brand) 3%, var(--color-background));
+}
+
+.bg-section-warm {
+  background-color: color-mix(in srgb, var(--color-warning) 3%, var(--color-background));
+}
+
+.bg-section-cool {
+  background-color: color-mix(in srgb, var(--color-success) 3%, var(--color-background));
+}
+
 .text-balance {
   text-wrap: balance;
 }

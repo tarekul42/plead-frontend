@@ -38,7 +38,7 @@ const colorMap: Record<string, { bg: string; text: string; line: string }> = {
 
 export function HowItWorks() {
   return (
-    <section className="section-padding">
+    <section className="section-padding bg-section-alt">
       <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="How it works"

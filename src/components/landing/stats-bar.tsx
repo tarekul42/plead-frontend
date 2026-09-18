@@ -101,7 +101,7 @@ export function StatsBar() {
   ];
 
   return (
-    <section className="section-padding border-y border-border">
+    <section className="section-padding border-y border-border bg-section-alt">
       <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow="Trusted by agents" title="Results that speak for themselves" />
         <div className="gradient-border rounded-2xl bg-surface p-8 md:p-12">

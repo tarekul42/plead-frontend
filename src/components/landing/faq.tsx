@@ -13,7 +13,7 @@ export function Faq() {
 
   if (isLoading) {
     return (
-      <section className="section-padding">
+      <section className="section-padding bg-section-alt">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <h2 className="text-2xl font-bold md:text-3xl">Frequently Asked Questions</h2>
