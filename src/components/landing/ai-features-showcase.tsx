@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkles, FileText } from "lucide-react";
+import Link from "next/link";
+import { Sparkles, FileText, BarChart3, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const features = [
   {
@@ -18,6 +20,13 @@ const features = [
       "Generate compelling property descriptions and personalized lead outreach emails in seconds. Choose from multiple tones and styles.",
     highlights: ["Property descriptions", "Outreach emails", "Multiple tones"],
   },
+  {
+    icon: BarChart3,
+    title: "Smart Analytics Dashboard",
+    description:
+      "Track your pipeline performance with real-time analytics. See which lead sources convert best, monitor agent performance, and identify trends.",
+    highlights: ["Pipeline insights", "Agent metrics", "Conversion tracking"],
+  },
 ];
 
 export function AiFeaturesShowcase() {
@@ -28,7 +37,7 @@ export function AiFeaturesShowcase() {
           <h2 className="text-2xl font-bold md:text-3xl">AI-Powered Features</h2>
           <p className="mt-2 text-muted">Work smarter, not harder</p>
         </div>
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-3">
           {features.map((feature, i) => (
             <motion.div
               key={feature.title}
@@ -55,6 +64,13 @@ export function AiFeaturesShowcase() {
               </div>
             </motion.div>
           ))}
+        </div>
+        <div className="text-center mt-12">
+          <Link href="/sign-up">
+            <Button size="lg" rightIcon={<ArrowRight className="h-4 w-4" />}>
+              Try AI Features Free
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

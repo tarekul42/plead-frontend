@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, Cpu, Handshake } from "lucide-react";
+import Link from "next/link";
+import { Search, Cpu, Handshake, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const steps = [
   {
@@ -55,6 +57,13 @@ export function HowItWorks() {
               <p className="text-sm text-muted">{step.description}</p>
             </motion.div>
           ))}
+        </div>
+        <div className="text-center mt-12">
+          <Link href="/sign-up">
+            <Button size="lg" rightIcon={<ArrowRight className="h-4 w-4" />}>
+              Get Started Free
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

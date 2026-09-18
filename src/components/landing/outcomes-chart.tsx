@@ -59,7 +59,17 @@ export function OutcomesChart() {
                   stroke="currentColor"
                   opacity={0.4}
                 />
-                <YAxis tick={{ fontSize: 12 }} stroke="currentColor" opacity={0.4} />
+                <YAxis
+                  tick={{ fontSize: 12 }}
+                  stroke="currentColor"
+                  opacity={0.4}
+                  label={{
+                    value: "Days to Close",
+                    angle: -90,
+                    position: "insideLeft",
+                    style: { fontSize: 12, fill: "currentColor", opacity: 0.6 },
+                  }}
+                />
                 <Tooltip
                   contentStyle={{
                     background: "var(--color-surface)",

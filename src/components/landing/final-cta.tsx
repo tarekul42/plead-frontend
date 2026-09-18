@@ -22,9 +22,10 @@ export function FinalCta() {
             Start free
           </Link>
           <Link href="/contact" className={buttonVariants({ variant: "secondary", size: "lg" })}>
-            Talk to sales
+            Have questions?
           </Link>
         </div>
+        <p className="mt-6 text-sm text-muted">No credit card required</p>
       </motion.div>
     </section>
   );
