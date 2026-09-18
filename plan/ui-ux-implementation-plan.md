@@ -2,719 +2,655 @@
 
 ## Overview
 
-This plan covers a full UI/UX overhaul of all public-facing routes in the PropLead AI frontend. Work is divided into 6 phases, ordered by impact and dependency. Each phase is a single PR; each fix within a phase is a separate commit.
+Zero hardcoded data. Everything from the backend. If the backend endpoint doesn't exist, it's documented here for implementation.
 
-**Current state:** Functional but with critical bugs (fake forms, broken links, dynamic Tailwind failures), accessibility gaps, and inconsistent design patterns.
+**Current state:** Frontend has hardcoded blog posts, testimonials, stats, categories, FAQ, contact form (fake), newsletter (fake), save button (local state only). Backend has some endpoints but many are auth-gated or missing.
 
-**Target state:** Polished, accessible, trustworthy public experience ready for production launch.
+**Target state:** Every piece of data on public routes is fetched from the backend API.
 
 ---
 
-## Phase 0: Critical Bug Fixes
+## Backend API Audit
 
-These are broken features that actively harm users or render components visually broken.
+### What Already Exists
 
-### 0.1 — Fix Dynamic Tailwind Classes
+| Endpoint | Auth Required | Public Access? | Notes |
+|----------|--------------|----------------|-------|
+| `GET /properties` | No | Yes (with agencyId param) | Works, needs agencyId handling for public |
+| `GET /properties/:slug` | No | Yes | Works |
+| `GET /properties/:id/related` | No | Yes | Works |
+| `GET /blog` | YES | NO | Needs public version |
+| `GET /blog/:slug` | YES | NO | Needs public version |
+| `GET /reviews` | YES | NO | Needs public read |
+| `GET /properties/:id/reviews` | YES | NO | Needs public read |
+| `POST /reviews` | YES | NO | Needs public write for logged-in users |
+| `GET /users/me` | YES | NO | OK |
+| `GET /leads/stats` | YES | NO | OK (dashboard only) |
+| `GET /admin/stats` | YES | NO | OK (admin only) |
 
-**Problem:** Tailwind cannot detect dynamically constructed class names at build time. `bg-${match.color}/10` and `text-${stat.color}` produce empty styles.
+### What Needs to Be Built (Backend)
 
-**Files affected:**
-- `src/components/landing/hero.tsx` — match score badges, colored dots
-- `src/components/landing/stats-bar.tsx` — stat icons
+| Priority | Endpoint | Purpose |
+|----------|----------|---------|
+| **CRITICAL** | `GET /public/blog` | Public blog listing (no auth, status=published only) |
+| **CRITICAL** | `GET /public/blog/:slug` | Public blog detail (no auth, status=published only) |
+| **CRITICAL** | `POST /contact` | Contact form submission |
+| **CRITICAL** | `POST /newsletter/subscribe` | Newsletter subscription |
+| **HIGH** | `GET /public/stats` | Platform-wide stats (property count, lead count, etc.) |
+| **HIGH** | `GET /properties/category-counts` | Count of properties per type |
+| **HIGH** | `POST /favorites` | Save a property to favorites |
+| **HIGH** | `DELETE /favorites/:propertyId` | Remove from favorites |
+| **HIGH** | `GET /favorites` | List user's saved properties |
+| **HIGH** | `GET /favorites/check/:propertyId` | Check if property is saved |
+| **MEDIUM** | `GET /public/testimonials` | Public testimonials |
+| **MEDIUM** | `GET /public/faq` | Public FAQ content |
+| **MEDIUM** | `GET /public/outcomes` | Outcomes chart data |
 
-**Fix:**
+---
+
+## Phase 0: Backend — New Endpoints (plead-backend)
+
+### 0.1 — Public Blog Endpoints
+
+**Problem:** All blog routes require auth. Public blog pages can't fetch data.
+
+**Fix:** Add public routes that only return `status: "published"` blogs, no agency scoping.
+
+**New file:** `src/modules/blogs/blogs.public.routes.ts`
+
 ```ts
-// Replace dynamic construction with a lookup map
-const colorMap: Record<string, { bg: string; text: string; light: string }> = {
-  brand:   { bg: "bg-brand/10",   text: "text-brand",   light: "bg-brand/20" },
-  success: { bg: "bg-success/10", text: "text-success", light: "bg-success/20" },
-  warning: { bg: "bg-warning/10", text: "text-warning", light: "bg-warning/20" },
-  danger:  { bg: "bg-danger/10",  text: "text-danger",  light: "bg-danger/20" },
-};
+import { Router } from "express";
+import { BlogsPublicController } from "./blogs.public.controller";
+import { validate } from "../../core/middleware/validate.middleware";
+import { blogSlugParamSchema, listBlogsQuerySchema } from "./blogs.validation";
+
+const blogsPublicRouter = Router();
+
+blogsPublicRouter.get("/", validate(listBlogsQuerySchema, "query"), BlogsPublicController.list);
+blogsPublicRouter.get("/:slug", validate(blogSlugParamSchema, "params"), BlogsPublicController.getBySlug);
+
+export { blogsPublicRouter };
 ```
 
-Apply the same pattern in both files. Verify all colored elements render correctly in both light and dark mode.
+**New file:** `src/modules/blogs/blogs.public.controller.ts`
+
+- `list`: Returns published blogs only, no agency filtering. Paginated.
+- `getBySlug`: Returns a single published blog by slug. No agency filtering.
+
+**Register in `app.ts`:** `app.use("/api/v1/public/blog", blogsPublicRouter);`
+
+**Key difference from existing controller:** No `req.user!.agencyId` — returns all published blogs across all agencies.
 
 ---
 
-### 0.2 — Fix Broken Blog Posts
+### 0.2 — Contact Form Endpoint
 
-**Problem:** 3 of 6 listed blog posts have no content defined. Clicking them shows "Post not found."
+**New files:**
+- `src/modules/contact/contact.model.ts`
+- `src/modules/contact/contact.service.ts`
+- `src/modules/contact/contact.controller.ts`
+- `src/modules/contact/contact.routes.ts`
+- `src/modules/contact/contact.validation.ts`
 
-**File:** `src/app/(public)/blog/[slug]/page.tsx`
-
-**Fix options (choose one):**
-- A) Add real content for all 6 posts (preferred if content exists)
-- B) Remove the 3 broken posts from the listing array in `blog/page.tsx`
-- C) Show a "Coming Soon" state for posts without content instead of "Post not found"
-
-**Recommendation:** Option B for now, with a TODO to add content later. Broken links damage trust.
-
----
-
-### 0.3 — Fix Broken Footer Links
-
-**Problem:** Footer links to `/pricing`, `/careers`, `/cookies` — none of these pages exist.
-
-**File:** `src/components/layout/public-footer.tsx`
-
-**Fix:** Remove all three links. Update the link lists to only include working routes:
-- Product: Explore, How it Works, AI Features
-- Company: About, Blog, Contact
-- Legal: Privacy, Terms, Help
-
----
-
-### 0.4 — Fix Placeholder Social Links
-
-**Problem:** GitHub/Twitter/LinkedIn link to generic homepages (`github.com`, `twitter.com`, `linkedin.com`).
-
-**File:** `src/components/layout/public-footer.tsx`
-
-**Fix:** Either:
-- A) Point to actual PropLead profiles (if they exist)
-- B) Remove the social links section entirely until real profiles are created
-- C) Use `mailto:` for email only, remove the rest
-
-**Recommendation:** Option B — placeholder links look unprofessional.
-
----
-
-### 0.5 — Fix Non-Functional "Share" Button
-
-**Problem:** Share button on property detail page has no `onClick` handler.
-
-**File:** `src/app/(public)/properties/[slug]/page.tsx`
-
-**Fix:**
-```tsx
-const handleShare = async () => {
-  try {
-    await navigator.clipboard.writeText(window.location.href);
-    toast({ title: "Link copied!", description: "Property link copied to clipboard" });
-  } catch {
-    toast({ title: "Failed to copy", variant: "destructive" });
-  }
-};
-```
-
-Wire `handleShare` to the Share button's `onClick`. Verify the global toast system is available.
-
----
-
-### 0.6 — Fix Fake Contact Form
-
-**Problem:** Form submission does nothing — just sets `submitted = true` without any API call.
-
-**File:** `src/app/(public)/contact/page.tsx`
-
-**Fix options (choose one):**
-- A) Integrate with a form service (Formspree, Getform, etc.) — requires signing up and adding API key to `.env`
-- B) Use `mailto:` link as the primary CTA, remove the fake form
-- C) Keep the form but clearly label: "This form is currently a demo. Email us directly at hello@proplead.ai"
-
-**Recommendation:** Option C for now (no backend dependency), with a TODO for real integration.
-
----
-
-### 0.7 — Fix Fake Newsletter Subscribe
-
-**Problem:** Subscribe is a `setTimeout` mock — no backend integration.
-
-**File:** `src/components/landing/newsletter-cta.tsx`
-
-**Fix:** Same approach as contact form — either integrate with a real service, or clearly label as demo. Add privacy note: "We respect your privacy. Unsubscribe anytime."
-
----
-
-## Phase 1: High-Priority UX Fixes
-
-### 1.1 — Fix "Save" Button Persistence
-
-**Problem:** Save heart toggles local state but doesn't persist. User loses saved state on navigation.
-
-**Files:** `src/components/properties/property-card.tsx`, `src/app/(public)/properties/[slug]/page.tsx`
-
-**Fix (interim):** Use `localStorage` to persist saved property IDs:
+**Model:**
 ```ts
-// Hook: useSavedProperties
-const getSaved = (): string[] => {
-  if (typeof window === "undefined") return [];
-  return JSON.parse(localStorage.getItem("savedProperties") || "[]");
-};
-
-const toggleSave = (id: string) => {
-  const saved = getSaved();
-  const next = saved.includes(id) ? saved.filter(s => s !== id) : [...saved, id];
-  localStorage.setItem("savedProperties", JSON.stringify(next));
-  return next.includes(id);
-};
-
-const isSaved = (id: string) => getSaved().includes(id);
+interface IContact {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  propertyId?: mongoose.Types.ObjectId; // optional, for property inquiries
+  status: "new" | "read" | "replied";
+  createdAt: Date;
+}
 ```
 
-Extract into `src/hooks/use-saved-properties.ts`. Update both `PropertyCard` and property detail page to use this hook. Add a TODO comment for API integration.
+**Validation:**
+```ts
+const createContactSchema = z.object({
+  name: z.string().min(1).max(100),
+  email: z.string().email(),
+  subject: z.string().min(1).max(200),
+  message: z.string().min(1).max(5000),
+  propertyId: objectId.optional(),
+});
+```
+
+**Endpoint:** `POST /api/v1/contact` (no auth required, rate-limited)
+
+**Register:** `app.use("/api/v1/contact", contactRouter);`
 
 ---
 
-### 1.2 — Fix "Inquire Now" Auth Check
+### 0.3 — Newsletter Subscribe Endpoint
 
-**Problem:** Always redirects to `/sign-up`, even for logged-in users.
+**New files:**
+- `src/modules/newsletter/newsletter.model.ts`
+- `src/modules/newsletter/newsletter.service.ts`
+- `src/modules/newsletter/newsletter.controller.ts`
+- `src/modules/newsletter/newsletter.routes.ts`
+- `src/modules/newsletter/newsletter.validation.ts`
 
-**File:** `src/app/(public)/properties/[slug]/page.tsx`
-
-**Fix:**
-```tsx
-import { useUser } from "@clerk/nextjs";
-
-// In the component:
-const { isSignedIn } = useUser();
-
-// In the CTA:
-const handleInquire = () => {
-  if (isSignedIn) {
-    // Option A: scroll to a contact form section on the page
-    // Option B: open a modal
-    // Option C: link to /contact with property context
-    router.push(`/contact?property=${property._id}`);
-  } else {
-    router.push("/sign-in");
-  }
-};
+**Model:**
+```ts
+interface INewsletter {
+  email: string;
+  status: "active" | "unsubscribed";
+  subscribedAt: Date;
+  unsubscribedAt?: Date;
+}
 ```
 
-**Recommendation:** Option C — redirect to contact page with property ID as a query param. The contact form can then pre-fill the subject line.
+**Endpoint:** `POST /api/v1/newsletter/subscribe` (no auth required, rate-limited)
+
+**Register:** `app.use("/api/v1/newsletter", newsletterRouter);`
 
 ---
 
-### 1.3 — Fix Stats Bar Clarity
+### 0.4 — Public Stats Endpoint
 
-**Problem:** "Avg Deal Time: 52%" is ambiguous — users don't know what the metric represents.
+**New file or add to existing controller.**
+
+**Endpoint:** `GET /api/v1/public/stats` (no auth required)
+
+**Returns:**
+```json
+{
+  "propertiesListed": 1247,
+  "leadsTracked": 5832,
+  "aiMatchesMade": 28491,
+  "avgCloseTimeReduction": 52
+}
+```
+
+**Implementation:** Aggregate queries on PropertyModel, LeadModel, and AiGeneratedCopyModel.
+
+**Register:** `app.use("/api/v1/public", publicRouter);`
+
+---
+
+### 0.5 — Property Category Counts
+
+**Add to properties service or create public endpoint.**
+
+**Endpoint:** `GET /api/v1/properties/category-counts` (no auth required)
+
+**Returns:**
+```json
+{
+  "house": 240,
+  "apartment": 320,
+  "condo": 180,
+  "townhouse": 95,
+  "land": 60,
+  "commercial": 45
+}
+```
+
+**Implementation:** MongoDB aggregation: `PropertyModel.aggregate([{ $group: { _id: "$propertyType", count: { $sum: 1 } } }])`
+
+---
+
+### 0.6 — Favorites/Saved Properties
+
+**New files:**
+- `src/modules/favorites/favorites.model.ts`
+- `src/modules/favorites/favorites.service.ts`
+- `src/modules/favorites/favorites.controller.ts`
+- `src/modules/favorites/favorites.routes.ts`
+
+**Model:**
+```ts
+interface IFavorite {
+  userId: mongoose.Types.ObjectId;
+  propertyId: mongoose.Types.ObjectId;
+  agencyId: mongoose.Types.ObjectId;
+  createdAt: Date;
+}
+```
+
+**Endpoints (auth required):**
+- `POST /api/v1/favorites` — `{ propertyId: string }`
+- `DELETE /api/v1/favorites/:propertyId`
+- `GET /api/v1/favorites` — list user's favorites
+- `GET /api/v1/favorites/check/:propertyId` — boolean check
+
+**Compound unique index:** `{ userId, propertyId }` to prevent duplicates.
+
+**Register:** `app.use("/api/v1/favorites", favoritesRouter);`
+
+---
+
+### 0.7 — Public Testimonials
+
+**New files:**
+- `src/modules/testimonials/testimonials.model.ts`
+- `src/modules/testimonials/testimonials.service.ts`
+- `src/modules/testimonials/testimonials.controller.ts`
+- `src/modules/testimonials/testimonials.routes.ts`
+
+**Model:**
+```ts
+interface ITestimonial {
+  name: string;
+  role: string;
+  company: string;
+  quote: string;
+  avatarUrl?: string;
+  featured: boolean;
+  sortOrder: number;
+  createdAt: Date;
+}
+```
+
+**Endpoint:** `GET /api/v1/public/testimonials` (no auth required)
+
+**Register:** `app.use("/api/v1/public", publicRouter);`
+
+---
+
+### 0.8 — Public FAQ
+
+**New files:**
+- `src/modules/faq/faq.model.ts`
+- `src/modules/faq/faq.controller.ts`
+- `src/modules/faq/faq.routes.ts`
+
+**Model:**
+```ts
+interface IFAQ {
+  question: string;
+  answer: string;
+  category: string;
+  sortOrder: number;
+}
+```
+
+**Endpoint:** `GET /api/v1/public/faq` (no auth required)
+
+---
+
+### 0.9 — Fix Blog Auth Requirement
+
+**Problem:** Existing `GET /api/v1/blog` requires auth. The dashboard blog management uses this.
+
+**Fix:** Keep existing auth-gated routes for dashboard. Add new public routes as described in 0.1. The public routes go under `/api/v1/public/blog` and don't require auth.
+
+---
+
+### 0.10 — Fix Properties agencyId for Public Access
+
+**Problem:** `GET /properties` requires `agencyId` from `req.user` or query param. Public users aren't authenticated.
+
+**Fix:** For public property listing, either:
+- A) Pass `agencyId` as a required query param from the frontend (e.g., `?agencyId=xxx`)
+- B) Create a public endpoint that doesn't filter by agency
+- C) Use a default agency ID for public access
+
+**Recommendation:** Option A — the frontend knows which agency to show (from env var or config). The existing endpoint already supports `agencyId` as a query param.
+
+---
+
+## Phase 1: Frontend — API Client Updates (plead-frontend)
+
+### 1.1 — Add New API Endpoints to Client
+
+**File:** `src/lib/api-client.ts`
+
+Add:
+```ts
+export const contactApi = {
+  submit: (data: { name: string; email: string; subject: string; message: string; propertyId?: string }) =>
+    apiClient.post("/contact", data).then(extractData),
+};
+
+export const newsletterApi = {
+  subscribe: (data: { email: string }) =>
+    apiClient.post("/newsletter/subscribe", data).then(extractData),
+};
+
+export const publicApi = {
+  stats: () => apiClient.get("/public/stats").then(extractData),
+  testimonials: () => apiClient.get("/public/testimonials").then(extractData),
+  faq: () => apiClient.get("/public/faq").then(extractData),
+  blogList: (params?: Record<string, unknown>) =>
+    apiClient.get("/public/blog", { params }).then(extractPaginatedData),
+  blogGet: (slug: string) => apiClient.get(`/public/blog/${slug}`).then(extractData),
+};
+
+export const favoritesApi = {
+  list: () => apiClient.get("/favorites").then(extractPaginatedData),
+  add: (propertyId: string) => apiClient.post("/favorites", { propertyId }).then(extractData),
+  remove: (propertyId: string) => apiClient.delete(`/favorites/${propertyId}`).then(extractData),
+  check: (propertyId: string) => apiClient.get(`/favorites/check/${propertyId}`).then(extractData),
+};
+
+export const propertiesApiExtended = {
+  categoryCounts: () => apiClient.get("/properties/category-counts").then(extractData),
+};
+```
+
+### 1.2 — Add React Query Hooks
+
+**New file:** `src/lib/queries/use-public.ts`
+
+```ts
+import { useQuery, useMutation, useQueryClient } from "@tanstack/query";
+import { publicApi, contactApi, newsletterApi, favoritesApi, propertiesApiExtended } from "@/lib/api-client";
+
+// Public stats
+export function usePublicStats() {
+  return useQuery({ queryKey: ["public-stats"], queryFn: publicApi.stats });
+}
+
+// Public testimonials
+export function useTestimonials() {
+  return useQuery({ queryKey: ["testimonials"], queryFn: publicApi.testimonials });
+}
+
+// Public FAQ
+export function useFaq() {
+  return useQuery({ queryKey: ["faq"], queryFn: publicApi.faq });
+}
+
+// Public blog
+export function usePublicBlogList(params?: Record<string, unknown>) {
+  return useQuery({ queryKey: ["public-blog", params], queryFn: () => publicApi.blogList(params) });
+}
+
+export function usePublicBlogPost(slug: string) {
+  return useQuery({ queryKey: ["public-blog", slug], queryFn: () => publicApi.blogGet(slug) });
+}
+
+// Contact form
+export function useSubmitContact() {
+  return useMutation({ mutationFn: contactApi.submit });
+}
+
+// Newsletter
+export function useSubscribeNewsletter() {
+  return useMutation({ mutationFn: newsletterApi.subscribe });
+}
+
+// Favorites
+export function useFavorites() {
+  return useQuery({ queryKey: ["favorites"], queryFn: favoritesApi.list });
+}
+
+export function useCheckFavorite(propertyId: string) {
+  return useQuery({
+    queryKey: ["favorites", propertyId],
+    queryFn: () => favoritesApi.check(propertyId),
+    enabled: !!propertyId,
+  });
+}
+
+export function useToggleFavorite() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ propertyId, isFavorited }: { propertyId: string; isFavorited: boolean }) => {
+      if (isFavorited) return favoritesApi.remove(propertyId);
+      return favoritesApi.add(propertyId);
+    },
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["favorites"] }),
+  });
+}
+
+// Category counts
+export function useCategoryCounts() {
+  return useQuery({ queryKey: ["category-counts"], queryFn: propertiesApiExtended.categoryCounts });
+}
+```
+
+---
+
+## Phase 2: Frontend — Replace All Hardcoded Data
+
+### 2.1 — Blog Pages → Use `usePublicBlogList` / `usePublicBlogPost`
+
+**Files:**
+- `src/components/landing/blog-teaser.tsx` — replace hardcoded array with `usePublicBlogList({ limit: 3 })`
+- `src/app/(public)/blog/page.tsx` — replace hardcoded array with `usePublicBlogList()`
+- `src/app/(public)/blog/[slug]/page.tsx` — replace hardcoded `posts` record with `usePublicBlogPost(slug)`
+
+**Note:** Remove the duplicated blog data. Both `blog-teaser.tsx` and `blog/page.tsx` will use the same hook.
+
+---
+
+### 2.2 — Stats Bar → Use `usePublicStats`
 
 **File:** `src/components/landing/stats-bar.tsx`
 
-**Fix:** Change the stat to:
-```ts
-{
-  label: "Faster Closes",
-  value: 52,
-  suffix: "%",
-  icon: TrendingDown,
-  color: "success",
-  description: "Reduction in average deal closing time",
-}
-```
-
-Or: "Avg Close Time" with value "47 days" and a secondary label "52% faster than industry avg".
+Replace hardcoded `stats` array with `usePublicStats()`. Map the API response to the component's expected format.
 
 ---
 
-### 1.4 — Deduplicate Featured/Top Rated Properties
+### 2.3 — Property Categories → Use `useCategoryCounts`
 
-**Problem:** If fewer than 8 properties exist, both sections show identical cards.
+**File:** `src/components/landing/property-categories.tsx`
 
-**Files:** `src/components/landing/featured-properties.tsx`, `src/components/landing/top-rated-properties.tsx`
-
-**Fix:** Pass excluded IDs from FeaturedProperties to TopRatedProperties:
-```tsx
-// In page.tsx (landing page):
-const featuredIds = featuredProperties.map(p => p._id);
-
-// Pass to TopRatedProperties
-<TopRatedProperties excludeIds={featuredIds} />
-```
-
-In `TopRatedProperties`, filter out excluded IDs from the API query or after fetch.
+Replace hardcoded `categories` with `useCategoryCounts()`. Merge with `PROPERTY_CATEGORIES` from constants for labels/icons.
 
 ---
 
-### 1.5 — Extract Shared Blog Data
-
-**Problem:** Blog post data is duplicated between `blog-teaser.tsx` and `blog/page.tsx`.
-
-**Fix:**
-1. Create `src/lib/blog-data.ts` with the shared `posts` array and `Post` type
-2. Import from both `blog-teaser.tsx` and `blog/page.tsx`
-3. Single source of truth for all blog content
-
----
-
-### 1.6 — Fix Price Filter Validation
-
-**Problem:** Price inputs accept negative values and min > max.
-
-**File:** `src/components/properties/property-filters.tsx`
-
-**Fix:**
-```tsx
-<input
-  type="number"
-  min="0"
-  max={priceMax || undefined}
-  placeholder="Min"
-  value={priceMin}
-  onChange={(e) => {
-    const val = Number(e.target.value);
-    if (val >= 0) updateFilter("priceMin", val > 0 ? String(val) : undefined);
-  }}
-/>
-```
-
-Apply the same pattern to max price input. Add visual validation message if min > max.
-
----
-
-### 1.7 — Fix Mobile Navbar Gap
-
-**Problem:** Desktop buttons hidden at `sm`, hamburger only shows at `md`. Gap between breakpoints.
-
-**File:** `src/components/layout/public-navbar.tsx`
-
-**Fix:** Change hamburger menu visibility from `md:hidden` to `sm:hidden`, so it appears as soon as desktop buttons hide:
-```tsx
-{/* Desktop buttons */}
-<div className="hidden sm:flex items-center gap-2">
-  {/* Sign in / Get started buttons */}
-</div>
-
-{/* Hamburger */}
-<button className="sm:hidden ...">
-```
-
----
-
-## Phase 2: Accessibility & Mobile Improvements
-
-### 2.1 — Add Skip-to-Content Link
-
-**File:** `src/app/(public)/layout.tsx`
-
-Add as the first child inside `<body>`:
-```tsx
-<a
-  href="#main-content"
-  className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-brand focus:text-white focus:px-4 focus:py-2 focus:rounded-md"
->
-  Skip to content
-</a>
-
-<main id="main-content" className="min-h-screen">
-  {children}
-</main>
-```
-
----
-
-### 2.2 — Add `aria-expanded` to Mobile Hamburger
-
-**File:** `src/components/layout/public-navbar.tsx`
-
-```tsx
-<button
-  className="sm:hidden ..."
-  onClick={() => setMobileOpen(!mobileOpen)}
-  aria-expanded={mobileOpen}
-  aria-label={mobileOpen ? "Close menu" : "Open menu"}
->
-```
-
----
-
-### 2.3 — Fix Mobile Filter Drawer
-
-**File:** `src/app/(public)/properties/page.tsx`
-
-**Animation:** Add CSS transition:
-```tsx
-<div className={`fixed inset-0 z-50 transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-  {/* Backdrop */}
-</div>
-<div className={`fixed top-0 right-0 h-full w-80 z-50 transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
-  {/* Filter panel */}
-</div>
-```
-
-**Focus trap:** Use a `useEffect` to:
-1. Trap Tab/Shift+Tab inside the drawer when open
-2. Return focus to the trigger button when closed
-3. Add `role="dialog"` and `aria-modal="true"` to the drawer
-
----
-
-### 2.4 — Add Touch/Swipe to Property Gallery
-
-**File:** `src/components/properties/property-gallery.tsx`
-
-Add touch handlers:
-```tsx
-const touchStart = useRef<number | null>(null);
-
-const handleTouchStart = (e: React.TouchEvent) => {
-  touchStart.current = e.touches[0].clientX;
-};
-
-const handleTouchEnd = (e: React.TouchEvent) => {
-  if (touchStart.current === null) return;
-  const diff = touchStart.current - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 50) {
-    if (diff > 0) nextImage();
-    else prevImage();
-  }
-  touchStart.current = null;
-};
-
-// Apply to the main image container
-<div onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-```
-
----
-
-### 2.5 — Improve Chip Remove Accessibility
-
-**File:** `src/app/(public)/properties/page.tsx`
-
-```tsx
-<Chip
-  key={filter.key}
-  label={filter.label}
-  onRemove={() => removeFilter(filter.key)}
-  aria-label={`Remove ${filter.label} filter`}
-/>
-```
-
----
-
-## Phase 3: Design System Foundations
-
-### 3.1 — Establish Typography Scale
-
-Create a consistent type hierarchy in `globals.css` or as Tailwind theme extensions:
-
-| Token | Class | Usage |
-|-------|-------|-------|
-| Display | `text-5xl font-bold tracking-tight` | Hero headlines |
-| H1 | `text-4xl font-bold` | Page titles |
-| H2 | `text-3xl font-semibold` | Section headings |
-| H3 | `text-2xl font-semibold` | Sub-section headings |
-| H4 | `text-xl font-medium` | Card titles |
-| Body | `text-base` | Default text |
-| Small | `text-sm` | Secondary text |
-| Caption | `text-xs` | Labels, timestamps |
-
-Audit every page and apply the correct tier. No more ad-hoc `text-2xl` vs `text-3xl` choices.
-
----
-
-### 3.2 — Create PageHeader Component
-
-**New file:** `src/components/layout/page-header.tsx`
-
-```tsx
-interface PageHeaderProps {
-  title: string;
-  description?: string;
-  action?: React.ReactNode;
-}
-
-export function PageHeader({ title, description, action }: PageHeaderProps) {
-  return (
-    <div className="text-center py-12 px-4">
-      <h1 className="text-4xl font-bold text-foreground mb-4">{title}</h1>
-      {description && (
-        <p className="text-lg text-muted max-w-2xl mx-auto">{description}</p>
-      )}
-      {action && <div className="mt-6">{action}</div>}
-    </div>
-  );
-}
-```
-
-Replace manual heading blocks in: About, Help, Contact, Properties, Blog, Terms, Privacy pages.
-
----
-
-### 3.3 — Create Section Component
-
-**New file:** `src/components/layout/section.tsx`
-
-```tsx
-interface SectionProps {
-  children: React.ReactNode;
-  variant?: "default" | "surface" | "brand";
-  className?: string;
-}
-
-export function Section({ children, variant = "default", className }: SectionProps) {
-  const bg = {
-    default: "bg-background",
-    surface: "bg-surface",
-    brand: "bg-brand/5",
-  }[variant];
-
-  return (
-    <section className={`${bg} py-16 px-4 sm:px-6 lg:px-8`}>
-      <div className="max-w-container mx-auto">{children}</div>
-    </section>
-  );
-}
-```
-
-Replace all `section` wrappers in landing page sections with `<Section>`.
-
----
-
-### 3.4 — Create Standardized EmptyState Component
-
-**New file:** `src/components/ui/empty-state.tsx`
-
-```tsx
-interface EmptyStateProps {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  description: string;
-  action?: React.ReactNode;
-}
-
-export function EmptyState({ icon: Icon, title, description, action }: EmptyStateProps) {
-  return (
-    <div className="flex flex-col items-center justify-center py-16 text-center">
-      <div className="h-16 w-16 rounded-full bg-muted/10 flex items-center justify-center mb-4">
-        <Icon className="h-8 w-8 text-muted" />
-      </div>
-      <h3 className="text-lg font-medium text-foreground mb-2">{title}</h3>
-      <p className="text-sm text-muted max-w-sm">{description}</p>
-      {action && <div className="mt-4">{action}</div>}
-    </div>
-  );
-}
-```
-
-Use in: property grid empty state, blog empty state, search no-results, reviews empty state.
-
----
-
-### 3.5 — Verify Toast Integration
-
-Audit all user feedback points and ensure they use the global toast system:
-
-| Action | Current Feedback | Should Be |
-|--------|-----------------|-----------|
-| Share button clicked | Nothing | Toast: "Link copied!" |
-| Save toggled | Visual heart toggle only | Optional toast: "Saved to favorites" |
-| Contact form submitted | Inline success state | Toast + inline |
-| Newsletter subscribed | Inline success state | Toast + inline |
-| Filter applied | Visual grid update | No toast needed |
-| Error occurs | Error component | Toast: "Something went wrong" |
-
----
-
-## Phase 4: Landing Page Enhancements
-
-### 4.1 — How It Works: Add CTA
-
-**File:** `src/components/landing/how-it-works.tsx`
-
-Add after the 3-step grid:
-```tsx
-<div className="text-center mt-12">
-  <Button asChild size="lg">
-    <Link href="/sign-up">
-      Get Started Free
-      <ArrowRight className="ml-2 h-4 w-4" />
-    </Link>
-  </Button>
-</div>
-```
-
----
-
-### 4.2 — AI Features Showcase: Add Third Feature + CTA
-
-**File:** `src/components/landing/ai-features-showcase.tsx`
-
-Add a third feature card (e.g., "Smart Analytics" or "Email Automation"). Add a CTA row at the bottom: "Try AI Features →" linking to `/sign-up`.
-
----
-
-### 4.3 — Testimonials: Visual Variety
+### 2.4 — Testimonials → Use `useTestimonials`
 
 **File:** `src/components/landing/testimonials.tsx`
 
-Add different colored avatar backgrounds:
-```ts
-const avatarColors = ["bg-brand/10", "bg-success/10", "bg-warning/10"];
-```
-
-Cycle through them for each testimonial. Add company logos as small grayscale images if available.
+Replace hardcoded `testimonials` array with `useTestimonials()`.
 
 ---
 
-### 4.4 — Outcomes Chart: Add Y-Axis Label
+### 2.5 — FAQ → Use `useFaq`
 
-**File:** `src/components/landing/outcomes-chart.tsx`
+**File:** `src/components/landing/faq.tsx`
 
-Add a Y-axis label via Recharts:
-```tsx
-<YAxis label={{ value: "Days to Close", angle: -90, position: "insideLeft" }} />
-```
-
-Evaluate if Recharts bundle size is justified. Consider a CSS-only bar chart as an alternative.
+Replace hardcoded `faqs` array with `useFaq()`.
 
 ---
 
-### 4.5 — Final CTA: Copy Update
+### 2.6 — Contact Form → Use `useSubmitContact`
 
-**File:** `src/components/landing/final-cta.tsx`
+**File:** `src/app/(public)/contact/page.tsx`
 
-- Change "Talk to sales" → "Have questions?"
-- Add trust signal below buttons: "Join 500+ real estate professionals"
+Replace `handleSubmit` with `useSubmitContact()` mutation. Add loading state, error handling, and real success feedback.
 
 ---
 
-### 4.6 — Newsletter CTA: Privacy Note + Demo Label
+### 2.7 — Newsletter → Use `useSubscribeNewsletter`
 
 **File:** `src/components/landing/newsletter-cta.tsx`
 
-Add below the form:
-```tsx
-<p className="text-xs text-muted mt-3">
-  We respect your privacy. Unsubscribe anytime.
-</p>
-{/* If keeping as demo: */}
-<p className="text-xs text-warning mt-1">Demo — not yet connected to a mailing list</p>
-```
+Replace `setTimeout` mock with `useSubscribeNewsletter()` mutation. Add loading state, error handling, and privacy note.
 
 ---
 
-## Phase 5: Page Redesigns
+### 2.8 — Save Button → Use `useCheckFavorite` + `useToggleFavorite`
 
-### 5.1 — About Page Redesign
+**Files:**
+- `src/components/properties/property-card.tsx`
+- `src/app/(public)/properties/[slug]/page.tsx`
 
-**File:** `src/app/(public)/about/page.tsx`
-
-Current: 52 lines, too thin.
-
-**New structure:**
-1. Hero section with mission statement
-2. Founder story / "Why we built PropLead"
-3. Values grid (existing 4 cards, improved copy)
-4. Team section (1-2 people with photos, or "Meet the team" placeholder)
-5. Timeline / milestones (founding, beta launch, etc.)
-6. CTA: "Join us" or "Explore the platform"
+Replace local `useState(false)` with `useCheckFavorite(propertyId)` and `useToggleFavorite()` mutation.
 
 ---
 
-### 5.2 — Help Center Redesign
+### 2.9 — Help Topics → Keep Hardcoded (or Build Endpoint)
 
-**File:** `src/app/(public)/help/page.tsx`
+The help topics are static support content. Options:
+- A) Keep hardcoded (low risk, rarely changes)
+- B) Build a `GET /public/help-topics` endpoint
 
-Current: Flat list of 6 items.
-
-**New structure:**
-1. Search bar (keep)
-2. Category cards: Getting Started, Properties, AI Features, Account, Billing
-3. Each category expands to show articles
-4. Articles have step-by-step format with screenshots
-5. Link to external docs/knowledge base at the bottom
-6. "Still need help?" section with contact link
+**Recommendation:** Option A for now. Add a TODO comment.
 
 ---
 
-### 5.3 — 404 Page Redesign
+### 2.10 — Hero Mock Matches → Keep as Marketing
 
-**File:** `src/app/(public)/not-found.tsx`
-
-Current: Just 3 elements.
-
-**New structure:**
-1. Illustration or large "404" with brand styling
-2. "Page not found" heading
-3. "The page you're looking for doesn't exist or has been moved."
-4. Navigation suggestions: "Popular pages" with links to Explore, Blog, Help
-5. Search bar
-6. "Go home" as a secondary link, not the only option
+The hero section's mock AI match cards are marketing illustration, not real data. Keep hardcoded but fix the dynamic Tailwind classes.
 
 ---
 
-### 5.4 — Error Page Improvements
+### 2.11 — Outcomes Chart → Keep as Marketing (or Build Endpoint)
 
-**File:** `src/app/(public)/error.tsx`
+The outcomes chart shows demo before/after data. Options:
+- A) Keep hardcoded (marketing content)
+- B) Build `GET /public/outcomes` endpoint
 
-- Show error reference ID (from `error.digest`) for support
-- Add "Go home" fallback link alongside "Try again"
-- Better visual design with icon and descriptive text
-
----
-
-### 5.5 — Legal Pages: Table of Contents
-
-**Files:** `src/app/(public)/terms/page.tsx`, `src/app/(public)/privacy/page.tsx`
-
-Add at the top of each page:
-```tsx
-<nav className="mb-8 p-4 bg-surface rounded-card">
-  <h2 className="font-medium mb-2">Table of Contents</h2>
-  <ul className="space-y-1">
-    {sections.map((s) => (
-      <li key={s.id}>
-        <a href={`#${s.id}`} className="text-sm text-brand hover:underline">
-          {s.title}
-        </a>
-      </li>
-    ))}
-  </ul>
-</nav>
-```
-
-Add `id` attributes to each section heading for anchor linking.
+**Recommendation:** Option A for now.
 
 ---
 
-### 5.6 — Property Detail: Real Map
+## Phase 3: Frontend — Bug Fixes (No Backend Changes)
+
+### 3.1 — Fix Dynamic Tailwind Classes
+
+**Files:** `src/components/landing/hero.tsx`, `src/components/landing/stats-bar.tsx`
+
+Replace `bg-${color}/10` with lookup map.
+
+---
+
+### 3.2 — Fix Broken Footer Links
+
+**File:** `src/components/layout/public-footer.tsx`
+
+Remove `/pricing`, `/careers`, `/cookies`. Update to only working routes.
+
+---
+
+### 3.3 — Fix Placeholder Social Links
+
+**File:** `src/components/layout/public-footer.tsx`
+
+Remove or replace generic GitHub/Twitter/LinkedIn URLs.
+
+---
+
+### 3.4 — Fix Non-Functional "Share" Button
 
 **File:** `src/app/(public)/properties/[slug]/page.tsx`
 
-The env already has a Mapbox tile URL configured.
-
-**Implementation options:**
-- A) **Leaflet + OpenStreetMap** (free, no API key needed, ~40KB gzipped)
-- B) **Mapbox GL JS** (requires token, more features)
-- C) **Static map image** via Mapbox static API (no JS dependency)
-
-**Recommendation:** Option A for zero cost. Install `react-leaflet` + `leaflet`, render a map centered on the property coordinates with a marker.
+Add `navigator.clipboard.writeText()` with toast feedback.
 
 ---
 
-### 5.7 — Property Detail: Additional Fixes
+### 3.5 — Fix "Inquire Now" Auth Check
 
 **File:** `src/app/(public)/properties/[slug]/page.tsx`
 
-- Fix status text capitalization: `property.status.replace("_", " ").replace(/\b\w/g, c => c.toUpperCase())`
-- Add "Back to results" link that preserves filter state via `router.back()` or a constructed URL
-- Improve mobile layout: sidebar should stack below main content on mobile instead of side-by-side
+Check auth state. If signed in → `/contact?property={id}`. If not → `/sign-in`.
 
 ---
 
-## Execution Summary
+### 3.6 — Fix Stats Bar Clarity
 
-| Phase | PR Title | Commits | Est. Complexity |
-|-------|----------|---------|-----------------|
-| 0 | fix: critical bug fixes for public routes | 7 | Low-Medium |
-| 1 | fix: high-priority UX improvements | 7 | Medium |
-| 2 | feat: accessibility and mobile improvements | 5 | Medium |
-| 3 | refactor: design system foundations | 5 | Low |
-| 4 | feat: landing page enhancements | 6 | Low-Medium |
-| 5 | feat: page redesigns and improvements | 7 | Medium-High |
+**File:** `src/components/landing/stats-bar.tsx`
 
-**Total: ~37 commits across 6 PRs**
+Change "Avg Deal Time: 52%" to "52% Faster Closes" or similar.
 
 ---
 
-## Open Questions (Require User Decision)
+### 3.7 — Deduplicate Featured/Top Rated Properties
 
-1. **Contact form / newsletter:** Demo labeling, or real service integration? If real, which service?
-2. **Save button:** localStorage interim acceptable?
-3. **Property map:** Leaflet (free) or Mapbox (requires token)?
-4. **Blog posts:** Remove broken ones, or add content?
-5. **Social links:** Remove until real profiles exist, or point to project repo?
-6. **Any brand/design references** to follow?
+**Files:** `src/components/landing/featured-properties.tsx`, `src/components/landing/top-rated-properties.tsx`
+
+Pass excluded IDs from FeaturedProperties to TopRatedProperties.
+
+---
+
+### 3.8 — Fix Price Filter Validation
+
+**File:** `src/components/properties/property-filters.tsx`
+
+Add `min="0"`, validate min <= max.
+
+---
+
+### 3.9 — Fix Mobile Navbar Gap
+
+**File:** `src/components/layout/public-navbar.tsx`
+
+Change hamburger from `md:hidden` to `sm:hidden`.
+
+---
+
+## Phase 4: Frontend — Accessibility & Mobile
+
+### 4.1 — Add Skip-to-Content Link
+### 4.2 — Add `aria-expanded` to Mobile Hamburger
+### 4.3 — Fix Mobile Filter Drawer (animation + focus trap)
+### 4.4 — Add Touch/Swipe to Property Gallery
+### 4.5 — Improve Chip Remove Accessibility
+
+---
+
+## Phase 5: Frontend — Design System
+
+### 5.1 — Typography Scale
+### 5.2 — PageHeader Component
+### 5.3 — Section Component
+### 5.4 — EmptyState Component
+### 5.5 — Toast Integration Audit
+
+---
+
+## Phase 6: Frontend — Landing Page Enhancements
+
+### 6.1 — How It Works: Add CTA
+### 6.2 — AI Features Showcase: Add Third Feature + CTA
+### 6.3 — Testimonials: Visual Variety (from API data)
+### 6.4 — Outcomes Chart: Add Y-Axis Label
+### 6.5 — Final CTA: Copy Update
+### 6.6 — Newsletter: Privacy Note (from real subscribe)
+
+---
+
+## Phase 7: Frontend — Page Redesigns
+
+### 7.1 — About Page Redesign
+### 7.2 — Help Center Redesign
+### 7.3 — 404 Page Redesign
+### 7.4 — Error Page Improvements
+### 7.5 — Legal Pages: Table of Contents
+### 7.6 — Property Detail: Real Map (Leaflet)
+### 7.7 — Property Detail: Status Capitalization + Back Link
+
+---
+
+## Execution Order
+
+| Step | What | Repo | Est. |
+|------|------|------|------|
+| 1 | Phase 0: Build all backend endpoints | plead-backend | High |
+| 2 | Phase 1: Update frontend API client + hooks | plead-frontend | Medium |
+| 3 | Phase 2: Replace all hardcoded data with API calls | plead-frontend | Medium |
+| 4 | Phase 3: Bug fixes (no backend) | plead-frontend | Low |
+| 5 | Phase 4: Accessibility + mobile | plead-frontend | Medium |
+| 6 | Phase 5: Design system | plead-frontend | Low |
+| 7 | Phase 6: Landing page enhancements | plead-frontend | Low |
+| 8 | Phase 7: Page redesigns | plead-frontend | Medium |
+
+---
+
+## Summary: What to Build
+
+### Backend (plead-backend)
+1. Public blog endpoints (`/api/v1/public/blog`)
+2. Contact form endpoint (`/api/v1/contact`)
+3. Newsletter subscribe endpoint (`/api/v1/newsletter/subscribe`)
+4. Public stats endpoint (`/api/v1/public/stats`)
+5. Property category counts (`/api/v1/properties/category-counts`)
+6. Favorites system (`/api/v1/favorites`)
+7. Public testimonials (`/api/v1/public/testimonials`)
+8. Public FAQ (`/api/v1/public/faq`)
+
+### Frontend (plead-frontend)
+1. API client additions (8 new API modules)
+2. React Query hooks (use-public.ts)
+3. Replace hardcoded data in 10+ components
+4. Bug fixes (9 items)
+5. Accessibility improvements (5 items)
+6. Design system (5 items)
+7. Landing page enhancements (6 items)
+8. Page redesigns (7 items)
