@@ -42,7 +42,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         </div>
       </div>
 
-      <div className="hidden flex-1 flex-col items-center justify-center bg-linear-to-br from-brand/5 via-background to-success/5 p-12 lg:flex">
+      <div className="hidden flex-1 flex-col items-center justify-center bg-linear-to-br from-brand/5 via-background to-accent/5 p-12 lg:flex">
         <div className="max-w-md text-center">
           <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-brand shadow-glow">
             <Sparkles className="h-10 w-10 text-white" />

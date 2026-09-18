@@ -10,25 +10,25 @@ const values = [
     icon: Target,
     title: "Our Mission",
     text: "Empower real estate agents with AI tools that automate lead matching, so they can focus on closing deals — not data entry.",
-    gradient: "from-brand/10 to-brand/5",
+    gradient: "from-brand/8 to-brand/3",
   },
   {
     icon: Users,
     title: "Built for Teams",
     text: "Whether you're a solo agent or a 50-person agency, PropLead scales with you. Multi-tenant by design, simple by choice.",
-    gradient: "from-success/10 to-success/5",
+    gradient: "from-brand/6 to-brand/2",
   },
   {
     icon: Lightbulb,
     title: "AI-First",
     text: "We believe AI should be a practical daily tool, not a gimmick. Every feature is designed to save real time and deliver measurable results.",
-    gradient: "from-warning/10 to-warning/5",
+    gradient: "from-accent/8 to-accent/3",
   },
   {
     icon: Shield,
     title: "Privacy First",
     text: "Your data belongs to you. We never train on your data, never share it, and never lock you in. Export anytime.",
-    gradient: "from-purple-500/10 to-purple-500/5",
+    gradient: "from-brand/10 to-accent/5",
   },
 ];
 
@@ -154,11 +154,11 @@ export default function AboutPage() {
             {milestones.map((m, i) => (
               <div key={m.year} className="flex gap-6">
                 <div className="flex flex-col items-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-brand to-success text-sm font-bold text-white shadow-lg">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-brand to-accent text-sm font-bold text-white shadow-lg">
                     {m.year.slice(2)}
                   </div>
                   {i < milestones.length - 1 && (
-                    <div className="mt-2 h-full w-px bg-gradient-to-b from-brand/30 to-success/30" />
+                    <div className="mt-2 h-full w-px bg-gradient-to-b from-brand/30 to-accent/30" />
                   )}
                 </div>
                 <div className="pb-12">
@@ -172,7 +172,7 @@ export default function AboutPage() {
 
         {/* CTA */}
         <section className="py-16 md:py-20">
-          <div className="rounded-2xl bg-gradient-to-br from-primary-1 to-primary-2 px-8 py-16 text-center text-white shadow-xl md:px-16">
+          <div className="rounded-2xl bg-gradient-cta px-8 py-16 text-center text-white shadow-xl md:px-16">
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">Ready to get started?</h2>
             <p className="mx-auto mb-8 max-w-lg text-lg text-white/70">
               Join real estate professionals who are closing deals faster with AI.
