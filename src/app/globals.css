@@ -1,20 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #4f46e5;
-  --color-brand-light: #6366f1;
-  --color-brand-dark: #4338ca;
-  --color-success: #16a34a;
-  --color-success-light: #22c55e;
-  --color-warning: #eab308;
-  --color-warning-light: #facc15;
+  --color-brand: #2563eb;
+  --color-brand-light: #3b82f6;
+  --color-brand-dark: #1d4ed8;
+  --color-accent: #7c3aed;
+  --color-accent-light: #8b5cf6;
+  --color-accent-dark: #6d28d9;
+  --color-success: #059669;
+  --color-success-light: #10b981;
+  --color-warning: #d97706;
+  --color-warning-light: #f59e0b;
   --color-danger: #dc2626;
   --color-danger-light: #ef4444;
-  --color-background: #f8f7ff;
-  --color-surface: #eeedff;
-  --color-foreground: #1a1636;
-  --color-muted: #6b6490;
-  --color-border: #dddae8;
+  --color-background: #ffffff;
+  --color-surface: #f9fafb;
+  --color-foreground: #111827;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
   --radius-card: 12px;
@@ -27,25 +30,28 @@
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-glow: 0 0 20px rgb(79 70 229 / 0.2);
+  --shadow-glow: 0 0 20px rgb(37 99 237 / 0.15);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dark {
-  --color-background: #1a1636;
-  --color-surface: #241f42;
-  --color-foreground: #f0eeff;
-  --color-muted: #a099c0;
-  --color-border: #352e5c;
-  --color-brand: #6366f1;
-  --color-brand-light: #818cf8;
-  --color-brand-dark: #4f46e5;
+  --color-background: #0b0f19;
+  --color-surface: #131825;
+  --color-foreground: #f1f5f9;
+  --color-muted: #94a3b8;
+  --color-border: #1e293b;
+  --color-brand: #3b82f6;
+  --color-brand-light: #60a5fa;
+  --color-brand-dark: #2563eb;
+  --color-accent: #8b5cf6;
+  --color-accent-light: #a78bfa;
+  --color-accent-dark: #7c3aed;
   --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.3);
-  --shadow-glow: 0 0 20px rgb(99 102 241 / 0.3);
+  --shadow-glow: 0 0 20px rgb(59 130 246 / 0.25);
 }
 
 * {
@@ -99,11 +105,11 @@ button:not(:disabled) {
 }
 
 .bg-gradient-hero {
-  background: radial-gradient(ellipse at top right, color-mix(in srgb, var(--color-brand) 10%, transparent), transparent 50%);
+  background: radial-gradient(ellipse at top right, color-mix(in srgb, var(--color-brand) 8%, transparent), transparent 50%);
 }
 
 .bg-gradient-card {
-  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-dark) 100%);
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-accent) 100%);
 }
 
 .bg-gradient-brand {
@@ -111,30 +117,30 @@ button:not(:disabled) {
 }
 
 .bg-gradient-property {
-  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-dark) 100%);
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-accent) 100%);
 }
 
 .bg-gradient-cta {
-  background: linear-gradient(135deg, var(--color-foreground) 0%, var(--color-surface) 100%);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
 }
 
 .text-gradient-brand {
-  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-light) 100%);
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .glass {
-  background: rgba(248, 247, 255, 0.8);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(221, 218, 232, 0.5);
+  border: 1px solid rgba(229, 231, 235, 0.5);
 }
 
 .dark .glass {
-  background: rgba(26, 22, 54, 0.8);
-  border: 1px solid rgba(53, 46, 92, 0.5);
+  background: rgba(11, 15, 25, 0.8);
+  border: 1px solid rgba(30, 41, 59, 0.5);
 }
 
 .shimmer {
@@ -158,7 +164,7 @@ button:not(:disabled) {
 }
 
 .bg-section-tinted {
-  background-color: color-mix(in srgb, var(--color-brand) 5%, var(--color-background));
+  background-color: color-mix(in srgb, var(--color-brand) 4%, var(--color-background));
 }
 
 .text-balance {
@@ -199,7 +205,7 @@ button:not(:disabled) {
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-dark));
+  background: linear-gradient(135deg, var(--color-brand), var(--color-accent));
   z-index: -1;
   opacity: 0.3;
   transition: opacity 0.3s ease;
