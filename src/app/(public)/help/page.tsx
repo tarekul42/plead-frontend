@@ -2,45 +2,83 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Search } from "lucide-react";
+import { ChevronDown, Search, BookOpen, MessageSquare, Lightbulb, Settings } from "lucide-react";
 import Link from "next/link";
 
-const helpTopics = [
+const categories = [
   {
-    q: "How do I get started?",
-    a: "Sign up for a free account, set up your agency profile, and start adding properties. It takes about 5 minutes to get started.",
+    icon: BookOpen,
+    label: "Getting Started",
+    topics: [
+      {
+        q: "How do I get started?",
+        a: "Sign up for a free account, set up your agency profile, and start adding properties. It takes about 5 minutes to get started.",
+      },
+      {
+        q: "How do I add a property?",
+        a: "Navigate to Dashboard → Properties → Add Property. Fill in the details, upload images, and click Save. You can also use the AI Description Generator to create compelling copy.",
+      },
+    ],
   },
   {
-    q: "How do I add a property?",
-    a: "Navigate to Dashboard → Properties → Add Property. Fill in the details, upload images, and click Save. You can also use the AI Description Generator to create compelling copy.",
+    icon: Lightbulb,
+    label: "AI Features",
+    topics: [
+      {
+        q: "How does AI lead matching work?",
+        a: "Open any lead and click 'Match Properties'. The AI scores your property inventory against the lead's criteria (budget, location, beds) and returns ranked results with reasons.",
+      },
+      {
+        q: "What AI providers do you use?",
+        a: "We use Google Gemini as our primary provider with Groq as a fallback. Both are free-tier providers, ensuring we can offer AI features without passing costs to you.",
+      },
+    ],
   },
   {
-    q: "How does AI lead matching work?",
-    a: "Open any lead and click 'Match Properties'. The AI scores your property inventory against the lead's criteria (budget, location, beds) and returns ranked results with reasons.",
+    icon: Settings,
+    label: "Account & Team",
+    topics: [
+      {
+        q: "How do I manage my team?",
+        a: "Admins can invite team members and assign roles (Agent, Manager). Managers can view all activity and reassign leads. Go to Dashboard → Users to manage.",
+      },
+      {
+        q: "Can I import leads?",
+        a: "You can manually add leads from the dashboard. Bulk import is coming soon. For now, you can use the Lead form to enter lead details one at a time.",
+      },
+    ],
   },
   {
-    q: "Can I import leads?",
-    a: "You can manually add leads from the dashboard. Bulk import is coming soon. For now, you can use the Lead form to enter lead details one at a time.",
-  },
-  {
-    q: "How do I manage my team?",
-    a: "Admins can invite team members and assign roles (Agent, Manager). Managers can view all activity and reassign leads. Go to Dashboard → Users to manage.",
-  },
-  {
-    q: "Is there a mobile app?",
-    a: "PropLead is fully responsive and works great on mobile browsers. A native mobile app is on the roadmap.",
+    icon: MessageSquare,
+    label: "General",
+    topics: [
+      {
+        q: "Is there a mobile app?",
+        a: "PropLead is fully responsive and works great on mobile browsers. A native mobile app is on the roadmap.",
+      },
+      {
+        q: "Is my data secure?",
+        a: "Yes. All data is encrypted in transit and at rest. Each agency's data is fully isolated from others. We never share or sell your data.",
+      },
+    ],
   },
 ];
 
 export default function HelpPage() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<string | null>(null);
   const [search, setSearch] = useState("");
 
-  const filtered = helpTopics.filter(
-    (t) =>
-      t.q.toLowerCase().includes(search.toLowerCase()) ||
-      t.a.toLowerCase().includes(search.toLowerCase()),
+  const allTopics = categories.flatMap((cat) =>
+    cat.topics.map((t) => ({ ...t, category: cat.label })),
   );
+
+  const filtered = search
+    ? allTopics.filter(
+        (t) =>
+          t.q.toLowerCase().includes(search.toLowerCase()) ||
+          t.a.toLowerCase().includes(search.toLowerCase()),
+      )
+    : null;
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
@@ -59,46 +97,111 @@ export default function HelpPage() {
         </div>
       </div>
 
-      <div className="space-y-3">
-        {filtered.map((topic, i) => (
-          <div key={i} className="rounded-card border border-border bg-surface shadow-sm">
-            <button
-              onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              className="flex w-full items-center justify-between px-6 py-4 text-left"
-            >
-              <span className="font-medium pr-4">{topic.q}</span>
-              <ChevronDown
-                className={`h-4 w-4 shrink-0 text-muted transition-transform duration-200 ${
-                  openIndex === i ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            <AnimatePresence>
-              {openIndex === i && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="overflow-hidden"
-                >
-                  <p className="border-t border-border px-6 py-4 text-sm text-muted leading-relaxed">
-                    {topic.a}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
-        {filtered.length === 0 && (
-          <p className="py-8 text-center text-muted">
-            No results found. Try different keywords, or{" "}
-            <Link href="/contact" className="text-brand hover:underline">
-              contact support
-            </Link>
-            .
-          </p>
-        )}
+      {filtered ? (
+        <div className="space-y-3">
+          {filtered.map((topic, i) => (
+            <div key={i} className="rounded-card border border-border bg-surface shadow-sm">
+              <button
+                onClick={() => setOpenIndex(openIndex === `${topic.category}-${i}` ? null : `${topic.category}-${i}`)}
+                className="flex w-full items-center justify-between px-6 py-4 text-left"
+              >
+                <div>
+                  <span className="font-medium pr-4">{topic.q}</span>
+                  <span className="mt-1 block text-xs text-muted">{topic.category}</span>
+                </div>
+                <ChevronDown
+                  className={`h-4 w-4 shrink-0 text-muted transition-transform duration-200 ${
+                    openIndex === `${topic.category}-${i}` ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              <AnimatePresence>
+                {openIndex === `${topic.category}-${i}` && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden"
+                  >
+                    <p className="border-t border-border px-6 py-4 text-sm text-muted leading-relaxed">
+                      {topic.a}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+          {filtered.length === 0 && (
+            <p className="py-8 text-center text-muted">
+              No results found. Try different keywords, or{" "}
+              <Link href="/contact" className="text-brand hover:underline">
+                contact support
+              </Link>
+              .
+            </p>
+          )}
+        </div>
+      ) : (
+        <div className="space-y-8">
+          {categories.map((cat) => (
+            <div key={cat.label}>
+              <div className="mb-4 flex items-center gap-2">
+                <cat.icon className="h-5 w-5 text-brand" />
+                <h2 className="text-lg font-semibold">{cat.label}</h2>
+              </div>
+              <div className="space-y-3">
+                {cat.topics.map((topic, i) => {
+                  const key = `${cat.label}-${i}`;
+                  return (
+                    <div key={i} className="rounded-card border border-border bg-surface shadow-sm">
+                      <button
+                        onClick={() => setOpenIndex(openIndex === key ? null : key)}
+                        className="flex w-full items-center justify-between px-6 py-4 text-left"
+                      >
+                        <span className="font-medium pr-4">{topic.q}</span>
+                        <ChevronDown
+                          className={`h-4 w-4 shrink-0 text-muted transition-transform duration-200 ${
+                            openIndex === key ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                      <AnimatePresence>
+                        {openIndex === key && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="overflow-hidden"
+                          >
+                            <p className="border-t border-border px-6 py-4 text-sm text-muted leading-relaxed">
+                              {topic.a}
+                            </p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="mt-12 rounded-card border border-border bg-surface p-8 text-center shadow-sm">
+        <h3 className="mb-2 text-lg font-semibold">Still need help?</h3>
+        <p className="mb-4 text-sm text-muted">
+          Can&apos;t find what you&apos;re looking for? Our team is here to help.
+        </p>
+        <Link
+          href="/contact"
+          className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
+        >
+          <MessageSquare className="h-4 w-4" />
+          Contact Support
+        </Link>
       </div>
     </div>
   );

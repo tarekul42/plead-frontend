@@ -1,7 +1,8 @@
 "use client";
 
-import { use } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { useProperty, useProperties } from "@/lib/queries/use-properties";
@@ -28,6 +29,11 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Property } from "@/types";
+
+const PropertyMap = dynamic(
+  () => import("@/components/properties/property-map").then((m) => m.PropertyMap),
+  { ssr: false, loading: () => <div className="h-64 animate-pulse rounded-xl bg-surface" /> },
+);
 
 const statusVariants: Record<string, "success" | "warning" | "danger" | "brand"> = {
   available: "success",
@@ -61,25 +67,6 @@ function SpecCard({
   );
 }
 
-function PropertyMap({ property }: { property: Property }) {
-  return (
-    <div className="mt-8">
-      <h2 className="mb-4 text-xl font-semibold">Location</h2>
-      <div className="flex h-64 items-center justify-center rounded-xl bg-neutral-100 dark:bg-surface-alt">
-        <div className="text-center">
-          <MapPin className="mx-auto mb-2 h-6 w-6 text-muted" />
-          <p className="text-sm text-muted">{property.location}</p>
-          {property.coordinates && (
-            <p className="mt-1 text-xs text-muted">
-              {property.coordinates.lat.toFixed(4)}, {property.coordinates.lng.toFixed(4)}
-            </p>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function RelatedProperties({
   currentId,
   propertyType,
@@ -105,10 +92,14 @@ function RelatedProperties({
 }
 
 export default function PropertyDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
+  const [slug, setSlug] = useState<string>("");
   const { data, isLoading, isError, refetch } = useProperty(slug);
   const { isSignedIn } = useUser();
   const router = useRouter();
+
+  useEffect(() => {
+    params.then((p) => setSlug(p.slug));
+  }, [params]);
 
   const property = data as Property | undefined;
   const { data: favData } = useCheckFavorite(property?._id ?? "");
@@ -213,7 +204,17 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
             </div>
           </div>
 
-          {property.coordinates && <PropertyMap property={property} />}
+          {property.coordinates && (
+            <div className="mt-8">
+              <h2 className="mb-4 text-xl font-semibold">Location</h2>
+              <PropertyMap
+                lat={property.coordinates.lat}
+                lng={property.coordinates.lng}
+                title={property.title}
+                location={property.location}
+              />
+            </div>
+          )}
 
           <RelatedProperties currentId={property._id} propertyType={property.propertyType} />
 
