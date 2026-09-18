@@ -13,7 +13,7 @@ export function Faq() {
 
   if (isLoading) {
     return (
-      <section className="py-16">
+      <section className="section-padding">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <h2 className="text-2xl font-bold md:text-3xl">Frequently Asked Questions</h2>
@@ -35,7 +35,7 @@ export function Faq() {
   if (faqs.length === 0) return null;
 
   return (
-    <section className="py-16">
+    <section className="section-padding">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <h2 className="text-2xl font-bold md:text-3xl">Frequently Asked Questions</h2>

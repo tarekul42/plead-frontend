@@ -14,7 +14,7 @@ export function FinalCta() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-1 to-primary-2 px-6 py-16 text-center text-white shadow-xl sm:px-12 md:py-20"
+          className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-1 to-primary-2 px-6 py-20 text-center text-white shadow-xl sm:px-12 md:py-28"
         >
           {/* Decorative elements */}
           <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-brand/20 blur-3xl" />
