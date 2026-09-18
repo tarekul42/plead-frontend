@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   contactApi,
   newsletterApi,
