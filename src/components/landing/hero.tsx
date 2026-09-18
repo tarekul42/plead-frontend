@@ -16,7 +16,7 @@ const demoSlides = [
     price: "$850,000",
     beds: 3,
     baths: 2,
-    image: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    image: "bg-gradient-property",
   },
   {
     type: "match" as const,
@@ -38,7 +38,7 @@ const demoSlides = [
 function PropertySlide({ slide }: { slide: (typeof demoSlides)[0] }) {
   return (
     <div className="space-y-3">
-      <div className="h-32 rounded-xl sm:h-40" style={{ background: slide.image }} />
+      <div className={`h-32 rounded-xl sm:h-40 ${slide.image}`} />
       <div className="rounded-xl border border-border bg-background/80 p-3 backdrop-blur-sm">
         <div className="mb-1 flex items-center justify-between">
           <p className="text-sm font-semibold">{slide.title}</p>
